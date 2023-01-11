@@ -14,7 +14,7 @@ class Queue {
     }
 
     getLength() {
-        return this.#_array.length
+        return this.#_array.length;
     }
 }
 
