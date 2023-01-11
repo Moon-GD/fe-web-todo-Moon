@@ -6,8 +6,8 @@ const mainTag = document.querySelector("main");
 const columnAddBtn = document.querySelector("#column-add-btn");
 
 // column 버튼에 column 삭제 이벤트를 추가합니다.
-function columnDeleteEvent(btn, column) {
-    btn.addEventListener("click", () => {
+function columnDeleteEvent(columnDeleteBtn, column) {
+    columnDeleteBtn.addEventListener("click", () => {
         let status = column.children[0].innerHTML.split("\n")[0]
         
         deleteStatus(status)
@@ -28,13 +28,11 @@ function addColumn(columnName = "제목 없음") {
 }
 
 // fab 버튼에 column add event를 추가합니다.
-columnAddBtn.addEventListener("click", () => {
-    turnOnColumnAddModal();
-})
+columnAddBtn.addEventListener("click", () => { turnOnColumnAddModal(); })
 
 // 카드가 속한 헤더의 이름을 반환합니다.
-function findCardHeaderName(card) {
-    let currentSection = card.parentElement.parentElement;
+function findCardHeaderName(cardNode) {
+    let currentSection = cardNode.parentElement.parentElement;
     let headerName = currentSection.children[0].children[0].innerHTML
 
     return headerName
@@ -49,8 +47,8 @@ function updateColumnLength(status) {
 }
 
 // 카드가 속한 column의 status 번호를 반환합니다.
-function findColumnStatusByCard(card) {
-    let headerName = findCardHeaderName(card)
+function findColumnStatusByCard(cardNode) {
+    let headerName = findCardHeaderName(cardNode)
 
     for(let i=0;i<statusNameList.length;i++) {
         if(headerName == statusNameList[i]) { return i; }
@@ -60,40 +58,40 @@ function findColumnStatusByCard(card) {
 }
 
 // column의 header에 더블 클릭 이벤트를 추가합니다.
-function headerDoubleClickEvent(headerDom) {
-    headerDom.addEventListener("dblclick", () => {
+function headerDoubleClickEvent(headerNode) {
+    headerNode.addEventListener("dblclick", () => {
         let headerTitle = headerDom.children[0].innerHTML;
-        let headerInputTemplate = headerTitleTemplate(headerTitle, headerDom);
+        let headerInputTemplate = headerTitleTemplate(headerTitle, headerNode);
 
-        headerDom.after(headerInputTemplate)
-        headerDom.style.display = "none";
+        headerNode.after(headerInputTemplate)
+        headerNode.style.display = "none";
     })
 }
 
-// 헤더의 이름을 수정합니다. ( 호출 시기 :  )
+// 헤더의 이름을 수정합니다. ( 호출 시기 : 헤더에 더블 클릭 발생 이후 )
 function changeHeaderName(headerDom, newTitle) {
     headerDom.children[0].innerHTML = newTitle
 }
 
 // 헤더에 focus out 이벤트를 추가합니다.
-function inputFocusOutEvent(inputDom, originalTitle, originalHeaderDom) {
-    inputDom.addEventListener("focusout", ()=> {
-        const newTitle = inputDom.value;
+function inputFocusOutEvent(headerInput, originalTitle, originalHeaderDom) {
+    headerInput.addEventListener("focusout", ()=> {
+        const newTitle = headerInput.value;
 
         // 새로 바뀐 이름 중복 검사
         if(validateNewName(originalTitle, newTitle)) {
             changeHeaderName(originalHeaderDom, newTitle)
             originalHeaderDom.style.display = "flex";
 
-            updateStatusName(originalTitle, inputDom.value);
-            inputDom.parentElement.remove();
+            updateStatusName(originalTitle, headerInput.value);
+            headerInput.parentElement.remove();
         }
         else {
             alert("이미 존재하는 이름입니다.");
-            inputDom.value = "";
+            headerInput.value = "";
             
             setTimeout(()=>{
-                inputDom.focus();
+                headerInput.focus();
             })
 
         }

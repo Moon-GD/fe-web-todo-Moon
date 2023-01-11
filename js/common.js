@@ -9,8 +9,8 @@ const CARD_BACKGROUND_HOVER = "#FFEEEC";
 
 
 // (target)의 css (key)를 (value)로 바꿉니다.
-function changeCSS(target, key, value) {
-    target.style[key] = value
+function changeCSS(targetNode, key, value) {
+    targetNode.style[key] = value
 }
 
 // parentNode 다음에 childNode를 추가합니다.

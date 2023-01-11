@@ -11,8 +11,8 @@ import { findCardHeaderName } from "../component/column.js"
 let registering = false;
 
 // 버튼이 클릭되면 카드 등록 폼이 보여지도록 이벤트를 등록합니다.
-function cardAddEvent(btn, currentColumn) {
-    btn.addEventListener("click", () => {
+function cardAddEvent(cardRegisterBtn, currentColumn) {
+    cardRegisterBtn.addEventListener("click", () => {
         registering ? 
                 currentColumn.children[0].remove() :    
                 currentColumn.prepend(newCardTemplate());
@@ -22,36 +22,36 @@ function cardAddEvent(btn, currentColumn) {
 }
 
 // 버튼에 카드 삭제 이벤트를 등록합니다.
-function cardDeleteEvent(btn, currentCard) {
-    btn.addEventListener("click", () => {
-        setCard(currentCard)
+function cardDeleteEvent(cardDeleteBtn, deletedCard) {
+    cardDeleteBtn.addEventListener("click", () => {
+        setCard(deletedCard)
         turnOnModal();
     })
 
-    let xBtn = currentCard.children[0].children[0]
+    let xBtn = deletedCard.children[0].children[0]
     
-    btn.addEventListener("mouseover", () => {
-        currentCard.style.transition = "0.5s"
-        currentCard.style.marginTop = "-0.5vh";
-        currentCard.style.marginBottom = "1.5vh";
-        btn.style.color = CARD_BTN_HOVER;
-        currentCard.style.outline = CARD_OUTLINE_HOVER;
-        currentCard.style.backgroundColor = CARD_BACKGROUND_HOVER;
+    cardDeleteBtn.addEventListener("mouseover", () => {
+        deletedCard.style.transition = "0.5s"
+        deletedCard.style.marginTop = "-0.5vh";
+        deletedCard.style.marginBottom = "1.5vh";
+        cardDeleteBtn.style.color = CARD_BTN_HOVER;
+        deletedCard.style.outline = CARD_OUTLINE_HOVER;
+        deletedCard.style.backgroundColor = CARD_BACKGROUND_HOVER;
     })
 
-    btn.addEventListener("mouseleave", () => {
-        currentCard.style.marginTop = "0vh";
-        currentCard.style.marginBottom = "1vh";
-        btn.style.color = CARD_BTN_ORIGINAL;
+    cardDeleteBtn.addEventListener("mouseleave", () => {
+        deletedCard.style.marginTop = "0vh";
+        deletedCard.style.marginBottom = "1vh";
+        cardDeleteBtn.style.color = CARD_BTN_ORIGINAL;
         xBtn.style.color = CARD_DELETE_BTN_ORIGINAL;
-        currentCard.style.outline = CARD_OUTLINE_ORIGINAL;
-        currentCard.style.backgroundColor = CARD_BACKGROUND_ORIGINAL;
+        deletedCard.style.outline = CARD_OUTLINE_ORIGINAL;
+        deletedCard.style.backgroundColor = CARD_BACKGROUND_ORIGINAL;
     })
 }
 
 // 새로운 카드 등록을 취소하는 이벤트를 등록합니다.
-function newCardCancelEvent(btn, currentCard, prevCard, isUpdated) {
-    btn.addEventListener("click", () => {
+function newCardCancelEvent(registerCancelBtn, cardRegisterForm, prevCard, isUpdated) {
+    registerCancelBtn.addEventListener("click", () => {
         if(isUpdated) {
             prevCard.style.display = "block";
 
@@ -63,13 +63,13 @@ function newCardCancelEvent(btn, currentCard, prevCard, isUpdated) {
             )
         }
 
-        currentCard.remove()
+        cardRegisterForm.remove()
     })
 }
 
 // 새로운 카드를 생성하는 이벤트를 등록합니다.
-function newCardRegisterEvent(btn, currentCard, prevCard, isUpdated) {
-    btn.addEventListener("click", () => {
+function newCardRegisterEvent(cardMakeBtn, currentCard, prevCard, isUpdated) {
+    cardMakeBtn.addEventListener("click", () => {
         registering = false;
 
         let title = currentCard.children[0].value;
@@ -87,6 +87,7 @@ function newCardRegisterEvent(btn, currentCard, prevCard, isUpdated) {
 
         // 데이터 반영
         let currentStatus = findColumnStatusByCard(newCard)
+
         addJSONData(currentStatus, title, updatedContent)
 
         // 메뉴 update
@@ -109,51 +110,50 @@ function newCardRegisterEvent(btn, currentCard, prevCard, isUpdated) {
 }
 
 // 새로운 카드를 생성할 때, 사용자의 입력에 따라 카드의 크기를 조절해줍니다.
-function resizeCardByInputBox(inputBox, currentCard) {
+function resizeCardByInputBox(cardRegisterInput, cardRegisterForm) {
     let scrollHeight = 0
     let cardHeight = 18
-    let cardRegisterAccpetBtn = currentCard.children[2].children[1];
+    let registerAcceptBtn = cardRegisterForm.children[2].children[1];
 
-    inputBox.value ?
-                cardRegisterAccpetBtn.disabled = false  :
-                cardRegisterAccpetBtn.disabled = true;
+    cardRegisterInput.value ?
+            registerAcceptBtn.disabled = false  :
+            registerAcceptBtn.disabled = true;
 
-    inputBox.addEventListener("input", () => {
-        if(inputBox.scrollHeight != scrollHeight) {
+    cardRegisterInput.addEventListener("input", () => {
+        if(cardRegisterInput.scrollHeight != scrollHeight) {
             cardHeight += 2.5
-            currentCard.style.height = cardHeight + "vh";
-            scrollHeight = inputBox.scrollHeight
+            cardRegisterForm.style.height = cardHeight + "vh";
+            scrollHeight = cardRegisterInput.scrollHeight
         }
 
-        inputBox.value ?
-                cardRegisterAccpetBtn.disabled = false  :
-                cardRegisterAccpetBtn.disabled = true;
+        cardRegisterInput.value ?
+                registerAcceptBtn.disabled = false  :
+                registerAcceptBtn.disabled = true;
     })
 }
 
 // 새로운 카드를 등록할 때, 개행을 기준으로 문자열을 나누어줍니다.
-function parseContent(string) {
-    let stringArray = string.split("\n");
-    return stringArray.join("<br>");
+function parseContent(cardContent) {
+    let cardContents = cardContent.split("\n");
+    return cardContents.join("<br>");
 }
 
-// 카드를 카드 등록 폼으로 변경합니다.
-function cardToRegisterForm(card) {
-    let title = findCardTitle(card);
-    let content = findCardContent(card);
-    let status = findColumnStatusByCard(card);
+function cardToRegisterForm(cardNode) {
+    let title = findCardTitle(cardNode);
+    let content = findCardContent(cardNode);
+    let status = findColumnStatusByCard(cardNode);
 
     // JSON 반영
     deleteJSONData(status, title);
 
-    card.before(newCardTemplate(title, content, card, true));
-    card.style.display = "none";
+    cardNode.before(newCardTemplate(title, content, cardNode, true));
+    cardNode.style.display = "none";
 }
 
 // 카드에 더블 클릭 이벤트를 추가해줍니다.
-function addDoubleClickEventToCard(card) {
-    card.addEventListener("dblclick", () => {
-        cardToRegisterForm(card);
+function addDoubleClickEventToCard(cardNode) {
+    cardNode.addEventListener("dblclick", () => {
+        cardToRegisterForm(cardNode);
     })
 }
 

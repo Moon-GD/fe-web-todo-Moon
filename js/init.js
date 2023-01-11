@@ -1,4 +1,4 @@
-import { statusList, statusNameList, TODO, DOING, DONE, JSON_DATA } from "./json_data/json_data.js"
+import { statusList, statusNameList, JSON_DATA } from "./json_data/json_data.js"
 import { mainTag } from "./component/column.js"
 import { columnTemplate, cardTemplate } from "./templates/template.js"
 import { makeCardDragEvent } from "./drag/addDragEvent.js";
