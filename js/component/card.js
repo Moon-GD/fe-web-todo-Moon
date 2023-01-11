@@ -137,6 +137,7 @@ function parseContent(string) {
     return stringArray.join("<br>");
 }
 
+// 카드를 카드 등록 폼으로 변경합니다.
 function cardToRegisterForm(card) {
     let title = findCardTitle(card);
     let content = findCardContent(card);

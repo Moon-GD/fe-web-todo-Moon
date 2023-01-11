@@ -63,6 +63,7 @@ function deleteJSONData(status, title) {
     updateColumnLength(status);
 }
 
+// 해당하는 JSON 데이터를 이동합니다.
 function moveJSONData(prevStatus, nextStatus, card) {
     let title = findCardTitle(card);
     let content = findCardContent(card);
@@ -99,8 +100,7 @@ function validateNewName(originalName, newName) {
     return true;
 }
 
-// 새로운 status를 추가합니다.
-// 호출 시기 : column 생성 이후
+// 새로운 status를 추가합니다. (호출 시기 : column 생성 이후)
 function addStatus(newStatus) {
     let newStatusIndex = statusList.length
     statusList[newStatusIndex] = statusList[newStatusIndex - 1] + 1;
@@ -109,8 +109,7 @@ function addStatus(newStatus) {
     JSON_DATA[newStatusIndex] = []
 }
 
-// 해당하는 status를 삭제합니다.
-// 호출 시기 : column 삭제 이후 
+// 해당하는 status를 삭제합니다. (호출 시기 : column 삭제 이후)
 function deleteStatus(status) {
     let statusIndex = statusName.indexOf(status)
     

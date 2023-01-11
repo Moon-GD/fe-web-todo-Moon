@@ -183,6 +183,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
     return menuFrame;
 }
 
+// 헤더 템플릿을 반환합니다.
 function headerTitleTemplate(title, originalHeaderDom) {
     const headerDom = document.createElement("h3");
     const inputDom = document.createElement("input")

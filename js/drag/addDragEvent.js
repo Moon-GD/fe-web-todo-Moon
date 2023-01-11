@@ -8,6 +8,7 @@ import { moveJSONData } from "../json_data/json_data.js";
 let dragStartStatus = "";
 let dragEndStatus = "";
 
+// 카드 Dom에 드래그 이벤트를 추가합니다
 function makeCardDragEvent(cardDom) {
     cardDom.addEventListener("dragstart", (event) => {
         dragStartStatus = findColumnStatusByCard(cardDom)

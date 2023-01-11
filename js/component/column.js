@@ -70,10 +70,12 @@ function headerDoubleClickEvent(headerDom) {
     })
 }
 
+// header의 이름을 수정합니다. ( 호출 시기 :  )
 function changeHeaderName(headerDom, newTitle) {
     headerDom.children[0].innerHTML = newTitle
 }
 
+// 헤더에 focus out 이벤트를 추가합니다.
 function inputFocusOutEvent(inputDom, originalTitle, originalHeaderDom) {
     inputDom.addEventListener("focusout", ()=> {
         const newTitle = inputDom.value;

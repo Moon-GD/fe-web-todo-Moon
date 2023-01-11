@@ -81,9 +81,9 @@ function validateDomByQuery(dom, queryObj) {
     return true;
 }
 
-function singleQuerySelector(query) {
+function singleQuerySelector(query, startDom=BODY_DOM) {
     let queue = new Queue();
-    queue.enque(BODY_DOM);
+    queue.enque(startDom);
 
     let queryObj = singleQueryToObject(query);
 

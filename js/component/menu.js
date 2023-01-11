@@ -6,7 +6,6 @@ import {
 const menuBar = document.querySelector("#menu");
 const menuOpenBtn = document.querySelector("#menu-open-btn");
 const menuCloseBtn = document.querySelector("#menu-close-btn");
-
 const menuContent = document.getElementById("menu-content")
 
 // menu toggle 이벤트 추가
@@ -30,6 +29,7 @@ function menuLogMove(title, prevStatus, nextStatus, emotion="🥳", author="@sam
     menuContent.prepend(menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author))
 }
 
+// 메뉴 바에 기록을 남깁니다. (update)
 function menuLogUpdate(title, status, emotion="🥳", author="@sam") {
     menuContent.prepend(menuLogUpdateTemplate(title, status, emotion, author));
 }
