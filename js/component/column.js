@@ -1,5 +1,5 @@
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
-import { statusName, addStatus, deleteStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
+import { statusNameList, addStatus, deleteStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
 import { turnOnColumnAddModal } from "./modal.js";
 
 const mainTag = document.querySelector("main");
@@ -52,8 +52,8 @@ function updateColumnLength(status) {
 function findColumnStatusByCard(card) {
     let headerName = findCardHeaderName(card)
 
-    for(let i=0;i<statusName.length;i++) {
-        if(headerName == statusName[i]) { return i; }
+    for(let i=0;i<statusNameList.length;i++) {
+        if(headerName == statusNameList[i]) { return i; }
     }
 
     return -1;

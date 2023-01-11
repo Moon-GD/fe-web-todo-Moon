@@ -5,7 +5,7 @@ import { cardAddEvent, cardDeleteEvent,
 } from "../component/card.js";
 import { dragIDManager } from "../drag/dragIDManager.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
-import { statusName } from "../json_data/json_data.js";
+import { statusNameList } from "../json_data/json_data.js";
 
 // column 템플릿을 반환합니다.
 function columnTemplate(columnTitle, cardCount = 0) {
@@ -151,8 +151,8 @@ function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
                 <strong>${title}</strong>을/를
-                <strong>${statusName[prevStatus]}</strong>에서
-                <strong>${statusName[nextStatus]}</strong>
+                <strong>${statusNameList[prevStatus]}</strong>에서
+                <strong>${statusNameList[nextStatus]}</strong>
                 로 이동하였습니다.
             </h4>
             <h5>1분전</h5>
@@ -172,7 +172,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
         <div class="log-content-area">
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
-                <strong>${statusName[status]}</strong>의
+                <strong>${statusNameList[status]}</strong>의
                 <strong>${title}</strong>
                 을/를 수정하였습니다.
             </h4>

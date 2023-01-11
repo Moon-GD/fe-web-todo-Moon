@@ -1,4 +1,4 @@
-import { validateStatus, statusName, deleteJSONData } from "../json_data/json_data.js";
+import { validateStatus, statusNameList, deleteJSONData } from "../json_data/json_data.js";
 import { addColumn, findColumnStatusByCard } from "./column.js";
 import { menuLogDelete } from "./menu.js";
 import { findHeaderLengthByCard } from "../common.js";
@@ -48,7 +48,7 @@ modalDeleteBtn.addEventListener("click", () => {
     let title = chosenCard.children[0].textContent.split("\n")[0]
 
     // menu 삭제 log 남기기
-    menuLogDelete(title, statusName[status]);
+    menuLogDelete(title, statusNameList[status]);
 
     // column에 길이 반영
     let span = findHeaderLengthByCard(chosenCard)
