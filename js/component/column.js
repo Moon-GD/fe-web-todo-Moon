@@ -7,26 +7,41 @@ import {
     DISPLAY_FLEX, DISPLAY_NONE 
 } from "../common/commonVariable.js";
 import { changeCSS } from "../common/commonFunction.js";
+import { 
+    addEventToSearchBtn, addEventToSearchCancelBtn, addEventToSearchAcceptBtn
+} from "../search/search.js";
 
 const mainTag = querySelector("main");
 const fabBtn = querySelector("#column-add-btn");
 const goColumnAddModalBtn = querySelector("#go-column-add-modal-btn");
-const goSearchBtn = querySelector("#go-search-btn");
+const goSearchModalBtn = querySelector("#go-search-btn");
 
-function addEventToFabBtn() {
-    fabBtn.addEventListener(CLICK, () => {
-        if(goColumnAddModalBtn.style.bottom == "21%") {
-            changeCSS(goColumnAddModalBtn, "bottom", "5%");
-            changeCSS(goSearchBtn, "bottom", "5%");
-        }
-        else {
-            changeCSS(goColumnAddModalBtn, "bottom", "21%");
-            changeCSS(goSearchBtn, "bottom", "13%");
-        }
-    })
+// fab 버튼을 토글합니다.
+function toggleFabBtn() {
+    if(goColumnAddModalBtn.style.bottom == "21%") {
+        changeCSS(goColumnAddModalBtn, "bottom", "5%");
+        changeCSS(goSearchModalBtn, "bottom", "5%");
+    }
+    else {
+        changeCSS(goColumnAddModalBtn, "bottom", "21%");
+        changeCSS(goSearchModalBtn, "bottom", "13%");
+    }
 }
 
-addEventToFabBtn();
+// fab 버튼에 클릭 이벤트를 추가합니다.
+function addEventToFabBtn() {
+    fabBtn.addEventListener(CLICK, () => {
+        toggleFabBtn();
+    })
+
+    // Fab에 숨겨진 버튼들에 이벤트를 추가합니다.
+    addEventToSearchBtn();
+    addEventToSearchCancelBtn();
+    addEventToSearchAcceptBtn();
+
+    // fab 버튼에 column add event를 추가합니다.
+    goColumnAddModalBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
+}
 
 // column 버튼에 column 삭제 이벤트를 추가합니다.
 function columnDeleteEvent(columnDeleteBtn, column) {
@@ -49,9 +64,6 @@ function addColumn(columnName="제목 없음") {
     // column으로 smooth하게 스크롤 이동
     newColumn.scrollIntoView({behavior:'smooth'});
 }
-
-// fab 버튼에 column add event를 추가합니다.
-goColumnAddModalBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
 
 // 카드가 속한 헤더의 이름을 반환합니다.
 function findCardHeaderName(cardNode) {
@@ -122,8 +134,8 @@ function inputFocusOutEvent(headerInput, originalTitle, originalHeaderDom) {
 }
 
 export { 
-    mainTag, 
+    mainTag, goSearchModalBtn,
     columnDeleteEvent, findColumnStatusByCard, addColumn, 
     findCardHeaderName, updateColumnLength,
-    headerDoubleClickEvent, inputFocusOutEvent
+    headerDoubleClickEvent, inputFocusOutEvent, addEventToFabBtn
 }

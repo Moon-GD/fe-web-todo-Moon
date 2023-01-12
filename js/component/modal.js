@@ -2,7 +2,9 @@ import { validateStatus, statusNameList, deleteJSONData } from "../json_data/jso
 import { addColumn, findColumnStatusByCard } from "./column.js";
 import { menuLogDelete } from "./menu.js";
 import { querySelector } from "../devUtils/querySelector.js";
-import { CLICK } from "../common/commonVariable.js";
+import { CLICK, DISPLAY_NONE } from "../common/commonVariable.js";
+import { searchModal } from "../search/search.js";
+import { changeCSS } from "../common/commonFunction.js";
 
 let chosenCard = "";
 
@@ -71,7 +73,12 @@ function addEventToFabButton() {
     })
 }
 
+// 검색 modal을 끕니다.
+function turnOffSearchModal() {
+    changeCSS(searchModal, "display", DISPLAY_NONE);
+}
+
 export { 
     setCard, modalSection, turnOnModal, turnOnColumnAddModal,
-    addEventToModalButtons, addEventToFabButton
+    addEventToModalButtons, addEventToFabButton, turnOffSearchModal
  }

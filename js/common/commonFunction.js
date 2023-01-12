@@ -1,5 +1,5 @@
 import { statusList, statusNameList, JSON_DATA } from "../json_data/json_data.js";
-import { mainTag } from "../component/column.js";
+import { mainTag, addEventToFabBtn } from "../component/column.js";
 import { columnTemplate, cardTemplate } from "../templates/template.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { addEventToMenuBtns } from "../component/menu.js";
@@ -53,6 +53,7 @@ function addEventsToWebsite() {
     addEventToModalButtons();
     addEventToFabButton();
     loadInitialData();
+    addEventToFabBtn();
 }
 
 export {
