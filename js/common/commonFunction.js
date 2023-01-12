@@ -7,6 +7,8 @@ const CARD_BTN_HOVER = "#FE5958";
 const CARD_OUTLINE_HOVER = "0.2vh solid " + CARD_BTN_HOVER;
 const CARD_BACKGROUND_HOVER = "#FFEEEC";
 
+const MENU_MOVE_DISTANCE = "-30vw";
+const RIGHT = "right";
 
 // (target)의 css (key)를 (value)로 바꿉니다.
 function changeCSS(targetNode, key, value) {
@@ -41,5 +43,6 @@ function findHeaderLengthByCard(card) {
 export {
     CARD_BTN_ORIGINAL, CARD_OUTLINE_ORIGINAL, CARD_BACKGROUND_ORIGINAL,
     CARD_BTN_HOVER, CARD_OUTLINE_HOVER, CARD_BACKGROUND_HOVER, CARD_DELETE_BTN_ORIGINAL,
-    changeCSS, addChildAfterParent, findHeaderLengthByCard, findCardTitle, findCardContent
+    changeCSS, addChildAfterParent, findHeaderLengthByCard, findCardTitle, findCardContent,
+    MENU_MOVE_DISTANCE, RIGHT
 }

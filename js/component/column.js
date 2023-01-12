@@ -17,7 +17,7 @@ function columnDeleteEvent(columnDeleteBtn, column) {
 }
 
 // 새로운 column을 추가합니다.
-function addColumn(columnName = "제목 없음") {
+function addColumn(columnName="제목 없음") {
     let newColumn = columnTemplate(columnName);
     mainTag.appendChild(newColumn);
 

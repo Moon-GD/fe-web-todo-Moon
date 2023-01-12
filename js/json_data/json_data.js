@@ -1,4 +1,4 @@
-import { findCardTitle, findCardContent } from "../common.js"
+import { findCardTitle, findCardContent } from "../common/commonFunction.js"
 import { updateColumnLength } from "../component/column.js"
 
 // 새로운 상태값이 입력되면? statusList의 길이 값을 대입해주면 된다!

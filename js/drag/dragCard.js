@@ -1,5 +1,5 @@
 import { dragIDManager } from "./dragIDManager.js";
-import { addChildAfterParent } from "../common.js";
+import { addChildAfterParent } from "../common/commonFunction.js";
 import { makeShadedNode, makeLightNode } from "./dragEffect.js";
 
 // 드래그 중인 카드를 기록합니다.
