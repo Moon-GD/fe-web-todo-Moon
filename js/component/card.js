@@ -1,6 +1,7 @@
 import { 
     CARD_BTN_ORIGINAL, CARD_OUTLINE_ORIGINAL, CARD_BACKGROUND_ORIGINAL, CARD_BTN_HOVER, 
     CARD_OUTLINE_HOVER, CARD_BACKGROUND_HOVER, CARD_DELETE_BTN_ORIGINAL, 
+    DISPLAY_BLOCK, DISPLAY_NONE,
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK
 } from "../common/commonVariable.js";
 import { findCardTitle, findCardContent } from "../common/commonFunction.js"
@@ -57,7 +58,7 @@ function cardDeleteEvent(cardDeleteBtn, deletedCard) {
 function newCardCancelEvent(registerCancelBtn, cardRegisterForm, prevCard, isUpdated) {
     registerCancelBtn.addEventListener(CLICK, () => {
         if(isUpdated) {
-            prevCard.style.display = "block";
+            prevCard.style.display = DISPLAY_BLOCK;
 
             // json 데이터 복구
             addJSONData(
@@ -87,7 +88,7 @@ function newCardRegisterEvent(cardMakeBtn, currentCard, prevCard, isUpdated) {
 
         // 카드 배치 후 카드 등록 폼 제거
         currentCard.after(newCard);
-        currentCard.style.display = "none";
+        currentCard.style.display = DISPLAY_NONE;
 
         // 데이터 반영
         let currentStatus = findColumnStatusByCard(newCard)
@@ -151,7 +152,7 @@ function cardToRegisterForm(cardNode) {
     deleteJSONData(status, title);
 
     cardNode.before(newCardTemplate(title, content, cardNode, true));
-    cardNode.style.display = "none";
+    cardNode.style.display = DISPLAY_NONE;
 }
 
 // 카드에 더블 클릭 이벤트를 추가해줍니다.

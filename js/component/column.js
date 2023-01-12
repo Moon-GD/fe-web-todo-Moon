@@ -2,7 +2,10 @@ import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { statusNameList, addStatus, deleteStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
 import { turnOnColumnAddModal } from "./modal.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
-import { CLICK, DOUBLE_CLICK, FOCUS_OUT } from "../common/commonVariable.js";
+import { 
+    CLICK, DOUBLE_CLICK, FOCUS_OUT, 
+    DISPLAY_FLEX, DISPLAY_NONE 
+} from "../common/commonVariable.js";
 
 const mainTag = querySelector("main");
 const columnAddBtn = querySelector("#column-add-btn");
@@ -66,7 +69,7 @@ function headerDoubleClickEvent(headerNode) {
         let headerInputTemplate = headerTitleTemplate(headerTitle, headerNode);
 
         headerNode.after(headerInputTemplate)
-        headerNode.style.display = "none";
+        headerNode.style.display = DISPLAY_NONE;
     })
 }
 
@@ -83,7 +86,7 @@ function inputFocusOutEvent(headerInput, originalTitle, originalHeaderDom) {
         // 새로 바뀐 이름 중복 검사
         if(validateNewName(originalTitle, newTitle)) {
             changeHeaderName(originalHeaderDom, newTitle)
-            originalHeaderDom.style.display = "flex";
+            originalHeaderDom.style.display = DISPLAY_FLEX;
 
             updateStatusName(originalTitle, headerInput.value);
             headerInput.parentElement.remove();
