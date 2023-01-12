@@ -7,7 +7,7 @@
 <hr>
 
 ## 현재 제공 기능
-##### querySelector
+##### querySelector (document에서 지원하는 기능 사용 X)
 ##### add, delete, update, move 액션 기록 메뉴바에 표시
 ##### column 추가
 ##### column 추가 시, status 중복 검사
@@ -31,7 +31,7 @@
 <hr>
 
 ## 할 일
-##### reset.css에서 사용하지 않는 태그는 불 필요하게 컴파일되지 않도록 지우기
+##### reset.css에서 사용하지 않는 태그는 불 필요하게 컴파일되지 않도록 지우기 ✅
 ##### column 삭제 -> json_data 연동 ✅
 <hr>
 
