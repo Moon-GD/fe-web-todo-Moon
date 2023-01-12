@@ -1,19 +1,8 @@
-import { statusList, statusNameList, JSON_DATA } from "./json_data/json_data.js"
-import { mainTag } from "./component/column.js"
-import { columnTemplate, cardTemplate } from "./templates/template.js"
-import { makeCardDragEvent } from "./drag/addDragEvent.js";
+import { addEventsToWebsite } from "./common/commonFunction.js";
 
 (() => {
-    statusList.forEach((status) => {
-        let newColumn = columnTemplate(statusNameList[status], JSON_DATA[status].length);
-        let cardArea = newColumn.children[1];
-        JSON_DATA[status].forEach((data) => {
-            let newCard = cardTemplate(data.title, data.content, data.author)
-            makeCardDragEvent(newCard)
-    
-            cardArea.prepend(newCard)  
-        })
-        
-        mainTag.appendChild(newColumn);
-    })
+    // HTML collection은 forEach가 안되기 때문에 배열 forEach 순회 등록
+    HTMLCollection.prototype.forEach = Array.prototype.forEach;
+
+    addEventsToWebsite();
 })();
