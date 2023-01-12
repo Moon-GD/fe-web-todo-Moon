@@ -1,11 +1,12 @@
 import { goSearchModalBtn } from "../component/column.js";
 import { CLICK } from "../common/commonVariable.js";
-import { changeCSS } from "../common/commonFunction.js";
+import { changeCSS, findCardTitle } from "../common/commonFunction.js";
 import { DISPLAY_FLEX } from "../common/commonVariable.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { turnOffSearchModal } from "../component/modal.js";
 
 const searchModal = querySelector("#search-modal-section");
+const searchInput = querySelector("#search-input");
 const searchCancelBtn = querySelector("#search-cancel-btn");
 const searchAcceptBtn = querySelector("#search-accept-btn");
 
@@ -25,6 +26,27 @@ function addEventToSearchCancelBtn() {
 function addEventToSearchAcceptBtn() {
     searchAcceptBtn.addEventListener(CLICK, () => {
         turnOffSearchModal();
+        searchCard(searchInput.value)
+    })
+}
+
+function searchCard(searchInputValue) {
+    const cards = document.querySelectorAll("div.card-frame");
+    let cardNodeList = [];
+
+    cards.forEach((card) => {
+        if(findCardTitle(card).indexOf(searchInputValue) != -1) {
+            cardNodeList.push(card);
+        }
+    })
+
+    cardNodeList.forEach((cardNode) => {
+        cardNode.style.outline = "0.2vh solid red";
+        
+        setTimeout(() => {
+            cardNode.style.transition = "1s";
+            cardNode.style.outline = "0.2vh solid #fff";
+        }, 1000)
     })
 }
 

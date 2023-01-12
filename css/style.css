@@ -155,6 +155,7 @@ section > article {
   padding: 1.5vh 1vw;
   border-radius: 1vh;
   background-color: white;
+  transition: 0.2s;
 }
 .card-frame > h3 {
   position: relative;
