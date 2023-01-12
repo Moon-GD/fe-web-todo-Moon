@@ -135,8 +135,49 @@ function singleQuerySelector(query, startDom=BODY_DOM) {
 // 복합 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다.
 function multipleQuerySelector(multipleQuery, startDom=BODY_DOM) {
     let multipleQueryList = multipleQueryToList(multipleQuery);
+    let queryListIndex = 0;
+    let startNodeList = [];
+    let endNodeList = [startDom];
 
-    console.log(multipleQueryList)
+    while(queryListIndex < multipleQueryList.length) {
+        startNodeList = endNodeList;
+        endNodeList = [];
+
+        startNodeList.forEach((node) => {
+            let all = singleQuerySelectorAll(multipleQueryList[queryListIndex], node);
+            endNodeList = endNodeList.concat(all);
+        })
+
+        queryListIndex += 1;
+    }
+
+    return endNodeList[0];
+}
+
+// 복합 쿼리에 해당하는 모든 노드를 리스트 형태로 반환합니다.
+function multipleQuerySelectorAll(multipleQuery, startDom=BODY_DOM) {
+    let multipleQueryList = multipleQueryToList(multipleQuery);  // query문 파싱
+    let queryListIndex = 0;  // query 선택을 위한 인덱스
+    let startNodeList = [];  // 탐색 시작 지점
+    let endNodeList = [startDom];  // 탐색 결과를 저장할 리스트
+
+    while(queryListIndex < multipleQueryList.length) {
+        // 탐색 시작 지점과 결과 리스트 초기화
+        startNodeList = endNodeList;
+        endNodeList = [];
+
+        // 탐색 시작 지점을 순회하며 query에 해당하는 모든 노드를 endNodeList에 저장
+        startNodeList.forEach((node) => {
+            let all = singleQuerySelectorAll(multipleQueryList[queryListIndex], node);
+            endNodeList = endNodeList.concat(all);
+        })
+
+        // query 선택 인덱스 1 증가
+        queryListIndex += 1;
+    }
+
+    // 최종 결과 반환
+    return endNodeList;
 }
 
 setTimeout(() => {
