@@ -7,6 +7,7 @@
 <hr>
 
 ## 현재 제공 기능
+##### querySelector
 ##### add, delete, update, move 액션 기록 메뉴바에 표시
 ##### column 추가
 ##### column 추가 시, status 중복 검사

@@ -1,19 +1,19 @@
 import { validateStatus, statusNameList, deleteJSONData } from "../json_data/json_data.js";
 import { addColumn, findColumnStatusByCard } from "./column.js";
 import { menuLogDelete } from "./menu.js";
-import { findHeaderLengthByCard } from "../common.js";
+import { querySelector } from "../devUtils/querySelector.js";
 
 let chosenCard = "";
 
 // card delete modal
-const modalSection = document.querySelector("#modal-section");
-const modalDeleteBtn = document.querySelector("#card-delete-btn");
-const modalCancelBtn = document.querySelector("#card-cancel-btn");
+const modalSection = querySelector("#modal-section");
+const modalDeleteBtn = querySelector("#card-delete-btn");
+const modalCancelBtn = querySelector("#card-cancel-btn");
 
 // column add modal
-const columnAddModal = document.querySelector("#column-add-modal-section");
-const columnAddModalCancelBtn = document.querySelector("#column-add-cancel-btn");
-const columnAddModalAcceptBtn = document.querySelector("#column-add-accept-btn");
+const columnAddModal = querySelector("#column-add-modal-section");
+const columnAddModalCancelBtn = querySelector("#column-add-cancel-btn");
+const columnAddModalAcceptBtn = querySelector("#column-add-accept-btn");
 
 // 카드 삭제 관련 모달을 띄워줍니다.
 function turnOnModal() { modalSection.style.display = "flex"; }
@@ -51,7 +51,7 @@ modalCancelBtn.addEventListener("click", () => { turnOffModal(); })
 // column add modal 버튼들 이벤트 추가
 columnAddModalCancelBtn.addEventListener("click", () => { turnOffColumnAddModal(); })
 columnAddModalAcceptBtn.addEventListener("click", () => {
-    let columnAddInput = document.querySelector("#column-add-input");
+    let columnAddInput = querySelector("#column-add-input");
     
     // 중복되는 status가 없을 경우에만 column 추가
     if(validateStatus(columnAddInput.value)) {

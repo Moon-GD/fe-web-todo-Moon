@@ -1,9 +1,10 @@
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { statusNameList, addStatus, deleteStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
 import { turnOnColumnAddModal } from "./modal.js";
+import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 
-const mainTag = document.querySelector("main");
-const columnAddBtn = document.querySelector("#column-add-btn");
+const mainTag = querySelector("main");
+const columnAddBtn = querySelector("#column-add-btn");
 
 // column 버튼에 column 삭제 이벤트를 추가합니다.
 function columnDeleteEvent(columnDeleteBtn, column) {
@@ -40,7 +41,7 @@ function findCardHeaderName(cardNode) {
 
 // column 길이를 갱신합니다.
 function updateColumnLength(status) {
-    let currentSection = document.querySelectorAll("article")[status].parentElement
+    let currentSection = querySelectorAll("article")[status].parentElement
     let sectionLength = currentSection.children[0].children[1]
     
     sectionLength.innerHTML = JSON_DATA[status].length
