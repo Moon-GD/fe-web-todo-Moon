@@ -14,9 +14,23 @@ const MENU_MOVE_DISTANCE = "-30vw";
 // 위치, 배치 관련
 const RIGHT = "right";
 
+// 이벤트 관련
+const CLICK = "click";
+const MOUSE_OVER = "mouseover";
+const MOUSE_LEAVE = "mouseleave";
+const INPUT = "input";
+const DOUBLE_CLICK = "dblclick";
+const FOCUS_OUT = "focusout";
+const DRAG_START = "dragstart";
+const DRAG_OVER = "dragover";
+const DRAV_END = "dragend";
+const DROP = "drop";
+
 export {
     CARD_BTN_ORIGINAL, CARD_OUTLINE_ORIGINAL, CARD_BACKGROUND_ORIGINAL, CARD_DELETE_BTN_ORIGINAL,
     CARD_BTN_HOVER, CARD_OUTLINE_HOVER, CARD_BACKGROUND_HOVER,
     MENU_MOVE_DISTANCE,
-    RIGHT
+    RIGHT,
+    CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK, FOCUS_OUT, 
+    DRAG_START, DRAG_OVER, DRAV_END, DROP
 }

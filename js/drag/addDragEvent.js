@@ -4,22 +4,23 @@ import { makeLightNode } from "./dragEffect.js"
 import { menuLogMove } from "../component/menu.js";
 import { findCardTitle } from "../common/commonFunction.js";
 import { moveJSONData } from "../json_data/json_data.js";
+import { DRAG_START, DRAG_OVER, DRAV_END, DROP } from "../common/commonVariable.js";
 
 let dragStartStatus = "";
 let dragEndStatus = "";
 
 // 카드 Dom에 드래그 이벤트를 추가합니다
 function makeCardDragEvent(cardDom) {
-    cardDom.addEventListener("dragstart", (event) => {
+    cardDom.addEventListener(DRAG_START, (event) => {
         dragStartStatus = findColumnStatusByCard(cardDom)
         dragCard(event)
     })
 
-    cardDom.addEventListener("dragover", (event) => {
+    cardDom.addEventListener(DRAG_OVER, (event) => {
         dragOverCard(cardDom, event)
     })
 
-    cardDom.addEventListener("dragend", (event) => {
+    cardDom.addEventListener(DRAV_END, (event) => {
         // 이동 완료된 column의 status 계산
         dragEndStatus = findColumnStatusByCard(cardDom);
 
@@ -32,7 +33,7 @@ function makeCardDragEvent(cardDom) {
         makeLightNode();
     })
 
-    cardDom.addEventListener("drop", (event) => {
+    cardDom.addEventListener(DROP, (event) => {
         dropCard(cardDom, event)
     })
 }

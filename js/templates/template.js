@@ -6,6 +6,7 @@ import { cardAddEvent, cardDeleteEvent,
 import { dragIDManager } from "../drag/dragIDManager.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
 import { statusNameList } from "../json_data/json_data.js";
+import { DRAG_OVER } from "../common/commonVariable.js";
 
 // column 템플릿을 반환합니다.
 function columnTemplate(columnTitle, cardCount = 0) {
@@ -29,12 +30,12 @@ function columnTemplate(columnTitle, cardCount = 0) {
     let header = columnNode.children[0]
     let article = header.parentElement.children[1];
 
-    header.addEventListener("dragover", (event) => {
+    header.addEventListener(DRAG_OVER, (event) => {
         event.preventDefault();
         article.prepend(makeShadedNode());
     })
 
-    article.addEventListener("dragover", (event) => {
+    article.addEventListener(DRAG_OVER, (event) => {
         if(article.children.length) { return; }
         
         event.preventDefault();

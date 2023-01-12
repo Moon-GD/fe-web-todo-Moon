@@ -1,5 +1,5 @@
 import { changeCSS } from "../common/commonFunction.js"
-import { MENU_MOVE_DISTANCE, RIGHT } from "../common/commonVariable.js";
+import { MENU_MOVE_DISTANCE, RIGHT, CLICK } from "../common/commonVariable.js";
 import { 
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate
 } from "../templates/template.js";
@@ -11,8 +11,8 @@ const menuCloseBtn = querySelector("#menu-close-btn");
 const menuContent = querySelector("#menu-content")
 
 // menu toggle 이벤트 추가
-menuOpenBtn.addEventListener("click", () => { changeCSS(menuBar, RIGHT, 0) })
-menuCloseBtn.addEventListener("click", () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
+menuOpenBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, 0) })
+menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
 
 // 메뉴 바에 기록을 남깁니다. (add)
 function menuLogAdd(title, status, emotion="🥳", author="@sam") {

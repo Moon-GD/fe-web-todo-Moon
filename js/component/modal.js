@@ -2,6 +2,7 @@ import { validateStatus, statusNameList, deleteJSONData } from "../json_data/jso
 import { addColumn, findColumnStatusByCard } from "./column.js";
 import { menuLogDelete } from "./menu.js";
 import { querySelector } from "../devUtils/querySelector.js";
+import { CLICK } from "../common/commonVariable.js";
 
 let chosenCard = "";
 
@@ -31,7 +32,7 @@ function turnOffColumnAddModal() { columnAddModal.style.display = "none"; }
 function setCard(cardDom) { chosenCard = cardDom; }
 
 // card modal 버튼들 이벤트 추가
-modalDeleteBtn.addEventListener("click", () => {
+modalDeleteBtn.addEventListener(CLICK, () => {
     turnOffModal();
     
     let status = findColumnStatusByCard(chosenCard);
@@ -46,11 +47,11 @@ modalDeleteBtn.addEventListener("click", () => {
     chosenCard.remove();
 })
 
-modalCancelBtn.addEventListener("click", () => { turnOffModal(); })
+modalCancelBtn.addEventListener(CLICK, () => { turnOffModal(); })
 
 // column add modal 버튼들 이벤트 추가
-columnAddModalCancelBtn.addEventListener("click", () => { turnOffColumnAddModal(); })
-columnAddModalAcceptBtn.addEventListener("click", () => {
+columnAddModalCancelBtn.addEventListener(CLICK, () => { turnOffColumnAddModal(); })
+columnAddModalAcceptBtn.addEventListener(CLICK, () => {
     let columnAddInput = querySelector("#column-add-input");
     
     // 중복되는 status가 없을 경우에만 column 추가

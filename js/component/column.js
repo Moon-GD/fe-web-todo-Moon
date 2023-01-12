@@ -2,13 +2,14 @@ import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { statusNameList, addStatus, deleteStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
 import { turnOnColumnAddModal } from "./modal.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
+import { CLICK, DOUBLE_CLICK, FOCUS_OUT } from "../common/commonVariable.js";
 
 const mainTag = querySelector("main");
 const columnAddBtn = querySelector("#column-add-btn");
 
 // column 버튼에 column 삭제 이벤트를 추가합니다.
 function columnDeleteEvent(columnDeleteBtn, column) {
-    columnDeleteBtn.addEventListener("click", () => {
+    columnDeleteBtn.addEventListener(CLICK, () => {
         let status = column.children[0].innerHTML.split("\n")[0]
         
         deleteStatus(status)
@@ -29,7 +30,7 @@ function addColumn(columnName="제목 없음") {
 }
 
 // fab 버튼에 column add event를 추가합니다.
-columnAddBtn.addEventListener("click", () => { turnOnColumnAddModal(); })
+columnAddBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
 
 // 카드가 속한 헤더의 이름을 반환합니다.
 function findCardHeaderName(cardNode) {
@@ -60,7 +61,7 @@ function findColumnStatusByCard(cardNode) {
 
 // column의 header에 더블 클릭 이벤트를 추가합니다.
 function headerDoubleClickEvent(headerNode) {
-    headerNode.addEventListener("dblclick", () => {
+    headerNode.addEventListener(DOUBLE_CLICK, () => {
         let headerTitle = headerNode.children[0].innerHTML;
         let headerInputTemplate = headerTitleTemplate(headerTitle, headerNode);
 
@@ -76,7 +77,7 @@ function changeHeaderName(headerDom, newTitle) {
 
 // 헤더에 focus out 이벤트를 추가합니다.
 function inputFocusOutEvent(headerInput, originalTitle, originalHeaderDom) {
-    headerInput.addEventListener("focusout", ()=> {
+    headerInput.addEventListener(FOCUS_OUT, ()=> {
         const newTitle = headerInput.value;
 
         // 새로 바뀐 이름 중복 검사
