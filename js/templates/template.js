@@ -25,10 +25,10 @@ function columnTemplate(columnTitle, cardCount = 0) {
             </article>
         `
 
-    let cardAddBtn = columnNode.children[0].children[2].children[0]
-    let columnDeleteBtn = columnNode.children[0].children[2].children[1];
-    let header = columnNode.children[0]
-    let article = header.parentElement.children[1];
+    let cardAddBtn = columnNode.querySelector(".card-add-btn")
+    let columnDeleteBtn = columnNode.querySelector(".column-delete-btn")
+    let header = columnNode.querySelector("h3")
+    let article = columnNode.querySelector("article")
 
     header.addEventListener(DRAG_OVER, (event) => {
         event.preventDefault();

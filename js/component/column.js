@@ -15,7 +15,7 @@ function columnDeleteEvent(columnDeleteBtn, column) {
     columnDeleteBtn.addEventListener(CLICK, () => {
         let status = column.children[0].innerHTML.split("\n")[0]
         
-        deleteStatus(status)
+        // deleteStatus(status)
         column.remove();
     })
 }
@@ -38,7 +38,7 @@ columnAddBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
 // 카드가 속한 헤더의 이름을 반환합니다.
 function findCardHeaderName(cardNode) {
     let currentSection = cardNode.parentElement.parentElement;
-    let headerName = currentSection.children[0].children[0].innerHTML
+    let headerName = currentSection.querySelector("span").innerHTML;
 
     return headerName
 }
@@ -46,7 +46,7 @@ function findCardHeaderName(cardNode) {
 // column 길이를 갱신합니다.
 function updateColumnLength(status) {
     let currentSection = querySelectorAll("article")[status].parentElement
-    let sectionLength = currentSection.children[0].children[1]
+    let sectionLength = currentSection.querySelector(".column-length");
     
     sectionLength.innerHTML = JSON_DATA[status].length
 }
@@ -65,7 +65,7 @@ function findColumnStatusByCard(cardNode) {
 // column의 header에 더블 클릭 이벤트를 추가합니다.
 function headerDoubleClickEvent(headerNode) {
     headerNode.addEventListener(DOUBLE_CLICK, () => {
-        let headerTitle = headerNode.children[0].innerHTML;
+        let headerTitle = headerNode.querySelector("span").innerHTML;
         let headerInputTemplate = headerTitleTemplate(headerTitle, headerNode);
 
         headerNode.after(headerInputTemplate)
@@ -75,7 +75,7 @@ function headerDoubleClickEvent(headerNode) {
 
 // 헤더의 이름을 수정합니다. ( 호출 시기 : 헤더에 더블 클릭 발생 이후 )
 function changeHeaderName(headerDom, newTitle) {
-    headerDom.children[0].innerHTML = newTitle
+    headerDom.querySelector("span").innerHTML = newTitle
 }
 
 // 헤더에 focus out 이벤트를 추가합니다.

@@ -38,7 +38,7 @@ function addEventToModalButtons() {
         turnOffModal();
         
         let status = findColumnStatusByCard(chosenCard);
-        let title = chosenCard.children[0].textContent.split("\n")[0]
+        const title = chosenCard.querySelector(".card-title").textContent.split("\n")[0]
 
         // menu 삭제 log 남기기
         menuLogDelete(title, statusNameList[status]);

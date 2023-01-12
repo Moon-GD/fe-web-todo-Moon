@@ -33,7 +33,7 @@ function cardDeleteEvent(cardDeleteBtn, deletedCard) {
         turnOnModal();
     })
 
-    let xBtn = deletedCard.children[0].children[0]
+    let xBtn = deletedCard.querySelector("i");
     
     cardDeleteBtn.addEventListener(MOUSE_OVER, () => {
         deletedCard.style.transition = "0.5s"
@@ -77,9 +77,9 @@ function newCardRegisterEvent(cardMakeBtn, currentCard, prevCard, isUpdated) {
     cardMakeBtn.addEventListener(CLICK, () => {
         registering = false;
 
-        let title = currentCard.children[0].value;
+        let title = currentCard.querySelector("input").value;
         let prevContent = "";
-        let updatedContent = currentCard.children[1].value ;
+        let updatedContent = currentCard.querySelector("textarea").value ;
         let newCard = cardTemplate(title, parseContent(updatedContent));
         let updatedStatus = "";
 
@@ -99,7 +99,7 @@ function newCardRegisterEvent(cardMakeBtn, currentCard, prevCard, isUpdated) {
             updatedStatus = findColumnStatusByCard(prevCard)
             prevCard.remove();
             currentCard.remove();
-            prevContent = prevCard.children[1].innerHTML
+            prevContent = prevCard.querySelector(".card-content").innerHTML
         }
         // 메뉴 add
         else {
@@ -117,7 +117,7 @@ function newCardRegisterEvent(cardMakeBtn, currentCard, prevCard, isUpdated) {
 function resizeCardByInputBox(cardRegisterInput, cardRegisterForm) {
     let scrollHeight = 0
     let cardHeight = 18
-    let registerAcceptBtn = cardRegisterForm.children[2].children[1];
+    let registerAcceptBtn = cardRegisterForm.querySelector("#new-card-register-btn");
 
     cardRegisterInput.value ?
             registerAcceptBtn.disabled = false  :
