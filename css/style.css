@@ -108,6 +108,44 @@ section > article {
   background-color: #0175DE;
 }
 
+#go-column-add-modal-btn {
+  position: fixed;
+  transition: 1s;
+  right: 5%;
+  bottom: 5%;
+  padding: 0 0.8vw;
+  border: none;
+  cursor: pointer;
+  font-size: 3rem;
+  font-weight: 300;
+  box-shadow: 0 0.5vh 1vh 0 gray;
+  color: #fff;
+  border-radius: 50%;
+  background-color: #0175DE;
+}
+#go-column-add-modal-btn > span {
+  font-size: 2rem;
+}
+
+#go-search-btn {
+  position: fixed;
+  right: 5%;
+  transition: 1s;
+  bottom: 5%;
+  padding: 0 0.8vw;
+  border: none;
+  cursor: pointer;
+  font-size: 3rem;
+  font-weight: 300;
+  box-shadow: 0 0.5vh 1vh 0 gray;
+  color: #fff;
+  border-radius: 50%;
+  background-color: #0175DE;
+}
+#go-search-btn > span {
+  font-size: 2rem;
+}
+
 .card-frame {
   display: flex;
   flex-direction: column;
@@ -287,7 +325,7 @@ header > i {
   background-color: #F0FAE9;
   border-bottom: 1px dotted black;
 }
-.log-frame:last-child {
+.log-frame :last-child {
   border-bottom: none;
 }
 .log-frame > .log-emotion-area {

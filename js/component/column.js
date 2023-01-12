@@ -6,9 +6,27 @@ import {
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
     DISPLAY_FLEX, DISPLAY_NONE 
 } from "../common/commonVariable.js";
+import { changeCSS } from "../common/commonFunction.js";
 
 const mainTag = querySelector("main");
-const columnAddBtn = querySelector("#column-add-btn");
+const fabBtn = querySelector("#column-add-btn");
+const goColumnAddModalBtn = querySelector("#go-column-add-modal-btn");
+const goSearchBtn = querySelector("#go-search-btn");
+
+function addEventToFabBtn() {
+    fabBtn.addEventListener(CLICK, () => {
+        if(goColumnAddModalBtn.style.bottom == "21%") {
+            changeCSS(goColumnAddModalBtn, "bottom", "5%");
+            changeCSS(goSearchBtn, "bottom", "5%");
+        }
+        else {
+            changeCSS(goColumnAddModalBtn, "bottom", "21%");
+            changeCSS(goSearchBtn, "bottom", "13%");
+        }
+    })
+}
+
+addEventToFabBtn();
 
 // column 버튼에 column 삭제 이벤트를 추가합니다.
 function columnDeleteEvent(columnDeleteBtn, column) {
@@ -33,7 +51,7 @@ function addColumn(columnName="제목 없음") {
 }
 
 // fab 버튼에 column add event를 추가합니다.
-columnAddBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
+goColumnAddModalBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
 
 // 카드가 속한 헤더의 이름을 반환합니다.
 function findCardHeaderName(cardNode) {
