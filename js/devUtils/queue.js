@@ -1,8 +1,8 @@
 class Queue {
     #_array = [];
 
-    constructor() {
-        this.#_array = [];
+    constructor(assignedList=[]) {
+        this.#_array = assignedList;
     }
 
     enque(item) {

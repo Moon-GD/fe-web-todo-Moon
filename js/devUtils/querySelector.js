@@ -10,6 +10,7 @@ const ID = "id";
 const ROOT_DOM = document.documentElement;
 const BODY_DOM = ROOT_DOM.children[1];
 
+// 단일 query를 객체로 반환합니다.
 function singleQueryToObject(query) {
     let objectQuery = {
         [TAG]: [],
@@ -40,47 +41,80 @@ function singleQueryToObject(query) {
     return objectQuery;
 }
 
-function multipleQueryToObject(query) {
+// 복합 query를 리스트로 반환합니다.
+function multipleQueryToList(multipleQuery) {
+    multipleQuery = multipleQuery.replace(/>/g, " > ");
+    
+    let listToBeReturned = multipleQuery.split(" ").filter((ele) => ele);
+
+    return listToBeReturned;
+}
+
+// 복합 query를 객체로 반환합니다.
+function multipleQueryToObject(multipleQuery) {
     // main section : 하위 요소
     // main>section : 자식 요소
     // main > section : 자식 요소
 
     let objectQuery = []
 
-    query = query.split(" ")
+    multipleQuery = multipleQuery.split(" ")
 
-    for(let i=0;i<query.length;i++) {
-        if(query[i] == ">") {
+    for(let i=0;i<multipleQuery.length;i++) {
+        if(multipleQuery[i] == ">") {
             objectQuery.push(">");
         }
         else {
-            objectQuery.push(singleQueryToObject(query[i]))
+            objectQuery.push(singleQueryToObject(multipleQuery[i]))
         }
     }
+
+    return objectQuery;
 }
 
-function validateDomByQuery(dom, queryObj) {
+// query에 해당하는 노드인지를 boolean으로 반환합니다.
+function valiedateNodeByQuery(node, queryObj) {
     const tags = queryObj[TAG];
     const classes = queryObj[CLASS];
     const ids = queryObj[ID];
     
     
     for(let i=0;i<tags.length;i++) {
-        if(dom.tagName != tags[i]) { return false; }
+        if(node.tagName != tags[i]) { return false; }
     }
     
     
     for(let i=0;i<classes.length;i++) {
-        if(classes[i] in dom.classList) { return false; }
+        if(classes[i] in node.classList) { return false; }
     }
 
     for(let i=0;i<ids.length;i++) {
-        if(dom.id != ids[i]) { return false; }
+        if(node.id != ids[i]) { return false; }
     }
 
     return true;
 }
 
+// 단일 쿼리에 해당하는 모든 노드를 리스트 형태로 반환합니다.
+function singleQuerySelectorAll(query, startDom=BODY_DOM) {
+    let listToBeReturned = []
+    let queue = new Queue();
+    queue.enque(startDom);
+
+    let queryObj = singleQueryToObject(query);
+
+    // BFS 방식으로 순회
+    while(queue.getLength()) {
+        let currentDom = queue.deque();
+        // return : 원하는 ID를 찾은 경우
+        if(valiedateNodeByQuery(currentDom, queryObj)) { listToBeReturned.push(currentDom); }
+        currentDom.children.forEach((child) => { queue.enque(child); })
+    }
+
+    return listToBeReturned;
+}
+
+// 단일 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다.
 function singleQuerySelector(query, startDom=BODY_DOM) {
     let queue = new Queue();
     queue.enque(startDom);
@@ -91,13 +125,20 @@ function singleQuerySelector(query, startDom=BODY_DOM) {
     while(queue.getLength()) {
         let currentDom = queue.deque();
         // return : 원하는 ID를 찾은 경우
-        if(validateDomByQuery(currentDom, queryObj)) { return currentDom; }
+        if(valiedateNodeByQuery(currentDom, queryObj)) { return currentDom; }
         currentDom.children.forEach((child) => { queue.enque(child); })
     }
 
     return null;
 }
 
+// 복합 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다.
+function multipleQuerySelector(multipleQuery, startDom=BODY_DOM) {
+    let multipleQueryList = multipleQueryToList(multipleQuery);
+
+    console.log(multipleQueryList)
+}
+
 setTimeout(() => {
-    console.log(singleQuerySelector("i.fa-solid#menu-open-btn"), document.querySelector("i.fa-solid#menu-open-btn"))
+    multipleQuerySelector("aside section")
 })

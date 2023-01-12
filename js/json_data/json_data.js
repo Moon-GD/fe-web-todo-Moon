@@ -80,8 +80,8 @@ function moveJSONData(prevStatus, nextStatus, card) {
 
 // 새롭게 생성될 status의 이름 타당성 여부를 반환합니다.
 function validateStatus(name) {
-    for(let i=0;i<statusName.length;i++) {
-        if(statusName[i] == name) {
+    for(let i=0;i<statusNameList.length;i++) {
+        if(statusNameList[i] == name) {
             return false;
         }
     }
@@ -91,8 +91,8 @@ function validateStatus(name) {
 
 // 수정될 status의 이름 타당성 여부를 반환합니다.
 function validateNewName(originalName, newName) {
-    for(let i=0;i<statusName.length;i++) {
-        if(statusName[i] == newName && statusName[i] != originalName) {
+    for(let i=0;i<statusNameList.length;i++) {
+        if(statusNameList[i] == newName && statusNameList[i] != originalName) {
             return false;
         }
     }
@@ -104,27 +104,26 @@ function validateNewName(originalName, newName) {
 function addStatus(newStatus) {
     let newStatusIndex = statusList.length
     statusList[newStatusIndex] = statusList[newStatusIndex - 1] + 1;
-    statusName[newStatusIndex] = newStatus
+    statusNameList[newStatusIndex] = newStatus
 
     JSON_DATA[newStatusIndex] = []
 }
 
 // 해당하는 status를 삭제합니다. (호출 시기 : column 삭제 이후)
 function deleteStatus(status) {
-    let statusIndex = statusName.indexOf(status)
+    let statusIndex = statusNameList.indexOf(status)
     
     // 삭제
     JSON_DATA.splice(statusIndex, 1)
     statusList.splice(statusIndex, 1)
-    statusName.splice(statusIndex, 1)
+    statusNameList.splice(statusIndex, 1)
 }
 
 // status의 이름을 바꾸어 줍니다.
 function updateStatusName(prevName, nextName) {
-    console.log(prevName, nextName)
-    for(let i=0;i<statusName.length;i++) {
-        if(statusName[i] == prevName) {
-            statusName[i] = nextName;
+    for(let i=0;i<statusNameList.length;i++) {
+        if(statusNameList[i] == prevName) {
+            statusNameList[i] = nextName;
             break;
         }
     }

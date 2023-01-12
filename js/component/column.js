@@ -60,7 +60,7 @@ function findColumnStatusByCard(cardNode) {
 // column의 header에 더블 클릭 이벤트를 추가합니다.
 function headerDoubleClickEvent(headerNode) {
     headerNode.addEventListener("dblclick", () => {
-        let headerTitle = headerDom.children[0].innerHTML;
+        let headerTitle = headerNode.children[0].innerHTML;
         let headerInputTemplate = headerTitleTemplate(headerTitle, headerNode);
 
         headerNode.after(headerInputTemplate)
