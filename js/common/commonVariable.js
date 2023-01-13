@@ -1,7 +1,7 @@
 // 카드 관련
 const CARD_BTN_ORIGINAL = "#000";
-const CARD_OUTLINE_ORIGINAL = "none";
 const CARD_BACKGROUND_ORIGINAL = "#fff";
+const CARD_OUTLINE_ORIGINAL = "none";
 const CARD_DELETE_BTN_ORIGINAL = "#D0D0D0";
 
 const CARD_BTN_HOVER = "#FE5958";

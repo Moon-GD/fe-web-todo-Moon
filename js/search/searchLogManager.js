@@ -31,7 +31,6 @@ class SearchLogManager {
 
     // 검색어의 검색 빈도를 반환합니다
     getSearchCount(searchLog) {
-        console.log(this.#searchCount[searchLog])
         if(this.#searchCount[searchLog]) {
             return this.#searchCount[searchLog];
         }

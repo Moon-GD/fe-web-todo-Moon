@@ -13,16 +13,16 @@ const columnAddModal = querySelector("#column-add-modal-section");
 const cardClearModal = querySelector("#clear-modal-section");
 
 // 카드 삭제 관련 모달을 띄워줍니다.
-function turnOnModal() { modalSection.style.display = "flex"; }
+function turnOnModal() { modalSection.style.display = DISPLAY_FLEX; }
 
 // 카드 삭제 관련 모달을 숨겨줍니다.
-function turnOffModal() { modalSection.style.display = "none"; }
+function turnOffModal() { modalSection.style.display = DISPLAY_NONE; }
 
 // column 추가 관련 모달을 띄워줍니다.
-function turnOnColumnAddModal() { columnAddModal.style.display = "flex"; }
+function turnOnColumnAddModal() { columnAddModal.style.display = DISPLAY_FLEX; }
 
 // column 추가 관련 모달을 숨겨줍니다.
-function turnOffColumnAddModal() { columnAddModal.style.display = "none"; }
+function turnOffColumnAddModal() { columnAddModal.style.display = DISPLAY_NONE; }
 
 // 검색 modal을 끕니다.
 function turnOffSearchModal() {

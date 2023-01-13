@@ -7,14 +7,14 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { statusList, statusNameList, JSON_DATA } from "../json_data/json_data.js";
 import { columnTemplate, cardTemplate } from "../templates/template.js";
 
-// (target)의 css (key)를 (value)로 바꿉니다.
-function changeCSS(targetNode, key, value) {
-    targetNode.style[key] = value
-}
-
 // parentNode 다음에 childNode를 추가합니다.
 function addChildAfterParent(parentNode, childNode) {
     parentNode.after(childNode)
+}
+
+// (target)의 css (key)를 (value)로 바꿉니다.
+function changeCSS(targetNode, key, value) {
+    targetNode.style[key] = value
 }
 
 // 초기 데이터를 불러와 column, card를 생성합니다.

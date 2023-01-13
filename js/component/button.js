@@ -1,14 +1,20 @@
 import { changeCSS } from "../common/commonFunction.js";
-import { CLICK, RIGHT, MENU_MOVE_DISTANCE } from "../common/commonVariable.js";
+import { CLICK, RIGHT, MENU_MOVE_DISTANCE, DISPLAY_FLEX } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn } from "./column.js";
 import { menuBar, menuLogDelete } from "./menu.js";
 import { 
-    turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, turnOffModal, turnOffColumnAddModal 
+    turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, turnOffModal, turnOffColumnAddModal, turnOffSearchModal
 } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { validateStatus } from "../json_data/json_data.js";
-import { addEventToSearchBtn, addEventToSearchCancelBtn, addEventToSearchAcceptBtn } from "../search/search.js";
+import { 
+    showSuggestedLog, searchModal , searchInput, searchCard
+} from "../search/search.js";
+
+// 검색 관련 버튼
+const searchCancelBtn = querySelector("#search-cancel-btn");
+const searchAcceptBtn = querySelector("#search-accept-btn");
 
 // column 생성 관련 버튼
 const columnAddModalCancelBtn = querySelector("#column-add-cancel-btn");
@@ -40,6 +46,15 @@ function addEventToCardClearBtns() {
     cardClearModalAcceptBtn.addEventListener(CLICK, () => {
         deleteAllCards();
         turnOffCardClearModal();
+    })
+}
+
+// 검색 모달의 검색 버튼에 클릭 이벤트를 추가합니다.
+function addEventToSearchAcceptBtn() {
+    searchAcceptBtn.addEventListener(CLICK, () => {
+        turnOffSearchModal();
+        searchCard(searchInput.value)
+        searchInput.value = "";
     })
 }
 
@@ -76,6 +91,19 @@ function addEventToFabBtn() {
 
     // fab 버튼의 휴지통 버튼에 event를 추가합니다.
     goClearBtn.addEventListener(CLICK, () => {})
+}
+
+// 검색 모달의 취소 버튼에 클릭 이벤트를 추가합니다.
+function addEventToSearchCancelBtn() {
+    searchCancelBtn.addEventListener(CLICK, turnOffSearchModal);
+}
+
+// 검색 모달을 띄워주는 클릭 이벤트를 추가합니다.
+function addEventToSearchBtn() {
+    goSearchModalBtn.addEventListener(CLICK, () => {
+        changeCSS(searchModal, "display", DISPLAY_FLEX);
+        showSuggestedLog();
+    })
 }
 
 // menu toggle 이벤트 추가
@@ -122,6 +150,6 @@ export {
     goColumnAddModalBtn, goSearchModalBtn, goClearBtn,
     columnAddModalCancelBtn, columnAddModalAcceptBtn,
     modalDeleteBtn, modalCancelBtn,
-    addEventToCardClearBtns,
+    addEventToCardClearBtns, addEventToSearchBtn,
     addEventToFabBtn, addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton
 }

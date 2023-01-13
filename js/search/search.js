@@ -1,7 +1,5 @@
-import { changeCSS } from "../common/commonFunction.js";
-import { DISPLAY_FLEX, CLICK } from "../common/commonVariable.js";
+import { CLICK } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
-import { goSearchModalBtn } from "../component/column.js";
 import { menuLogSearch } from "../component/menu.js";
 import { turnOffSearchModal } from "../component/modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
@@ -9,31 +7,7 @@ import { searchLogManger } from "./searchLogManager.js";
 
 const searchModal = querySelector("#search-modal-section");
 const searchInput = querySelector("#search-input");
-const searchCancelBtn = querySelector("#search-cancel-btn");
-const searchAcceptBtn = querySelector("#search-accept-btn");
 const suggestedSearchText = querySelector("#suggested-search-log");
-
-// 검색 모달을 띄워주는 클릭 이벤트를 추가합니다.
-function addEventToSearchBtn() {
-    goSearchModalBtn.addEventListener(CLICK, () => {
-        changeCSS(searchModal, "display", DISPLAY_FLEX);
-        showSuggestedLog();
-    })
-}
-
-// 검색 모달의 취소 버튼에 클릭 이벤트를 추가합니다.
-function addEventToSearchCancelBtn() {
-    searchCancelBtn.addEventListener(CLICK, turnOffSearchModal);
-}
-
-// 검색 모달의 검색 버튼에 클릭 이벤트를 추가합니다.
-function addEventToSearchAcceptBtn() {
-    searchAcceptBtn.addEventListener(CLICK, () => {
-        turnOffSearchModal();
-        searchCard(searchInput.value)
-        searchInput.value = "";
-    })
-}
 
 // 카드를 검색합니다.
 function searchCard(searchInputValue) {
@@ -79,6 +53,6 @@ function showSuggestedLog() {
 }
 
 export {
-    searchModal,
-    addEventToSearchBtn, addEventToSearchCancelBtn, addEventToSearchAcceptBtn
+    searchModal, searchInput, searchCard,
+    showSuggestedLog
 }
