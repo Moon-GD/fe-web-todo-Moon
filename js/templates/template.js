@@ -184,6 +184,25 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
     return menuFrame;
 }
 
+// 메뉴 로그 템플릿을 반환합니다. (search)
+function menuSearchTemplate(searchLog, emotion, author) {
+    let menuFrame = document.createElement("div");
+    menuFrame.classList.add("log-frame");
+
+    menuFrame.innerHTML = `
+        <div class="log-emotion-area">${emotion}</div>
+        <div class="log-content-area">
+            <h4 class="log-author">${author}</h4>
+            <h4 class="log-content">
+                최근 검색어 : <strong>${searchLog}</strong>
+            </h4>
+            <h5>1분전</h5>
+        </div>
+    `
+
+    return menuFrame;
+}
+
 // 헤더 템플릿을 반환합니다.
 function headerTitleTemplate(title, originalHeaderDom) {
     const headerDom = document.createElement("h3");
@@ -210,6 +229,6 @@ function headerTitleTemplate(title, originalHeaderDom) {
 
 export {
     columnTemplate, cardTemplate, newCardTemplate, 
-    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate,
+    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate,
     headerTitleTemplate
 }

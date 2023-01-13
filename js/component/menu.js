@@ -1,7 +1,7 @@
 import { changeCSS } from "../common/commonFunction.js"
 import { MENU_MOVE_DISTANCE, RIGHT, CLICK } from "../common/commonVariable.js";
 import { 
-    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate
+    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate
 } from "../templates/template.js";
 import { querySelector } from "../devUtils/querySelector.js";
 
@@ -32,10 +32,14 @@ function menuLogUpdate(title, status, emotion="🥳", author="@sam") {
     menuContent.prepend(menuLogUpdateTemplate(title, status, emotion, author));
 }
 
+function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
+    menuContent.prepend(menuSearchTemplate(searchLog, emotion, author));
+}
+
 // menu toggle 이벤트 추가
 function addEventToMenuBtns() {
     menuOpenBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, 0) })
     menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
 }
 
-export { menuLogAdd, menuLogDelete, menuLogMove, menuLogUpdate, addEventToMenuBtns }
+export { menuLogAdd, menuLogDelete, menuLogMove, menuLogUpdate, menuLogSearch, addEventToMenuBtns }
