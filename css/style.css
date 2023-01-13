@@ -155,7 +155,6 @@ section > article {
   padding: 1.5vh 1vw;
   border-radius: 1vh;
   background-color: white;
-  transition: 0.2s;
 }
 .card-frame > h3 {
   position: relative;
@@ -169,7 +168,7 @@ section > article {
   font-size: 1.3rem;
   color: #D0D0D0;
 }
-.card-frame > h3 > i :hover {
+.card-frame > h3 > i:hover {
   color: #FF4D4D;
 }
 .card-frame > h4 {
@@ -227,11 +226,11 @@ section > article {
   color: #828282;
   background-color: #e0e0e0;
 }
-.new-card-button-area > button#new-card-cancel-btn :hover {
+.new-card-button-area > button#new-card-cancel-btn:hover {
   color: #fff;
   background-color: #828282;
 }
-.new-card-button-area > button#new-card-cancel-btn :disabled {
+.new-card-button-area > button#new-card-cancel-btn:disabled {
   color: #828282;
   background-color: #e0e0e0;
 }
@@ -239,11 +238,11 @@ section > article {
   color: #fff;
   background-color: #0075de;
 }
-.new-card-button-area > button#new-card-register-btn :hover {
+.new-card-button-area > button#new-card-register-btn:hover {
   color: #fff;
   background-color: #0075de;
 }
-.new-card-button-area > button#new-card-register-btn :disabled {
+.new-card-button-area > button#new-card-register-btn:disabled {
   color: rgba(255, 255, 255, 0.4);
   background-color: #86c6ff;
 }
@@ -326,7 +325,7 @@ header > i {
   background-color: #F0FAE9;
   border-bottom: 1px dotted black;
 }
-.log-frame:last-child {
+.log-frame :last-child {
   border-bottom: none;
 }
 .log-frame > .log-emotion-area {
@@ -399,7 +398,7 @@ header > i {
   color: #B1B1B1;
   background-color: #E0E0E0;
 }
-#modal-btn-area > button#card-cancel-btn :hover {
+#modal-btn-area > button#card-cancel-btn:hover {
   color: #E0E0E0;
   background-color: #B1B1B1;
   outline: 0.2vh solid #B1B1B1;
@@ -408,7 +407,7 @@ header > i {
   color: #fff;
   background-color: #0175DE;
 }
-#modal-btn-area > button#card-delete-btn :hover {
+#modal-btn-area > button#card-delete-btn:hover {
   color: #fff;
   background-color: #0175FF;
   outline: 0.2vh solid #0175FF;
@@ -461,7 +460,7 @@ header > i {
   color: #B1B1B1;
   background-color: #E0E0E0;
 }
-#column-add-cancel-btn :hover {
+#column-add-cancel-btn:hover {
   color: #E0E0E0;
   background-color: #B1B1B1;
   outline: 0.2vh solid #B1B1B1;
@@ -471,7 +470,7 @@ header > i {
   color: #fff;
   background-color: #0175DE;
 }
-#column-add-accept-btn :hover {
+#column-add-accept-btn:hover {
   color: #fff;
   background-color: #0175FF;
   outline: 0.2vh solid #0175FF;
@@ -496,7 +495,7 @@ header > i {
   justify-content: space-evenly;
   padding: 0 2vw;
   opacity: 1;
-  height: 24vh;
+  height: 16vh;
   width: 20vw;
   border-radius: 1vh;
   background-color: #fff;
@@ -523,7 +522,7 @@ header > i {
   color: #B1B1B1;
   background-color: #E0E0E0;
 }
-#search-cancel-btn :hover {
+#search-cancel-btn:hover {
   color: #E0E0E0;
   background-color: #B1B1B1;
   outline: 0.2vh solid #B1B1B1;
@@ -533,8 +532,89 @@ header > i {
   color: #fff;
   background-color: #0175DE;
 }
-#search-accept-btn :hover {
+#search-accept-btn:hover {
   color: #fff;
   background-color: #0175FF;
   outline: 0.2vh solid #0175FF;
+}
+
+#go-card-clear-btn {
+  position: fixed;
+  right: 5%;
+  transition: 1s;
+  bottom: 5%;
+  padding: 0 0.8vw;
+  border: none;
+  cursor: pointer;
+  font-size: 3rem;
+  font-weight: 300;
+  box-shadow: 0 0.5vh 1vh 0 gray;
+  color: #fff;
+  border-radius: 50%;
+  background-color: #0175DE;
+}
+#go-card-clear-btn > span {
+  font-size: 2rem;
+}
+
+#clear-modal-section {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(147, 147, 149, 0.5);
+}
+
+#clear-modal-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 2vw;
+  opacity: 1;
+  height: 16vh;
+  width: 20vw;
+  border-radius: 1vh;
+  background-color: #fff;
+}
+#clear-modal-frame > input {
+  outline: none;
+  border: none;
+}
+
+#clear-modal-btn-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#clear-modal-btn-area > button {
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5vh;
+  width: 40%;
+  height: 3vh;
+}
+
+#clear-cancel-btn {
+  color: #B1B1B1;
+  background-color: #E0E0E0;
+}
+#clear-cancel-btn:hover {
+  color: #E0E0E0;
+  background-color: #B1B1B1;
+  outline: 0.2vh solid #B1B1B1;
+}
+
+#clear-accept-btn {
+  color: #fff;
+  background-color: #EE675C;
+}
+#clear-accept-btn:hover {
+  color: #fff;
+  background-color: #EE675C;
+  outline: 0.2vh solid #EE675C;
 }/*# sourceMappingURL=style.css.map */

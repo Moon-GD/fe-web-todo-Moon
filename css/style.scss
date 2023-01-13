@@ -177,7 +177,7 @@ section {
             font-size: 1.3rem;
             color: #D0D0D0;
 
-            :hover {
+            &:hover {
                 color: #FF4D4D;
             }
         }
@@ -245,12 +245,12 @@ section {
         color: #828282;
         background-color: #e0e0e0;
 
-        :hover {
+        &:hover {
             color: #fff;
             background-color: #828282;
         }
 
-        :disabled {
+        &:disabled {
             color: #828282;
             background-color: #e0e0e0;
         }
@@ -260,12 +260,12 @@ section {
         color: #fff;
         background-color: #0075de;
 
-        :hover {
+        &:hover {
             color: #fff;
             background-color: #0075de;
         }
 
-        :disabled {
+        &:disabled {
             color: rgba(255, 255, 255, 0.4);
             background-color: #86c6ff;
         }
@@ -431,7 +431,7 @@ header {
             color: #B1B1B1;
             background-color: #E0E0E0;
 
-            :hover {
+            &:hover {
                 color: #E0E0E0;
                 background-color: #B1B1B1;
                 outline: 0.2vh solid #B1B1B1;
@@ -442,7 +442,7 @@ header {
             color: #fff;
             background-color: #0175DE;
 
-            :hover {
+            &:hover {
                 color: #fff;
                 background-color: #0175FF;
                 outline: 0.2vh solid #0175FF;
@@ -500,7 +500,7 @@ header {
     color: #B1B1B1;
     background-color: #E0E0E0;
 
-    :hover {
+    &:hover {
         color: #E0E0E0;
         background-color: #B1B1B1;
         outline: 0.2vh solid #B1B1B1;
@@ -511,7 +511,7 @@ header {
     color: #fff;
     background-color: #0175DE;
 
-    :hover {
+    &:hover {
         color: #fff;
         background-color: #0175FF;
         outline: 0.2vh solid #0175FF;
@@ -566,7 +566,7 @@ header {
     color: #B1B1B1;
     background-color: #E0E0E0;
 
-    :hover {
+    &:hover {
         color: #E0E0E0;
         background-color: #B1B1B1;
         outline: 0.2vh solid #B1B1B1;
@@ -577,9 +577,95 @@ header {
     color: #fff;
     background-color: #0175DE;
 
-    :hover {
+    &:hover {
         color: #fff;
         background-color: #0175FF;
         outline: 0.2vh solid #0175FF;
+    }
+}
+
+#go-card-clear-btn {
+    position: fixed;
+    right: 5%;
+    transition: 1s;
+    bottom: 5%;
+    padding:0 0.8vw;
+    border: none;
+    cursor: pointer;
+    font-size: 3rem;
+    font-weight: 300;
+    box-shadow: 0 0.5vh 1vh 0 gray;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #0175DE;
+
+    > span {
+        font-size: 2rem;
+    }
+}
+
+#clear-modal-section {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(147, 147, 149, 0.5);
+}
+
+#clear-modal-frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding:0 2vw;
+    opacity: 1;
+    height: 16vh;
+    width: 20vw;
+    border-radius: 1vh;
+    background-color: #fff;
+
+    > input {
+        outline: none;
+        border: none;
+    }
+}
+
+#clear-modal-btn-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    > button {
+        border: none;
+        cursor: pointer;
+        border-radius: 0.5vh;
+        width: 40%;
+        height: 3vh;
+    }
+}
+
+#clear-cancel-btn {
+    color: #B1B1B1;
+    background-color: #E0E0E0;
+
+    &:hover {
+        color: #E0E0E0;
+        background-color: #B1B1B1;
+        outline: 0.2vh solid #B1B1B1;
+    }
+}
+
+#clear-accept-btn {
+    color: #fff;
+    background-color: #EE675C;
+
+    &:hover {
+        color: #fff;
+        background-color: #EE675C;
+        outline: 0.2vh solid #EE675C;
     }
 }

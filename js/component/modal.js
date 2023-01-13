@@ -2,9 +2,10 @@ import { validateStatus, statusNameList, deleteJSONData } from "../json_data/jso
 import { addColumn, findColumnStatusByCard } from "./column.js";
 import { menuLogDelete } from "./menu.js";
 import { querySelector } from "../devUtils/querySelector.js";
-import { CLICK, DISPLAY_NONE } from "../common/commonVariable.js";
+import { CLICK, DISPLAY_FLEX, DISPLAY_NONE } from "../common/commonVariable.js";
 import { searchModal } from "../search/search.js";
 import { changeCSS } from "../common/commonFunction.js";
+import { addEventToCardClearBtns } from "./card.js";
 
 let chosenCard = "";
 
@@ -17,6 +18,9 @@ const modalCancelBtn = querySelector("#card-cancel-btn");
 const columnAddModal = querySelector("#column-add-modal-section");
 const columnAddModalCancelBtn = querySelector("#column-add-cancel-btn");
 const columnAddModalAcceptBtn = querySelector("#column-add-accept-btn");
+
+// card clear modal
+const cardClearModal = querySelector("#clear-modal-section");
 
 // 카드 삭제 관련 모달을 띄워줍니다.
 function turnOnModal() { modalSection.style.display = "flex"; }
@@ -51,6 +55,7 @@ function addEventToModalButtons() {
         chosenCard.remove();
     })
 
+    addEventToCardClearBtns();
     modalCancelBtn.addEventListener(CLICK, () => { turnOffModal(); })
 }
 
@@ -78,7 +83,18 @@ function turnOffSearchModal() {
     changeCSS(searchModal, "display", DISPLAY_NONE);
 }
 
+// card clear modal을 숨겨줍니다.
+function turnOffCardClearModal() {
+    changeCSS(cardClearModal, "display", DISPLAY_NONE);
+}
+
+// card clear modal을 보여줍니다.
+function turnOnCardClearModal() {
+    changeCSS(cardClearModal, "display", DISPLAY_FLEX);
+}
+
 export { 
     setCard, modalSection, turnOnModal, turnOnColumnAddModal,
-    addEventToModalButtons, addEventToFabButton, turnOffSearchModal
+    addEventToModalButtons, addEventToFabButton, turnOffSearchModal,
+    turnOnCardClearModal, turnOffCardClearModal
  }

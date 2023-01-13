@@ -5,13 +5,18 @@ import {
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK
 } from "../common/commonVariable.js";
 import { findCardTitle, findCardContent } from "../common/commonFunction.js"
-import { setCard, turnOnModal } from "./modal.js";
+import { setCard, turnOnModal, turnOnCardClearModal, turnOffCardClearModal } from "./modal.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { findColumnStatusByCard } from "./column.js"
 import { addJSONData, deleteJSONData } from "../json_data/json_data.js"; 
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { menuLogAdd, menuLogUpdate } from "./menu.js";
+import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu.js";
 import { findCardHeaderName } from "../component/column.js"
+import { querySelector } from "../devUtils/querySelector.js";
+
+const goCardClearModalBtn = querySelector("#go-card-clear-btn");
+const cardClearModalCancelBtn = querySelector("#clear-cancel-btn");
+const cardClearModalAcceptBtn = querySelector("#clear-accept-btn");
 
 let registering = false;
 
@@ -143,6 +148,7 @@ function parseContent(cardContent) {
     return cardContents.join("<br>");
 }
 
+// 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.
 function cardToRegisterForm(cardNode) {
     let title = findCardTitle(cardNode);
     let content = findCardContent(cardNode);
@@ -162,8 +168,35 @@ function addDoubleClickEventToCard(cardNode) {
     })
 }
 
+function deleteAllCards() {
+    const cards = document.querySelectorAll(".card-frame")
+
+    cards.forEach((card) => {
+        const title = card.querySelector(".card-title").textContent.split("\n")[0]
+        let status = findColumnStatusByCard(card);
+        
+        // 로컬 data 반영
+        deleteJSONData(status, title);
+
+        card.remove();
+    })
+
+    // 메뉴에 로그를 남깁니다.
+    menuLogDeleteAll();
+}
+
+// card clear 버튼들에 이벤트를 추가합니다.
+function addEventToCardClearBtns() {
+    goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal)
+    cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal)
+    cardClearModalAcceptBtn.addEventListener(CLICK, () => {
+        deleteAllCards();
+        turnOffCardClearModal();
+    })
+}
+
 export { 
     cardAddEvent, cardDeleteEvent, 
     newCardCancelEvent, newCardRegisterEvent, resizeCardByInputBox,
-    addDoubleClickEventToCard
+    addDoubleClickEventToCard, addEventToCardClearBtns
  }

@@ -1,7 +1,7 @@
 import { changeCSS } from "../common/commonFunction.js"
 import { MENU_MOVE_DISTANCE, RIGHT, CLICK } from "../common/commonVariable.js";
 import { 
-    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate
+    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../templates/template.js";
 import { querySelector } from "../devUtils/querySelector.js";
 
@@ -20,6 +20,11 @@ function menuLogDelete(title, status, emotion="🥳", author="@sam") {
     menuContent.prepend(menuLogDeleteTemplate(title, status, emotion, author))
 }
 
+// 메뉴 바에 기록을 남깁니다. (delete all)
+function menuLogDeleteAll(emotion="🥳", author="@sam") {
+    menuContent.prepend(menuLogDeleteAllTemplate(emotion, author))
+}
+
 // 메뉴 바에 기록을 남깁니다. (move)
 function menuLogMove(title, prevStatus, nextStatus, emotion="🥳", author="@sam") {
     if(prevStatus == nextStatus) { return ; }
@@ -32,6 +37,7 @@ function menuLogUpdate(title, status, emotion="🥳", author="@sam") {
     menuContent.prepend(menuLogUpdateTemplate(title, status, emotion, author));
 }
 
+// 메뉴 바에 기록을 남깁니다. (search)
 function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
     menuContent.prepend(menuSearchTemplate(searchLog, emotion, author));
 }
@@ -42,4 +48,4 @@ function addEventToMenuBtns() {
     menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
 }
 
-export { menuLogAdd, menuLogDelete, menuLogMove, menuLogUpdate, menuLogSearch, addEventToMenuBtns }
+export { menuLogAdd, menuLogDelete, menuLogDeleteAll, menuLogMove, menuLogUpdate, menuLogSearch, addEventToMenuBtns }
