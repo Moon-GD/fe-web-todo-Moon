@@ -59,3 +59,12 @@
     </ul>
   </li>
 </ol>
+
+<br>
+
+## 셀프 피드백 -> 모르는 게 많은 듯. 정확하게 아는 것 같지는 않다는 느낌이 들었다.
+##### 이벤트 버블링, 캡처링
+##### js remove, map
+##### bind
+##### for of, for in 차이
+##### css styling guid - bem
