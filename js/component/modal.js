@@ -1,11 +1,10 @@
-import { validateStatus, statusNameList, deleteJSONData } from "../json_data/json_data.js";
-import { addColumn, findColumnStatusByCard } from "./column.js";
-import { menuLogDelete } from "./menu.js";
+import { validateStatus } from "../json_data/json_data.js";
+import { addColumn } from "./column.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { CLICK, DISPLAY_FLEX, DISPLAY_NONE } from "../common/commonVariable.js";
 import { searchModal } from "../search/search.js";
 import { changeCSS } from "../common/commonFunction.js";
-import { addEventToCardClearBtns } from "./card.js";
+import { deleteCard } from "./card.js";
 
 let chosenCard = "";
 
@@ -41,21 +40,10 @@ function setCard(cardDom) { chosenCard = cardDom; }
 function addEventToModalButtons() {
     // card modal 버튼들 이벤트 추가
     modalDeleteBtn.addEventListener(CLICK, () => {
+        deleteCard(chosenCard);
         turnOffModal();
-        
-        let status = findColumnStatusByCard(chosenCard);
-        const title = chosenCard.querySelector(".card-title").textContent.split("\n")[0]
-
-        // menu 삭제 log 남기기
-        menuLogDelete(title, statusNameList[status]);
-
-        // 로컬 data 반영
-        deleteJSONData(status, title);
-
-        chosenCard.remove();
     })
 
-    addEventToCardClearBtns();
     modalCancelBtn.addEventListener(CLICK, () => { turnOffModal(); })
 }
 

@@ -1,6 +1,6 @@
 import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
-import { cardAddEvent, cardDeleteEvent, 
-    newCardCancelEvent, newCardRegisterEvent,
+import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
+    addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
     resizeCardByInputBox, addDoubleClickEventToCard
 } from "../component/card.js";
 import { dragIDManager } from "../drag/dragIDManager.js";
@@ -44,7 +44,7 @@ function columnTemplate(columnTitle, cardCount = 0) {
     })
 
     columnDeleteEvent(columnDeleteBtn, columnNode); // column 제거 이벤트
-    cardAddEvent(cardAddBtn, columnNode.children[1]); // card 추가 이벤트
+    addEventToShowCardRegisterBtn(cardAddBtn, columnNode.children[1]); // card 추가 이벤트
     headerDoubleClickEvent(header);  // 헤더 더블 클릭 이벤트
 
     return columnNode;
@@ -69,7 +69,7 @@ function cardTemplate(cardTitle, cardContent, cardAuthor="author by web") {
     addDoubleClickEventToCard(cardDom)
 
     let cardDeleteBtn = cardDom.children[0].children[0]
-    cardDeleteEvent(cardDeleteBtn, cardDom)
+    addEventToCardDeleteBtn(cardDeleteBtn, cardDom)
 
     return cardDom;
 }
@@ -93,8 +93,8 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
     const textArea = newCardDom.children[1]
 
     // 등록 카드 폼의 버튼에 이벤트 추가
-    newCardCancelEvent(newCancelBtn, newCardDom, prevCard, isUpdated);
-    newCardRegisterEvent(newRegisterBtn, newCardDom, prevCard, isUpdated);
+    addEventToMakeCardCancelBtn(newCancelBtn, newCardDom, prevCard, isUpdated);
+    addEventToMakeNewCardBtn(newRegisterBtn, newCardDom, prevCard, isUpdated);
     resizeCardByInputBox(textArea, newCardDom);
 
     return newCardDom;

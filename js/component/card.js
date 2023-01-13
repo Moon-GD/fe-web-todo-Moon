@@ -4,7 +4,6 @@ import {
     DISPLAY_BLOCK, DISPLAY_NONE,
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK
 } from "../common/commonVariable.js";
-import { findCardTitle, findCardContent } from "../common/commonFunction.js"
 import { setCard, turnOnModal, turnOnCardClearModal, turnOffCardClearModal } from "./modal.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { findColumnStatusByCard } from "./column.js"
@@ -14,14 +13,46 @@ import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu.js";
 import { findCardHeaderName } from "../component/column.js"
 import { querySelector } from "../devUtils/querySelector.js";
 
-const goCardClearModalBtn = querySelector("#go-card-clear-btn");
-const cardClearModalCancelBtn = querySelector("#clear-cancel-btn");
-const cardClearModalAcceptBtn = querySelector("#clear-accept-btn");
-
 let registering = false;
 
-// 버튼이 클릭되면 카드 등록 폼이 보여지도록 이벤트를 등록합니다.
-function cardAddEvent(cardRegisterBtn, currentColumn) {
+// 카드의 제목을 찾아줍니다.
+function findCardTitle(card) {
+    const cardTitleText = card.querySelector("h3").innerHTML
+    const cardTitle = cardTitleText.split('\n')[0];
+
+    return cardTitle;
+}
+
+// 카드의 내용을 찾아줍니다.
+function findCardContent(card) {
+    const cardContent = card.querySelector(".card-content").innerHTML;
+
+    return cardContent;
+}
+
+// 카드를 삭제합니다.
+function deleteCard(card) {
+    const title = card.querySelector(".card-title").textContent.split("\n")[0]
+    const status = findColumnStatusByCard(card);
+        
+    // 로컬 data 반영
+    deleteJSONData(status, title);
+
+    card.remove();
+}
+
+// 모든 카드를 삭제합니다.
+function deleteAllCards() {
+    const cards = document.querySelectorAll(".card-frame")
+
+    cards.forEach((card) => { deleteCard(card); })
+
+    // 메뉴에 로그를 남깁니다.
+    menuLogDeleteAll();
+}
+
+// 카드 생성 폼을 보여주는 버튼에 event를 등록합니다.
+function addEventToShowCardRegisterBtn(cardRegisterBtn, currentColumn) {
     cardRegisterBtn.addEventListener(CLICK, () => {
         registering ? 
                 currentColumn.children[0].remove() :    
@@ -31,8 +62,8 @@ function cardAddEvent(cardRegisterBtn, currentColumn) {
     })
 }
 
-// 버튼에 카드 삭제 이벤트를 등록합니다.
-function cardDeleteEvent(cardDeleteBtn, deletedCard) {
+// 카드 삭제 버튼에 event를 등록합니다.
+function addEventToCardDeleteBtn(cardDeleteBtn, deletedCard) {
     cardDeleteBtn.addEventListener(CLICK, () => {
         setCard(deletedCard)
         turnOnModal();
@@ -59,8 +90,8 @@ function cardDeleteEvent(cardDeleteBtn, deletedCard) {
     })
 }
 
-// 새로운 카드 등록을 취소하는 이벤트를 등록합니다.
-function newCardCancelEvent(registerCancelBtn, cardRegisterForm, prevCard, isUpdated) {
+// 카드 생성 취소 버튼에 event를 등록합니다.
+function addEventToMakeCardCancelBtn(registerCancelBtn, cardRegisterForm, prevCard, isUpdated) {
     registerCancelBtn.addEventListener(CLICK, () => {
         if(isUpdated) {
             prevCard.style.display = DISPLAY_BLOCK;
@@ -77,15 +108,15 @@ function newCardCancelEvent(registerCancelBtn, cardRegisterForm, prevCard, isUpd
     })
 }
 
-// 새로운 카드를 생성하는 이벤트를 등록합니다.
-function newCardRegisterEvent(cardMakeBtn, currentCard, prevCard, isUpdated) {
+// 카드를 생성 버튼에 event를 등록합니다.
+function addEventToMakeNewCardBtn(cardMakeBtn, currentCard, prevCard, isUpdated) {
     cardMakeBtn.addEventListener(CLICK, () => {
         registering = false;
 
         let title = currentCard.querySelector("input").value;
         let prevContent = "";
         let updatedContent = currentCard.querySelector("textarea").value ;
-        let newCard = cardTemplate(title, parseContent(updatedContent));
+        let newCard = cardTemplate(title, parseCardContentByNewLine(updatedContent));
         let updatedStatus = "";
 
         // drag 이벤트 추가
@@ -118,7 +149,7 @@ function newCardRegisterEvent(cardMakeBtn, currentCard, prevCard, isUpdated) {
     })
 }
 
-// 새로운 카드를 생성할 때, 사용자의 입력에 따라 카드의 크기를 조절해줍니다.
+// 카드 등록 폼에서 사용자의 입력에 따라 카드의 크기를 조절해줍니다.
 function resizeCardByInputBox(cardRegisterInput, cardRegisterForm) {
     let scrollHeight = 0
     let cardHeight = 18
@@ -141,15 +172,15 @@ function resizeCardByInputBox(cardRegisterInput, cardRegisterForm) {
     })
 }
 
-// 새로운 카드를 등록할 때, 개행을 기준으로 문자열을 나누어줍니다.
-function parseContent(cardContent) {
+// 카드를 생성할 때, 카드 등록 폼의 content 내용의 개행을 구분해줍니다.
+function parseCardContentByNewLine(cardContent) {
     let cardContents = cardContent.split("\n");
     
     return cardContents.join("<br>");
 }
 
 // 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.
-function cardToRegisterForm(cardNode) {
+function changeCardToRegisterForm(cardNode) {
     let title = findCardTitle(cardNode);
     let content = findCardContent(cardNode);
     let status = findColumnStatusByCard(cardNode);
@@ -164,39 +195,12 @@ function cardToRegisterForm(cardNode) {
 // 카드에 더블 클릭 이벤트를 추가해줍니다.
 function addDoubleClickEventToCard(cardNode) {
     cardNode.addEventListener(DOUBLE_CLICK, () => {
-        cardToRegisterForm(cardNode);
-    })
-}
-
-function deleteAllCards() {
-    const cards = document.querySelectorAll(".card-frame")
-
-    cards.forEach((card) => {
-        const title = card.querySelector(".card-title").textContent.split("\n")[0]
-        let status = findColumnStatusByCard(card);
-        
-        // 로컬 data 반영
-        deleteJSONData(status, title);
-
-        card.remove();
-    })
-
-    // 메뉴에 로그를 남깁니다.
-    menuLogDeleteAll();
-}
-
-// card clear 버튼들에 이벤트를 추가합니다.
-function addEventToCardClearBtns() {
-    goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal)
-    cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal)
-    cardClearModalAcceptBtn.addEventListener(CLICK, () => {
-        deleteAllCards();
-        turnOffCardClearModal();
+        changeCardToRegisterForm(cardNode);
     })
 }
 
 export { 
-    cardAddEvent, cardDeleteEvent, 
-    newCardCancelEvent, newCardRegisterEvent, resizeCardByInputBox,
-    addDoubleClickEventToCard, addEventToCardClearBtns
+    addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
+    addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn, resizeCardByInputBox,
+    addDoubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards
  }

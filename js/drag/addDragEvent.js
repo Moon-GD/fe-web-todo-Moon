@@ -2,7 +2,7 @@ import { findColumnStatusByCard } from "../component/column.js";
 import { dragCard, dragOverCard, dropCard } from "./dragCard.js"
 import { makeLightNode } from "./dragEffect.js"
 import { menuLogMove } from "../component/menu.js";
-import { findCardTitle } from "../common/commonFunction.js";
+import { findCardTitle } from "../component/card.js";
 import { moveJSONData } from "../json_data/json_data.js";
 import { DRAG_START, DRAG_OVER, DRAV_END, DROP } from "../common/commonVariable.js";
 

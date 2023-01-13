@@ -15,21 +15,6 @@ function addChildAfterParent(parentNode, childNode) {
     parentNode.after(childNode)
 }
 
-// 카드의 제목을 찾아줍니다.
-function findCardTitle(card) {
-    const cardTitleText = card.querySelector("h3").innerHTML
-    const cardTitle = cardTitleText.split('\n')[0];
-
-    return cardTitle;
-}
-
-// 카드의 내용을 찾아줍니다.
-function findCardContent(card) {
-    const cardContent = card.querySelector(".card-content").innerHTML;
-
-    return cardContent;
-}
-
 // 초기 데이터를 불러와 column, card를 생성합니다.
 function loadInitialData() {
     statusList.forEach((status) => {
@@ -57,5 +42,5 @@ function addEventsToWebsite() {
 }
 
 export {
-    changeCSS, addChildAfterParent, findCardTitle, findCardContent, addEventsToWebsite
+    changeCSS, addChildAfterParent, addEventsToWebsite
 }

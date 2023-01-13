@@ -1,5 +1,5 @@
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
-import { statusNameList, addStatus, deleteStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
+import { statusNameList, addStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
 import { turnOnColumnAddModal } from "./modal.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 import { 
@@ -10,6 +10,7 @@ import { changeCSS } from "../common/commonFunction.js";
 import { 
     addEventToSearchBtn, addEventToSearchCancelBtn, addEventToSearchAcceptBtn
 } from "../search/search.js";
+import { addEventToCardClearBtns } from "./button.js";
 
 const mainTag = querySelector("main");
 const fabBtn = querySelector("#column-add-btn");
@@ -41,6 +42,7 @@ function addEventToFabBtn() {
     addEventToSearchBtn();
     addEventToSearchCancelBtn();
     addEventToSearchAcceptBtn();
+    addEventToCardClearBtns();
 
     // fab 버튼의 column add event를 추가합니다.
     goColumnAddModalBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
