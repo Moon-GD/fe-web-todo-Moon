@@ -7,6 +7,7 @@ import { dragIDManager } from "../drag/dragIDManager.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
 import { statusNameList } from "../json_data/json_data.js";
 import { DRAG_OVER } from "../common/commonVariable.js";
+import { searchLogManger } from "../search/searchLogManager.js";
 
 // column 템플릿을 반환합니다.
 function columnTemplate(columnTitle, cardCount = 0) {
@@ -195,6 +196,9 @@ function menuSearchTemplate(searchLog, emotion, author) {
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
                 최근 검색어 : <strong>${searchLog}</strong>
+            </h4>
+            <h4 class="log-content">검색 횟수 : 
+                <strong>${searchLogManger.getSearchCount(searchLog)} </strong>
             </h4>
             <h5>1분전</h5>
         </div>
