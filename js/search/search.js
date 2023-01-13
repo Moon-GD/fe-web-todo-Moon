@@ -1,12 +1,11 @@
-import { goSearchModalBtn } from "../component/column.js";
-import { CLICK } from "../common/commonVariable.js";
 import { changeCSS } from "../common/commonFunction.js";
-import { DISPLAY_FLEX } from "../common/commonVariable.js";
-import { querySelector } from "../devUtils/querySelector.js";
-import { turnOffSearchModal } from "../component/modal.js";
-import { searchLogManger } from "./searchLogManager.js";
-import { menuLogSearch } from "../component/menu.js";
+import { DISPLAY_FLEX, CLICK } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
+import { goSearchModalBtn } from "../component/column.js";
+import { menuLogSearch } from "../component/menu.js";
+import { turnOffSearchModal } from "../component/modal.js";
+import { querySelector } from "../devUtils/querySelector.js";
+import { searchLogManger } from "./searchLogManager.js";
 
 const searchModal = querySelector("#search-modal-section");
 const searchInput = querySelector("#search-input");

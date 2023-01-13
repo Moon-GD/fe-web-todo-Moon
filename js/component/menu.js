@@ -1,13 +1,9 @@
-import { changeCSS } from "../common/commonFunction.js"
-import { MENU_MOVE_DISTANCE, RIGHT, CLICK } from "../common/commonVariable.js";
+import { querySelector } from "../devUtils/querySelector.js";
 import { 
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../templates/template.js";
-import { querySelector } from "../devUtils/querySelector.js";
 
 const menuBar = querySelector("#menu");
-const menuOpenBtn = querySelector("#menu-open-btn");
-const menuCloseBtn = querySelector("#menu-close-btn");
 const menuContent = querySelector("#menu-content")
 
 // 메뉴 바에 기록을 남깁니다. (add)
@@ -42,10 +38,4 @@ function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
     menuContent.prepend(menuSearchTemplate(searchLog, emotion, author));
 }
 
-// menu toggle 이벤트 추가
-function addEventToMenuBtns() {
-    menuOpenBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, 0) })
-    menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
-}
-
-export { menuLogAdd, menuLogDelete, menuLogDeleteAll, menuLogMove, menuLogUpdate, menuLogSearch, addEventToMenuBtns }
+export { menuBar, menuLogAdd, menuLogDelete, menuLogDeleteAll, menuLogMove, menuLogUpdate, menuLogSearch }

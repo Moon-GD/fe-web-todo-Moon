@@ -92,15 +92,12 @@ section {
     }
 }
 
-.column-add-btn:hover {
-    color:#3E95E3;
-}
-
 .column-delete-btn:hover {
     color: #FF4D4D;
 }
 
-#column-add-btn {
+#fab-btn {
+    transition: 1s;
     position: fixed;
     right: 5%;
     bottom: 5%;
@@ -113,6 +110,10 @@ section {
     color: #fff;
     border-radius: 50%;
     background-color: #0175DE;
+
+    &:hover {
+        box-shadow: 0 0.5vh 1vh 0 #3E95E3;
+    }
 }
 
 #go-column-add-modal-btn {

@@ -1,62 +1,19 @@
-import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
-import { statusNameList, addStatus, JSON_DATA, updateStatusName, validateNewName } from "../json_data/json_data.js";
-import { turnOnColumnAddModal } from "./modal.js";
-import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 import { 
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
     DISPLAY_FLEX, DISPLAY_NONE 
 } from "../common/commonVariable.js";
-import { changeCSS } from "../common/commonFunction.js";
-import { 
-    addEventToSearchBtn, addEventToSearchCancelBtn, addEventToSearchAcceptBtn
-} from "../search/search.js";
-import { addEventToCardClearBtns } from "./button.js";
+import { goSearchModalBtn } from "./button.js";
+import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
+import { statusNameList, addStatus, JSON_DATA, updateStatusName, validateNewName, deleteStatus } from "../json_data/json_data.js";
+import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 
 const mainTag = querySelector("main");
-const fabBtn = querySelector("#column-add-btn");
-const goColumnAddModalBtn = querySelector("#go-column-add-modal-btn");
-const goSearchModalBtn = querySelector("#go-search-btn");
-const goClearBtn = querySelector("#go-card-clear-btn");
-
-// fab 버튼을 토글합니다.
-function toggleFabBtn() {
-    if(goColumnAddModalBtn.style.bottom == "21%") {
-        changeCSS(goClearBtn, "bottom", "5%");
-        changeCSS(goColumnAddModalBtn, "bottom", "5%");
-        changeCSS(goSearchModalBtn, "bottom", "5%");
-    }
-    else {
-        changeCSS(goClearBtn, "bottom", "29%");
-        changeCSS(goColumnAddModalBtn, "bottom", "21%");
-        changeCSS(goSearchModalBtn, "bottom", "13%");
-    }
-}
-
-// fab 버튼에 클릭 이벤트를 추가합니다.
-function addEventToFabBtn() {
-    fabBtn.addEventListener(CLICK, () => {
-        toggleFabBtn();
-    })
-
-    // Fab에 숨겨진 버튼들에 event를 추가합니다.
-    addEventToSearchBtn();
-    addEventToSearchCancelBtn();
-    addEventToSearchAcceptBtn();
-    addEventToCardClearBtns();
-
-    // fab 버튼의 column add event를 추가합니다.
-    goColumnAddModalBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
-
-    // fab 버튼의 휴지통 버튼에 event를 추가합니다.
-    goClearBtn.addEventListener(CLICK, () => {})
-}
 
 // column 버튼에 column 삭제 이벤트를 추가합니다.
 function columnDeleteEvent(columnDeleteBtn, column) {
     columnDeleteBtn.addEventListener(CLICK, () => {
         let status = column.children[0].innerHTML.split("\n")[0]
-        
-        // deleteStatus(status)
+        deleteStatus(status);
         column.remove();
     })
 }
@@ -145,5 +102,5 @@ export {
     mainTag, goSearchModalBtn,
     columnDeleteEvent, findColumnStatusByCard, addColumn, 
     findCardHeaderName, updateColumnLength,
-    headerDoubleClickEvent, inputFocusOutEvent, addEventToFabBtn
+    headerDoubleClickEvent, inputFocusOutEvent
 }

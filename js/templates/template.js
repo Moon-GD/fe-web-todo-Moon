@@ -1,12 +1,12 @@
-import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
+import { DRAG_OVER } from "../common/commonVariable.js";
 import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
     resizeCardByInputBox, addDoubleClickEventToCard
 } from "../component/card.js";
-import { dragIDManager } from "../drag/dragIDManager.js";
+import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
+import { dragIDManager } from "../drag/dragIDManager.js";
 import { statusNameList } from "../json_data/json_data.js";
-import { DRAG_OVER } from "../common/commonVariable.js";
 import { searchLogManger } from "../search/searchLogManager.js";
 
 // column 템플릿을 반환합니다.

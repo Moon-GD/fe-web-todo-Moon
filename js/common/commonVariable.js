@@ -26,7 +26,7 @@ const DOUBLE_CLICK = "dblclick";
 const FOCUS_OUT = "focusout";
 const DRAG_START = "dragstart";
 const DRAG_OVER = "dragover";
-const DRAV_END = "dragend";
+const DRAG_END = "dragend";
 const DROP = "drop";
 
 export {
@@ -35,5 +35,5 @@ export {
     MENU_MOVE_DISTANCE,
     DISPLAY_FLEX, DISPLAY_BLOCK, DISPLAY_NONE, RIGHT,
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK, FOCUS_OUT, 
-    DRAG_START, DRAG_OVER, DRAV_END, DROP
+    DRAG_START, DRAG_OVER, DRAG_END, DROP
 }

@@ -4,16 +4,18 @@ import {
     DISPLAY_BLOCK, DISPLAY_NONE,
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK
 } from "../common/commonVariable.js";
-import { setCard, turnOnModal, turnOnCardClearModal, turnOffCardClearModal } from "./modal.js";
-import { cardTemplate, newCardTemplate } from "../templates/template.js";
-import { findColumnStatusByCard } from "./column.js"
-import { addJSONData, deleteJSONData } from "../json_data/json_data.js"; 
-import { makeCardDragEvent } from "../drag/addDragEvent.js";
+import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu.js";
-import { findCardHeaderName } from "../component/column.js"
-import { querySelector } from "../devUtils/querySelector.js";
+import { turnOnModal } from "./modal.js";
+import { makeCardDragEvent } from "../drag/addDragEvent.js";
+import { addJSONData, deleteJSONData } from "../json_data/json_data.js"; 
+import { cardTemplate, newCardTemplate } from "../templates/template.js";
 
+let chosenCard = "";
 let registering = false;
+
+// 현재 drag 중인 카드 정보를 저장합니다.
+function setCard(cardDom) { chosenCard = cardDom; }
 
 // 카드의 제목을 찾아줍니다.
 function findCardTitle(card) {
@@ -202,5 +204,5 @@ function parseCardContentByNewLine(cardContent) {
 export { 
     addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn, resizeCardByInputBox,
-    addDoubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards
+    addDoubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards, setCard, chosenCard
  }

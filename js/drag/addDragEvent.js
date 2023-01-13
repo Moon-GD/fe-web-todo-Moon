@@ -1,10 +1,10 @@
+import { DRAG_START, DRAG_OVER, DRAG_END, DROP } from "../common/commonVariable.js";
+import { findCardTitle } from "../component/card.js";
 import { findColumnStatusByCard } from "../component/column.js";
+import { menuLogMove } from "../component/menu.js";
 import { dragCard, dragOverCard, dropCard } from "./dragCard.js"
 import { makeLightNode } from "./dragEffect.js"
-import { menuLogMove } from "../component/menu.js";
-import { findCardTitle } from "../component/card.js";
 import { moveJSONData } from "../json_data/json_data.js";
-import { DRAG_START, DRAG_OVER, DRAV_END, DROP } from "../common/commonVariable.js";
 
 let dragStartStatus = "";
 let dragEndStatus = "";
@@ -20,7 +20,7 @@ function makeCardDragEvent(cardDom) {
         dragOverCard(cardDom, event)
     })
 
-    cardDom.addEventListener(DRAV_END, (event) => {
+    cardDom.addEventListener(DRAG_END, (event) => {
         // 이동 완료된 column의 status 계산
         dragEndStatus = findColumnStatusByCard(cardDom);
 
