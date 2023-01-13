@@ -325,7 +325,7 @@ header > i {
   background-color: #F0FAE9;
   border-bottom: 1px dotted black;
 }
-.log-frame :last-child {
+.log-frame:last-child {
   border-bottom: none;
 }
 .log-frame > .log-emotion-area {

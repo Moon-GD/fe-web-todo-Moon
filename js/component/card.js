@@ -149,6 +149,26 @@ function addEventToMakeNewCardBtn(cardMakeBtn, currentCard, prevCard, isUpdated)
     })
 }
 
+// 카드에 더블 클릭 이벤트를 추가해줍니다.
+function addDoubleClickEventToCard(cardNode) {
+    cardNode.addEventListener(DOUBLE_CLICK, () => {
+        changeCardToRegisterForm(cardNode);
+    })
+}
+
+// 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.
+function changeCardToRegisterForm(cardNode) {
+    let title = findCardTitle(cardNode);
+    let content = findCardContent(cardNode);
+    let status = findColumnStatusByCard(cardNode);
+
+    // JSON 반영
+    deleteJSONData(status, title);
+
+    cardNode.before(newCardTemplate(title, content, cardNode, true));
+    cardNode.style.display = DISPLAY_NONE;
+}
+
 // 카드 등록 폼에서 사용자의 입력에 따라 카드의 크기를 조절해줍니다.
 function resizeCardByInputBox(cardRegisterInput, cardRegisterForm) {
     let scrollHeight = 0
@@ -177,26 +197,6 @@ function parseCardContentByNewLine(cardContent) {
     let cardContents = cardContent.split("\n");
     
     return cardContents.join("<br>");
-}
-
-// 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.
-function changeCardToRegisterForm(cardNode) {
-    let title = findCardTitle(cardNode);
-    let content = findCardContent(cardNode);
-    let status = findColumnStatusByCard(cardNode);
-
-    // JSON 반영
-    deleteJSONData(status, title);
-
-    cardNode.before(newCardTemplate(title, content, cardNode, true));
-    cardNode.style.display = DISPLAY_NONE;
-}
-
-// 카드에 더블 클릭 이벤트를 추가해줍니다.
-function addDoubleClickEventToCard(cardNode) {
-    cardNode.addEventListener(DOUBLE_CLICK, () => {
-        changeCardToRegisterForm(cardNode);
-    })
 }
 
 export { 

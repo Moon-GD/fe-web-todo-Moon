@@ -1,10 +1,11 @@
 import { validateStatus } from "../json_data/json_data.js";
-import { addColumn } from "./column.js";
+import { addColumn, findCardHeaderName } from "./column.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { CLICK, DISPLAY_FLEX, DISPLAY_NONE } from "../common/commonVariable.js";
 import { searchModal } from "../search/search.js";
 import { changeCSS } from "../common/commonFunction.js";
-import { deleteCard } from "./card.js";
+import { deleteCard, findCardContent, findCardTitle } from "./card.js";
+import { menuLogDelete } from "./menu.js";
 
 let chosenCard = "";
 
@@ -40,6 +41,9 @@ function setCard(cardDom) { chosenCard = cardDom; }
 function addEventToModalButtons() {
     // card modal 버튼들 이벤트 추가
     modalDeleteBtn.addEventListener(CLICK, () => {
+        const headerTitle = findCardTitle(chosenCard);
+        const content = findCardHeaderName(chosenCard);
+        menuLogDelete(headerTitle, content)
         deleteCard(chosenCard);
         turnOffModal();
     })
