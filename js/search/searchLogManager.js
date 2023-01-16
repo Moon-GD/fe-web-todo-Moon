@@ -11,7 +11,7 @@ class SearchLogManager {
 
     // 새로운 검색 기록을 삽입합니다
     addNewSearchLog(searchLog) {
-        this.#searchLog.push(searchLog)
+        this.#searchLog.push(searchLog);
 
         if(this.#searchCount[searchLog]) { this.#searchCount[searchLog] += 1; }
         else { this.#searchCount[searchLog] = 1; }

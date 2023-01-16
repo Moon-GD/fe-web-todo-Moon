@@ -44,12 +44,12 @@ const Btns = {
     // 메뉴 버튼
     menuOpenBtn: querySelector("#menu-open-btn"),
     menuCloseBtn: querySelector("#search-accept-btn")
-}
+};
 
 // card clear 버튼들에 이벤트를 추가합니다.
 function addEventToCardClearBtns() {
-    Btns.goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal)
-    Btns.cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal)
+    Btns.goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal);
+    Btns.cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal);
     Btns.cardClearModalAcceptBtn.addEventListener(CLICK, () => {
         deleteAllCards();
         turnOffCardClearModal();
@@ -60,7 +60,7 @@ function addEventToCardClearBtns() {
 function addEventToSearchAcceptBtn() {
     Btns.searchAcceptBtn.addEventListener(CLICK, () => {
         turnOffSearchModal();
-        searchCard(searchInput.value)
+        searchCard(searchInput.value);
         searchInput.value = "";
     })
 }
@@ -68,13 +68,13 @@ function addEventToSearchAcceptBtn() {
 // fab 버튼을 토글합니다.
 function toggleFabBtn() {
     if(Btns.goColumnAddModalBtn.style.bottom == "21%") {
-        changeCSS(Btns.fabBtn, TRANSFORM, FAB_BTN_DEGREE_ORIGINAL)
+        changeCSS(Btns.fabBtn, TRANSFORM, FAB_BTN_DEGREE_ORIGINAL);
         changeCSS(Btns.goClearBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
         changeCSS(Btns.goColumnAddModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
         changeCSS(Btns.goSearchModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
     }
     else {
-        changeCSS(Btns.fabBtn, TRANSFORM, FAB_BTN_DEGREE_MOVED)
+        changeCSS(Btns.fabBtn, TRANSFORM, FAB_BTN_DEGREE_MOVED);
         changeCSS(Btns.goSearchModalBtn, POSITION_BOTTOM, GO_SEARCH_BTN_MOVED);
         changeCSS(Btns.goColumnAddModalBtn, POSITION_BOTTOM, GO_COLUMN_ADD_BTN_MOVED);
         changeCSS(Btns.goClearBtn, POSITION_BOTTOM, GO_CLEAR_BTN_MOVED);
@@ -112,7 +112,7 @@ function addEventToMenuBtns() {
         menuLogTimeUpdate();
     })
 
-    Btns.menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
+    Btns.menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE); })
 }
 
 // modal 버튼에 이벤트를 추가합니다.
@@ -132,7 +132,7 @@ function addEventToModalButtons() {
 // column 추가 관련 버튼들에 이벤트를 추가합니다.
 function addEventToColumnAddButton() {
     // columnnn
-    Btns.goColumnAddModalBtn.addEventListener(CLICK, turnOnColumnAddModal)
+    Btns.goColumnAddModalBtn.addEventListener(CLICK, turnOnColumnAddModal);
 
     // column add modal 버튼들 이벤트 추가
     Btns.columnAddModalCancelBtn.addEventListener(CLICK, turnOffColumnAddModal);
@@ -146,7 +146,7 @@ function addEventToColumnAddButton() {
         }
         else {
             columnAddInput.value = "";
-            alert("이미 존재하는 column 입니다.")
+            alert("이미 존재하는 column 입니다.");
         }
     })
 }

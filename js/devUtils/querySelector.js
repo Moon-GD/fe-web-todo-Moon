@@ -3,7 +3,7 @@ import {
 } from "./querySelectorHelper.js"
 
 // HTML collection은 forEach가 안되기 때문에 배열 forEach 순회 등록
-HTMLCollection.prototype.forEach = Array.prototype.forEach
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
 
 // 원하는 노드를 찾아 노드 형태로 반환합니다.
 function querySelector(query) {

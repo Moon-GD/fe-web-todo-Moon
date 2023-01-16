@@ -1,6 +1,6 @@
 import { 
     CARD_BTN_ORIGINAL, CARD_OUTLINE_ORIGINAL, CARD_BACKGROUND_ORIGINAL, CARD_BTN_HOVER, 
-    CARD_OUTLINE_HOVER, CARD_BACKGROUND_HOVER, CARD_DELETE_BTN_ORIGINAL, 
+    CARD_OUTLINE_HOVER, CARD_BACKGROUND_HOVER, CARD_DELETE_BTN_ORIGINAL, CARD_TEXT_HEIGHT,
     DISPLAY_BLOCK, DISPLAY_NONE,
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK
 } from "../common/commonVariable.js";
@@ -19,7 +19,7 @@ function setCard(cardDom) { chosenCard = cardDom; }
 
 // 카드의 제목을 찾아줍니다.
 function findCardTitle(card) {
-    const cardTitleText = card.querySelector("h3").innerHTML
+    const cardTitleText = card.querySelector("h3").innerHTML;
     const cardTitle = cardTitleText.split('\n')[0];
 
     return cardTitle;
@@ -67,7 +67,7 @@ function addEventToShowCardRegisterBtn(cardRegisterBtn, currentColumn) {
 // 카드 삭제 버튼에 event를 등록합니다.
 function addEventToCardDeleteBtn(cardDeleteBtn, deletedCard) {
     cardDeleteBtn.addEventListener(CLICK, () => {
-        setCard(deletedCard)
+        setCard(deletedCard);
         turnOnModal();
     })
 
@@ -103,10 +103,10 @@ function addEventToMakeCardCancelBtn(registerCancelBtn, cardRegisterForm, prevCa
                 findColumnStatusByCard(prevCard),
                 findCardTitle(prevCard),
                 findCardContent(prevCard)
-            )
+            );
         }
 
-        cardRegisterForm.remove()
+        cardRegisterForm.remove();
     })
 }
 
@@ -129,15 +129,15 @@ function addEventToMakeNewCardBtn(cardMakeBtn, currentCard, prevCard, isUpdated)
         currentCard.style.display = DISPLAY_NONE;
 
         // 데이터 반영
-        let currentStatus = findColumnStatusByCard(newCard)
-        addJSONData(currentStatus, title, updatedContent)
+        let currentStatus = findColumnStatusByCard(newCard);
+        addJSONData(currentStatus, title, updatedContent);
 
         // 메뉴 update
         if(isUpdated) {
-            updatedStatus = findColumnStatusByCard(prevCard)
+            updatedStatus = findColumnStatusByCard(prevCard);
             prevCard.remove();
             currentCard.remove();
-            prevContent = prevCard.querySelector(".card-content").innerHTML
+            prevContent = prevCard.querySelector(".card-content").innerHTML;
         }
         // 메뉴 add
         else {
@@ -173,8 +173,8 @@ function changeCardToRegisterForm(cardNode) {
 
 // 카드 등록 폼에서 사용자의 입력에 따라 카드의 크기를 조절해줍니다.
 function resizeCardByInputBox(cardRegisterInput, cardRegisterForm) {
-    let scrollHeight = 0
-    let cardHeight = 18
+    let scrollHeight = 0;
+    let cardHeight = 18;
     let registerAcceptBtn = cardRegisterForm.querySelector("#new-card-register-btn");
 
     cardRegisterInput.value ?
@@ -183,9 +183,9 @@ function resizeCardByInputBox(cardRegisterInput, cardRegisterForm) {
 
     cardRegisterInput.addEventListener(INPUT, () => {
         if(cardRegisterInput.scrollHeight != scrollHeight) {
-            cardHeight += 2.5
+            cardHeight += CARD_TEXT_HEIGHT;
             cardRegisterForm.style.height = cardHeight + "vh";
-            scrollHeight = cardRegisterInput.scrollHeight
+            scrollHeight = cardRegisterInput.scrollHeight;
         }
 
         cardRegisterInput.value ?

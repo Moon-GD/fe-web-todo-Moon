@@ -25,12 +25,12 @@ function columnTemplate(columnTitle, cardCount = 0) {
             </h3>
             <article>
             </article>
-        `
+        `;
 
-    let cardAddBtn = columnNode.querySelector(".card-add-btn")
-    let columnDeleteBtn = columnNode.querySelector(".column-delete-btn")
-    let header = columnNode.querySelector("h3")
-    let article = columnNode.querySelector("article")
+    let cardAddBtn = columnNode.querySelector(".card-add-btn");
+    let columnDeleteBtn = columnNode.querySelector(".column-delete-btn");
+    let header = columnNode.querySelector("h3");
+    let article = columnNode.querySelector("article");
 
     header.addEventListener(DRAG_OVER, (event) => {
         event.preventDefault();
@@ -54,9 +54,9 @@ function columnTemplate(columnTitle, cardCount = 0) {
 // 카드 템플릿을 반환합니다.
 function cardTemplate(cardTitle, cardContent, cardAuthor="author by web") {
     let cardDom = document.createElement("div");
-    cardDom.classList.add("card-frame")
-    cardDom.setAttribute("draggable", true)
-    cardDom.setAttribute("id", dragIDManager.getNewID())  // drag 이벤트를 위해 카드에 ID 부여
+    cardDom.classList.add("card-frame");
+    cardDom.setAttribute("draggable", true);
+    cardDom.setAttribute("id", dragIDManager.getNewID());  // drag 이벤트를 위해 카드에 ID 부여
 
     cardDom.innerHTML = `
         <h3 class="card-title">${cardTitle}
@@ -67,10 +67,10 @@ function cardTemplate(cardTitle, cardContent, cardAuthor="author by web") {
     `;
 
     // 더블 클릭 이벤트 추가
-    addDoubleClickEventToCard(cardDom)
+    addDoubleClickEventToCard(cardDom);
 
     let cardDeleteBtn = cardDom.querySelector("i");
-    addEventToCardDeleteBtn(cardDeleteBtn, cardDom)
+    addEventToCardDeleteBtn(cardDeleteBtn, cardDom);
 
     return cardDom;
 }
@@ -87,7 +87,7 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
             <button id="new-card-cancel-btn">취소</button>
             <button id="new-card-register-btn" disabled>등록</button>
         </div>
-    `
+    `;
 
     const newCancelBtn = newCardDom.querySelector("#new-card-cancel-btn");
     const newRegisterBtn = newCardDom.querySelector("#new-card-register-btn");
@@ -117,7 +117,7 @@ function menuLogAddTemplate(content, status, emotion, author) {
             </h4>
             <h5 class="log-time" data-time></h5>
         </div>
-    `
+    `;
 
     // 시간 계산 및 시간 노드 불러오기
     const parsedTime = getCurrentTimeInString(new Date());
@@ -128,7 +128,7 @@ function menuLogAddTemplate(content, status, emotion, author) {
     timeNode.textContent = getElapsedTime(timeArray);
 
     // 시간 노드에 등록 시간 저장
-    saveTimeInTimeNode(timeNode, parsedTime)
+    saveTimeInTimeNode(timeNode, parsedTime);
 
     // 시간 노드에 event 추가
     addEventToTimeNode(timeNode);
@@ -152,7 +152,7 @@ function menuLogDeleteTemplate(content, status, emotion, author) {
             </h4>
             <h5 class="log-time" data-time></h5>
         </div>
-    `
+    `;
 
     // 시간 계산 및 시간 노드 불러오기
     const parsedTime = getCurrentTimeInString(new Date());
@@ -163,7 +163,7 @@ function menuLogDeleteTemplate(content, status, emotion, author) {
     timeNode.textContent = getElapsedTime(timeArray);
 
     // 시간 노드에 등록 시간 저장
-    saveTimeInTimeNode(timeNode, parsedTime)
+    saveTimeInTimeNode(timeNode, parsedTime);
 
     // 시간 노드에 event 추가
     addEventToTimeNode(timeNode);
@@ -185,7 +185,7 @@ function menuLogDeleteAllTemplate(emotion, author) {
             </h4>
             <h5 class="log-time" data-time></h5>
         </div>
-    `
+    `;
 
     // 시간 계산 및 시간 노드 불러오기
     const parsedTime = getCurrentTimeInString(new Date());
@@ -196,7 +196,7 @@ function menuLogDeleteAllTemplate(emotion, author) {
     timeNode.textContent = getElapsedTime(timeArray);
 
     // 시간 노드에 등록 시간 저장
-    saveTimeInTimeNode(timeNode, parsedTime)
+    saveTimeInTimeNode(timeNode, parsedTime);
 
     // 시간 노드에 event 추가
     addEventToTimeNode(timeNode);
@@ -221,7 +221,7 @@ function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
             </h4>
             <h5 class="log-time" data-time></h5>
         </div>
-    `
+    `;
 
     // 시간 계산 및 시간 노드 불러오기
     const parsedTime = getCurrentTimeInString(new Date());
@@ -267,7 +267,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
     timeNode.textContent = getElapsedTime(timeArray);
 
     // 시간 노드에 등록 시간 저장
-    saveTimeInTimeNode(timeNode, parsedTime)
+    saveTimeInTimeNode(timeNode, parsedTime);
 
     // 시간 노드에 event 추가
     addEventToTimeNode(timeNode);
@@ -292,7 +292,7 @@ function menuSearchTemplate(searchLog, emotion, author) {
             </h4>
             <h5 class="log-time" data-time></h5>
         </div>
-    `
+    `;
 
     // 시간 계산 및 시간 노드 불러오기
     const parsedTime = getCurrentTimeInString(new Date());
@@ -303,7 +303,7 @@ function menuSearchTemplate(searchLog, emotion, author) {
     timeNode.textContent = getElapsedTime(timeArray);
 
     // 시간 노드에 등록 시간 저장
-    saveTimeInTimeNode(timeNode, parsedTime)
+    saveTimeInTimeNode(timeNode, parsedTime);
 
     // 시간 노드에 event 추가
     addEventToTimeNode(timeNode);
@@ -314,7 +314,7 @@ function menuSearchTemplate(searchLog, emotion, author) {
 // 헤더 템플릿을 반환합니다.
 function headerTitleTemplate(title, originalHeaderDom) {
     const headerDom = document.createElement("h3");
-    const inputDom = document.createElement("input")
+    const inputDom = document.createElement("input");
     
     inputDom.setAttribute("type", "text");
     inputDom.setAttribute("placeholder", "제목을 입력해주세요.");

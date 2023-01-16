@@ -12,8 +12,8 @@ let dragEndStatus = "";
 // 카드 Dom에 드래그 이벤트를 추가합니다
 function makeCardDragEvent(cardDom) {
     cardDom.addEventListener(DRAG_START, (event) => {
-        dragStartStatus = findColumnStatusByCard(cardDom)
-        dragCard(event)
+        dragStartStatus = findColumnStatusByCard(cardDom);
+        dragCard(event);
     })
 
     cardDom.addEventListener(DRAG_OVER, (event) => { dragOverCard(cardDom, event); })

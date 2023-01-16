@@ -1,19 +1,19 @@
 class DragIDManager {
-    #ID = 0
-    movedCardID = 0
+    #ID = 0;
+    movedCardID = 0;
 
     setCurrentCardID(cardID) {
-        this.movedCardID = cardID
+        this.movedCardID = cardID;
     }
 
     getCurrentCardID() {
-        return this.movedCardID
+        return this.movedCardID;
     }
 
     getNewID() {
         this.#ID += 1
         
-        return this.#ID
+        return this.#ID;
     }
 }
 

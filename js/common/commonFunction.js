@@ -6,13 +6,11 @@ import { statusList, statusNameList, JSON_DATA } from "../json_data/json_data.js
 import { columnTemplate, cardTemplate } from "../templates/template.js";
 
 // parentNode 다음에 childNode를 추가합니다.
-function addChildAfterParent(parentNode, childNode) {
-    parentNode.after(childNode)
-}
+function addChildAfterParent(parentNode, childNode) { parentNode.after(childNode); }
 
 // (target)의 css (key)를 (value)로 바꿉니다.
 function changeCSS(targetNode, key, value) {
-    targetNode.style[key] = value
+    targetNode.style[key] = value;
 }
 
 // 초기 데이터를 불러와 column, card를 생성합니다.
@@ -41,7 +39,7 @@ function getCurrentTimeInString() {
     const hour = dateObject.getHours();
     const minute = dateObject.getMinutes();
     
-    return `${month}월 ${day}일 ${hour}시 ${minute}분`
+    return `${month}월 ${day}일 ${hour}시 ${minute}분`;
 }
 
 // 시간 string을 배열로 반환합니다.
@@ -77,9 +75,7 @@ function getElapsedTime(timeArray) {
 }
 
 // 노드에 시간을 저장합니다.
-function saveTimeInTimeNode(timeNode, parsedTime) {
-    timeNode.setAttribute("data-time", parsedTime);
-}
+function saveTimeInTimeNode(timeNode, parsedTime) { timeNode.setAttribute("data-time", parsedTime); }
 
 function addEventToTimeNode(timeNode) {
     const timeNodeContent = timeNode.textContent;

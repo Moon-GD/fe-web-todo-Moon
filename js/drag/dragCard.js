@@ -8,7 +8,7 @@ function dragCard(event) { dragIDManager.setCurrentCardID(event.target.id); }
 // 카드가 위에 지나갈 때 실행됩니다.
 function dragOverCard(parentDom, event) {
     event.preventDefault();
-    addChildAfterParent(parentDom, makeShadedNode())
+    addChildAfterParent(parentDom, makeShadedNode());
 }
 
 // 카드를 놓을 때 실행됩니다. (drag가 끝날 때)

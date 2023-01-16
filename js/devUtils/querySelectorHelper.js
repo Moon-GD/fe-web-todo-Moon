@@ -105,7 +105,7 @@ function singleQuerySelector(query, startNode=BODY_NODE) {
 
 // 단일 쿼리에 해당하는 모든 노드를 리스트 형태로 반환합니다.
 function singleQuerySelectorAll(query, startNode=BODY_NODE) {
-    let listToBeReturned = []
+    let listToBeReturned = [];
     const queryObj = singleQueryToObject(query);
     const queue = new Queue();
     queue.enque(startNode);
@@ -144,7 +144,7 @@ function multipleQuerySelector(multipleQuery, startNode=BODY_NODE) {
         else {
             startNodeList.forEach((node) => {
                 let validateNodeList = singleQuerySelectorAll(multipleQueryList[queryListIndex], node);
-                endNodeList = endNodeList.concat(validateNodeList).filter((ele) => ele != node)
+                endNodeList = endNodeList.concat(validateNodeList).filter((ele) => ele != node);
             })
         }
 
@@ -179,7 +179,7 @@ function multipleQuerySelectorAll(multipleQuery, startNode=BODY_NODE) {
         else {
             startNodeList.forEach((node) => {
                 let validateNodeList = singleQuerySelectorAll(multipleQueryList[queryListIndex], node);
-                endNodeList = endNodeList.concat(validateNodeList).filter((ele) => ele != node)
+                endNodeList = endNodeList.concat(validateNodeList).filter((ele) => ele != node);
             })
         }
 

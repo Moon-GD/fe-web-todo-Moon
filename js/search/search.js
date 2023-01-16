@@ -13,7 +13,7 @@ function searchCard(searchInputValue) {
     searchLogManger.addNewSearchLog(searchInputValue);
 
     // 검색된 기록에 해당하는 카드의 색상을 변경해줍니다.
-    changeCardBackGroundColor(searchInputValue)
+    changeCardBackGroundColor(searchInputValue);
 
     // 메뉴에 기록을 남깁니다.
     menuLogSearch(searchInputValue);
@@ -36,7 +36,7 @@ function changeCardBackGroundColor(findTitle) {
         setTimeout(() => {
             cardNode.style.transition = "1s";
             cardNode.style.outline = "0.2vh solid #fff";
-        }, 1000)
+        }, 1000);
     })
 }
 
