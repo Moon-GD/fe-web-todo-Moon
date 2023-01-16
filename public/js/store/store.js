@@ -1,12 +1,10 @@
 import { findCardContent, findCardTitle } from "../component/card.js";
 import { updateColumnLength } from "../component/column.js";
 
-// 새로운 상태값이 입력되면? statusList의 길이 값을 대입해주면 된다!
 const TODO = 0;
 const DOING = 1;
 const DONE = 2;
 
-// 리스트로 관리하는 이유? state가 추가될 수도 있음!
 let statusList = [TODO, DOING, DONE];
 let statusNameList = ["해야 할 일", "하고 있는 일", "완료한 일"];
 let JSON_DATA = [[], [], []];

@@ -10,6 +10,16 @@ function addEventsToWebsite() {
     addEventToModalButtons();
     addEventToColumnAddButton();
     addEventToFabBtn();
+
+    fetch("http://localhost:3000/get").then((res) => {
+        if(res.status == 200) {
+            return res.json();
+        }
+        else {
+            return null;
+        }
+    }).then((data) => { console.log(data); })
+    .catch((error) => { console.log("fail to fetch"); })
 }
 
 (() => {
