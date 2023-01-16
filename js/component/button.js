@@ -1,5 +1,10 @@
 import { changeCSS } from "../common/commonFunction.js";
-import { CLICK, RIGHT, MENU_MOVE_DISTANCE, DISPLAY_FLEX } from "../common/commonVariable.js";
+import {
+    POSITION_BOTTOM, TRANSFORM,
+    FAB_BTN_DEGREE_ORIGINAL, FAB_BTNS_BOTTOM_ORIGINAL, 
+    FAB_BTN_DEGREE_MOVED, GO_SEARCH_BTN_MOVED, GO_COLUMN_ADD_BTN_MOVED, GO_CLEAR_BTN_MOVED,
+    CLICK, RIGHT, MENU_MOVE_DISTANCE, DISPLAY_FLEX 
+} from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn } from "./column.js";
 import { menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu.js";
@@ -61,16 +66,16 @@ function addEventToSearchAcceptBtn() {
 // fab 버튼을 토글합니다.
 function toggleFabBtn() {
     if(goColumnAddModalBtn.style.bottom == "21%") {
-        changeCSS(fabBtn, "transform", "rotate(0deg)")
-        changeCSS(goClearBtn, "bottom", "5%");
-        changeCSS(goColumnAddModalBtn, "bottom", "5%");
-        changeCSS(goSearchModalBtn, "bottom", "5%");
+        changeCSS(fabBtn, TRANSFORM, FAB_BTN_DEGREE_ORIGINAL)
+        changeCSS(goClearBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS(goColumnAddModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS(goSearchModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
     }
     else {
-        changeCSS(fabBtn, "transform", "rotate(-45deg)")
-        changeCSS(goClearBtn, "bottom", "29%");
-        changeCSS(goColumnAddModalBtn, "bottom", "21%");
-        changeCSS(goSearchModalBtn, "bottom", "13%");
+        changeCSS(fabBtn, TRANSFORM, FAB_BTN_DEGREE_MOVED)
+        changeCSS(goSearchModalBtn, POSITION_BOTTOM, GO_SEARCH_BTN_MOVED);
+        changeCSS(goColumnAddModalBtn, POSITION_BOTTOM, GO_COLUMN_ADD_BTN_MOVED);
+        changeCSS(goClearBtn, POSITION_BOTTOM, GO_CLEAR_BTN_MOVED);
     }
 }
 
