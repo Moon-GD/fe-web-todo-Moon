@@ -46,7 +46,9 @@ function getCurrentTimeInString() {
 
 // 시간 string을 배열로 반환합니다.
 function timeStringToArray(timeString) {
+    // "1월 1일 1시 1분"
     const splitPoints = ["월", "일", "시", "분"];
+    // [월, 일, 시, 분]
     let listToBeReturned = [];
 
     // 월, 일, 시, 분 순서로 자릅니다.
@@ -74,6 +76,7 @@ function getElapsedTime(timeArray) {
     else { return '방금'; }
 }
 
+// 노드에 시간을 저장합니다.
 function saveTimeInTimeNode(timeNode, parsedTime) {
     timeNode.setAttribute("data-time", parsedTime);
 }

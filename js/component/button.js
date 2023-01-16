@@ -17,38 +17,40 @@ import {
     showSuggestedLog, searchModal , searchInput, searchCard
 } from "../search/search.js";
 
-// 검색 관련 버튼
-const searchCancelBtn = querySelector("#search-cancel-btn");
-const searchAcceptBtn = querySelector("#search-accept-btn");
+const Btns = {
+    // 검색 관련 버튼
+    searchCancelBtn: querySelector("#search-cancel-btn"), 
+    searchAcceptBtn: querySelector("#search-accept-btn"),
 
-// column 생성 관련 버튼
-const columnAddModalCancelBtn = querySelector("#column-add-cancel-btn");
-const columnAddModalAcceptBtn = querySelector("#column-add-accept-btn");
+    // column 생성 관련 버튼
+    columnAddModalCancelBtn: querySelector("#column-add-cancel-btn"),
+    columnAddModalAcceptBtn: querySelector("#column-add-accept-btn"),
 
-// 카드 삭제 모달 관련 버튼
-const modalDeleteBtn = querySelector("#card-delete-btn");
-const modalCancelBtn = querySelector("#card-cancel-btn");
+    // 카드 삭제 모달 관련 버튼
+    modalDeleteBtn: querySelector("#card-delete-btn"),
+    modalCancelBtn: querySelector("#card-cancel-btn"),
 
-// 모든 카드 삭제 관련 버튼
-const goCardClearModalBtn = querySelector("#go-card-clear-btn");
-const cardClearModalCancelBtn = querySelector("#clear-cancel-btn");
-const cardClearModalAcceptBtn = querySelector("#clear-accept-btn");
+    // 모든 카드 삭제 관련 버튼
+    goCardClearModalBtn: querySelector("#go-card-clear-btn"),
+    cardClearModalCancelBtn: querySelector("#clear-cancel-btn"),
+    cardClearModalAcceptBtn: querySelector("#clear-accept-btn"),
 
-// fab 버튼
-const fabBtn = querySelector("#fab-btn");
-const goColumnAddModalBtn = querySelector("#go-column-add-modal-btn");
-const goSearchModalBtn = querySelector("#go-search-btn");
-const goClearBtn = querySelector("#go-card-clear-btn");
+    // fab 버튼
+    fabBtn: querySelector("#fab-btn"),
+    goColumnAddModalBtn: querySelector("#go-column-add-modal-btn"),
+    goSearchModalBtn: querySelector("#go-search-btn"),
+    goClearBtn: querySelector("#go-card-clear-btn"),
 
-// 메뉴 버튼
-const menuOpenBtn = querySelector("#menu-open-btn");
-const menuCloseBtn = querySelector("#menu-close-btn");
+    // 메뉴 버튼
+    menuOpenBtn: querySelector("#menu-open-btn"),
+    menuCloseBtn: querySelector("#search-accept-btn")
+}
 
 // card clear 버튼들에 이벤트를 추가합니다.
 function addEventToCardClearBtns() {
-    goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal)
-    cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal)
-    cardClearModalAcceptBtn.addEventListener(CLICK, () => {
+    Btns.goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal)
+    Btns.cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal)
+    Btns.cardClearModalAcceptBtn.addEventListener(CLICK, () => {
         deleteAllCards();
         turnOffCardClearModal();
     })
@@ -56,7 +58,7 @@ function addEventToCardClearBtns() {
 
 // 검색 모달의 검색 버튼에 클릭 이벤트를 추가합니다.
 function addEventToSearchAcceptBtn() {
-    searchAcceptBtn.addEventListener(CLICK, () => {
+    Btns.searchAcceptBtn.addEventListener(CLICK, () => {
         turnOffSearchModal();
         searchCard(searchInput.value)
         searchInput.value = "";
@@ -65,23 +67,23 @@ function addEventToSearchAcceptBtn() {
 
 // fab 버튼을 토글합니다.
 function toggleFabBtn() {
-    if(goColumnAddModalBtn.style.bottom == "21%") {
-        changeCSS(fabBtn, TRANSFORM, FAB_BTN_DEGREE_ORIGINAL)
-        changeCSS(goClearBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
-        changeCSS(goColumnAddModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
-        changeCSS(goSearchModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+    if(Btns.goColumnAddModalBtn.style.bottom == "21%") {
+        changeCSS(Btns.fabBtn, TRANSFORM, FAB_BTN_DEGREE_ORIGINAL)
+        changeCSS(Btns.goClearBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS(Btns.goColumnAddModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS(Btns.goSearchModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
     }
     else {
-        changeCSS(fabBtn, TRANSFORM, FAB_BTN_DEGREE_MOVED)
-        changeCSS(goSearchModalBtn, POSITION_BOTTOM, GO_SEARCH_BTN_MOVED);
-        changeCSS(goColumnAddModalBtn, POSITION_BOTTOM, GO_COLUMN_ADD_BTN_MOVED);
-        changeCSS(goClearBtn, POSITION_BOTTOM, GO_CLEAR_BTN_MOVED);
+        changeCSS(Btns.fabBtn, TRANSFORM, FAB_BTN_DEGREE_MOVED)
+        changeCSS(Btns.goSearchModalBtn, POSITION_BOTTOM, GO_SEARCH_BTN_MOVED);
+        changeCSS(Btns.goColumnAddModalBtn, POSITION_BOTTOM, GO_COLUMN_ADD_BTN_MOVED);
+        changeCSS(Btns.goClearBtn, POSITION_BOTTOM, GO_CLEAR_BTN_MOVED);
     }
 }
 
 // fab 버튼에 클릭 이벤트를 추가합니다.
 function addEventToFabBtn() {
-    fabBtn.addEventListener(CLICK, toggleFabBtn);
+    Btns.fabBtn.addEventListener(CLICK, toggleFabBtn);
 
     // Fab에 숨겨진 버튼들에 event를 추가합니다.
     addEventToSearchBtn();
@@ -92,12 +94,12 @@ function addEventToFabBtn() {
 
 // 검색 모달의 취소 버튼에 클릭 이벤트를 추가합니다.
 function addEventToSearchCancelBtn() {
-    searchCancelBtn.addEventListener(CLICK, turnOffSearchModal);
+    Btns.searchCancelBtn.addEventListener(CLICK, turnOffSearchModal);
 }
 
 // 검색 모달을 띄워주는 클릭 이벤트를 추가합니다.
 function addEventToSearchBtn() {
-    goSearchModalBtn.addEventListener(CLICK, () => {
+    Btns.goSearchModalBtn.addEventListener(CLICK, () => {
         changeCSS(searchModal, "display", DISPLAY_FLEX);
         showSuggestedLog();
     })
@@ -105,17 +107,18 @@ function addEventToSearchBtn() {
 
 // menu toggle 이벤트 추가
 function addEventToMenuBtns() {
-    menuOpenBtn.addEventListener(CLICK, () => { 
+    Btns.menuOpenBtn.addEventListener(CLICK, () => { 
         changeCSS(menuBar, RIGHT, 0);
         menuLogTimeUpdate();
     })
-    menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
+
+    Btns.menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
 }
 
 // modal 버튼에 이벤트를 추가합니다.
 function addEventToModalButtons() {
     // card modal 버튼들 이벤트 추가
-    modalDeleteBtn.addEventListener(CLICK, () => {
+    Btns.modalDeleteBtn.addEventListener(CLICK, () => {
         const headerTitle = findCardTitle(chosenCard);
         const content = findCardHeaderName(chosenCard);
         menuLogDelete(headerTitle, content);
@@ -123,17 +126,17 @@ function addEventToModalButtons() {
         turnOffModal();
     })
 
-    modalCancelBtn.addEventListener(CLICK, turnOffModal);
+    Btns.modalCancelBtn.addEventListener(CLICK, turnOffModal);
 }
 
 // column 추가 관련 버튼들에 이벤트를 추가합니다.
 function addEventToColumnAddButton() {
     // columnnn
-    goColumnAddModalBtn.addEventListener(CLICK, turnOnColumnAddModal)
+    Btns.goColumnAddModalBtn.addEventListener(CLICK, turnOnColumnAddModal)
 
     // column add modal 버튼들 이벤트 추가
-    columnAddModalCancelBtn.addEventListener(CLICK, turnOffColumnAddModal);
-    columnAddModalAcceptBtn.addEventListener(CLICK, () => {
+    Btns.columnAddModalCancelBtn.addEventListener(CLICK, turnOffColumnAddModal);
+    Btns.columnAddModalAcceptBtn.addEventListener(CLICK, () => {
         let columnAddInput = querySelector("#column-add-input");
         
         // 중복되는 status가 없을 경우에만 column 추가
@@ -149,10 +152,7 @@ function addEventToColumnAddButton() {
 }
 
 export {
-    fabBtn,
-    goColumnAddModalBtn, goSearchModalBtn, goClearBtn,
-    columnAddModalCancelBtn, columnAddModalAcceptBtn,
-    modalDeleteBtn, modalCancelBtn,
+    Btns,
     addEventToCardClearBtns, addEventToSearchBtn,
     addEventToFabBtn, addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton
 }

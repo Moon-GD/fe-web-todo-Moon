@@ -2,7 +2,7 @@ import {
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
     DISPLAY_FLEX, DISPLAY_NONE 
 } from "../common/commonVariable.js";
-import { goSearchModalBtn } from "./button.js";
+import { Btns } from "./button.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 import { statusNameList, addStatus, JSON_DATA, updateStatusName, validateNewName, deleteStatus } from "../json_data/json_data.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
@@ -99,7 +99,7 @@ function inputFocusOutEvent(headerInput, originalTitle, originalHeaderDom) {
 }
 
 export { 
-    mainTag, goSearchModalBtn,
+    mainTag,
     columnDeleteEvent, findColumnStatusByCard, addColumn, 
     findCardHeaderName, updateColumnLength,
     headerDoubleClickEvent, inputFocusOutEvent
