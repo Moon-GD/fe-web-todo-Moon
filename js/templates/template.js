@@ -7,7 +7,7 @@ import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn,
 import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
 import { dragIDManager } from "../drag/dragIDManager.js";
-import { statusNameList } from "../json_data/json_data.js";
+import { statusNameList } from "../store/store.js";
 import { searchLogManger } from "../search/searchLogManager.js";
 
 // column 템플릿을 반환합니다.

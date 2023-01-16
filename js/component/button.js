@@ -12,7 +12,7 @@ import {
     turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, turnOffModal, turnOffColumnAddModal, turnOffSearchModal
 } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
-import { validateStatus } from "../json_data/json_data.js";
+import { validateStatus } from "../store/store.js";
 import { 
     showSuggestedLog, searchModal , searchInput, searchCard
 } from "../search/search.js";

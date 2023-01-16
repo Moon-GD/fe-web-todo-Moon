@@ -3,7 +3,7 @@ import {
     DISPLAY_FLEX, DISPLAY_NONE 
 } from "../common/commonVariable.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
-import { statusNameList, addStatus, JSON_DATA, updateStatusName, validateNewName, deleteStatus } from "../json_data/json_data.js";
+import { statusNameList, addStatus, JSON_DATA, updateStatusName, validateNewName, deleteStatus } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 
 const mainTag = querySelector("main");

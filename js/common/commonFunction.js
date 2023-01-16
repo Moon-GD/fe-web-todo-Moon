@@ -2,7 +2,7 @@
 import { MONTH, DATE, HOUR, MINUTE, MOUSE_OVER, MOUSE_LEAVE } from "./commonVariable.js";
 import { mainTag } from "../component/column.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { statusList, statusNameList, JSON_DATA } from "../json_data/json_data.js";
+import { statusList, statusNameList, JSON_DATA } from "../store/store.js";
 import { columnTemplate, cardTemplate } from "../templates/template.js";
 
 // parentNode 다음에 childNode를 추가합니다.

@@ -8,7 +8,7 @@ import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu.js";
 import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { addJSONData, deleteJSONData } from "../json_data/json_data.js"; 
+import { addJSONData, deleteJSONData } from "../store/store.js"; 
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 
 let chosenCard = "";

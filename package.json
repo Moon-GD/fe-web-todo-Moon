@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Moon-GD/fe-web-todo-Moon/issues"
   },
-  "homepage": "https://github.com/Moon-GD/fe-web-todo-Moon#readme"
+  "homepage": "https://github.com/Moon-GD/fe-web-todo-Moon#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
