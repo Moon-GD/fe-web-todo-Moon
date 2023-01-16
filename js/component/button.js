@@ -81,21 +81,13 @@ function toggleFabBtn() {
 
 // fab 버튼에 클릭 이벤트를 추가합니다.
 function addEventToFabBtn() {
-    fabBtn.addEventListener(CLICK, () => {
-        toggleFabBtn();
-    })
+    fabBtn.addEventListener(CLICK, toggleFabBtn);
 
     // Fab에 숨겨진 버튼들에 event를 추가합니다.
     addEventToSearchBtn();
     addEventToSearchCancelBtn();
     addEventToSearchAcceptBtn();
     addEventToCardClearBtns();
-
-    // fab 버튼의 column add event를 추가합니다.
-    goColumnAddModalBtn.addEventListener(CLICK, () => { turnOnColumnAddModal(); })
-
-    // fab 버튼의 휴지통 버튼에 event를 추가합니다.
-    goClearBtn.addEventListener(CLICK, () => {})
 }
 
 // 검색 모달의 취소 버튼에 클릭 이벤트를 추가합니다.
@@ -126,18 +118,21 @@ function addEventToModalButtons() {
     modalDeleteBtn.addEventListener(CLICK, () => {
         const headerTitle = findCardTitle(chosenCard);
         const content = findCardHeaderName(chosenCard);
-        menuLogDelete(headerTitle, content)
+        menuLogDelete(headerTitle, content);
         deleteCard(chosenCard);
         turnOffModal();
     })
 
-    modalCancelBtn.addEventListener(CLICK, () => { turnOffModal(); })
+    modalCancelBtn.addEventListener(CLICK, turnOffModal);
 }
 
-// column 추가 이벤트를 추가합니다.
+// column 추가 관련 버튼들에 이벤트를 추가합니다.
 function addEventToColumnAddButton() {
+    // columnnn
+    goColumnAddModalBtn.addEventListener(CLICK, turnOnColumnAddModal)
+
     // column add modal 버튼들 이벤트 추가
-    columnAddModalCancelBtn.addEventListener(CLICK, () => { turnOffColumnAddModal(); })
+    columnAddModalCancelBtn.addEventListener(CLICK, turnOffColumnAddModal);
     columnAddModalAcceptBtn.addEventListener(CLICK, () => {
         let columnAddInput = querySelector("#column-add-input");
         
@@ -148,7 +143,7 @@ function addEventToColumnAddButton() {
         }
         else {
             columnAddInput.value = "";
-            alert("이미 존재하는 status 입니다.")
+            alert("이미 존재하는 column 입니다.")
         }
     })
 }

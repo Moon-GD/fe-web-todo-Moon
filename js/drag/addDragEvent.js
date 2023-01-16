@@ -16,9 +16,7 @@ function makeCardDragEvent(cardDom) {
         dragCard(event)
     })
 
-    cardDom.addEventListener(DRAG_OVER, (event) => {
-        dragOverCard(cardDom, event)
-    })
+    cardDom.addEventListener(DRAG_OVER, (event) => { dragOverCard(cardDom, event); })
 
     cardDom.addEventListener(DRAG_END, (event) => {
         // 이동 완료된 column의 status 계산
@@ -33,9 +31,7 @@ function makeCardDragEvent(cardDom) {
         makeLightNode();
     })
 
-    cardDom.addEventListener(DROP, (event) => {
-        dropCard(cardDom, event)
-    })
+    cardDom.addEventListener(DROP, (event) => { dropCard(cardDom, event); })
 }
 
 export { 

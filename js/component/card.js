@@ -34,7 +34,7 @@ function findCardContent(card) {
 
 // 카드를 삭제합니다.
 function deleteCard(card) {
-    const title = card.querySelector(".card-title").textContent.split("\n")[0]
+    const title = card.querySelector(".card-title").textContent.split("\n")[0];
     const status = findColumnStatusByCard(card);
         
     // 로컬 data 반영
@@ -45,7 +45,7 @@ function deleteCard(card) {
 
 // 모든 카드를 삭제합니다.
 function deleteAllCards() {
-    const cards = document.querySelectorAll(".card-frame")
+    const cards = document.querySelectorAll(".card-frame");
 
     cards.forEach((card) => { deleteCard(card); })
 

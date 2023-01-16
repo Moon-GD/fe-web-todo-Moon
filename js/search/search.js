@@ -1,7 +1,5 @@
-import { CLICK } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
 import { menuLogSearch } from "../component/menu.js";
-import { turnOffSearchModal } from "../component/modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { searchLogManger } from "./searchLogManager.js";
 
@@ -44,12 +42,8 @@ function changeCardBackGroundColor(findTitle) {
 
 // 추천 검색어를 보여줍니다.
 function showSuggestedLog() {
-    if(searchLogManger.suggestLog()) { 
-        suggestedSearchText.innerHTML = "#" + searchLogManger.suggestLog();
-    }
-    else {
-        suggestedSearchText.innerHTML = "아직 없습니다."
-    }
+    if(searchLogManger.suggestLog()) {  suggestedSearchText.innerHTML = "#" + searchLogManger.suggestLog(); }
+    else { suggestedSearchText.innerHTML = "아직 없습니다."; }
 }
 
 export {

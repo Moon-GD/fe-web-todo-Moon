@@ -69,7 +69,7 @@ function cardTemplate(cardTitle, cardContent, cardAuthor="author by web") {
     // 더블 클릭 이벤트 추가
     addDoubleClickEventToCard(cardDom)
 
-    let cardDeleteBtn = cardDom.children[0].children[0]
+    let cardDeleteBtn = cardDom.querySelector("i");
     addEventToCardDeleteBtn(cardDeleteBtn, cardDom)
 
     return cardDom;
@@ -89,9 +89,9 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
         </div>
     `
 
-    const newCancelBtn = newCardDom.children[2].children[0];
-    const newRegisterBtn = newCardDom.children[2].children[1];
-    const textArea = newCardDom.children[1]
+    const newCancelBtn = newCardDom.querySelector("#new-card-cancel-btn");
+    const newRegisterBtn = newCardDom.querySelector("#new-card-register-btn");
+    const textArea = newCardDom.querySelector("textarea");
 
     // 등록 카드 폼의 버튼에 이벤트 추가
     addEventToMakeCardCancelBtn(newCancelBtn, newCardDom, prevCard, isUpdated);

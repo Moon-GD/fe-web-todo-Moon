@@ -25,19 +25,13 @@ function turnOnColumnAddModal() { columnAddModal.style.display = DISPLAY_FLEX; }
 function turnOffColumnAddModal() { columnAddModal.style.display = DISPLAY_NONE; }
 
 // 검색 modal을 끕니다.
-function turnOffSearchModal() {
-    changeCSS(searchModal, "display", DISPLAY_NONE);
-}
+function turnOffSearchModal() { changeCSS(searchModal, "display", DISPLAY_NONE); }
 
 // card clear modal을 숨겨줍니다.
-function turnOffCardClearModal() {
-    changeCSS(cardClearModal, "display", DISPLAY_NONE);
-}
+function turnOffCardClearModal() { changeCSS(cardClearModal, "display", DISPLAY_NONE); }
 
 // card clear modal을 보여줍니다.
-function turnOnCardClearModal() {
-    changeCSS(cardClearModal, "display", DISPLAY_FLEX);
-}
+function turnOnCardClearModal() { changeCSS(cardClearModal, "display", DISPLAY_FLEX); }
 
 export { 
     modalSection, turnOnModal, turnOnColumnAddModal,
