@@ -10,28 +10,28 @@ let dragStartStatus = "";
 let dragEndStatus = "";
 
 // 카드 Dom에 드래그 이벤트를 추가합니다
-function makeCardDragEvent(cardDom) {
-    cardDom.addEventListener(DRAG_START, (event) => {
-        dragStartStatus = findColumnStatusByCard(cardDom);
+function makeCardDragEvent($cardNode) {
+    $cardNode.addEventListener(DRAG_START, (event) => {
+        dragStartStatus = findColumnStatusByCard($cardNode);
         dragCard(event);
     })
 
-    cardDom.addEventListener(DRAG_OVER, (event) => { dragOverCard(cardDom, event); })
+    $cardNode.addEventListener(DRAG_OVER, (event) => { dragOverCard($cardNode, event); })
 
-    cardDom.addEventListener(DRAG_END, (event) => {
+    $cardNode.addEventListener(DRAG_END, (event) => {
         // 이동 완료된 column의 status 계산
-        dragEndStatus = findColumnStatusByCard(cardDom);
+        dragEndStatus = findColumnStatusByCard($cardNode);
 
         // menu에 이동 로그 남기기
-        menuLogMove(findCardTitle(cardDom), dragStartStatus, dragEndStatus);
+        menuLogMove(findCardTitle($cardNode), dragStartStatus, dragEndStatus);
 
         // json 데이터 이동 반영
-        moveJSONData(dragStartStatus, dragEndStatus, cardDom);
+        moveJSONData(dragStartStatus, dragEndStatus, $cardNode);
 
         makeLightNode();
     })
 
-    cardDom.addEventListener(DROP, (event) => { dropCard(cardDom, event); })
+    $cardNode.addEventListener(DROP, (event) => { dropCard($cardNode, event); })
 }
 
 export { 

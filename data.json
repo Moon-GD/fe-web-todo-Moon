@@ -1,0 +1,35 @@
+{
+  "TODO": [
+    {
+      "id": 1,
+      "title": "github 공부하기",
+      "content": "add, commit, push",
+      "author": "author by web",
+      "date": "Sun Jan 03 2023 00:00:00 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": 2,
+      "title": "블로그에 포스팅할 것",
+      "content": "github 공부 내용",
+      "author": "author by web",
+      "date": "Sun Jan 02 2023 00:00:00 GMT+0900 (한국 표준시)"
+    },
+    {
+      "id": 3,
+      "title": "HTML/CSS 공부하기",
+      "content": "input 태그 실습",
+      "author": "author by web",
+      "date": "Sun Jan 03 2023 00:00:00 GMT+0900 (한국 표준시)"
+    }
+  ],
+  "DOING": [
+    {
+      "id": 4,
+      "title": "HTML/CSS 공부하기",
+      "content": "input 태그 실습",
+      "author": "author by web",
+      "date": "Sun Jan 03 2023 00:00:00 GMT+0900 (한국 표준시)"
+    }
+  ],
+  "DONE": []
+}
