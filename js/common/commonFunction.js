@@ -1,8 +1,5 @@
 
 import { MONTH, DATE, HOUR, MINUTE, MOUSE_OVER, MOUSE_LEAVE } from "./commonVariable.js";
-import { 
-    addEventToFabBtn, addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton 
-} from "../component/button.js";
 import { mainTag } from "../component/column.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { statusList, statusNameList, JSON_DATA } from "../json_data/json_data.js";
@@ -33,15 +30,6 @@ function loadInitialData() {
         
         mainTag.appendChild(newColumn);
     })
-}
-
-// 웹 페이지에 필요한 이벤트를 추가합니다.
-function addEventsToWebsite() {
-    loadInitialData();
-    addEventToMenuBtns();
-    addEventToModalButtons();
-    addEventToColumnAddButton();
-    addEventToFabBtn();
 }
 
 // 현재 시간을 string으로 파싱하여 반환합니다.
@@ -103,7 +91,8 @@ function addEventToTimeNode(timeNode) {
 }
 
 export {
-    changeCSS, addChildAfterParent, addEventsToWebsite, 
+    changeCSS, addChildAfterParent, 
     getCurrentTimeInString, timeStringToArray, getElapsedTime,
-    saveTimeInTimeNode, addEventToTimeNode
+    saveTimeInTimeNode, addEventToTimeNode,
+    loadInitialData
 }
