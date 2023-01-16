@@ -1,3 +1,4 @@
+import { getCurrentTimeInString, saveTimeInTimeNode, addEventToTimeNode, timeStringToArray, getElapsedTime } from "../common/commonFunction.js";
 import { DRAG_OVER } from "../common/commonVariable.js";
 import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
@@ -114,9 +115,23 @@ function menuLogAddTemplate(content, status, emotion, author) {
                 <strong>${content}</strong>
                 을/를 등록하였습니다.
             </h4>
-            <h5>1분전</h5>
+            <h5 class="log-time" data-time></h5>
         </div>
     `
+
+    // 시간 계산 및 시간 노드 불러오기
+    const parsedTime = getCurrentTimeInString(new Date());
+    const timeArray = timeStringToArray(parsedTime);
+    const timeNode = menuFrame.querySelector(".log-time");
+
+    // 시간 차이 계산하여 저장
+    timeNode.textContent = getElapsedTime(timeArray);
+
+    // 시간 노드에 등록 시간 저장
+    saveTimeInTimeNode(timeNode, parsedTime)
+
+    // 시간 노드에 event 추가
+    addEventToTimeNode(timeNode);
 
     return menuFrame;
 }
@@ -135,9 +150,23 @@ function menuLogDeleteTemplate(content, status, emotion, author) {
                 <strong>${content}</strong>
                 을/를 삭제하였습니다.
             </h4>
-            <h5>1분전</h5>
+            <h5 class="log-time" data-time></h5>
         </div>
     `
+
+    // 시간 계산 및 시간 노드 불러오기
+    const parsedTime = getCurrentTimeInString(new Date());
+    const timeArray = timeStringToArray(parsedTime);
+    const timeNode = menuFrame.querySelector(".log-time");
+
+    // 시간 차이 계산하여 저장
+    timeNode.textContent = getElapsedTime(timeArray);
+
+    // 시간 노드에 등록 시간 저장
+    saveTimeInTimeNode(timeNode, parsedTime)
+
+    // 시간 노드에 event 추가
+    addEventToTimeNode(timeNode);
 
     return menuFrame;
 }
@@ -154,9 +183,23 @@ function menuLogDeleteAllTemplate(emotion, author) {
             <h4 class="log-content">
                 <strong>모든 카드를 삭제하였습니다.</strong>
             </h4>
-            <h5>1분전</h5>
+            <h5 class="log-time" data-time></h5>
         </div>
     `
+
+    // 시간 계산 및 시간 노드 불러오기
+    const parsedTime = getCurrentTimeInString(new Date());
+    const timeArray = timeStringToArray(parsedTime);
+    const timeNode = menuFrame.querySelector(".log-time");
+
+    // 시간 차이 계산하여 저장
+    timeNode.textContent = getElapsedTime(timeArray);
+
+    // 시간 노드에 등록 시간 저장
+    saveTimeInTimeNode(timeNode, parsedTime)
+
+    // 시간 노드에 event 추가
+    addEventToTimeNode(timeNode);
 
     return menuFrame;
 }
@@ -176,9 +219,23 @@ function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
                 <strong>${statusNameList[nextStatus]}</strong>
                 로 이동하였습니다.
             </h4>
-            <h5>1분전</h5>
+            <h5 class="log-time" data-time></h5>
         </div>
     `
+
+    // 시간 계산 및 시간 노드 불러오기
+    const parsedTime = getCurrentTimeInString(new Date());
+    const timeArray = timeStringToArray(parsedTime);
+    const timeNode = menuFrame.querySelector(".log-time");
+
+    // 시간 차이 계산하여 저장
+    timeNode.textContent = getElapsedTime(timeArray);
+
+    // 시간 노드에 등록 시간 저장
+    saveTimeInTimeNode(timeNode, parsedTime)
+
+    // 시간 노드에 event 추가
+    addEventToTimeNode(timeNode);
 
     return menuFrame;
 }
@@ -197,9 +254,23 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
                 <strong>${title}</strong>
                 을/를 수정하였습니다.
             </h4>
-            <h5>1분전</h5>
-        </div>
+            <h5 class="log-time" data-time></h5>
+        </div class="log-time">
     `
+
+    // 시간 계산 및 시간 노드 불러오기
+    const parsedTime = getCurrentTimeInString(new Date());
+    const timeArray = timeStringToArray(parsedTime);
+    const timeNode = menuFrame.querySelector(".log-time");
+
+    // 시간 차이 계산하여 저장
+    timeNode.textContent = getElapsedTime(timeArray);
+
+    // 시간 노드에 등록 시간 저장
+    saveTimeInTimeNode(timeNode, parsedTime)
+
+    // 시간 노드에 event 추가
+    addEventToTimeNode(timeNode);
 
     return menuFrame;
 }
@@ -219,9 +290,23 @@ function menuSearchTemplate(searchLog, emotion, author) {
             <h4 class="log-content">검색 횟수 : 
                 <strong>${searchLogManger.getSearchCount(searchLog)} </strong>
             </h4>
-            <h5>1분전</h5>
+            <h5 class="log-time" data-time></h5>
         </div>
     `
+
+    // 시간 계산 및 시간 노드 불러오기
+    const parsedTime = getCurrentTimeInString(new Date());
+    const timeArray = timeStringToArray(parsedTime);
+    const timeNode = menuFrame.querySelector(".log-time");
+
+    // 시간 차이 계산하여 저장
+    timeNode.textContent = getElapsedTime(timeArray);
+
+    // 시간 노드에 등록 시간 저장
+    saveTimeInTimeNode(timeNode, parsedTime)
+
+    // 시간 노드에 event 추가
+    addEventToTimeNode(timeNode);
 
     return menuFrame;
 }

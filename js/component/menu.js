@@ -1,3 +1,4 @@
+import { timeStringToArray, getElapsedTime } from "../common/commonFunction.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { 
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate, menuLogDeleteAllTemplate
@@ -38,4 +39,21 @@ function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
     menuContent.prepend(menuSearchTemplate(searchLog, emotion, author));
 }
 
-export { menuBar, menuLogAdd, menuLogDelete, menuLogDeleteAll, menuLogMove, menuLogUpdate, menuLogSearch }
+// 메뉴 바 로그의 시간을 업데이트합니다.
+function menuLogTimeUpdate() {
+    const logFrameList = document.querySelectorAll(".log-frame");
+
+    for(const logFrame of logFrameList) {
+        const timeNode = logFrame.querySelector(".log-time");
+        const timeString = timeNode.dataset.time;
+        const timeArray = timeStringToArray(timeString);
+        const elapsedTimeString = getElapsedTime(timeArray);
+        timeNode.textContent = elapsedTimeString;
+    }
+}
+
+export { 
+    menuBar, 
+    menuLogAdd, menuLogDelete, menuLogDeleteAll, menuLogMove, menuLogUpdate, menuLogSearch, 
+    menuLogTimeUpdate 
+}

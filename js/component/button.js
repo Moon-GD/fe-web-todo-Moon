@@ -2,7 +2,7 @@ import { changeCSS } from "../common/commonFunction.js";
 import { CLICK, RIGHT, MENU_MOVE_DISTANCE, DISPLAY_FLEX } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn } from "./column.js";
-import { menuBar, menuLogDelete } from "./menu.js";
+import { menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu.js";
 import { 
     turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, turnOffModal, turnOffColumnAddModal, turnOffSearchModal
 } from "./modal.js";
@@ -108,7 +108,10 @@ function addEventToSearchBtn() {
 
 // menu toggle 이벤트 추가
 function addEventToMenuBtns() {
-    menuOpenBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, 0) })
+    menuOpenBtn.addEventListener(CLICK, () => { 
+        changeCSS(menuBar, RIGHT, 0);
+        menuLogTimeUpdate();
+    })
     menuCloseBtn.addEventListener(CLICK, () => { changeCSS(menuBar, RIGHT, MENU_MOVE_DISTANCE) })
 }
 

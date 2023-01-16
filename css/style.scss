@@ -355,7 +355,7 @@ header {
     background-color: #F0FAE9;
     border-bottom: 1px dotted black;
 
-    :last-child {
+    &:last-child {
         border-bottom: none;
     }
 
@@ -384,6 +384,11 @@ header {
 
 .log-content {
     font-size: 1.1rem;
+}
+
+.log-time {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 // modal

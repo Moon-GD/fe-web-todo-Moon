@@ -21,6 +21,8 @@
 ### 3️⃣ Menu
 <ul>
   <li> Card 관련 4가지 액션 (add, delete, update, move) 발생 시 로그로 표시 </li>
+  <li> 메뉴 로그의 시간 표시 (ex: 방금, n분전, n시간 전) </li>
+  <li> 메뉴 로그의 시간 hover시 실제 등록 시간 표시</li>
 </ul>
 
 ### 4️⃣ For Dev

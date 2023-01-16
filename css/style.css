@@ -90,7 +90,7 @@ section > article {
 }
 
 #fab-btn {
-  transition: 0.5s;
+  transition: 1s;
   position: fixed;
   right: 5%;
   bottom: 5%;
@@ -325,7 +325,7 @@ header > i {
   background-color: #F0FAE9;
   border-bottom: 1px dotted black;
 }
-.log-frame :last-child {
+.log-frame:last-child {
   border-bottom: none;
 }
 .log-frame > .log-emotion-area {
@@ -350,6 +350,11 @@ header > i {
 
 .log-content {
   font-size: 1.1rem;
+}
+
+.log-time {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 #modal-section {
