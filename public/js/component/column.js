@@ -5,10 +5,12 @@ import {
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 import { 
     cardListOnLocal, statusListOnLocal,
-    addStatus,
-    updateStatusName, validateNewStatusName, deleteStatus
+    validateNewStatusName
 } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
+import { addStatus } from "../../../server/POST.js";
+import { updateStatusName } from "../../../server/PATCH.js";
+import { deleteStatus } from "../../../server/DELETE.js";
 
 const $mainTag = querySelector("main");
 
