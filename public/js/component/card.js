@@ -34,11 +34,10 @@ function findCardContent($cardNode) {
 
 // 카드를 삭제합니다.
 function deleteCard($cardNode) {
-    const title = $cardNode.querySelector(".card-title").textContent.split("\n")[0];
     const status = findColumnStatusByCard($cardNode);
         
     // 로컬 data 반영
-    deleteJSONData(status, title);
+    deleteJSONData(status, $cardNode.getAttribute("id"));
 
     $cardNode.remove();
 }
@@ -102,7 +101,8 @@ function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $pre
             addJSONData(
                 findColumnStatusByCard($prevCard),
                 findCardTitle($prevCard),
-                findCardContent($prevCard)
+                findCardContent($prevCard),
+                $prevCard.getAttribute("id")
             );
         }
 
@@ -130,7 +130,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 
         // 데이터 반영
         let currentStatus = findColumnStatusByCard($newCard);
-        addJSONData(currentStatus, title, updatedContent);
+        addJSONData(currentStatus, title, updatedContent, $newCard.getAttribute("id"));
 
         // 메뉴 update
         if(isUpdated) {
@@ -160,12 +160,11 @@ function addDoubleClickEventToCard($cardNode) {
 
 // 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.
 function changeCardToRegisterForm($cardNode) {
-    let title = findCardTitle($cardNode);
     let content = findCardContent($cardNode);
     let status = findColumnStatusByCard($cardNode);
 
     // JSON 반영
-    deleteJSONData(status, title);
+    deleteJSONData(status, $cardNode.getAttribute("id"));
 
     $cardNode.before(newCardTemplate(title, content, $cardNode, true));
     $cardNode.style.display = DISPLAY_NONE;

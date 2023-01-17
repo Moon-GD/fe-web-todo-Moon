@@ -26,7 +26,7 @@ function makeCardDragEvent($cardNode) {
         menuLogMove(findCardTitle($cardNode), dragStartStatus, dragEndStatus);
 
         // json 데이터 이동 반영
-        moveJSONData(dragStartStatus, dragEndStatus, $cardNode);
+        moveJSONData(dragStartStatus, dragEndStatus, $cardNode.getAttribute("id"));
 
         makeLightNode();
     })

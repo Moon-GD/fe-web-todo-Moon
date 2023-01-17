@@ -1,3 +1,7 @@
+// fetch url
+const FETCH_CARD_URL = "http://localhost:3000/cardList";
+const FETCH_STATUS_URL = "http://localhost:3000/statusList"
+
 // CSS 속성 관련
 const POSITION_BOTTOM = "bottom";
 const TRANSFORM = "transform";
@@ -48,6 +52,7 @@ const HOUR = 2;
 const MINUTE = 3;
 
 export {
+    FETCH_CARD_URL, FETCH_STATUS_URL,
     POSITION_BOTTOM, TRANSFORM,
     FAB_BTN_DEGREE_ORIGINAL, FAB_BTNS_BOTTOM_ORIGINAL, 
     FAB_BTN_DEGREE_MOVED, GO_SEARCH_BTN_MOVED, GO_COLUMN_ADD_BTN_MOVED, GO_CLEAR_BTN_MOVED,

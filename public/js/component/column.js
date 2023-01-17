@@ -1,9 +1,13 @@
 import { 
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
-    DISPLAY_FLEX, DISPLAY_NONE 
+    DISPLAY_FLEX, DISPLAY_NONE
 } from "../common/commonVariable.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
-import { statusNameList, addStatus, JSON_DATA, updateStatusName, validateNewName, deleteStatus } from "../store/store.js";
+import { 
+    statusNameListOnLocal, cardListOnLocal, 
+    statusNameList, addStatus, JSON_DATA, 
+    updateStatusName, validateNewName, deleteStatus 
+} from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 
 const $mainTag = querySelector("main");
@@ -42,7 +46,7 @@ function updateColumnLength(status) {
     let $currentSection = querySelectorAll("article")[status].parentElement;
     let $sectionLength = $currentSection.querySelector(".column-length");
     
-    $sectionLength.innerHTML = JSON_DATA[status].length;
+    $sectionLength.innerHTML = cardListOnLocal[status].length;
 }
 
 // 카드가 속한 column의 status 번호를 반환합니다.

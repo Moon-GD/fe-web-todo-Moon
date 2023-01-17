@@ -2,7 +2,7 @@
 import { MONTH, DATE, HOUR, MINUTE, MOUSE_OVER, MOUSE_LEAVE } from "./commonVariable.js";
 import { $mainTag } from "../component/column.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { statusList, statusNameList, JSON_DATA } from "../store/store.js";
+import { cardListOnLocal, statusNameListOnLocal } from "../store/store.js";
 import { columnTemplate, cardTemplate } from "../templates/template.js";
 
 // parentNode 다음에 childNode를 추가합니다.
@@ -15,17 +15,17 @@ function changeCSS($targetNode, key, value) {
 
 // 초기 데이터를 불러와 column, card를 생성합니다.
 function loadInitialData() {
-    statusList.forEach((status) => {
-        let $newColumn = columnTemplate(statusNameList[status], JSON_DATA[status].length);
+    statusNameListOnLocal.forEach((statusName, statusIndex) => {
+        let $newColumn = columnTemplate(statusNameListOnLocal[statusIndex], cardListOnLocal[statusIndex].length);
         let $cardArea = $newColumn.querySelector("article");
-        
-        JSON_DATA[status].forEach((data) => {
-            let $newCard = cardTemplate(data.title, data.content, data.author);
+
+        cardListOnLocal[statusIndex].forEach((cardData) => {
+            let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author);
             makeCardDragEvent($newCard);
     
             $cardArea.prepend($newCard);
         })
-        
+
         $mainTag.appendChild($newColumn);
     })
 }
@@ -77,6 +77,7 @@ function getElapsedTime(timeArray) {
 // 노드에 시간을 저장합니다.
 function saveTimeInTimeNode(timeNode, parsedTime) { timeNode.setAttribute("data-time", parsedTime); }
 
+// 시간 노드에 이벤트를 추가합니다.
 function addEventToTimeNode(timeNode) {
     const timeNodeContent = timeNode.textContent;
 
