@@ -4,9 +4,9 @@ import {
 } from "../common/commonVariable.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 import { 
-    statusNameListOnLocal, cardListOnLocal, 
-    statusNameList, addStatus, JSON_DATA, 
-    updateStatusName, validateNewName, deleteStatus 
+    cardListOnLocal, statusListOnLocal,
+    addStatus,
+    updateStatusName, validateNewName, deleteStatus
 } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 
@@ -15,8 +15,8 @@ const $mainTag = querySelector("main");
 // column 버튼에 column 삭제 이벤트를 추가합니다.
 function columnDeleteEvent($columnDeleteBtn, $columnNode) {
     $columnDeleteBtn.addEventListener(CLICK, () => {
-        let status = $columnNode.children[0].innerHTML.split("\n")[0];
-        deleteStatus(status);
+        let statusName = $columnNode.querySelector("span").innerHTML;
+        deleteStatus(statusName);
         $columnNode.remove();
     })
 }
@@ -53,11 +53,13 @@ function updateColumnLength(status) {
 function findColumnStatusByCard(cardNode) {
     let headerName = findCardHeaderName(cardNode);
 
-    for(let i=0;i<statusNameList.length;i++) {
-        if(headerName == statusNameList[i]) { return i; }
-    }
+    let filterd = statusListOnLocal.filter((ele) => {
+        return ele.statusName == headerName;
+    })
 
-    return -1;
+    let statusIndex = filterd[0]["statusIndex"];
+
+    return statusIndex;
 }
 
 // column의 header에 더블 클릭 이벤트를 추가합니다.

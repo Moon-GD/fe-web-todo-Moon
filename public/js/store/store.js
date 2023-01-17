@@ -1,9 +1,14 @@
-import { FETCH_CARD_URL, FETCH_STATUS_URL } from "../common/commonVariable.js";
-import { findCardContent, findCardTitle } from "../component/card.js";
+import { 
+    POST_METHOD, GET_METHOD, DELETE_METHOD, PATCH_METHOD,
+    POST_HEADER, PATCH_HEADER,
+    FETCH_CARD_URL, FETCH_STATUS_URL,
+    STATUS, STATUS_INDEX, STATUS_NAME, STATUS_ID, CARD_ID,
+} from "../common/commonVariable.js";
 import { updateColumnLength } from "../component/column.js";
+import { idGenerator } from "../common/IDGenerator.js";
 
 let cardListOnLocal = [];
-let statusNameListOnLocal = [];
+let statusListOnLocal = [];
 
 const TODO = 0;
 const DOING = 1;
@@ -16,32 +21,37 @@ let JSON_DATA = [[], [], []];
 /** status json 데이터를 분류해줍니다. */
 function classifyStatusJSONList(statusJSONList) {
     statusJSONList.forEach((statusJSON) => {
-        const statusIndex = statusJSON["statusIndex"];
-        const statusName = statusJSON["statusName"];
+        const statusIndex = statusJSON[STATUS_INDEX];
+        const statusName = statusJSON[STATUS_NAME];
+        const statusID = statusJSON[STATUS_ID];
 
-        statusNameListOnLocal[statusIndex] = statusName;
+        statusListOnLocal[statusIndex] = {
+            id:statusID,
+            statusIndex,
+            statusName
+        }
         cardListOnLocal[statusIndex] = [];
     })
 }
 
-/** card json 데이터를 분류해줍니다. */
+/** 카드 json 데이터를 분류해줍니다. */
 function classifyCardJSONList(cardJSONList) {
     cardJSONList.forEach((cardJSON) => {
-        const status = cardJSON["status"];
+        const status = cardJSON[STATUS];
         cardListOnLocal[status].push(cardJSON)
     })
 }
 
 /** status 관련 모든 JSON 데이터를 불러옵니다. */
 async function getAllStatusJSONData() {
-    await fetch(FETCH_STATUS_URL, { method: "GET" })
+    await fetch(FETCH_STATUS_URL, { method: GET_METHOD })
     .then((res) => { return res.json(); })
     .then((data) => { classifyStatusJSONList(data); } )
 }
 
 /** 카드 관련 모든 JSON 데이터를 불러옵니다. */
 async function getAllCardJSONData() {
-    await fetch(FETCH_CARD_URL, { method: "GET" })
+    await fetch(FETCH_CARD_URL, { method: GET_METHOD })
     .then((res) => { return res.json(); })
     .then((data) => { classifyCardJSONList(data); })
 }
@@ -58,16 +68,14 @@ function addJSONData(status, title, content, cardID) {
         title,
         content,
         author: "author by web",
-        status: TODO,
+        status,
         date: new Date(),
         id: cardID
     }
 
     fetch(FETCH_CARD_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        method: POST_METHOD,
+        headers: PATCH_HEADER,
         body: JSON.stringify(newJSONData)
     })
     .catch((error) => { 
@@ -77,8 +85,6 @@ function addJSONData(status, title, content, cardID) {
     cardListOnLocal[status].push(newJSONData);
 
     updateColumnLength(status);
-
-    // JSON_DATA[status].push(newJSONData);
 }
 
 /** 해당하는 JSON 데이터를 삭제합니다. */
@@ -108,13 +114,9 @@ function deleteJSONData(status, cardID) {
 function moveJSONData(prevStatus, nextStatus, cardID) {
     // 서버 data 반영
     fetch(FETCH_CARD_URL + "/" + cardID, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            status:nextStatus
-        })
+        method: PATCH_METHOD,
+        headers: PATCH_HEADER,
+        body: JSON.stringify({ status:nextStatus })
     })
 
     // local data 반영
@@ -128,14 +130,16 @@ function moveJSONData(prevStatus, nextStatus, cardID) {
             break;
         }
     }
+
+    // 이동 전 후 column의 길이 갱신
+    updateColumnLength(prevStatus);
+    updateColumnLength(nextStatus);
 }
 
 /** 새롭게 생성될 status의 이름 타당성 여부를 반환합니다. */
 function validateStatus(name) {
-    for(let i=0;i<statusNameListOnLocal.length;i++) {
-        if(statusNameListOnLocal[i] == name) {
-            return false;
-        }
+    for(let statusJSON of statusListOnLocal) {
+        if(statusJSON[STATUS_NAME] == name) { return false; }
     }
 
     return true;
@@ -143,42 +147,77 @@ function validateStatus(name) {
 
 /** 수정될 status의 이름 타당성 여부를 반환합니다. */
 function validateNewName(originalName, newName) {
-    for(let i=0;i<statusNameListOnLocal.length;i++) {
-        if(statusNameListOnLocal[i] == newName && statusNameListOnLocal[i] != originalName) {
-            return false;
-        }
+    for(let i=0;i<statusListOnLocal.length;i++) {
+        let statusName = statusList[i][STATUS_NAME];
+
+        if(statusName == newName && statusName != originalName) { return false; }
     }
 
     return true;
 }
 
-// 새로운 status를 추가합니다. (호출 시기 : column 생성 이후)
-function addStatus(newStatus) {
-    let newStatusIndex = statusNameListOnLocal.length
-    statusNameListOnLocal[newStatusIndex] = statusNameListOnLocal[newStatusIndex - 1] + 1;
-    statusNameListOnLocal[newStatusIndex] = newStatus;
+/** 새로운 status를 추가합니다. (호출 시기 : column 생성 이후) */
+function addStatus(statusName) {
+    // local에 데이터 갱신
+    let newStatusID = idGenerator.createStatusID();
 
-    cardListOnLocal[newStatusIndex] = [];
+    let newStatusJSON = {
+        id: newStatusID,
+        statusIndex: newStatusID,
+        statusName
+    }
+
+    cardListOnLocal[newStatusID] = [];
+    statusListOnLocal[newStatusID] = newStatusJSON;
+
+    fetch(FETCH_STATUS_URL, {
+        method: POST_METHOD,
+        headers: POST_HEADER,
+        body: JSON.stringify(newStatusJSON)
+    })
 }
 
 // 해당하는 status를 삭제합니다. (호출 시기 : column 삭제 이후)
-function deleteStatus(status) {
-    let statusIndex = statusNameList.indexOf(status);
-    
-    // 삭제
-    JSON_DATA.splice(statusIndex, 1);
-    statusList.splice(statusIndex, 1);
-    statusNameList.splice(statusIndex, 1);
+function deleteStatus(statusName) {
+    let filterdList = statusListOnLocal.filter((statusJSON) => statusJSON[STATUS_NAME] == statusName)
+    let statusIndex = filterdList[0][STATUS_INDEX];
+
+    // 서버에서 status 데이터 삭제
+    fetch(FETCH_STATUS_URL + "/" + statusIndex, {
+        method: DELETE_METHOD
+    }).then((res) => { 
+        if(res.status != 200) {
+        // 에러 상황 출력을 위해 임시로 해둠
+        // 추후에 에러 핸들링해주기
+        throw new Error(`error : ${statusIndex}번의 card를 삭제하는데 실패`)
+    } })
+
+    // 서버에서 해당하는 status를 가진 카드 삭제
+    cardListOnLocal[statusIndex].filter((cardJSON) => cardJSON[STATUS] == statusIndex)
+    .forEach((cardJSON) => { deleteJSONData(cardJSON[STATUS], cardJSON[CARD_ID]) })
+
+    // 로컬에서 해당하는 status 정보 모두 삭제
+    cardListOnLocal.splice(statusIndex, 1);
+    statusListOnLocal.splice(statusIndex, 1);
 }
 
 // status의 이름을 바꾸어 줍니다.
 function updateStatusName(prevName, nextName) {
-    for(let i=0;i<statusNameList.length;i++) {
-        if(statusNameList[i] == prevName) {
-            statusNameList[i] = nextName;
+    let statusID = -1;
+
+    for(const statusJSON of statusListOnLocal) {
+        if(statusJSON[STATUS_NAME] == prevName) { 
+            statusID = statusJSON[STATUS_ID]; 
+            statusJSON[STATUS_NAME] = nextName;
             break;
         }
     }
+
+    fetch(FETCH_STATUS_URL + "/" + statusID, {
+        method: PATCH_METHOD,
+        headers: PATCH_HEADER,
+        body: JSON.stringify({statusName: nextName})
+    });
 }
 
 JSON_DATA[TODO] = [
@@ -208,7 +247,7 @@ JSON_DATA[DOING] = [
 JSON_DATA[DONE] = [];
 
 export { 
-    cardListOnLocal, statusNameListOnLocal,
+    cardListOnLocal, statusListOnLocal,
     statusList, statusNameList, TODO, DOING, DONE, JSON_DATA, getAllJSONData,
     addJSONData, deleteJSONData, validateStatus,
     addStatus, deleteStatus, moveJSONData,

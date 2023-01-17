@@ -1,6 +1,23 @@
 // fetch url
 const FETCH_CARD_URL = "http://localhost:3000/cardList";
 const FETCH_STATUS_URL = "http://localhost:3000/statusList"
+const POST_METHOD = "POST";
+const POST_HEADER = {
+    "Content-Type": "application/json",
+};
+const GET_METHOD = "GET";
+const DELETE_METHOD = "DELETE";
+const PATCH_METHOD = "PATCH";
+const PATCH_HEADER = {
+    "Content-Type": "application/json",
+};
+
+// JSON 데이터 관련
+const STATUS = "status";
+const STATUS_INDEX = "statusIndex";
+const STATUS_NAME = "statusName";
+const STATUS_ID = "id";
+const CARD_ID = "id";
 
 // CSS 속성 관련
 const POSITION_BOTTOM = "bottom";
@@ -52,7 +69,11 @@ const HOUR = 2;
 const MINUTE = 3;
 
 export {
+    POST_METHOD, GET_METHOD, DELETE_METHOD, PATCH_METHOD,
+    POST_HEADER, PATCH_HEADER,
     FETCH_CARD_URL, FETCH_STATUS_URL,
+    STATUS, STATUS_INDEX, STATUS_NAME, STATUS_ID,
+    CARD_ID,
     POSITION_BOTTOM, TRANSFORM,
     FAB_BTN_DEGREE_ORIGINAL, FAB_BTNS_BOTTOM_ORIGINAL, 
     FAB_BTN_DEGREE_MOVED, GO_SEARCH_BTN_MOVED, GO_COLUMN_ADD_BTN_MOVED, GO_CLEAR_BTN_MOVED,

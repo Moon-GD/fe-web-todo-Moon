@@ -2,7 +2,7 @@
 import { MONTH, DATE, HOUR, MINUTE, MOUSE_OVER, MOUSE_LEAVE } from "./commonVariable.js";
 import { $mainTag } from "../component/column.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { cardListOnLocal, statusNameListOnLocal } from "../store/store.js";
+import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
 import { columnTemplate, cardTemplate } from "../templates/template.js";
 
 // parentNode 다음에 childNode를 추가합니다.
@@ -15,16 +15,16 @@ function changeCSS($targetNode, key, value) {
 
 // 초기 데이터를 불러와 column, card를 생성합니다.
 function loadInitialData() {
-    statusNameListOnLocal.forEach((statusName, statusIndex) => {
-        let $newColumn = columnTemplate(statusNameListOnLocal[statusIndex], cardListOnLocal[statusIndex].length);
+    statusListOnLocal.forEach(({id: statusID, statusName}) => {
+        let $newColumn = columnTemplate(statusName, cardListOnLocal[statusID].length);
         let $cardArea = $newColumn.querySelector("article");
 
-        cardListOnLocal[statusIndex].forEach((cardData) => {
+        cardListOnLocal[statusID].forEach((cardData) => {
             let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author);
             makeCardDragEvent($newCard);
     
             $cardArea.prepend($newCard);
-        })
+        })    
 
         $mainTag.appendChild($newColumn);
     })
