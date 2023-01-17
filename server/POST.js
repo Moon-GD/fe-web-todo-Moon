@@ -26,6 +26,7 @@ function addStatus(statusName) {
 
 /** 새로운 JSON 데이터를 추가합니다. */
 function addJSONData(status, title, content, cardID) {
+    console.log(cardID)
     let newJSONData = {
         title,
         content,

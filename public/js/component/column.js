@@ -3,14 +3,12 @@ import {
     DISPLAY_FLEX, DISPLAY_NONE
 } from "../common/commonVariable.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
-import { 
-    cardListOnLocal, statusListOnLocal,
-    validateNewStatusName
-} from "../store/store.js";
+import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { addStatus } from "../../../server/POST.js";
 import { updateStatusName } from "../../../server/PATCH.js";
 import { deleteStatus } from "../../../server/DELETE.js";
+import { validateNewStatusName } from "../../../server/validateData.js";
 
 const $mainTag = querySelector("main");
 

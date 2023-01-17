@@ -12,10 +12,10 @@ import {
     turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, turnOffModal, turnOffColumnAddModal, turnOffSearchModal
 } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
-import { validateStatus } from "../store/store.js";
 import { 
     showSuggestedLog, $searchModal , $searchInput, searchCard
 } from "../search/search.js";
+import { validateStatus } from "../../../server/validateData.js";
 
 const $Btns = {
     // 검색 관련 버튼

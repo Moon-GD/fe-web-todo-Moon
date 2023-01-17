@@ -1,6 +1,6 @@
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 import { 
-    STATUS_NAME, STATUS_INDEX,
+    STATUS_NAME, STATUS_INDEX, FETCH_CARD_URL,
     FETCH_STATUS_URL, DELETE_METHOD,
     STATUS, CARD_ID
 } from "../public/js/common/commonVariable.js";

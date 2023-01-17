@@ -11,6 +11,7 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteJSONData } from "../../../server/DELETE.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addJSONData } from "../../../server/POST.js";
+import { idGenerator } from "../common/IDGenerator.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -118,7 +119,10 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
         let title = $currentCard.querySelector("input").value;
         let prevContent = "";
         let updatedContent = $currentCard.querySelector("textarea").value ;
-        let $newCard = cardTemplate(title, parseCardContentByNewLine(updatedContent), "", $prevCard.getAttribute("id"));
+        let $newCard = cardTemplate(
+            title, parseCardContentByNewLine(updatedContent), "", 
+            isUpdated ? $prevCard.getAttribute("id") : idGenerator.createCardID()
+        );
         let updatedStatus = "";
 
         // drag 이벤트 추가
