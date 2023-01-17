@@ -1,9 +1,9 @@
 import { changeCSS } from "../common/commonFunction.js";
 import {
-    POSITION_BOTTOM, TRANSFORM,
-    FAB_BTN_DEGREE_ORIGINAL, FAB_BTNS_BOTTOM_ORIGINAL, 
-    FAB_BTN_DEGREE_MOVED, GO_SEARCH_BTN_MOVED, GO_COLUMN_ADD_BTN_MOVED, GO_CLEAR_BTN_MOVED,
-    CLICK, RIGHT, MENU_MOVE_DISTANCE, DISPLAY_FLEX 
+    POSITION_BOTTOM, RIGHT, TRANSFORM,
+    FAB_BTN_DEGREE_ORIGINAL, FAB_BTN_DEGREE_MOVED, FAB_BTNS_BOTTOM_ORIGINAL, 
+    GO_SEARCH_BTN_MOVED, GO_COLUMN_ADD_BTN_MOVED, GO_CLEAR_BTN_MOVED,
+    CLICK, MENU_MOVE_DISTANCE, DISPLAY_FLEX 
 } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn } from "./column.js";

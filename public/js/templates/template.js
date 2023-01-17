@@ -6,8 +6,8 @@ import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn,
 } from "../component/card.js";
 import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
-import { statusListOnLocal } from "../store/store.js";
 import { searchLogManger } from "../search/searchLogManager.js";
+import { statusListOnLocal } from "../store/store.js";
 
 // column 템플릿을 반환합니다.
 function columnTemplate(columnTitle, cardCount = 0) {

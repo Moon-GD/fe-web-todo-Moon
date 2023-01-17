@@ -1,7 +1,8 @@
 import { timeStringToArray, getElapsedTime } from "../common/commonFunction.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { 
-    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate, menuLogDeleteAllTemplate
+    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, 
+    menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../templates/template.js";
 
 const $menuBar = querySelector("#menu");

@@ -1,5 +1,6 @@
 import {
-    singleQuerySelector, singleQuerySelectorAll, multipleQueryToList, multipleQuerySelector, multipleQuerySelectorAll
+    singleQuerySelector, singleQuerySelectorAll, 
+    multipleQueryToList, multipleQuerySelector, multipleQuerySelectorAll
 } from "./querySelectorHelper.js"
 
 // HTML collection은 forEach가 안되기 때문에 배열 forEach 순회 등록

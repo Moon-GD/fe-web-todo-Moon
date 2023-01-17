@@ -4,6 +4,7 @@ import {
     DISPLAY_BLOCK, DISPLAY_NONE,
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK
 } from "../common/commonVariable.js";
+import { idGenerator } from "../common/IDGenerator.js";
 import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu.js";
 import { turnOnModal } from "./modal.js";
@@ -11,7 +12,6 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteJSONData } from "../../../server/DELETE.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addJSONData } from "../../../server/POST.js";
-import { idGenerator } from "../common/IDGenerator.js";
 
 let $chosenCard = "";
 let registering = false;
