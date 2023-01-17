@@ -1,5 +1,5 @@
 
-import { MONTH, DATE, HOUR, MINUTE, MOUSE_OVER, MOUSE_LEAVE } from "./commonVariable.js";
+import { MONTH, DATE, HOUR, MINUTE, MOUSE_OVER, MOUSE_LEAVE, CARD_ID } from "./commonVariable.js";
 import { $mainTag } from "../component/column.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
@@ -20,7 +20,7 @@ function loadInitialData() {
         let $cardArea = $newColumn.querySelector("article");
 
         cardListOnLocal[statusID].forEach((cardData) => {
-            let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author);
+            let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author, cardData[CARD_ID]);
             makeCardDragEvent($newCard);
     
             $cardArea.prepend($newCard);

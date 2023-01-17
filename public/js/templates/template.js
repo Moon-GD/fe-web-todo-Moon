@@ -1,13 +1,12 @@
 import { getCurrentTimeInString, saveTimeInTimeNode, addEventToTimeNode, timeStringToArray, getElapsedTime } from "../common/commonFunction.js";
-import { DRAG_OVER } from "../common/commonVariable.js";
+import { DRAG_OVER, STATUS_NAME } from "../common/commonVariable.js";
 import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
     resizeCardByInputBox, addDoubleClickEventToCard
 } from "../component/card.js";
 import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
-import { dragIDManager } from "../drag/dragIDManager.js";
-import { statusNameList } from "../store/store.js";
+import { statusNameList, statusListOnLocal } from "../store/store.js";
 import { searchLogManger } from "../search/searchLogManager.js";
 
 // column 템플릿을 반환합니다.
@@ -52,11 +51,11 @@ function columnTemplate(columnTitle, cardCount = 0) {
 }
 
 // 카드 템플릿을 반환합니다.
-function cardTemplate(cardTitle, cardContent, cardAuthor="author by web") {
+function cardTemplate(cardTitle, cardContent, cardAuthor="author by web", cardId) {
     let $cardNode = document.createElement("div");
     $cardNode.classList.add("card-frame");
     $cardNode.setAttribute("draggable", true);
-    $cardNode.setAttribute("id", dragIDManager.getNewID());  // drag 이벤트를 위해 카드에 ID 부여
+    $cardNode.setAttribute("id", cardId);  // drag 이벤트를 위해 카드에 ID 부여
 
     $cardNode.innerHTML = `
         <h3 class="card-title">${cardTitle}
@@ -215,8 +214,8 @@ function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
                 <strong>${title}</strong>을/를
-                <strong>${statusNameList[prevStatus]}</strong>에서
-                <strong>${statusNameList[nextStatus]}</strong>
+                <strong>${statusListOnLocal[prevStatus][STATUS_NAME]}</strong>에서
+                <strong>${statusListOnLocal[nextStatus][STATUS_NAME]}</strong>
                 로 이동하였습니다.
             </h4>
             <h5 class="log-time" data-time></h5>

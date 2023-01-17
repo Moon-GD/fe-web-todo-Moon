@@ -10,6 +10,7 @@ import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { addJSONData, deleteJSONData } from "../store/store.js"; 
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
+import { idGenerator } from "../common/IDGenerator.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -118,7 +119,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
         let title = $currentCard.querySelector("input").value;
         let prevContent = "";
         let updatedContent = $currentCard.querySelector("textarea").value ;
-        let $newCard = cardTemplate(title, parseCardContentByNewLine(updatedContent));
+        let $newCard = cardTemplate(title, parseCardContentByNewLine(updatedContent), "", idGenerator.createCardID());
         let updatedStatus = "";
 
         // drag 이벤트 추가
@@ -160,6 +161,7 @@ function addDoubleClickEventToCard($cardNode) {
 
 // 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.
 function changeCardToRegisterForm($cardNode) {
+    let title = findCardTitle($cardNode);
     let content = findCardContent($cardNode);
     let status = findColumnStatusByCard($cardNode);
 

@@ -9,14 +9,7 @@ import { idGenerator } from "../common/IDGenerator.js";
 
 let cardListOnLocal = [];
 let statusListOnLocal = [];
-
-const TODO = 0;
-const DOING = 1;
-const DONE = 2;
-
-let statusList = [TODO, DOING, DONE];
 let statusNameList = ["해야 할 일", "하고 있는 일", "완료한 일"];
-let JSON_DATA = [[], [], []];
 
 /** status json 데이터를 분류해줍니다. */
 function classifyStatusJSONList(statusJSONList) {
@@ -119,6 +112,8 @@ function moveJSONData(prevStatus, nextStatus, cardID) {
         body: JSON.stringify({ status:nextStatus })
     })
 
+    console.log(FETCH_CARD_URL + "/" + cardID)
+
     // local data 반영
     let prevCardList = cardListOnLocal[prevStatus];
     let nextCardList = cardListOnLocal[nextStatus];
@@ -148,7 +143,7 @@ function validateStatus(name) {
 /** 수정될 status의 이름 타당성 여부를 반환합니다. */
 function validateNewName(originalName, newName) {
     for(let i=0;i<statusListOnLocal.length;i++) {
-        let statusName = statusList[i][STATUS_NAME];
+        let statusName = statusListOnLocal[i][STATUS_NAME];
 
         if(statusName == newName && statusName != originalName) { return false; }
     }
@@ -220,35 +215,9 @@ function updateStatusName(prevName, nextName) {
     });
 }
 
-JSON_DATA[TODO] = [
-    {
-        title: "github 공부하기",
-        content: "add, commit, push",
-        author: "author by web",
-        date: "Sun Jan 03 2023 00:00:00 GMT+0900 (한국 표준시)"
-    },
-    {
-        title: "블로그에 포스팅할 것",
-        content: "github 공부 내용",
-        author: "author by web",
-        date: "Sun Jan 02 2023 00:00:00 GMT+0900 (한국 표준시)"
-    },
-];
-
-JSON_DATA[DOING] = [
-    {
-        title: "HTML/CSS 공부하기",
-        content: "input 태그 실습",
-        author: "author by web",
-        date: "Sun Jan 03 2023 00:00:00 GMT+0900 (한국 표준시)"
-    }
-];
-
-JSON_DATA[DONE] = [];
-
 export { 
     cardListOnLocal, statusListOnLocal,
-    statusList, statusNameList, TODO, DOING, DONE, JSON_DATA, getAllJSONData,
+    statusNameList, getAllJSONData,
     addJSONData, deleteJSONData, validateStatus,
     addStatus, deleteStatus, moveJSONData,
     updateStatusName, validateNewName
