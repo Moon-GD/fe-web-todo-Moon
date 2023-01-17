@@ -43,6 +43,17 @@
 
 <br>
 
+## 3주차 요구사항
+<ol>
+  <li> Mock 서버 or 실제 서버 활용 </li>
+  <li> fetch api에 then, async/await 활용 </li>
+  <li> Store, View 관계 느슨하게 </li>
+  <li> Promise 객체 만들기 </li>
+  <li> 사이드바 시간 반영 </li>
+</ol>
+
+<br>
+
 ## 기타 사항
 ### 리팩토링 가이드
 <ol>
