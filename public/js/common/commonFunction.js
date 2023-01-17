@@ -1,9 +1,13 @@
 
-import { MONTH, DATE, HOUR, MINUTE, MOUSE_OVER, MOUSE_LEAVE, CARD_ID } from "./commonVariable.js";
+import { 
+    CARD_ID, 
+    MONTH, DATE, HOUR, MINUTE, 
+    MOUSE_OVER, MOUSE_LEAVE 
+} from "./commonVariable.js";
 import { $mainTag } from "../component/column.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
-import { columnTemplate, cardTemplate } from "../templates/template.js";
+import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
+import { cardTemplate, columnTemplate } from "../templates/template.js";
 
 // parentNode 다음에 childNode를 추가합니다.
 function addChildAfterParent($parentNode, $childNode) { $parentNode.after($childNode); }
@@ -91,8 +95,8 @@ function addEventToTimeNode(timeNode) {
 }
 
 export {
+    loadInitialData,
     changeCSS, addChildAfterParent, 
     getCurrentTimeInString, timeStringToArray, getElapsedTime,
-    saveTimeInTimeNode, addEventToTimeNode,
-    loadInitialData
+    saveTimeInTimeNode, addEventToTimeNode
 }

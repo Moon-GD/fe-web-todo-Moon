@@ -1,10 +1,9 @@
 import { 
-    STATUS_INDEX, STATUS_NAME, STATUS_ID,
+    STATUS, STATUS_ID, STATUS_INDEX, STATUS_NAME,
     FETCH_STATUS_URL, FETCH_CARD_URL,
-    STATUS, 
     GET_METHOD 
 } from "../public/js/common/commonVariable.js";
-import { cardListOnLocal, statusListOnLocal } from "../public/js/store/store.js";
+import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 
 /** status json 데이터를 분류해줍니다. */
 function classifyStatusJSONList(statusJSONList) {

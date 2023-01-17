@@ -1,7 +1,10 @@
-import { FETCH_STATUS_URL, FETCH_CARD_URL, POST_METHOD, POST_HEADER } from "../public/js/common/commonVariable.js";
-import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
+import { 
+    FETCH_STATUS_URL, FETCH_CARD_URL, 
+    POST_METHOD, POST_HEADER 
+} from "../public/js/common/commonVariable.js";
 import { idGenerator } from "../public/js/common/IDGenerator.js";
 import { updateColumnLength } from "../public/js/component/column.js";
+import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 
 /** 새로운 status를 추가합니다. */
 function addStatus(statusName) {
@@ -26,7 +29,6 @@ function addStatus(statusName) {
 
 /** 새로운 JSON 데이터를 추가합니다. */
 function addJSONData(status, title, content, cardID) {
-    console.log(cardID)
     let newJSONData = {
         title,
         content,

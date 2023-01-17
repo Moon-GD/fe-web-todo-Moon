@@ -1,10 +1,11 @@
-import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 import { 
-    STATUS_NAME, STATUS_INDEX, FETCH_CARD_URL,
-    FETCH_STATUS_URL, DELETE_METHOD,
-    STATUS, CARD_ID
+    FETCH_STATUS_URL, FETCH_CARD_URL,
+    STATUS, STATUS_INDEX, STATUS_NAME,
+    CARD_ID,
+    DELETE_METHOD,
 } from "../public/js/common/commonVariable.js";
 import { updateColumnLength } from "../public/js/component/column.js";
+import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 
 /** 해당하는 status를 삭제합니다. */
 function deleteStatus(statusName) {
