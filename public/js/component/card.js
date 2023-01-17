@@ -115,11 +115,10 @@ function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $pre
 function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated) {
     $cardMakeBtn.addEventListener(CLICK, () => {
         registering = false;
-
         let title = $currentCard.querySelector("input").value;
         let prevContent = "";
         let updatedContent = $currentCard.querySelector("textarea").value ;
-        let $newCard = cardTemplate(title, parseCardContentByNewLine(updatedContent), "", idGenerator.createCardID());
+        let $newCard = cardTemplate(title, parseCardContentByNewLine(updatedContent), "", $prevCard.getAttribute("id"));
         let updatedStatus = "";
 
         // drag 이벤트 추가

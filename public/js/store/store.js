@@ -9,7 +9,6 @@ import { idGenerator } from "../common/IDGenerator.js";
 
 let cardListOnLocal = [];
 let statusListOnLocal = [];
-let statusNameList = ["해야 할 일", "하고 있는 일", "완료한 일"];
 
 /** status json 데이터를 분류해줍니다. */
 function classifyStatusJSONList(statusJSONList) {
@@ -141,7 +140,7 @@ function validateStatus(name) {
 }
 
 /** 수정될 status의 이름 타당성 여부를 반환합니다. */
-function validateNewName(originalName, newName) {
+function validateNewStatusName(originalName, newName) {
     for(let i=0;i<statusListOnLocal.length;i++) {
         let statusName = statusListOnLocal[i][STATUS_NAME];
 
@@ -151,7 +150,7 @@ function validateNewName(originalName, newName) {
     return true;
 }
 
-/** 새로운 status를 추가합니다. (호출 시기 : column 생성 이후) */
+/** 새로운 status를 추가합니다. */
 function addStatus(statusName) {
     // local에 데이터 갱신
     let newStatusID = idGenerator.createStatusID();
@@ -172,7 +171,7 @@ function addStatus(statusName) {
     })
 }
 
-// 해당하는 status를 삭제합니다. (호출 시기 : column 삭제 이후)
+/** 해당하는 status를 삭제합니다. */
 function deleteStatus(statusName) {
     let filterdList = statusListOnLocal.filter((statusJSON) => statusJSON[STATUS_NAME] == statusName)
     let statusIndex = filterdList[0][STATUS_INDEX];
@@ -196,7 +195,7 @@ function deleteStatus(statusName) {
     statusListOnLocal.splice(statusIndex, 1);
 }
 
-// status의 이름을 바꾸어 줍니다.
+/** status의 이름을 바꾸어 줍니다. */
 function updateStatusName(prevName, nextName) {
     let statusID = -1;
 
@@ -217,8 +216,8 @@ function updateStatusName(prevName, nextName) {
 
 export { 
     cardListOnLocal, statusListOnLocal,
-    statusNameList, getAllJSONData,
+    getAllJSONData,
     addJSONData, deleteJSONData, validateStatus,
     addStatus, deleteStatus, moveJSONData,
-    updateStatusName, validateNewName
+    updateStatusName, validateNewStatusName
 }

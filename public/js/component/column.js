@@ -6,7 +6,7 @@ import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 import { 
     cardListOnLocal, statusListOnLocal,
     addStatus,
-    updateStatusName, validateNewName, deleteStatus
+    updateStatusName, validateNewStatusName, deleteStatus
 } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 
@@ -84,7 +84,7 @@ function inputFocusOutEvent($headerInput, originalTitle, originalHeaderDom) {
         const newTitle = $headerInput.value;
 
         // 새로 바뀐 이름 중복 검사
-        if(validateNewName(originalTitle, newTitle)) {
+        if(validateNewStatusName(originalTitle, newTitle)) {
             changeHeaderName(originalHeaderDom, newTitle);
             originalHeaderDom.style.display = DISPLAY_FLEX;
 

@@ -6,7 +6,7 @@ import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn,
 } from "../component/card.js";
 import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
-import { statusNameList, statusListOnLocal } from "../store/store.js";
+import { statusListOnLocal } from "../store/store.js";
 import { searchLogManger } from "../search/searchLogManager.js";
 
 // column 템플릿을 반환합니다.
@@ -249,7 +249,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
         <div class="log-content-area">
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
-                <strong>${statusNameList[status]}</strong>의
+                <strong>${ statusListOnLocal[status][STATUS_NAME] }</strong>의
                 <strong>${title}</strong>
                 을/를 수정하였습니다.
             </h4>

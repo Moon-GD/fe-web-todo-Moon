@@ -43,7 +43,7 @@ const $Btns = {
 
     // 메뉴 버튼
     $menuOpenBtn: querySelector("#menu-open-btn"),
-    $menuCloseBtn: querySelector("#search-accept-btn")
+    $menuCloseBtn: querySelector("#menu-close-btn")
 };
 
 // card clear 버튼들에 이벤트를 추가합니다.
