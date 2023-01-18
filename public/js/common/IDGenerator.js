@@ -1,6 +1,6 @@
 class IDGenerator {
     #statusID = 2;
-    #cardID = 3;
+    #cardID;
 
     createStatusID() {
         this.#statusID += 1;
@@ -9,7 +9,7 @@ class IDGenerator {
     }
 
     createCardID() {
-        this.#cardID += 1;
+        this.#cardID = new Date()
 
         return this.#cardID;
     }

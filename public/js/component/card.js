@@ -9,7 +9,7 @@ import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu.js";
 import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { deleteJSONData } from "../../../server/DELETE.js";
+import { deleteCardData } from "../../../server/DELETE.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addJSONData } from "../../../server/POST.js";
 
@@ -39,7 +39,7 @@ function deleteCard($cardNode) {
     const status = findColumnStatusByCard($cardNode);
         
     // 로컬 data 반영
-    deleteJSONData(status, $cardNode.getAttribute("id"));
+    deleteCardData(status, $cardNode.getAttribute("id"));
 
     $cardNode.remove();
 }
@@ -169,7 +169,7 @@ function changeCardToRegisterForm($cardNode) {
     let status = findColumnStatusByCard($cardNode);
 
     // JSON 반영
-    deleteJSONData(status, $cardNode.getAttribute("id"));
+    deleteCardData(status, $cardNode.getAttribute("id"));
 
     $cardNode.before(newCardTemplate(title, content, $cardNode, true));
     $cardNode.style.display = DISPLAY_NONE;

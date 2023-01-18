@@ -12,6 +12,7 @@ import { statusListOnLocal } from "../store/store.js";
 // column 템플릿을 반환합니다.
 function columnTemplate(columnTitle, cardCount = 0) {
     let $columnNode = document.createElement("section");
+    $columnNode.classList.add("column")
 
     $columnNode.innerHTML = `
             <h3>

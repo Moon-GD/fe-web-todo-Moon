@@ -11,7 +11,7 @@ function updateStatusName(prevName, nextName) {
     let statusID = -1;
 
     for(const statusJSON of statusListOnLocal) {
-        if(statusJSON[STATUS_NAME] == prevName) { 
+        if(statusJSON && statusJSON[STATUS_NAME] == prevName) { 
             statusID = statusJSON[STATUS_ID]; 
             statusJSON[STATUS_NAME] = nextName;
             break;

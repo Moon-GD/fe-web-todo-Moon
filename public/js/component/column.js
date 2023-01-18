@@ -1,6 +1,6 @@
 import { 
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
-    DISPLAY_FLEX, DISPLAY_NONE
+    DISPLAY_FLEX, DISPLAY_NONE, STATUS_ID, STATUS_NAME
 } from "../common/commonVariable.js";
 import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
@@ -43,10 +43,18 @@ function findCardHeaderName($cardNode) {
 
 // column 길이를 갱신합니다.
 function updateColumnLength(status) {
-    let $currentSection = querySelectorAll("article")[status].parentElement;
-    let $sectionLength = $currentSection.querySelector(".column-length");
-    
-    $sectionLength.innerHTML = cardListOnLocal[status].length;
+    let statusName = statusListOnLocal.filter((statusJSON) => { return statusJSON[STATUS_ID] == status; })[0][STATUS_NAME];
+    let $columnList = document.querySelectorAll(".column");
+    let $columnLengthNode = '';
+
+    for(const $column of $columnList) {
+        if($column.querySelector("span").innerHTML == statusName) {
+            $columnLengthNode = $column.querySelector(".column-length");
+            break;
+        }
+    }
+
+    $columnLengthNode.innerHTML = cardListOnLocal[status].filter((ele) => ele).length;
 }
 
 // 카드가 속한 column의 status 번호를 반환합니다.

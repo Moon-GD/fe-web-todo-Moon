@@ -19,10 +19,18 @@ const STATUS_INDEX = "statusIndex";
 const STATUS_NAME = "statusName";
 const CARD_ID = "id";
 
+// HTTP status
+const HTTP_SUCCESS = 200
+
 // CSS key
 const POSITION_BOTTOM = "bottom";
 const RIGHT = "right";
 const TRANSFORM = "transform";
+
+// 버튼 색상 스타일링
+const CARD_BTN_HOVER = "#FE5958";
+const CARD_BTN_ORIGINAL = "#000";
+const CARD_DELETE_BTN_ORIGINAL = "#D0D0D0";
 
 // Todo 카드 css 스타일 value
 const CARD_BACKGROUND_ORIGINAL = "#fff";
@@ -30,11 +38,6 @@ const CARD_BACKGROUND_HOVER = "#FFEEEC";
 const CARD_OUTLINE_ORIGINAL = "none";
 const CARD_OUTLINE_HOVER = "0.2vh solid " + CARD_BTN_HOVER;
 const CARD_TEXT_HEIGHT = 2.5;
-
-// 버튼 색상 스타일링
-const CARD_BTN_HOVER = "#FE5958";
-const CARD_BTN_ORIGINAL = "#000";
-const CARD_DELETE_BTN_ORIGINAL = "#D0D0D0";
 
 // Fab 버튼 transition degree
 const FAB_BTN_DEGREE_MOVED = "rotate(-45deg)";
@@ -89,14 +92,17 @@ export {
     // fetch json key
     STATUS, STATUS_ID, STATUS_INDEX, STATUS_NAME, CARD_ID,
 
+    // HTTP status
+    HTTP_SUCCESS,
+
     // CSS key
     POSITION_BOTTOM, RIGHT, TRANSFORM,
 
-    // Todo 카드 css 스타일 value
-    CARD_BACKGROUND_ORIGINAL, CARD_BACKGROUND_HOVER, CARD_OUTLINE_ORIGINAL, CARD_OUTLINE_HOVER, CARD_TEXT_HEIGHT,
-
     // 버튼 색상 스타일링
     CARD_BTN_HOVER, CARD_BTN_ORIGINAL, CARD_DELETE_BTN_ORIGINAL,
+
+    // Todo 카드 css 스타일 value
+    CARD_BACKGROUND_ORIGINAL, CARD_BACKGROUND_HOVER, CARD_OUTLINE_ORIGINAL, CARD_OUTLINE_HOVER, CARD_TEXT_HEIGHT,
 
     // Fab 버튼 transition degree
     FAB_BTN_DEGREE_MOVED, FAB_BTN_DEGREE_ORIGINAL,

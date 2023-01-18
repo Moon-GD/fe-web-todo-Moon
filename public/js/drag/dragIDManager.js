@@ -11,7 +11,7 @@ class DragIDManager {
     }
 
     getNewID() {
-        this.#ID += 1
+        this.#ID = new Date();
         
         return this.#ID;
     }
