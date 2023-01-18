@@ -1,7 +1,7 @@
 import { pipe } from "../common/commonFunction.js";
 import { SEARCHED_CARD_OUTLINE, SEARCHED_CARD_ORIGINAL, ONE_SECOND } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
-import { menuLogSearch } from "../component/menu.js";
+import { menuLogSearch } from "../component/menu/menu.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { searchLogManger } from "./searchLogManager.js";
 

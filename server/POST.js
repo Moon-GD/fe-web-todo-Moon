@@ -35,9 +35,7 @@ function addStatus(statusName) {
 }
 
 /** 로컬에 카드 JSON을 추가합니다. */
-function addCardJSONOnLocal(status, newJSONData) {
-    cardListOnLocal[status].push(newJSONData);
-}
+function addCardJSONOnLocal(status, newJSONData) { cardListOnLocal[status].push(newJSONData); }
 
 /** 서버에 카드 JSON을 추가합니다. */
 function addCardJSONOnServer(newJSONData) {
@@ -45,9 +43,6 @@ function addCardJSONOnServer(newJSONData) {
         method: POST_METHOD,
         headers: POST_HEADER,
         body: JSON.stringify(newJSONData)
-    })
-    .catch((error) => { 
-        // 추후 오류 제어 (id 중복 등의 이유로 post 되지 않는 경우 )
     })
 }
 

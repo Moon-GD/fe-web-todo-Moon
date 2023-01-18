@@ -1,7 +1,7 @@
 import { DRAG_START, DRAG_OVER, DRAG_END, DROP } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
 import { findColumnStatusByCard } from "../component/column.js";
-import { menuLogMove } from "../component/menu.js";
+import { menuLogMove } from "../component/menu/menu.js";
 import { recordDragCard, dragOverCard, dropCard } from "./dragCard.js"
 import { makeLightNode } from "./dragEffect.js"
 import { moveJSONData } from "../../../server/PATCH.js";

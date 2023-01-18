@@ -6,7 +6,7 @@ import {
 } from "../common/commonVariable.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
-import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu.js";
+import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu/menu.js";
 import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteCardData } from "../../../server/DELETE.js";

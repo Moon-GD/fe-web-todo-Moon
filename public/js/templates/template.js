@@ -1,4 +1,3 @@
-import { getCurrentTimeInString, saveTimeInTimeNode, addEventToTimeNode, timeStringToArray, getElapsedTime } from "../common/commonFunction.js";
 import { DRAG_OVER, STATUS_NAME, CARD_ID } from "../common/commonVariable.js";
 import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
@@ -8,6 +7,10 @@ import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent
 import { makeShadedNode } from "../drag/dragEffect.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { searchLogManger } from "../search/searchLogManager.js";
+import { 
+    getCurrentTimeInString, timeStringToArray, 
+    getElapsedTime, saveTimeInTimeNode, addEventToTimeNode
+} from "../component/menu/menuLogTime.js";
 import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
 
 /** 초기 데이터를 템플릿으로 구성합니다. */

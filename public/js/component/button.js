@@ -7,7 +7,7 @@ import {
 } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn } from "./column.js";
-import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu.js";
+import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu/menu.js";
 import { 
     turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, turnOffModal, turnOffColumnAddModal, turnOffSearchModal
 } from "./modal.js";
