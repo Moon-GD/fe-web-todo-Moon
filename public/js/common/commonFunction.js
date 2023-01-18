@@ -10,6 +10,13 @@ function addChildAfterParent($parentNode, $childNode) { $parentNode.after($child
 /** (target)의 css (key)를 (value)로 바꿉니다. */
 function changeCSS($targetNode, key, value) { $targetNode.style[key] = value; }
 
+/** pipe 헬퍼 함수 */
+const pipe = (...functionList) => (pipeParam) => {
+    return functionList.reduce((curValue, curFunc) => { 
+        return curFunc(curValue); 
+    }, pipeParam)
+}
+
 /** 현재 시간을 string으로 파싱하여 반환합니다. */
 function getCurrentTimeInString() {
     const dateObject = new Date();
@@ -67,7 +74,7 @@ function addEventToTimeNode(timeNode) {
 }
 
 export {
-    changeCSS, addChildAfterParent, 
+    changeCSS, addChildAfterParent, pipe,
     getCurrentTimeInString, timeStringToArray, getElapsedTime,
     saveTimeInTimeNode, addEventToTimeNode
 }
