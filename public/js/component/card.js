@@ -16,10 +16,10 @@ import { addCardJSON } from "../../../server/POST.js";
 let $chosenCard = "";
 let registering = false;
 
-// 현재 drag 중인 카드 정보를 저장합니다.
+/** 현재 drag 중인 카드 정보를 저장합니다. */
 function setCard($cardNode) { $chosenCard = $cardNode; }
 
-// 카드의 제목을 찾아줍니다.
+/** 카드 제목을 찾아줍니다. */
 function findCardTitle($cardNode) {
     const cardTitleText = $cardNode.querySelector("h3").innerHTML;
     const cardTitle = cardTitleText.split('\n')[0];
@@ -27,14 +27,14 @@ function findCardTitle($cardNode) {
     return cardTitle;
 }
 
-// 카드의 내용을 찾아줍니다.
+/** 카드 내용을 찾아줍니다. */
 function findCardContent($cardNode) {
     const cardContent = $cardNode.querySelector(".card-content").innerHTML;
 
     return cardContent;
 }
 
-// 카드를 삭제합니다.
+/** 카드를 삭제합니다. */
 function deleteCard($cardNode) {
     const status = findColumnStatusByCard($cardNode);
         
@@ -44,7 +44,7 @@ function deleteCard($cardNode) {
     $cardNode.remove();
 }
 
-// 모든 카드를 삭제합니다.
+/** 모든 카드를 삭제합니다. */
 function deleteAllCards() {
     const $cards = document.querySelectorAll(".card-frame");
 
@@ -54,7 +54,7 @@ function deleteAllCards() {
     menuLogDeleteAll();
 }
 
-// 카드 생성 폼을 보여주는 버튼에 event를 등록합니다.
+/** 카드 생성 폼을 보여주는 버튼에 이벤트를 등록합니다. */
 function addEventToShowCardRegisterBtn($cardRegisterBtn, $currentColumn) {
     $cardRegisterBtn.addEventListener(CLICK, () => {
         registering ? 
@@ -65,7 +65,7 @@ function addEventToShowCardRegisterBtn($cardRegisterBtn, $currentColumn) {
     })
 }
 
-// 카드 삭제 버튼에 event를 등록합니다.
+/** 카드 삭제 버튼에 이벤트를 등록합니다. */
 function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
     $cardDeleteBtn.addEventListener(CLICK, () => {
         setCard($deletedCard);
@@ -93,7 +93,7 @@ function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
     })
 }
 
-// 카드 생성 취소 버튼에 event를 등록합니다.
+/** 카드 생성 취소 버튼에 이벤트를 등록합니다. */
 function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $prevCard, isUpdated) {
     $registerCancelBtn.addEventListener(CLICK, () => {
         if(isUpdated) {
@@ -112,7 +112,7 @@ function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $pre
     })
 }
 
-// 카드를 생성 버튼에 event를 등록합니다.
+/** 카드 생성 버튼에 이벤트를 등록합니다. */
 function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated) {
     $cardMakeBtn.addEventListener(CLICK, () => {
         registering = false;
@@ -155,12 +155,12 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
     })
 }
 
-// 카드에 더블 클릭 이벤트를 추가해줍니다.
+/** 카드에 더블 클릭 이벤트를 등록합니다. */
 function addDoubleClickEventToCard($cardNode) {
     $cardNode.addEventListener(DOUBLE_CLICK, () => { changeCardToRegisterForm($cardNode); })
 }
 
-// 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.
+/** 카드를 등록 폼 형태로 바꾸어줍니다. */
 function changeCardToRegisterForm($cardNode) {
     let title = findCardTitle($cardNode);
     let content = findCardContent($cardNode);
@@ -173,7 +173,7 @@ function changeCardToRegisterForm($cardNode) {
     $cardNode.style.display = DISPLAY_NONE;
 }
 
-// 카드 등록 폼에서 사용자의 입력에 따라 카드의 크기를 조절해줍니다.
+/** 사용자 입력에 따라 카드 등록 폼 형태의 크기를 조절해줍니다. */
 function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
     let scrollHeight = 0;
     let cardHeight = 18;
@@ -196,7 +196,7 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
     })
 }
 
-// 카드를 생성할 때, 카드 등록 폼의 content 내용의 개행을 구분해줍니다.
+/** 카드 등록 폼 내용의 개행을 구분해줍니다. */
 function parseCardContentByNewLine(cardContent) {
     let cardContents = cardContent.split("\n");
     

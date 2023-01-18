@@ -12,7 +12,7 @@ import { validateNewStatusName } from "../../../server/validateData.js";
 
 const $mainTag = querySelector("main");
 
-// column 버튼에 column 삭제 이벤트를 추가합니다.
+/** column 삭제 버튼에 이벤트를 등록합니다. */
 function columnDeleteEvent($columnDeleteBtn, $columnNode) {
     $columnDeleteBtn.addEventListener(CLICK, () => {
         let statusName = $columnNode.querySelector("span").innerHTML;
@@ -21,7 +21,7 @@ function columnDeleteEvent($columnDeleteBtn, $columnNode) {
     })
 }
 
-// 새로운 column을 추가합니다.
+/** column을 추가합니다. */
 function addColumn(columnName="제목 없음") {
     let $newColumnNode = columnTemplate(columnName);
     $mainTag.appendChild($newColumnNode);
@@ -33,7 +33,7 @@ function addColumn(columnName="제목 없음") {
     $newColumnNode.scrollIntoView({behavior:'smooth'});
 }
 
-// 카드가 속한 헤더의 이름을 반환합니다.
+/** 카드가 속한 column의 header 이름을 반환합니다. */
 function findCardHeaderName($cardNode) {
     let $currentSection = $cardNode.closest("section");
     let headerName = $currentSection.querySelector("span").innerHTML;
@@ -41,7 +41,7 @@ function findCardHeaderName($cardNode) {
     return headerName;
 }
 
-// column 길이를 갱신합니다.
+/** column 길이를 갱신합니다. */
 function updateColumnLength(status) {
     let statusName = statusListOnLocal.filter((statusJSON) => { return statusJSON[STATUS_ID] == status; })[0][STATUS_NAME];
     let $columnList = document.querySelectorAll(".column");
@@ -57,7 +57,7 @@ function updateColumnLength(status) {
     $columnLengthNode.innerHTML = cardListOnLocal[status].filter((ele) => ele).length;
 }
 
-// 카드가 속한 column의 status 번호를 반환합니다.
+/** 카드가 속한 column의 status를 반환합니다. */
 function findColumnStatusByCard(cardNode) {
     let headerName = findCardHeaderName(cardNode);
 
@@ -70,7 +70,7 @@ function findColumnStatusByCard(cardNode) {
     return statusIndex;
 }
 
-// column의 header에 더블 클릭 이벤트를 추가합니다.
+/** column header에 더블 클릭 이벤트를 등록합니다. */
 function headerDoubleClickEvent($headerNode) {
     $headerNode.addEventListener(DOUBLE_CLICK, () => {
         let headerTitle = $headerNode.querySelector("span").innerHTML;
@@ -81,12 +81,12 @@ function headerDoubleClickEvent($headerNode) {
     })
 }
 
-// 헤더의 이름을 수정합니다. ( 호출 시기 : 헤더에 더블 클릭 발생 이후 )
+/** column header 이름을 수정합니다. */
 function changeHeaderName($headerNode, newTitle) {
     $headerNode.querySelector("span").innerHTML = newTitle;
 }
 
-// 헤더에 focus out 이벤트를 추가합니다.
+/** column header에 focus out 이벤트를 등록합니다. */
 function inputFocusOutEvent($headerInput, originalTitle, originalHeaderDom) {
     $headerInput.addEventListener(FOCUS_OUT, ()=> {
         const newTitle = $headerInput.value;

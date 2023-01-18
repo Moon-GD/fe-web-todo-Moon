@@ -17,6 +17,7 @@ function classifyStatusJSONList(statusJSONList) {
             statusIndex,
             statusName
         }
+        
         cardListOnLocal[statusIndex] = [];
     })
 }
