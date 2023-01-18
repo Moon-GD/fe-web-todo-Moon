@@ -45,7 +45,7 @@ function deleteStatus(statusName) {
     deleteStatusOnLocal(statusIndex);
 }
 
-/** 서버에서 해당하는 카드 데이터 삭제 */
+/** 서버에서 카드 JSON 데이터를 삭제합니다. */
 function deleteCardDataOnServer(cardID) {
     fetch(FETCH_CARD_URL + "/" + cardID, {
         method: DELETE_METHOD,
@@ -57,7 +57,7 @@ function deleteCardDataOnServer(cardID) {
     } })
 }
 
-/** 해당하는 JSON 데이터를 삭제합니다. */
+/** 카드 JSON 데이터를 삭제합니다. */
 function deleteCardData(status, cardID) {
     let dataList = cardListOnLocal[status];
 

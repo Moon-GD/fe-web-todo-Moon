@@ -11,7 +11,7 @@ import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteCardData } from "../../../server/DELETE.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
-import { addJSONData } from "../../../server/POST.js";
+import { addCardJSON } from "../../../server/POST.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -100,7 +100,7 @@ function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $pre
             $prevCard.style.display = DISPLAY_BLOCK;
 
             // json 데이터 복구
-            addJSONData(
+            addCardJSON(
                 findColumnStatusByCard($prevCard),
                 findCardTitle($prevCard),
                 findCardContent($prevCard),
@@ -134,7 +134,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 
         // 데이터 반영
         let currentStatus = findColumnStatusByCard($newCard);
-        addJSONData(currentStatus, title, updatedContent, $newCard.getAttribute("id"));
+        addCardJSON(currentStatus, title, updatedContent, $newCard.getAttribute("id"));
 
         // 메뉴 update
         if(isUpdated) {

@@ -6,8 +6,8 @@ import {
 import { updateColumnLength } from "../public/js/component/column.js";
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 
-/** status의 이름을 바꾸어 줍니다. */
-function updateStatusName(prevName, nextName) {
+/** 로컬에서 status의 이름을 바꾸어 줍니다. */
+function updateStatusNameOnLocal(prevName, nextName) {
     let statusID = -1;
 
     for(const statusJSON of statusListOnLocal) {
@@ -18,6 +18,11 @@ function updateStatusName(prevName, nextName) {
         }
     }
 
+    return statusID;
+}
+
+/** 서버에서 status의 이름을 바꾸어 줍니다. */
+function updateStatusNameOnServer(statusID, nextName) {
     fetch(FETCH_STATUS_URL + "/" + statusID, {
         method: PATCH_METHOD,
         headers: PATCH_HEADER,
@@ -25,16 +30,14 @@ function updateStatusName(prevName, nextName) {
     });
 }
 
-/** 해당하는 JSON 데이터를 이동합니다. */
-function moveJSONData(prevStatus, nextStatus, cardID) {
-    // 서버 data 반영
-    fetch(FETCH_CARD_URL + "/" + cardID, {
-        method: PATCH_METHOD,
-        headers: PATCH_HEADER,
-        body: JSON.stringify({ status:nextStatus })
-    })
+/** status의 이름을 바꾸어 줍니다. */
+function updateStatusName(prevName, nextName) {
+    let statusID = updateStatusNameOnLocal(prevName, nextName);
+    updateStatusNameOnServer(statusID, nextName)
+}
 
-    // local data 반영
+/** 로컬에서 JSON 데이터를 이동합니다. */
+function moveJSONDataOnLocal(prevStatus, nextStatus, cardID) {
     let prevCardList = cardListOnLocal[prevStatus];
     let nextCardList = cardListOnLocal[nextStatus];
 
@@ -45,6 +48,21 @@ function moveJSONData(prevStatus, nextStatus, cardID) {
             break;
         }
     }
+}
+
+/** 서버에서 JSON 데이터를 이동합니다. */
+function moveJSONDataOnServer(cardID, nextStatus) {
+    fetch(FETCH_CARD_URL + "/" + cardID, {
+        method: PATCH_METHOD,
+        headers: PATCH_HEADER,
+        body: JSON.stringify({ status:nextStatus })
+    })
+}
+
+/** 해당하는 JSON 데이터를 이동합니다. */
+function moveJSONData(prevStatus, nextStatus, cardID) {
+    moveJSONDataOnServer(cardID, nextStatus);
+    moveJSONDataOnLocal(prevStatus, nextStatus, cardID);
 
     // 이동 전 후 column의 길이 갱신
     updateColumnLength(prevStatus);
