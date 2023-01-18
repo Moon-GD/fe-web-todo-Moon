@@ -12,6 +12,7 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteCardData } from "../../../server/DELETE.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/POST.js";
+import { pipe } from "../common/commonFunction.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -157,7 +158,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 
 /** 카드에 더블 클릭 이벤트를 등록합니다. */
 function addDoubleClickEventToCard($cardNode) {
-    $cardNode.addEventListener(DOUBLE_CLICK, () => { changeCardToRegisterForm($cardNode); })
+    $cardNode.addEventListener(DOUBLE_CLICK, () => changeCardToRegisterForm($cardNode))
 }
 
 /** 카드를 등록 폼 형태로 바꾸어줍니다. */
@@ -167,7 +168,7 @@ function changeCardToRegisterForm($cardNode) {
     let status = findColumnStatusByCard($cardNode);
 
     // JSON 반영
-    deleteCardData(status, $cardNode.getAttribute("id"));
+    deleteCardData(status, $cardNode.getAttribute(CARD_ID));
 
     $cardNode.before(newCardTemplate(title, content, $cardNode, true));
     $cardNode.style.display = DISPLAY_NONE;

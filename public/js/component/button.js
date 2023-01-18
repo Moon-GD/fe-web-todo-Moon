@@ -1,4 +1,4 @@
-import { changeCSS } from "../common/commonFunction.js";
+import { changeCSS, pipe } from "../common/commonFunction.js";
 import {
     POSITION_BOTTOM, RIGHT, TRANSFORM,
     FAB_BTN_DEGREE_ORIGINAL, FAB_BTN_DEGREE_MOVED, FAB_BTNS_BOTTOM_ORIGINAL, 
@@ -47,19 +47,23 @@ const $Btns = {
 };
 
 /** card clear 버튼들에 이벤트를 추가합니다.  */
-function addEventToCardClearBtns() {
-    $Btns.$goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal);
-    $Btns.$cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal);
-    $Btns.$cardClearModalAcceptBtn.addEventListener(CLICK, () => {
-        deleteAllCards();
-        turnOffCardClearModal();
-    })
+function eventToCardClearBtns() {
+    const eventToCardClearModalBtn = () => $Btns.$goCardClearModalBtn.addEventListener(CLICK, turnOnCardClearModal);    
+    const eventToCardClearCancelBtn = () => { $Btns.$cardClearModalCancelBtn.addEventListener(CLICK, turnOffCardClearModal); }
+    const eventToCardClearAcceptBtn = () => { 
+        $Btns.$cardClearModalAcceptBtn.addEventListener(CLICK, () => {
+            deleteAllCards();
+            turnOffCardClearModal();
+        }) 
+    }
+
+    eventToCardClearModalBtn();
+    eventToCardClearCancelBtn();
+    eventToCardClearAcceptBtn();
 }
 
 /** 검색 취소 버튼에 클릭 이벤트를 추가합니다. */
-function addEventToSearchCancelBtn() {
-    $Btns.$searchCancelBtn.addEventListener(CLICK, turnOffSearchModal);
-}
+function addEventToSearchCancelBtn() { $Btns.$searchCancelBtn.addEventListener(CLICK, turnOffSearchModal); }
 
 /** 검색 수락 버튼에 클릭 이벤트를 추가합니다. */
 function addEventToSearchAcceptBtn() {
@@ -94,7 +98,7 @@ function addEventToFabBtn() {
     addEventToSearchBtn();
     addEventToSearchCancelBtn();
     addEventToSearchAcceptBtn();
-    addEventToCardClearBtns();
+    eventToCardClearBtns();
 }
 
 /** 검색 모달을 띄워주는 버튼에 클릭 이벤트를 추가합니다. */
@@ -112,7 +116,7 @@ function addEventToMenuBtns() {
         menuLogTimeUpdate();
     })
 
-    $Btns.$menuCloseBtn.addEventListener(CLICK, () => { changeCSS($menuBar, RIGHT, MENU_MOVE_DISTANCE); })
+    $Btns.$menuCloseBtn.addEventListener(CLICK, () => changeCSS($menuBar, RIGHT, MENU_MOVE_DISTANCE))
 }
 
 /** 카드 삭제 관련 modal 버튼들에 이벤트를 추가합니다. */
@@ -131,15 +135,11 @@ function addEventToModalButtons() {
 
 /** column 추가 관련 버튼들에 클릭 이벤트를 추가합니다. */
 function addEventToColumnAddButton() {
-    // columnnn
     $Btns.$goColumnAddModalBtn.addEventListener(CLICK, turnOnColumnAddModal);
-
-    // column add modal 버튼들 이벤트 추가
     $Btns.$columnAddModalCancelBtn.addEventListener(CLICK, turnOffColumnAddModal);
     $Btns.$columnAddModalAcceptBtn.addEventListener(CLICK, () => {
         let $columnAddInput = querySelector("#column-add-input");
-
-        // 중복되는 status가 없을 경우에만 column 추가
+        
         if(validateStatus($columnAddInput.value)) {
             addColumn($columnAddInput.value);
             turnOffColumnAddModal();
@@ -153,6 +153,6 @@ function addEventToColumnAddButton() {
 
 export {
     $Btns,
-    addEventToCardClearBtns, addEventToSearchBtn,
+    addEventToSearchBtn,
     addEventToFabBtn, addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton
 }

@@ -3,8 +3,9 @@ import {
     multipleQueryToList, multipleQuerySelector, multipleQuerySelectorAll
 } from "./querySelectorHelper.js"
 
-// HTML collection은 forEach가 안되기 때문에 배열 forEach 순회 등록
+// HTML collection은 forEach가 안되기 때문에 배열 forEach, filter 등록
 HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.filter = Array.prototype.filter;
 
 /** 원하는 노드를 찾아 노드 형태로 반환합니다. */
 function querySelector(query) {

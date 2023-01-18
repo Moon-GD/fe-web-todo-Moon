@@ -5,7 +5,7 @@ import {
     STATUS, STATUS_INDEX, STATUS_NAME,
     CARD_ID,
 } from "../public/js/common/commonVariable.js";
-import { updateColumnLength } from "../public/js/component/column.js";
+import { findColumnStatusByCard, updateColumnLength } from "../public/js/component/column.js";
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 
 /** 로컬에서 status 삭제  */

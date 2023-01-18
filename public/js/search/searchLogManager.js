@@ -13,8 +13,9 @@ class SearchLogManager {
     addNewSearchLog(searchLog) {
         this.#searchLog.push(searchLog);
 
-        if(this.#searchCount[searchLog]) { this.#searchCount[searchLog] += 1; }
-        else { this.#searchCount[searchLog] = 1; }
+        this.#searchCount[searchLog] ?
+                this.#searchCount[searchLog] += 1:
+                this.#searchCount[searchLog] = 1;
 
         if(this.#searchCount[searchLog] >= this.#maxCount) {
             this.#maxCount = this.#searchCount[searchLog];
@@ -24,18 +25,13 @@ class SearchLogManager {
 
     /** 검색어를 추천합니다. */
     suggestLog() {
-        if(this.#searchLog.length == 0) { return null; }
-
-        return this.#maxLog;
+        return this.#searchLog.length == 0 ? null : this.#maxLog;
     }
 
     /** 검색어의 빈도를 반환합니다. */
     getSearchCount(searchLog) {
-        if(this.#searchCount[searchLog]) {
-            return this.#searchCount[searchLog];
-        }
-
-        return 0;
+        return this.#searchCount[searchLog] ? 
+                this.#searchCount[searchLog] : 0;
     }
 }
 
