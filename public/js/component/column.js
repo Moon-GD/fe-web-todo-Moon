@@ -9,6 +9,7 @@ import { deleteStatus } from "../../../server/DELETE.js";
 import { updateStatusName } from "../../../server/PATCH.js";
 import { addStatus } from "../../../server/POST.js";
 import { validateNewStatusName } from "../../../server/validateData.js";
+import { pipe } from "../common/commonFunction.js";
 
 const $mainTag = querySelector("main");
 
@@ -23,22 +24,24 @@ function columnDeleteEvent($columnDeleteBtn, $columnNode) {
 
 /** column을 추가합니다. */
 function addColumn(columnName="제목 없음") {
-    let $newColumnNode = columnTemplate(columnName);
-    $mainTag.appendChild($newColumnNode);
+    pipe(
+        columnTemplate,
+        ($column) => {
+            $mainTag.appendChild($column);
+            $column.scrollIntoView({behavior:'smooth'})
+        }
+    )(columnName)
 
     // data 영역에도 status 추가
     addStatus(columnName);
-
-    // column으로 smooth하게 스크롤 이동
-    $newColumnNode.scrollIntoView({behavior:'smooth'});
 }
 
 /** 카드가 속한 column의 header 이름을 반환합니다. */
-function findCardHeaderName($cardNode) {
-    let $currentSection = $cardNode.closest("section");
-    let headerName = $currentSection.querySelector("span").innerHTML;
-
-    return headerName;
+function findCardHeaderName($card) {
+    return pipe(
+        ($card) => $card.closest("section"),
+        ($section) => $section.querySelector("span").innerHTML
+    )($card)
 }
 
 /** column 길이를 갱신합니다. */
@@ -58,16 +61,14 @@ function updateColumnLength(status) {
 }
 
 /** 카드가 속한 column의 status를 반환합니다. */
-function findColumnStatusByCard(cardNode) {
-    let headerName = findCardHeaderName(cardNode);
-
-    let filterd = statusListOnLocal.filter((ele) => {
-        return ele.statusName == headerName;
-    })
-
-    let statusIndex = filterd[0]["statusIndex"];
-
-    return statusIndex;
+function findColumnStatusByCard($card) {
+    return pipe(
+        ($card) => findCardHeaderName($card),
+        (headerName) => statusListOnLocal.filter((ele) => {
+            return ele.statusName == headerName;
+        }),
+        ($column) => $column[0]["statusIndex"]
+    )($card)
 }
 
 /** column header에 더블 클릭 이벤트를 등록합니다. */
@@ -75,26 +76,23 @@ function headerDoubleClickEvent($headerNode) {
     $headerNode.addEventListener(DOUBLE_CLICK, () => {
         let headerTitle = $headerNode.querySelector("span").innerHTML;
         let $headerInputTemplate = headerTitleTemplate(headerTitle, $headerNode);
-
         $headerNode.after($headerInputTemplate);
         $headerNode.style.display = DISPLAY_NONE;
     })
 }
 
 /** column header 이름을 수정합니다. */
-function changeHeaderName($headerNode, newTitle) {
-    $headerNode.querySelector("span").innerHTML = newTitle;
-}
+const changeHeaderName = ($headerNode, newTitle) => $headerNode.querySelector("span").innerHTML = newTitle;
 
 /** column header에 focus out 이벤트를 등록합니다. */
-function inputFocusOutEvent($headerInput, originalTitle, originalHeaderDom) {
+function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
     $headerInput.addEventListener(FOCUS_OUT, ()=> {
         const newTitle = $headerInput.value;
 
         // 새로 바뀐 이름 중복 검사
         if(validateNewStatusName(originalTitle, newTitle)) {
-            changeHeaderName(originalHeaderDom, newTitle);
-            originalHeaderDom.style.display = DISPLAY_FLEX;
+            changeHeaderName($originalHeader, newTitle);
+            $originalHeader.style.display = DISPLAY_FLEX;
 
             updateStatusName(originalTitle, $headerInput.value);
             $headerInput.parentElement.remove();

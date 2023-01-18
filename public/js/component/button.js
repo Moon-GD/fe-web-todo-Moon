@@ -1,4 +1,4 @@
-import { changeCSS, pipe } from "../common/commonFunction.js";
+import { changeCSS } from "../common/commonFunction.js";
 import {
     POSITION_BOTTOM, RIGHT, TRANSFORM,
     FAB_BTN_DEGREE_ORIGINAL, FAB_BTN_DEGREE_MOVED, FAB_BTNS_BOTTOM_ORIGINAL, 
@@ -123,9 +123,10 @@ function addEventToMenuBtns() {
 function addEventToModalButtons() {
     // card modal 버튼들 이벤트 추가
     $Btns.$modalDeleteBtn.addEventListener(CLICK, () => {
-        const headerTitle = findCardTitle($chosenCard);
-        const content = findCardHeaderName($chosenCard);
-        menuLogDelete(headerTitle, content);
+        menuLogDelete(
+            findCardTitle($chosenCard),
+            findCardHeaderName($chosenCard)
+        );
         deleteCard($chosenCard);
         turnOffModal();
     })

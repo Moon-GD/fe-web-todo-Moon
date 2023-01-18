@@ -1,9 +1,3 @@
-
-import { 
-    MONTH, DATE, HOUR, MINUTE, 
-    MOUSE_OVER, MOUSE_LEAVE 
-} from "./commonVariable.js";
-
 /** parentNode 다음에 childNode를 추가합니다. */
 function addChildAfterParent($parentNode, $childNode) { $parentNode.after($childNode); }
 

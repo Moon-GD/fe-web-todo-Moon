@@ -1,4 +1,4 @@
-import { DRAG_START, DRAG_OVER, DRAG_END, DROP } from "../common/commonVariable.js";
+import { DRAG_START, DRAG_OVER, DRAG_END, DROP, CARD_ID } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
 import { findColumnStatusByCard } from "../component/column.js";
 import { menuLogMove } from "../component/menu/menu.js";
@@ -16,16 +16,16 @@ function makeCardDragEvent($cardNode) {
         recordDragCard(event);
     })
 
-    $cardNode.addEventListener(DRAG_OVER, (event) => { dragOverCard($cardNode, event); })
+    $cardNode.addEventListener(DRAG_OVER, (event) => dragOverCard($cardNode, event))
 
     $cardNode.addEventListener(DRAG_END, (event) => {
         dragEndStatus = findColumnStatusByCard($cardNode);
         menuLogMove(findCardTitle($cardNode), dragStartStatus, dragEndStatus);
-        moveJSONData(dragStartStatus, dragEndStatus, $cardNode.getAttribute("id"));
+        moveJSONData(dragStartStatus, dragEndStatus, $cardNode.getAttribute(CARD_ID));
         makeLightNode();
     })
 
-    $cardNode.addEventListener(DROP, (event) => { dropCard($cardNode, event); })
+    $cardNode.addEventListener(DROP, (event) => dropCard($cardNode, event))
 }
 
 export { 

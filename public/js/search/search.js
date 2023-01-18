@@ -9,11 +9,11 @@ const $searchModal = querySelector("#search-modal-section");
 const $searchInput = querySelector("#search-input");
 const $suggestedSearchText = querySelector("#suggested-search-log");
 
-const getCardListByTitle = (title) => { 
-    let $cardList = document.querySelectorAll("div.card-frame");
-    $cardList = $cardList.filter(($card) => findCardTitle($card).indexOf(title) != -1)
-
-    return $cardList;
+const getCardListByTitle = (title) => {
+    return pipe(
+        () => document.querySelectorAll("div.card-frame"),
+        ($cardList) => $cardList.filter(($card) => findCardTitle($card).indexOf(title) != -1)
+    )()
 }
 
 const changeCardColorTemporary = ($cardList) => {

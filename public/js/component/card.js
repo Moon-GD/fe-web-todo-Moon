@@ -29,11 +29,7 @@ function findCardTitle($cardNode) {
 }
 
 /** 카드 내용을 찾아줍니다. */
-function findCardContent($cardNode) {
-    const cardContent = $cardNode.querySelector(".card-content").innerHTML;
-
-    return cardContent;
-}
+const findCardContent = ($cardNode) => $cardNode.querySelector(".card-content").innerHTML;
 
 /** 카드를 삭제합니다. */
 function deleteCard($cardNode) {
@@ -62,7 +58,7 @@ function addEventToShowCardRegisterBtn($cardRegisterBtn, $currentColumn) {
                 $currentColumn.children[0].remove() :    
                 $currentColumn.prepend(newCardTemplate());
 
-        registering = !registering;
+        registering != registering;
     })
 }
 
@@ -200,7 +196,6 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
 /** 카드 등록 폼 내용의 개행을 구분해줍니다. */
 function parseCardContentByNewLine(cardContent) {
     let cardContents = cardContent.split("\n");
-    
     return cardContents.join("<br>");
 }
 

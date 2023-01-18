@@ -1,3 +1,4 @@
+import { pipe } from "../common/commonFunction.js";
 import { Queue } from "./queue.js";
 
 const TAG = "tagName";
@@ -31,12 +32,10 @@ function singleQueryToObject(query) {
 
 /** 복합 query를 단일 쿼리의 리스트로 반환합니다. */
 function multipleQueryToList(multipleQuery) {
-    multipleQuery = multipleQuery.replace(/>/g, " > ");
-    
-    // filter 하는 이유? 무의미한 공백 제거!
-    let listToBeReturned = multipleQuery.split(" ").filter((ele) => ele);
-
-    return listToBeReturned;
+    return pipe(
+            (multipleQuery) => multipleQuery.replace(/>/g, " > "),
+            (multipleQuery) => multipleQuery.split(" ").filter((ele) => ele)
+        )(multipleQuery)
 }
 
 /** query에 해당 노드 여부를 boolean으로 반환합니다. */
@@ -63,14 +62,11 @@ function valiedateNodeByQuery(node, queryObj) {
 /** $startNode에서 query에 해당하는 모든 자식 노드를 리스트 형태로 반환합니다. */
 function findAllChildren(query, $startNode=$BODY_NODE) {
     const queryObj = singleQueryToObject(query);
-    const $childNodeList = $startNode.children;
-    let listToBeReturned = [];
 
-    $childNodeList.forEach(($childNode) => {
-        if(valiedateNodeByQuery($childNode, queryObj)) { listToBeReturned.push($childNode); }
-    })
-
-    return listToBeReturned;
+    return pipe(
+        ($targetNode) => $targetNode.children,
+        ($childList) => $childList.filter(($child) => valiedateNodeByQuery($child, queryObj))
+    )($startNode)
 }
 
 /** 단일 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다. */
