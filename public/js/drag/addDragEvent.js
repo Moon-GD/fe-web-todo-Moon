@@ -10,22 +10,22 @@ let dragStartStatus = "";
 let dragEndStatus = "";
 
 /** $cardNode에 드래그 이벤트를 추가합니다 */
-function makeCardDragEvent($cardNode) {
-    $cardNode.addEventListener(DRAG_START, (event) => {
-        dragStartStatus = findColumnStatusByCard($cardNode);
+function makeCardDragEvent($card) {
+    $card.addEventListener(DRAG_START, (event) => {
+        dragStartStatus = findColumnStatusByCard($card);
         recordDragCard(event);
     })
 
-    $cardNode.addEventListener(DRAG_OVER, (event) => dragOverCard($cardNode, event))
+    $card.addEventListener(DRAG_OVER, (event) => dragOverCard($card, event))
 
-    $cardNode.addEventListener(DRAG_END, (event) => {
-        dragEndStatus = findColumnStatusByCard($cardNode);
-        menuLogMove(findCardTitle($cardNode), dragStartStatus, dragEndStatus);
-        moveJSONData(dragStartStatus, dragEndStatus, $cardNode.getAttribute(CARD_ID));
+    $card.addEventListener(DRAG_END, (event) => {
+        dragEndStatus = findColumnStatusByCard($card);
+        menuLogMove(findCardTitle($card), dragStartStatus, dragEndStatus);
+        moveJSONData(dragStartStatus, dragEndStatus, $card.getAttribute(CARD_ID));
         makeLightNode();
     })
 
-    $cardNode.addEventListener(DROP, (event) => dropCard($cardNode, event))
+    $card.addEventListener(DROP, (event) => dropCard($card, event))
 }
 
 export { 

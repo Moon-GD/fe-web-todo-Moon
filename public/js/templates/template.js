@@ -32,10 +32,10 @@ function initialDataToTemplate() {
 
 /** column 템플릿을 반환합니다. */
 function columnTemplate(columnTitle, cardCount = 0) {
-    let $columnNode = document.createElement("section");
-    $columnNode.classList.add("column")
+    let $column = document.createElement("section");
+    $column.classList.add("column")
 
-    $columnNode.innerHTML = `
+    $column.innerHTML = `
             <h3>
                 <span>${columnTitle}</span>
                 <span class="column-length">${cardCount}</span>
@@ -48,10 +48,10 @@ function columnTemplate(columnTitle, cardCount = 0) {
             </article>
         `;
 
-    let $cardAddBtn = $columnNode.querySelector(".card-add-btn");
-    let $columnDeleteBtn = $columnNode.querySelector(".column-delete-btn");
-    let $header = $columnNode.querySelector("h3");
-    let $article = $columnNode.querySelector("article");
+    let $cardAddBtn = $column.querySelector(".card-add-btn");
+    let $columnDeleteBtn = $column.querySelector(".column-delete-btn");
+    let $header = $column.querySelector("h3");
+    let $article = $column.querySelector("article");
 
     $header.addEventListener(DRAG_OVER, (event) => {
         event.preventDefault();
@@ -65,21 +65,21 @@ function columnTemplate(columnTitle, cardCount = 0) {
         $article.appendChild(makeShadedNode());
     })
 
-    columnDeleteEvent($columnDeleteBtn, $columnNode); // column 제거 이벤트
-    addEventToShowCardRegisterBtn($cardAddBtn, $columnNode.children[1]); // card 추가 이벤트
+    columnDeleteEvent($columnDeleteBtn, $column); // column 제거 이벤트
+    addEventToShowCardRegisterBtn($cardAddBtn, $column.children[1]); // card 추가 이벤트
     headerDoubleClickEvent($header);  // 헤더 더블 클릭 이벤트
 
-    return $columnNode;
+    return $column;
 }
 
 /** 카드 템플릿을 반환합니다. */
 function cardTemplate(cardTitle, cardContent, cardAuthor="author by web", cardId) {
-    let $cardNode = document.createElement("div");
-    $cardNode.classList.add("card-frame");
-    $cardNode.setAttribute("draggable", true);
-    $cardNode.setAttribute("id", cardId);  // drag 이벤트를 위해 카드에 ID 부여
+    let $card = document.createElement("div");
+    $card.classList.add("card-frame");
+    $card.setAttribute("draggable", true);
+    $card.setAttribute("id", cardId);  // drag 이벤트를 위해 카드에 ID 부여
 
-    $cardNode.innerHTML = `
+    $card.innerHTML = `
         <h3 class="card-title">${cardTitle}
             <i class="fa-solid fa-xmark"></i>
         </h3>
@@ -88,20 +88,20 @@ function cardTemplate(cardTitle, cardContent, cardAuthor="author by web", cardId
     `;
 
     // 더블 클릭 이벤트 추가
-    addDoubleClickEventToCard($cardNode);
+    addDoubleClickEventToCard($card);
 
-    let $cardDeleteBtn = $cardNode.querySelector("i");
-    addEventToCardDeleteBtn($cardDeleteBtn, $cardNode);
+    let $cardDeleteBtn = $card.querySelector("i");
+    addEventToCardDeleteBtn($cardDeleteBtn, $card);
 
-    return $cardNode;
+    return $card;
 }
 
 /** 카드 등록 템플릿을 반환합니다. */
 function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false) {
-    let $newCardNode = document.createElement("div");
-    $newCardNode.classList.add("new-card-frame");
+    let $newCard = document.createElement("div");
+    $newCard.classList.add("new-card-frame");
 
-    $newCardNode.innerHTML = `
+    $newCard.innerHTML = `
         <input type="text" placeholder="제목을 입력하세요" value='${title}'>
         <textarea cols="30" rows="20" maxlength="500" placeholder="내용을 입력하세요">${content}</textarea>
         <div class="new-card-button-area">
@@ -110,16 +110,16 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
         </div>
     `;
 
-    const $newCancelBtn = $newCardNode.querySelector("#new-card-cancel-btn");
-    const $newRegisterBtn = $newCardNode.querySelector("#new-card-register-btn");
-    const $textArea = $newCardNode.querySelector("textarea");
+    const $newCancelBtn = $newCard.querySelector("#new-card-cancel-btn");
+    const $newRegisterBtn = $newCard.querySelector("#new-card-register-btn");
+    const $textArea = $newCard.querySelector("textarea");
 
     // 등록 카드 폼의 버튼에 이벤트 추가
-    addEventToMakeCardCancelBtn($newCancelBtn, $newCardNode, prevCard, isUpdated);
-    addEventToMakeNewCardBtn($newRegisterBtn, $newCardNode, prevCard, isUpdated);
-    resizeCardByInputBox($textArea, $newCardNode);
+    addEventToMakeCardCancelBtn($newCancelBtn, $newCard, prevCard, isUpdated);
+    addEventToMakeNewCardBtn($newRegisterBtn, $newCard, prevCard, isUpdated);
+    resizeCardByInputBox($textArea, $newCard);
 
-    return $newCardNode;
+    return $newCard;
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (add) */

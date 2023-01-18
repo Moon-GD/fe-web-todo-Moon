@@ -6,12 +6,12 @@ import { dragIDManager } from "./dragIDManager.js";
 const recordDragCard = ({target}) => dragIDManager.setCurrentCardID(target.id);
 
 /** 카드가 위에 지나갈 때 실행됩니다. */
-const dragOverCard = ($parentNode, event) => {
+const dragOverCard = ($parent, event) => {
     event.preventDefault();
-    addChildAfterParent($parentNode, makeShadedNode());
+    addChildAfterParent($parent, makeShadedNode());
 }
 
 /** 카드를 놓을 때 실행됩니다. */
-const dropCard = ($parentNode, event) => addChildAfterParent($parentNode, makeLightNode());
+const dropCard = ($parent, event) => addChildAfterParent($parent, makeLightNode());
 
 export { recordDragCard, dragOverCard, dropCard }

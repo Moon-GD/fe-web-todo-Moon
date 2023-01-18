@@ -18,27 +18,27 @@ let $chosenCard = "";
 let registering = false;
 
 /** 현재 drag 중인 카드 정보를 저장합니다. */
-function setCard($cardNode) { $chosenCard = $cardNode; }
+function setCard($card) { $chosenCard = $card; }
 
 /** 카드 제목을 찾아줍니다. */
-function findCardTitle($cardNode) {
-    const cardTitleText = $cardNode.querySelector("h3").innerHTML;
+function findCardTitle($card) {
+    const cardTitleText = $card.querySelector("h3").innerHTML;
     const cardTitle = cardTitleText.split('\n')[0];
 
     return cardTitle;
 }
 
 /** 카드 내용을 찾아줍니다. */
-const findCardContent = ($cardNode) => $cardNode.querySelector(".card-content").innerHTML;
+const findCardContent = ($card) => $card.querySelector(".card-content").innerHTML;
 
 /** 카드를 삭제합니다. */
-function deleteCard($cardNode) {
-    const status = findColumnStatusByCard($cardNode);
+function deleteCard($card) {
+    const status = findColumnStatusByCard($card);
         
     // 로컬 data 반영
-    deleteCardData(status, $cardNode.getAttribute(CARD_ID));
+    deleteCardData(status, $card.getAttribute(CARD_ID));
 
-    $cardNode.remove();
+    $card.remove();
 }
 
 /** 모든 카드를 삭제합니다. */
@@ -153,21 +153,21 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 }
 
 /** 카드에 더블 클릭 이벤트를 등록합니다. */
-function addDoubleClickEventToCard($cardNode) {
-    $cardNode.addEventListener(DOUBLE_CLICK, () => changeCardToRegisterForm($cardNode))
+function addDoubleClickEventToCard($card) {
+    $card.addEventListener(DOUBLE_CLICK, () => changeCardToRegisterForm($card))
 }
 
 /** 카드를 등록 폼 형태로 바꾸어줍니다. */
-function changeCardToRegisterForm($cardNode) {
-    let title = findCardTitle($cardNode);
-    let content = findCardContent($cardNode);
-    let status = findColumnStatusByCard($cardNode);
+function changeCardToRegisterForm($card) {
+    let title = findCardTitle($card);
+    let content = findCardContent($card);
+    let status = findColumnStatusByCard($card);
 
     // JSON 반영
-    deleteCardData(status, $cardNode.getAttribute(CARD_ID));
+    deleteCardData(status, $card.getAttribute(CARD_ID));
 
-    $cardNode.before(newCardTemplate(title, content, $cardNode, true));
-    $cardNode.style.display = DISPLAY_NONE;
+    $card.before(newCardTemplate(title, content, $card, true));
+    $card.style.display = DISPLAY_NONE;
 }
 
 /** 사용자 입력에 따라 카드 등록 폼 형태의 크기를 조절해줍니다. */
