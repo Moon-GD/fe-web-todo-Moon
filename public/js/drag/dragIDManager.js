@@ -9,12 +9,6 @@ class DragIDManager {
     getCurrentCardID() {
         return this.movedCardID;
     }
-
-    getNewID() {
-        this.#ID = new Date();
-        
-        return this.#ID;
-    }
 }
 
 const dragIDManager = new DragIDManager();

@@ -25,7 +25,7 @@ function menuLogDeleteAll(emotion="🥳", author="@sam") {
 
 // 메뉴 바에 기록을 남깁니다. (move)
 function menuLogMove(title, prevStatus, nextStatus, emotion="🥳", author="@sam") {
-    if(prevStatus == nextStatus) { return ; }
+    if(prevStatus == nextStatus) { return; }
     
     $menuContent.prepend(menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author));
 }

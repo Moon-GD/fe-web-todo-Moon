@@ -8,6 +8,12 @@ import {
 import { updateColumnLength } from "../public/js/component/column.js";
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 
+/** 로컬에서 status 삭제  */
+function deleteStatusOnLocal(statusIndex) {
+    delete cardListOnLocal[statusIndex];
+    delete statusListOnLocal[statusIndex];
+}
+
 /** 서버에서 status 삭제 */
 function deleteStatusOnServer(statusIndex) {
     // 서버에서 status 데이터 삭제
@@ -19,12 +25,6 @@ function deleteStatusOnServer(statusIndex) {
         // 추후에 에러 핸들링해주기
         throw new Error(`error : ${statusIndex}번의 card를 삭제하는데 실패`)
     } })
-}
-
-/** 로컬에서 status 삭제  */
-function deleteStatusOnLocal(statusIndex) {
-    delete cardListOnLocal[statusIndex];
-    delete statusListOnLocal[statusIndex];
 }
 
 /** status를 삭제합니다. */

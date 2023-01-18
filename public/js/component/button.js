@@ -139,7 +139,6 @@ function addEventToColumnAddButton() {
     $Btns.$columnAddModalAcceptBtn.addEventListener(CLICK, () => {
         let $columnAddInput = querySelector("#column-add-input");
 
-
         // 중복되는 status가 없을 경우에만 column 추가
         if(validateStatus($columnAddInput.value)) {
             addColumn($columnAddInput.value);

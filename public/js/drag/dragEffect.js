@@ -1,6 +1,6 @@
 import { dragIDManager } from "./dragIDManager.js"
 
-// 카드의 잔상을 만듭니다
+/** 카드의 잔상을 만듭니다 */
 function makeShadedNode() {
     let $movedCardNode = document.getElementById(dragIDManager.getCurrentCardID());
     $movedCardNode.style.opacity = 0.5;
@@ -8,7 +8,7 @@ function makeShadedNode() {
     return $movedCardNode;
 }
 
-// 카드의 잔상을 밝게 해줍니다
+/** 카드의 잔상을 밝게 해줍니다 */
 function makeLightNode() {
     let $movedCardNode = document.getElementById(dragIDManager.getCurrentCardID());
     $movedCardNode.style.opacity = 1;

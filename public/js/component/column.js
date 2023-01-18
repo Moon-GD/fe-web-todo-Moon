@@ -35,7 +35,7 @@ function addColumn(columnName="제목 없음") {
 
 // 카드가 속한 헤더의 이름을 반환합니다.
 function findCardHeaderName($cardNode) {
-    let $currentSection = $cardNode.parentElement.parentElement;
+    let $currentSection = $cardNode.closest("section");
     let headerName = $currentSection.querySelector("span").innerHTML;
 
     return headerName;

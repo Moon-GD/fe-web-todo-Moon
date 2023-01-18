@@ -1,13 +1,31 @@
 import { getCurrentTimeInString, saveTimeInTimeNode, addEventToTimeNode, timeStringToArray, getElapsedTime } from "../common/commonFunction.js";
-import { DRAG_OVER, STATUS_NAME } from "../common/commonVariable.js";
+import { DRAG_OVER, STATUS_NAME, CARD_ID } from "../common/commonVariable.js";
 import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
     resizeCardByInputBox, addDoubleClickEventToCard
 } from "../component/card.js";
-import { columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
+import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
+import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { searchLogManger } from "../search/searchLogManager.js";
-import { statusListOnLocal } from "../store/store.js";
+import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
+
+/** 초기 데이터를 템플릿으로 구성합니다. */
+function initialDataToTemplate() {
+    statusListOnLocal.forEach(({id: statusID, statusName}) => {
+        let $newColumn = columnTemplate(statusName, cardListOnLocal[statusID].length);
+        let $cardArea = $newColumn.querySelector("article");
+
+        cardListOnLocal[statusID].forEach((cardData) => {
+            let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author, cardData[CARD_ID]);
+            makeCardDragEvent($newCard);
+    
+            $cardArea.prepend($newCard);
+        })    
+
+        $mainTag.appendChild($newColumn);
+    })
+}
 
 // column 템플릿을 반환합니다.
 function columnTemplate(columnTitle, cardCount = 0) {
@@ -336,6 +354,7 @@ function headerTitleTemplate(title, $originalHeaderDom) {
 }
 
 export {
+    initialDataToTemplate,
     columnTemplate, cardTemplate, newCardTemplate, 
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate,
     headerTitleTemplate, menuLogDeleteAllTemplate

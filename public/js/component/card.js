@@ -2,7 +2,7 @@ import {
     CARD_BTN_ORIGINAL, CARD_OUTLINE_ORIGINAL, CARD_BACKGROUND_ORIGINAL, CARD_BTN_HOVER, 
     CARD_OUTLINE_HOVER, CARD_BACKGROUND_HOVER, CARD_DELETE_BTN_ORIGINAL, CARD_TEXT_HEIGHT,
     DISPLAY_BLOCK, DISPLAY_NONE,
-    CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK
+    CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK, CARD_ID, HALF_SECOND
 } from "../common/commonVariable.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
@@ -39,7 +39,7 @@ function deleteCard($cardNode) {
     const status = findColumnStatusByCard($cardNode);
         
     // 로컬 data 반영
-    deleteCardData(status, $cardNode.getAttribute("id"));
+    deleteCardData(status, $cardNode.getAttribute(CARD_ID));
 
     $cardNode.remove();
 }
@@ -75,7 +75,7 @@ function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
     let $xBtn = $deletedCard.querySelector("i");
     
     $cardDeleteBtn.addEventListener(MOUSE_OVER, () => {
-        $deletedCard.style.transition = "0.5s"
+        $deletedCard.style.transition = HALF_SECOND;
         $deletedCard.style.marginTop = "-0.5vh";
         $deletedCard.style.marginBottom = "1.5vh";
         $deletedCard.style.outline = CARD_OUTLINE_HOVER;
@@ -104,7 +104,7 @@ function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $pre
                 findColumnStatusByCard($prevCard),
                 findCardTitle($prevCard),
                 findCardContent($prevCard),
-                $prevCard.getAttribute("id")
+                $prevCard.getAttribute(CARD_ID)
             );
         }
 
@@ -121,7 +121,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
         let updatedContent = $currentCard.querySelector("textarea").value ;
         let $newCard = cardTemplate(
             title, parseCardContentByNewLine(updatedContent), "", 
-            isUpdated ? $prevCard.getAttribute("id") : idGenerator.createCardID()
+            isUpdated ? $prevCard.getAttribute(CARD_ID) : idGenerator.createCardID()
         );
         let updatedStatus = "";
 
@@ -134,7 +134,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 
         // 데이터 반영
         let currentStatus = findColumnStatusByCard($newCard);
-        addCardJSON(currentStatus, title, updatedContent, $newCard.getAttribute("id"));
+        addCardJSON(currentStatus, title, updatedContent, $newCard.getAttribute(CARD_ID));
 
         // 메뉴 update
         if(isUpdated) {
@@ -157,9 +157,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 
 // 카드에 더블 클릭 이벤트를 추가해줍니다.
 function addDoubleClickEventToCard($cardNode) {
-    $cardNode.addEventListener(DOUBLE_CLICK, () => {
-        changeCardToRegisterForm($cardNode);
-    })
+    $cardNode.addEventListener(DOUBLE_CLICK, () => { changeCardToRegisterForm($cardNode); })
 }
 
 // 카드 더블 클릭이 되면 카드 등록 폼으로 형태를 바꾸어줍니다.

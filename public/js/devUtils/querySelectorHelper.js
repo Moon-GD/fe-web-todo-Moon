@@ -7,7 +7,7 @@ const ID = "id";
 const $ROOT_NODE = document.documentElement;
 const $BODY_NODE = $ROOT_NODE.children[1];
 
-// 단일 query를 명령어 객체로 반환합니다.
+/** 단일 query를 명령어 객체로 반환합니다. */
 function singleQueryToObject(query) {
     let queryObj = {
         [TAG]: [],
@@ -20,25 +20,16 @@ function singleQueryToObject(query) {
     query = query.split(" ").sort((a, b) => { return a - b });
 
     for(let i=0;i<query.length;i++) {
-        // 사용자가 임의로 넣은 공백은 무시합니다.
-        if(query[i] == "") { continue; }
-        else if(query[i][0] == ".") {
-            queryObj[CLASS].push(query[i].slice(1, ));
-        }
-        else if(query[i][0] == "#") {
-            queryObj[ID].push(query[i].slice(1, ));
-        }
-        else {
-            // upperCase로 태그 이름을 저장하는 이유?
-            // 특정 돔에 접근해서 태그 이름을 반환해보면 모두 대문자임! (Ex: div 노드의 태그 이름을 찾아보면? -> "DIV" )
-            queryObj[TAG].push(query[i].toUpperCase());
-        }
+        if(query[i] == "") { continue; } // 사용자가 임의로 넣은 공백은 무시합니다.
+        else if(query[i][0] == ".") { queryObj[CLASS].push(query[i].slice(1, )); }
+        else if(query[i][0] == "#") { queryObj[ID].push(query[i].slice(1, )); }
+        else { queryObj[TAG].push(query[i].toUpperCase()); }
     }
 
     return queryObj;
 }
 
-// 복합 query를 단일 쿼리의 리스트로 반환합니다.
+/** 복합 query를 단일 쿼리의 리스트로 반환합니다. */
 function multipleQueryToList(multipleQuery) {
     multipleQuery = multipleQuery.replace(/>/g, " > ");
     
@@ -48,50 +39,47 @@ function multipleQueryToList(multipleQuery) {
     return listToBeReturned;
 }
 
-// query에 해당하는 노드인지를 boolean으로 반환합니다.
+/** query에 해당 노드 여부를 boolean으로 반환합니다. */
 function valiedateNodeByQuery(node, queryObj) {
     const tags = queryObj[TAG];
     const classes = queryObj[CLASS];
     const ids = queryObj[ID];
     
-    // tag 체크
     for(let i=0;i<tags.length;i++) {
         if(node.tagName != tags[i]) { return false; }
     }
     
-    // class 체크
     for(let i=0;i<classes.length;i++) {
         if(classes[i] in node.classList) { return false; }
     }
 
-    // id 체크
     for(let i=0;i<ids.length;i++) {
         if(node.id != ids[i]) { return false; }
     }
 
-    return true;  // 모든 타당성 검사를 통과한 경우에만 true 반환
+    return true;
 }
 
-// 시작 지점에서 query에 해당하는 모든 자식 노드를 리스트 형태로 반환합니다.
+/** $startNode에서 query에 해당하는 모든 자식 노드를 리스트 형태로 반환합니다. */
 function findAllChildren(query, $startNode=$BODY_NODE) {
     const queryObj = singleQueryToObject(query);
     const $childNodeList = $startNode.children;
     let listToBeReturned = [];
 
-    $childNodeList.forEach(($chilNode) => {
+    $childNodeList.forEach(($childNode) => {
         if(valiedateNodeByQuery($childNode, queryObj)) { listToBeReturned.push($childNode); }
     })
 
     return listToBeReturned;
 }
 
-// 단일 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다.
+/** 단일 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다. */
 function singleQuerySelector(query, $startNode=$BODY_NODE) {
     const queryObj = singleQueryToObject(query);
     const queue = new Queue();
     queue.enque($startNode);
 
-    // BFS 방식으로 순회
+    // BFS 순회
     while(queue.getLength()) {
         const $currentDom = queue.deque();
         
@@ -103,14 +91,14 @@ function singleQuerySelector(query, $startNode=$BODY_NODE) {
     return null;
 }
 
-// 단일 쿼리에 해당하는 모든 노드를 리스트 형태로 반환합니다.
+/** 단일 쿼리에 해당하는 모든 노드를 리스트 형태로 반환합니다. */
 function singleQuerySelectorAll(query, $startNode=$BODY_NODE) {
     let listToBeReturned = [];
     const queryObj = singleQueryToObject(query);
     const queue = new Queue();
     queue.enque($startNode);
 
-    // BFS 방식으로 순회
+    // BFS 순회
     while(queue.getLength()) {
         const $currentDom = queue.deque();
 
@@ -122,7 +110,7 @@ function singleQuerySelectorAll(query, $startNode=$BODY_NODE) {
     return listToBeReturned;
 }
 
-// 복합 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다.
+/** 복합 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다. */
 function multipleQuerySelector(multipleQuery, $startNode=$BODY_NODE) {
     const multipleQueryList = multipleQueryToList(multipleQuery);
     let queryListIndex = 0;
@@ -157,7 +145,7 @@ function multipleQuerySelector(multipleQuery, $startNode=$BODY_NODE) {
     return $endNodeList[0];
 }
 
-// 복합 쿼리에 해당하는 모든 노드를 리스트 형태로 반환합니다.
+/** 복합 쿼리에 해당하는 모든 노드를 리스트 형태로 반환합니다. */
 function multipleQuerySelectorAll(multipleQuery, $startNode=$BODY_NODE) {
     const multipleQueryList = multipleQueryToList(multipleQuery);
     let queryListIndex = 0;
@@ -186,8 +174,7 @@ function multipleQuerySelectorAll(multipleQuery, $startNode=$BODY_NODE) {
         queryListIndex += 1;
     }
 
-    // 중복 제거
-    $endNodeList = Array.from(new Set($endNodeList));
+    $endNodeList = Array.from(new Set($endNodeList)); // 중복 제거
 
     return $endNodeList;
 }

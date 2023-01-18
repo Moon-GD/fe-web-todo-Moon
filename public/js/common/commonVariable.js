@@ -39,6 +39,10 @@ const CARD_OUTLINE_ORIGINAL = "none";
 const CARD_OUTLINE_HOVER = "0.2vh solid " + CARD_BTN_HOVER;
 const CARD_TEXT_HEIGHT = 2.5;
 
+// 검색된 카드 css 스타일링 value
+const SEARCHED_CARD_ORIGINAL = "0.2vh solid #fff";
+const SEARCHED_CARD_OUTLINE = "0.2vh solid red";
+
 // Fab 버튼 transition degree
 const FAB_BTN_DEGREE_MOVED = "rotate(-45deg)";
 const FAB_BTN_DEGREE_ORIGINAL = "rotate(0deg)";
@@ -79,6 +83,10 @@ const DATE = 1;
 const HOUR = 2;
 const MINUTE = 3;
 
+// css transition value
+const HALF_SECOND = "0.5s";
+const ONE_SECOND = "1s";
+
 export {
     // fetch url
     FETCH_CARD_URL, FETCH_STATUS_URL,
@@ -104,6 +112,9 @@ export {
     // Todo 카드 css 스타일 value
     CARD_BACKGROUND_ORIGINAL, CARD_BACKGROUND_HOVER, CARD_OUTLINE_ORIGINAL, CARD_OUTLINE_HOVER, CARD_TEXT_HEIGHT,
 
+    // 검색된 카드 css 스타일링 value
+    SEARCHED_CARD_OUTLINE, SEARCHED_CARD_ORIGINAL, 
+
     // Fab 버튼 transition degree
     FAB_BTN_DEGREE_MOVED, FAB_BTN_DEGREE_ORIGINAL,
 
@@ -126,5 +137,8 @@ export {
     DRAG_START, DRAG_OVER, DRAG_END, DROP,    
 
     // 사이드바 log 시간 변수
-    MONTH, DATE, HOUR, MINUTE
+    MONTH, DATE, HOUR, MINUTE,
+
+    // css transition value
+    HALF_SECOND, ONE_SECOND,
 }

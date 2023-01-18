@@ -42,7 +42,7 @@ function moveJSONDataOnLocal(prevStatus, nextStatus, cardID) {
     let nextCardList = cardListOnLocal[nextStatus];
 
     for(let i=0;i<prevCardList.length;i++) {
-        if(prevCardList[i].id == cardID) {
+        if(prevCardList[i] && prevCardList[i].id == cardID) {
             nextCardList.push(prevCardList[i]);
             prevCardList.splice(i, 1);
             break;
