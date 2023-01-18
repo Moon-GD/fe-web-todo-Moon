@@ -9,7 +9,7 @@ class SearchLogManager {
         this.#searchCount = {};
     }
 
-    // 새로운 검색 기록을 삽입합니다
+    /** 검색 기록을 삽입합니다. */
     addNewSearchLog(searchLog) {
         this.#searchLog.push(searchLog);
 
@@ -22,14 +22,14 @@ class SearchLogManager {
         }
     }
 
-    // 최근 검색 기록을 기반으로 검색어를 추천해줍니다
+    /** 검색어를 추천합니다. */
     suggestLog() {
         if(this.#searchLog.length == 0) { return null; }
 
         return this.#maxLog;
     }
 
-    // 검색어의 검색 빈도를 반환합니다
+    /** 검색어의 빈도를 반환합니다. */
     getSearchCount(searchLog) {
         if(this.#searchCount[searchLog]) {
             return this.#searchCount[searchLog];

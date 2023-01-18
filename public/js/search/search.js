@@ -15,7 +15,7 @@ function searchCard(searchInputValue) {
     menuLogSearch(searchInputValue);
 }
 
-// 카드의 색깔을 배경색을 일시적으로 바꾸어줍니다.
+/** 검색된 카드의 배경색을 일시적으로 바꿉니다. */
 function changeCardBackGroundColor(findTitle) {
     const $cardNodeList = document.querySelectorAll("div.card-frame");
     let $findingCardList = [];
@@ -36,7 +36,7 @@ function changeCardBackGroundColor(findTitle) {
     })
 }
 
-// 추천 검색어를 보여줍니다.
+/** 추천 검색어를 보여줍니다. */
 function showSuggestedLog() {
     if(searchLogManger.suggestLog()) {  $suggestedSearchText.innerHTML = "#" + searchLogManger.suggestLog(); }
     else { $suggestedSearchText.innerHTML = "아직 없습니다."; }

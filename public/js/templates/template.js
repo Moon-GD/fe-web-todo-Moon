@@ -27,7 +27,7 @@ function initialDataToTemplate() {
     })
 }
 
-// column 템플릿을 반환합니다.
+/** column 템플릿을 반환합니다. */
 function columnTemplate(columnTitle, cardCount = 0) {
     let $columnNode = document.createElement("section");
     $columnNode.classList.add("column")
@@ -69,7 +69,7 @@ function columnTemplate(columnTitle, cardCount = 0) {
     return $columnNode;
 }
 
-// 카드 템플릿을 반환합니다.
+/** 카드 템플릿을 반환합니다. */
 function cardTemplate(cardTitle, cardContent, cardAuthor="author by web", cardId) {
     let $cardNode = document.createElement("div");
     $cardNode.classList.add("card-frame");
@@ -93,7 +93,7 @@ function cardTemplate(cardTitle, cardContent, cardAuthor="author by web", cardId
     return $cardNode;
 }
 
-// 카드 등록 폼의 템플릿을 반환합니다.
+/** 카드 등록 템플릿을 반환합니다. */
 function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false) {
     let $newCardNode = document.createElement("div");
     $newCardNode.classList.add("new-card-frame");
@@ -119,7 +119,7 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
     return $newCardNode;
 }
 
-// 메뉴 로그 템플릿을 반환합니다. (add)
+/** 메뉴 log 템플릿을 반환합니다. (add) */
 function menuLogAddTemplate(content, status, emotion, author) {
     let $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
@@ -154,7 +154,7 @@ function menuLogAddTemplate(content, status, emotion, author) {
     return $menuFrame;
 }
 
-// 메뉴 로그 템플릿을 반환합니다. (delete)
+/** 메뉴 log 템플릿을 반환합니다. (delete) */
 function menuLogDeleteTemplate(content, status, emotion, author) {
     let $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
@@ -189,7 +189,7 @@ function menuLogDeleteTemplate(content, status, emotion, author) {
     return $menuFrame;
 }
 
-// 메뉴 로그 템플릿을 반환합니다. (delete all)
+/** 메뉴 log 템플릿을 반환합니다. (delete all) */
 function menuLogDeleteAllTemplate(emotion, author) {
     let $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
@@ -222,7 +222,7 @@ function menuLogDeleteAllTemplate(emotion, author) {
     return $menuFrame;
 }
 
-// 메뉴 로그 템플릿을 반환합니다. (move)
+/** 메뉴 log 템플릿을 반환합니다. (move) */
 function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
     let $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
@@ -258,7 +258,7 @@ function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
     return $menuFrame;
 }
  
-// 메뉴 로그 템플릿을 반환합니다. (update)
+/** 메뉴 log 템플릿을 반환합니다. (update) */
 function menuLogUpdateTemplate(title, status, emotion, author) {
     let $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
@@ -293,7 +293,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
     return $menuFrame;
 }
 
-// 메뉴 로그 템플릿을 반환합니다. (search)
+/** 메뉴 log 템플릿을 반환합니다. (search) */
 function menuSearchTemplate(searchLog, emotion, author) {
     let $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
@@ -329,7 +329,7 @@ function menuSearchTemplate(searchLog, emotion, author) {
     return $menuFrame;
 }
 
-// 헤더 템플릿을 반환합니다.
+/** column header 템플릿을 반환합니다. */
 function headerTitleTemplate(title, $originalHeaderDom) {
     const $headerDom = document.createElement("h3");
     const $inputDom = document.createElement("input");
