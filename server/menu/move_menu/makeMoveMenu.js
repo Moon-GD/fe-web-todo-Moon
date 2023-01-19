@@ -1,10 +1,7 @@
-import { 
-    MENU_ACTION, FETCH_MENU_URL, 
-    POST_METHOD, POST_HEADER 
-} from "../../../public/js/common/commonVariable.js";
+import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
-import { menuListOnLocal } from "../../../public/js/store/store.js";
+import { uploadMenuJSONOnServer, uploadMenuJSONOnLocal } from "../common_menu/common.js";
 
 /**
  * card 이동 menu json을 반환합니다.
@@ -25,24 +22,6 @@ function retureMoveMenuJSON(prevColumnName, nextColumnName, cardTitle) {
 }
 
 /**
- * card 이동 menu JSON을 server에 생성합니다.
- * @param {Object} menuJSON menu JSON
- */
-function makeMoveMenuJSONOnServer(menuJSON) {
-    fetch(FETCH_MENU_URL, {
-        method: POST_METHOD,
-        headers: POST_HEADER,
-        body: JSON.stringify(menuJSON)
-    });
-}
-
-/**
- * card 이동 menu JSON을 server에 생성합니다.
- * @param {Object} menuJSON menu JSON
- */
-function makeMoveMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
-
-/**
  * card 이동 menu JSON 데이터를 생성합니다. (server, local)
  * @param {String} prevColumnName 이전 column name
  * @param {String} nextColumnName 다음 column name
@@ -50,8 +29,8 @@ function makeMoveMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
  */
 function makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle) {
     const menuJSON = retureMoveMenuJSON(prevColumnName, nextColumnName, cardTitle);
-    makeMoveMenuJSONOnServer(menuJSON);
-    makeMoveMenuJSONOnLocal(menuJSON);
+    uploadMenuJSONOnServer(menuJSON);
+    uploadMenuJSONOnLocal(menuJSON);
 }
 
 export { makeMoveMenuJSON }
