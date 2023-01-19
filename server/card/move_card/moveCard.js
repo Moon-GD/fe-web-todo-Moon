@@ -2,7 +2,11 @@ import { cardListOnLocal } from "../../../public/js/store/store.js";
 import { moveJSONDataOnOneColumn, moveJSONDataOnTwoColumn } from "./updateCardOrder.js";
 import { FETCH_CARD_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
 
-/** 로컬에서 card JSON 데이터를 이동합니다. */
+/** 로컬에서 card JSON 데이터를 이동합니다.
+ * @param {number} prevStatus 이전 column status
+ * @param {number} nextStatus 다음 column status
+ * @param {string} cardID card ID
+ */
 function moveCardJSONDataOnLocal(prevStatus, nextStatus, cardID) {
     let prevCardList = cardListOnLocal[prevStatus];
     let nextCardList = cardListOnLocal[nextStatus];
@@ -16,7 +20,10 @@ function moveCardJSONDataOnLocal(prevStatus, nextStatus, cardID) {
     }
 }
 
-/** 서버에서 card JSON 데이터를 이동합니다. */
+/** 서버에서 card JSON 데이터를 이동합니다.
+ * @param {number} nextStatus 다음 column status
+ * @param {string} cardID card ID
+ */
 function moveCardJSONDataOnServer(nextStatus, cardID) {
     fetch(FETCH_CARD_URL + "/" + cardID, {
         method: PATCH_METHOD,
@@ -25,12 +32,21 @@ function moveCardJSONDataOnServer(nextStatus, cardID) {
     })
 }
 
+/** card JSON 데이터를 이동합니다.
+ * @param {number} prevStatus 이전 column status
+ * @param {number} nextStatus 다음 column status
+ * @param {string} cardID card ID
+ */
 function moveCardJsonData(prevStatus, nextStatus, cardID) {
     moveCardJSONDataOnLocal(prevStatus, nextStatus, cardID);
     moveCardJSONDataOnServer(nextStatus, cardID)
 }
 
-/** 해당하는 JSON 데이터를 이동합니다. */
+/** 카드 이동이 발생하면 카드, 카드 순서, column에 관련 정보를 갱신합니다.
+ * @param {number} prevStatus 이전 column status
+ * @param {number} nextStatus 다음 column status
+ * @param {string} cardID card ID
+*/
 function moveJSONData(prevStatus, nextStatus, cardID) {
     moveCardJsonData(prevStatus, nextStatus, cardID);
 

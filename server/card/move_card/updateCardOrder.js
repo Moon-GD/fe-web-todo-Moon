@@ -1,6 +1,7 @@
 import { statusListOnLocal } from "../../../public/js/store/store.js";
 import { CARD_ORDER, FETCH_STATUS_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
-import { getColumnNodeByStatus, getCardOrderByColumn } from "../../../public/js/component/column.js";
+import { getColumnNodeByStatus, getCardOrderByColumn, updateColumnLength } from "../../../public/js/component/column.js";
+import { pipe } from "../../../public/js/common/commonFunction.js";
 
 function changeCardOrderOnLocal(statusID, newCardOrder) {
     statusListOnLocal[statusID][CARD_ORDER] = newCardOrder;
