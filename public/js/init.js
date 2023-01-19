@@ -4,7 +4,7 @@ import {
 import { getAllJSONData } from "../../server/init.js";
 import { initialDataToTemplate } from "./templates/template.js";
 import { idGenerator } from "./common/IDGenerator.js";
-import { getMenuJSON } from "../../server/menu/get_menu/getMenu.js";
+import { getAllMenuJSON } from "../../server/menu/get_menu/getMenu.js";
 
 function addEventsToWebsite() {
     initialDataToTemplate();
@@ -17,7 +17,7 @@ function addEventsToWebsite() {
 ( async () => {
     await getAllJSONData();
     await idGenerator.initialize();
-    getMenuJSON();
+    getAllMenuJSON();
     
     // 사이트에 이벤트를 추가합니다
     addEventsToWebsite();

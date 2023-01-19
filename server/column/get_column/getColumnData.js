@@ -4,6 +4,10 @@ import {
 } from "../../../public/js/common/commonVariable.js";
 import { statusListOnLocal, cardListOnLocal } from "../../../public/js/store/store.js";
 
+/**
+ * 서버의 menu JSON을 분류하여 local에 저장합니다.
+ * @param {Array} statusJSONList 
+ */
 function classifyStatusJSONList(statusJSONList) {
     statusJSONList.forEach((statusJSON) => {
         const statusIndex = statusJSON[STATUS_INDEX];
@@ -21,7 +25,9 @@ function classifyStatusJSONList(statusJSONList) {
     })
 }
 
-/** status 관련 모든 JSON 데이터를 불러옵니다. */
+/**
+ * column JSON 데이터를 서버에서 불러옵니다.
+ */
 async function getAllStatusJSONData() {
     await fetch(FETCH_STATUS_URL, { method: GET_METHOD })
     .then((res) => { return res.json(); })

@@ -4,12 +4,14 @@ import {
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, 
     menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../../templates/template.js";
+import { createMenuJSON } from "../../../../server/menu/create_menu/createMenu.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
 
 /** 메뉴에 add log를 남깁니다. */
 function menuLogAdd(title, status, emotion="🥳", author="@sam") {
+    createMenuJSON(status, title);
     $menuContent.prepend(menuLogAddTemplate(title, status, emotion, author));
 }
 

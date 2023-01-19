@@ -21,6 +21,30 @@ const STATUS_NAME = "statusName";
 const CARD_ID = "id";
 const CARD_ORDER = "order";
 
+// json menu key
+const MENU = {
+    ACTION: "action",
+    ACTION_TIME: "actionTime",
+    ID: "id",
+    PREV_COLUMN_NAME: "prevColumnName",
+    NEXT_COLUMN_NAME: "nextColumnName",
+    COLUMN_NAME: "columnName",
+    CARD_TITLE: "cardTitle",
+    SEARCH_INPUT: "searchInput",
+    SEARCH_FREQUENCY: "searchFrequency"
+
+}
+
+// json menu action
+const MENU_ACTION = {
+    CREATE: "CREATE",
+    UPDATE: "UPDATE",
+    DELETE: "DELETE",
+    DELETE_ALL: "DELETE_ALL",
+    MOVE: "MOVE",
+    SEARCH: "SEARCH"
+}
+
 // HTTP status
 const HTTP_SUCCESS = 200
 
@@ -101,6 +125,12 @@ export {
 
     // fetch json key
     STATUS, STATUS_ID, STATUS_INDEX, STATUS_NAME, CARD_ID, CARD_ORDER,
+
+    // json menu key
+    MENU,
+
+    // json menu action
+    MENU_ACTION,
 
     // HTTP status
     HTTP_SUCCESS,
