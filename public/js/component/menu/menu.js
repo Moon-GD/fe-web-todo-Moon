@@ -8,6 +8,7 @@ import { makeCreateMenuJSON } from "../../../../server/menu/create_menu/makeCrea
 import { makeDeleteMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteMenu.js";
 import { makeSearchMenuJSON } from "../../../../server/menu/search_menu/makeSearchMenu.js";
 import { searchLogManger } from "../../search/searchLogManager.js";
+import { makeDeleteAllMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteAllMenu.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
@@ -26,6 +27,7 @@ function menuLogDelete(title, status, emotion="🥳", author="@sam") {
 
 /** 메뉴에 delete all log를 남깁니다. */
 function menuLogDeleteAll(emotion="🥳", author="@sam") {
+    makeDeleteAllMenuJSON()
     $menuContent.prepend(menuLogDeleteAllTemplate(emotion, author));
 }
 
