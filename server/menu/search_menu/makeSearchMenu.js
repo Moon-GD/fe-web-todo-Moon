@@ -1,7 +1,8 @@
 import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
+import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
-import { uploadMenuJSONOnServer, uploadMenuJSONOnLocal } from "../common_menu/common.js";
+import { uploadMenuJSON } from "../common_menu/common.js";
 
 /**
  * card 검색 menu json을 반환합니다.
@@ -9,7 +10,7 @@ import { uploadMenuJSONOnServer, uploadMenuJSONOnLocal } from "../common_menu/co
  * @param {Number} searchFrequency 검색 빈도
  * @returns 
  */
-function returnSearchMenuJSON(searchInput, searchFrequency) {
+function returnSearchMenuJSON([searchInput, searchFrequency]) {
     return {
         "action": MENU_ACTION.SEARCH,
         "actionTime": getCurrentTimeInString(),
@@ -25,9 +26,10 @@ function returnSearchMenuJSON(searchInput, searchFrequency) {
  * @param {Number} searchFrequency 검색 빈도
  */
 function makeSearchMenuJSON(searchInput, searchFrequency) {
-    const menuJSON = returnSearchMenuJSON(searchInput, searchFrequency);
-    uploadMenuJSONOnServer(menuJSON);
-    uploadMenuJSONOnLocal(menuJSON);
+    pipe(
+        returnSearchMenuJSON,
+        uploadMenuJSON
+    )([searchInput, searchFrequency])
 }
 
 export { makeSearchMenuJSON }

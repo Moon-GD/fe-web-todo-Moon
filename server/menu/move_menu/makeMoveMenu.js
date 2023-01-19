@@ -1,7 +1,8 @@
 import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
+import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
-import { uploadMenuJSONOnServer, uploadMenuJSONOnLocal } from "../common_menu/common.js";
+import { uploadMenuJSON } from "../common_menu/common.js";
 
 /**
  * card 이동 menu json을 반환합니다.
@@ -10,7 +11,7 @@ import { uploadMenuJSONOnServer, uploadMenuJSONOnLocal } from "../common_menu/co
  * @param {String} cardTitle card title
  * @returns 
  */
-function retureMoveMenuJSON(prevColumnName, nextColumnName, cardTitle) {
+function retureMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
     return {
         "action": MENU_ACTION.MOVE,
         "actionTime": getCurrentTimeInString(),
@@ -28,9 +29,10 @@ function retureMoveMenuJSON(prevColumnName, nextColumnName, cardTitle) {
  * @param {String} cardTitle card title
  */
 function makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle) {
-    const menuJSON = retureMoveMenuJSON(prevColumnName, nextColumnName, cardTitle);
-    uploadMenuJSONOnServer(menuJSON);
-    uploadMenuJSONOnLocal(menuJSON);
+    pipe(
+        retureMoveMenuJSON,
+        uploadMenuJSON
+    )([prevColumnName, nextColumnName, cardTitle])
 }
 
 export { makeMoveMenuJSON }

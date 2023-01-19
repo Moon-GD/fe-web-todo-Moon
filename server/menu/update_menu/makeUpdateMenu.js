@@ -1,7 +1,8 @@
 import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
+import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
-import { uploadMenuJSONOnServer, uploadMenuJSONOnLocal } from "../common_menu/common.js";
+import { uploadMenuJSON } from "../common_menu/common.js";
 /**
  * card 수정 menu json을 반환합니다.
  * @param {String} columnName column name
@@ -24,9 +25,10 @@ function returnUpdateMenuJSON(columnName, cardTitle) {
  * @param {String} cardTitle 
  */
 function makeUpdateMenuJSON(columnName, cardTitle) {
-    const menuJSON = returnUpdateMenuJSON(columnName, cardTitle);
-    uploadMenuJSONOnServer(menuJSON);
-    uploadMenuJSONOnLocal(menuJSON);
+    pipe(
+        returnUpdateMenuJSON,
+        uploadMenuJSON
+    )([columnName, cardTitle])
 }
 
 export { makeUpdateMenuJSON }
