@@ -2,7 +2,7 @@ import {
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
     DISPLAY_FLEX, DISPLAY_NONE, STATUS_ID, STATUS_NAME
 } from "../common/commonVariable.js";
-import { querySelector, querySelectorAll } from "../devUtils/querySelector.js";
+import { querySelector } from "../devUtils/querySelector.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { deleteStatus } from "../../../server/DELETE.js";
@@ -10,6 +10,7 @@ import { updateStatusName } from "../../../server/PATCH.js";
 import { addStatus } from "../../../server/POST.js";
 import { validateNewStatusName } from "../../../server/validateData.js";
 import { pipe } from "../common/commonFunction.js";
+import { idGenerator } from "../common/IDGenerator.js";
 
 const $mainTag = querySelector("main");
 
@@ -24,16 +25,13 @@ function columnDeleteEvent($columnDeleteBtn, $column) {
 
 /** column을 추가합니다. */
 function addColumn(columnName="제목 없음") {
-    pipe(
-        columnTemplate,
-        ($column) => {
-            $mainTag.appendChild($column);
-            $column.scrollIntoView({behavior:'smooth'})
-        }
-    )(columnName)
+    let newColumnID = idGenerator.createStatusID();
+    const $column = columnTemplate(columnName, newColumnID);
+    $mainTag.appendChild($column);
+    $column.scrollIntoView({behavior: "smooth"});
 
     // data 영역에도 status 추가
-    addStatus(columnName);
+    addStatus(columnName, newColumnID);
 }
 
 /** 카드가 속한 column의 header 이름을 반환합니다. */

@@ -1,9 +1,10 @@
 import { 
     FETCH_STATUS_URL, FETCH_CARD_URL,
     STATUS_ID, STATUS_NAME,
-    PATCH_METHOD, PATCH_HEADER 
+    PATCH_METHOD, PATCH_HEADER, CARD_ID 
 } from "../public/js/common/commonVariable.js";
-import { updateColumnLength } from "../public/js/component/column.js";
+import { findCardHeaderName, findColumnStatusByCard, updateColumnLength } from "../public/js/component/column.js";
+import { querySelector } from "../public/js/devUtils/querySelector.js";
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 
 /** 로컬에서 status의 이름을 바꾸어 줍니다. */
@@ -61,6 +62,15 @@ function moveJSONDataOnServer(cardID, nextStatus) {
 
 /** 해당하는 JSON 데이터를 이동합니다. */
 function moveJSONData(prevStatus, nextStatus, cardID) {
+    const $dragCard = querySelector("#" + cardID);
+    const $currentColumn = $dragCard.closest(".column");
+    const $cardList = $currentColumn.querySelectorAll(".card-frame");
+    const orderList = $cardList.map(($card) => $card.getAttribute(CARD_ID));
+
+    console.log(orderList);
+
+
+
     moveJSONDataOnServer(cardID, nextStatus);
     moveJSONDataOnLocal(prevStatus, nextStatus, cardID);
 

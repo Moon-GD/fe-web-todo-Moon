@@ -22,8 +22,7 @@ function addStatusOnServer(newStatusJSON) {
 }
 
 /** status를 추가합니다. */
-function addStatus(statusName) {
-    let newStatusID = idGenerator.createStatusID();
+function addStatus(statusName, newStatusID) {
     let newStatusJSON = {
         id: newStatusID,
         statusIndex: newStatusID,
@@ -62,6 +61,4 @@ function addCardJSON(status, title, content, cardID) {
     updateColumnLength(status);
 }
 
-export {
-    addStatus, addCardJSON
-}
+export { addStatus, addCardJSON }

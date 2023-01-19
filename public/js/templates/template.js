@@ -16,14 +16,13 @@ import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
 /** 초기 데이터를 템플릿으로 구성합니다. */
 function initialDataToTemplate() {
     statusListOnLocal.forEach(({id: statusID, statusName}) => {
-        let $newColumn = columnTemplate(statusName, cardListOnLocal[statusID].length);
+        let $newColumn = columnTemplate(statusName, statusID, cardListOnLocal[statusID].length);
         let $cardArea = $newColumn.querySelector("article");
 
         cardListOnLocal[statusID].forEach((cardData) => {
             let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author, cardData[CARD_ID]);
             makeCardDragEvent($newCard);
-    
-            $cardArea.prepend($newCard);
+            $cardArea.appendChild($newCard);
         })    
 
         $mainTag.appendChild($newColumn);
@@ -31,9 +30,10 @@ function initialDataToTemplate() {
 }
 
 /** column 템플릿을 반환합니다. */
-function columnTemplate(columnTitle, cardCount = 0) {
+function columnTemplate(columnTitle, columnID, cardCount = 0) {
     let $column = document.createElement("section");
     $column.classList.add("column")
+    $column.setAttribute("id", columnID);
 
     $column.innerHTML = `
             <h3>
@@ -77,7 +77,7 @@ function cardTemplate(cardTitle, cardContent, cardAuthor="author by web", cardId
     let $card = document.createElement("div");
     $card.classList.add("card-frame");
     $card.setAttribute("draggable", true);
-    $card.setAttribute("id", cardId);  // drag 이벤트를 위해 카드에 ID 부여
+    $card.setAttribute(CARD_ID, cardId);  // drag 이벤트를 위해 카드에 ID 부여
 
     $card.innerHTML = `
         <h3 class="card-title">${cardTitle}
