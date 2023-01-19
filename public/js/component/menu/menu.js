@@ -9,6 +9,7 @@ import { makeDeleteMenuJSON } from "../../../../server/menu/delete_menu/makeDele
 import { makeSearchMenuJSON } from "../../../../server/menu/search_menu/makeSearchMenu.js";
 import { searchLogManger } from "../../search/searchLogManager.js";
 import { makeDeleteAllMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteAllMenu.js";
+import { makeUpdateMenuJSON } from "../../../../server/menu/update_menu/makeUpdateMenu.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
@@ -40,6 +41,7 @@ function menuLogMove(title, prevStatus, nextStatus, emotion="🥳", author="@sam
 
 /** 메뉴에 update log를 남깁니다. */
 function menuLogUpdate(title, status, emotion="🥳", author="@sam") {
+    makeUpdateMenuJSON(status, title);
     $menuContent.prepend(menuLogUpdateTemplate(title, status, emotion, author));
 }
 
