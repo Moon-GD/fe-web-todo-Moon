@@ -23,7 +23,7 @@ function returnDeleteMenuJSON(columnName, cardTitle) {
  * card 생성 menu JSON을 server에 생성합니다.
  * @param {Object} menuJSON menu JSON
  */
-function makedeleteMenuJSONOnServer(menuJSON) {
+function makeDeleteMenuJSONOnServer(menuJSON) {
     fetch(FETCH_MENU_URL, {
         method: POST_METHOD,
         headers: POST_HEADER,
@@ -35,17 +35,17 @@ function makedeleteMenuJSONOnServer(menuJSON) {
  * card 생성 menu JSON을 local에 생성합니다.
  * @param {Object} menuJSON menu JSON
  */
-function makedeleteMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
+function makeDeleteMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
 
 /**
  * card 삭제 menu JSON 데이터를 생성합니다. (server, local)
  * @param {String} columnName column name
  * @param {String} cardTitle card title
  */
-function makedeleteMenuJSON(columnName, cardTitle) {
+function makeDeleteMenuJSON(columnName, cardTitle) {
     const menuJSON = returnDeleteMenuJSON(columnName, cardTitle);
-    makedeleteMenuJSONOnServer(menuJSON);
-    makedeleteMenuJSONOnLocal(menuJSON);
+    makeDeleteMenuJSONOnServer(menuJSON);
+    makeDeleteMenuJSONOnLocal(menuJSON);
 }
 
-export { makedeleteMenuJSON }
+export { makeDeleteMenuJSON }

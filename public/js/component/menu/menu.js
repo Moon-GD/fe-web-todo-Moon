@@ -5,7 +5,9 @@ import {
     menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../../templates/template.js";
 import { makeCreateMenuJSON } from "../../../../server/menu/create_menu/makeCreateMenu.js";
-import { makedeleteMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteMenu.js";
+import { makeDeleteMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteMenu.js";
+import { makeSearchMenuJSON } from "../../../../server/menu/search_menu/makeSearchMenu.js";
+import { searchLogManger } from "../../search/searchLogManager.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
@@ -18,7 +20,7 @@ function menuLogAdd(title, status, emotion="🥳", author="@sam") {
 
 /** 메뉴에 delete log를 남깁니다. */
 function menuLogDelete(title, status, emotion="🥳", author="@sam") {
-    makedeleteMenuJSON(status, title)
+    makeDeleteMenuJSON(status, title)
     $menuContent.prepend(menuLogDeleteTemplate(title, status, emotion, author));
 }
 
@@ -41,6 +43,7 @@ function menuLogUpdate(title, status, emotion="🥳", author="@sam") {
 
 /** 메뉴에 search log를 남깁니다. */
 function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
+    makeSearchMenuJSON(searchLog, searchLogManger.getSearchCount(searchLog))
     $menuContent.prepend(menuSearchTemplate(searchLog, emotion, author));
 }
 
