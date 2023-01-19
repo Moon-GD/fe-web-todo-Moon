@@ -1,6 +1,6 @@
 import { 
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
-    DISPLAY_FLEX, DISPLAY_NONE, STATUS_ID, STATUS_NAME
+    DISPLAY_FLEX, DISPLAY_NONE, STATUS_ID, STATUS_NAME, CARD_ID
 } from "../common/commonVariable.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
@@ -107,9 +107,20 @@ function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
     })
 }
 
+function getColumnNodeByStatus(columnStatus) {
+    const $columnList = document.querySelectorAll(".column");
+    return $columnList.find(($column) => $column.getAttribute("id") == `column-${columnStatus}`);
+}
+
+function getCardOrderByColumn($column) {
+    const $cardList = $column.querySelectorAll(".card-frame");
+    return $cardList.map(($card) => $card.getAttribute(CARD_ID));
+}
+
 export { 
     $mainTag,
     columnDeleteEvent, findColumnStatusByCard, addColumn, 
     findCardHeaderName, updateColumnLength,
-    headerDoubleClickEvent, inputFocusOutEvent
+    headerDoubleClickEvent, inputFocusOutEvent,
+    getColumnNodeByStatus, getCardOrderByColumn
 }

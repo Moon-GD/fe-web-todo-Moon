@@ -7,6 +7,7 @@ import {
 HTMLCollection.prototype.forEach = Array.prototype.forEach;
 NodeList.prototype.filter = Array.prototype.filter;
 NodeList.prototype.map = Array.prototype.map;
+NodeList.prototype.find = Array.prototype.find
 
 /** 원하는 노드를 찾아 노드 형태로 반환합니다. */
 function querySelector(query) {

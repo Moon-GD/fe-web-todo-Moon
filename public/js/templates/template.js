@@ -33,7 +33,7 @@ function initialDataToTemplate() {
 function columnTemplate(columnTitle, columnID, cardCount = 0) {
     let $column = document.createElement("section");
     $column.classList.add("column")
-    $column.setAttribute("id", columnID);
+    $column.setAttribute("id", `column-${columnID}`);
 
     $column.innerHTML = `
             <h3>
