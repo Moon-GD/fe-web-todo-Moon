@@ -9,10 +9,9 @@ import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu/menu.js";
 import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { deleteCardData } from "../../../server/DELETE.js";
+import { deleteCardData } from "../../../server/card/delete_card/deleteCard.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/POST.js";
-import { pipe } from "../common/commonFunction.js";
 
 let $chosenCard = "";
 let registering = false;
