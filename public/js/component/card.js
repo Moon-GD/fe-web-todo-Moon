@@ -11,7 +11,7 @@ import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteCardData } from "../../../server/card/delete_card/deleteCard.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
-import { addCardJSON } from "../../../server/POST.js";
+import { addCardJSON } from "../../../server/card/create_card/createCard.js";
 
 let $chosenCard = "";
 let registering = false;

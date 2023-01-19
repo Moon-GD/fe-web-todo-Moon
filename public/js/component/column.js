@@ -6,7 +6,7 @@ import { querySelector } from "../devUtils/querySelector.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { updateStatusName } from "../../../server/PATCH.js";
-import { addStatus } from "../../../server/POST.js";
+import { addStatus } from "../../../server/column/create_column/createColumn.js";
 import { validateNewStatusName } from "../../../server/column/validate_column/validateColumn.js";
 import { pipe } from "../common/commonFunction.js";
 import { idGenerator } from "../common/IDGenerator.js";
