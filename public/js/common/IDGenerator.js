@@ -9,7 +9,7 @@ class IDGenerator {
     }
 
     createCardID() {
-        this.#cardID = new Date()
+        this.#cardID = new Date().getTime()
 
         return this.#cardID;
     }

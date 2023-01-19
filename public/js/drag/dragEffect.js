@@ -8,7 +8,7 @@ const makeCardLight = ($card) => {
     return $card;
 }
 const makeCardDark = ($card) => {
-    $card.style.opacity = 0.5;
+    $card.style.opacity = 0.5;  
     return $card;
 }
 

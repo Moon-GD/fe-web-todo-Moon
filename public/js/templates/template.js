@@ -73,18 +73,18 @@ function columnTemplate(columnTitle, columnID, cardCount = 0) {
 }
 
 /** 카드 템플릿을 반환합니다. */
-function cardTemplate(cardTitle, cardContent, cardAuthor="author by web", cardId) {
+function cardTemplate(cardTitle, cardContent, cardAuthor, cardId) {
     let $card = document.createElement("div");
     $card.classList.add("card-frame");
     $card.setAttribute("draggable", true);
     $card.setAttribute(CARD_ID, cardId);  // drag 이벤트를 위해 카드에 ID 부여
-
+    
     $card.innerHTML = `
         <h3 class="card-title">${cardTitle}
             <i class="fa-solid fa-xmark"></i>
         </h3>
         <h4 class="card-content">${cardContent}</h4>
-        <h5 class="card-author">${cardAuthor}</h5>
+        <h5 class="card-author">${cardAuthor == "" ? "author by web" : cardAuthor}</h5>
     `;
 
     // 더블 클릭 이벤트 추가
