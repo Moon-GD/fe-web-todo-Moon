@@ -1,17 +1,17 @@
-import { FETCH_MENU_URL, POST_HEADER, POST_METHOD } from "../../../public/js/common/commonVariable.js";
+import { FETCH_MENU_URL, POST_HEADER, POST_METHOD, MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { menuListOnLocal } from "../../../public/js/store/store.js";
 
 /**
- * menu json을 반환합니다. (create card)
+ * card 생성 menu json을 반환합니다.
  * @param {string} columnName 
  * @param {string} cardTitle
  * @returns {Object} menu JSON (create)
  */
-function makeCreatMenuJSON(columnName, cardTitle) {
+function returnCreateMenuJSON(columnName, cardTitle) {
     return {
-        "action": "CREATE",
+        "action": MENU_ACTION.CREATE,
         "actionTime": getCurrentTimeInString(),
         "id": idGenerator.createMenuID(),
         "columnName": columnName,
@@ -20,10 +20,10 @@ function makeCreatMenuJSON(columnName, cardTitle) {
 }
 
 /**
- * menu JSON을 server에 생성합니다.
+ * card 생성 menu JSON을 server에 생성합니다.
  * @param {Object} menuJSON create menu JSON 
  */
-function createMenuJSONOnServer(menuJSON) {
+function makeCreateMenuJSONOnServer(menuJSON) {
     fetch(FETCH_MENU_URL, {
         method: POST_METHOD,
         headers: POST_HEADER,
@@ -32,20 +32,20 @@ function createMenuJSONOnServer(menuJSON) {
 }
 
 /**
- * menu JSON을 local에 생성합니다.
+ * card 생성 menu JSON을 local에 생성합니다.
  * @param {Object} menuJSON 
  */
-function createMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
+function makeCreateMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
 
 /**
- * menu JSON 데이터를 생성합니다. (server, local)
+ * card 생성 menu JSON 데이터를 생성합니다. (server, local)
  * @param {String} columnName column name
  * @param {String} cardTitle card title
  */
-function createMenuJSON(columnName, cardTitle) {
-    const menuJSON = makeCreatMenuJSON(columnName, cardTitle);
-    createMenuJSONOnServer(menuJSON);
-    createMenuJSONOnLocal(menuJSON);
+function makeCreateMenuJSON(columnName, cardTitle) {
+    const menuJSON = returnCreateMenuJSON(columnName, cardTitle);
+    makeCreateMenuJSONOnServer(menuJSON);
+    makeCreateMenuJSONOnLocal(menuJSON);
 }
 
-export { createMenuJSON }
+export { makeCreateMenuJSON }

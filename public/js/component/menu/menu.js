@@ -4,19 +4,21 @@ import {
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, 
     menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../../templates/template.js";
-import { createMenuJSON } from "../../../../server/menu/create_menu/createMenu.js";
+import { makeCreateMenuJSON } from "../../../../server/menu/create_menu/makeCreateMenu.js";
+import { makedeleteMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteMenu.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
 
 /** 메뉴에 add log를 남깁니다. */
 function menuLogAdd(title, status, emotion="🥳", author="@sam") {
-    createMenuJSON(status, title);
+    makeCreateMenuJSON(status, title);
     $menuContent.prepend(menuLogAddTemplate(title, status, emotion, author));
 }
 
 /** 메뉴에 delete log를 남깁니다. */
 function menuLogDelete(title, status, emotion="🥳", author="@sam") {
+    makedeleteMenuJSON(status, title)
     $menuContent.prepend(menuLogDeleteTemplate(title, status, emotion, author));
 }
 

@@ -5,8 +5,7 @@ const TAG = "tagName";
 const CLASS = "className";
 const ID = "id";
 
-const $ROOT_NODE = document.documentElement;
-const $BODY_NODE = $ROOT_NODE.children[1];
+const $BODY_NODE = document.body;
 
 /** 단일 query를 명령어 객체로 반환합니다. */
 function singleQueryToObject(query) {
