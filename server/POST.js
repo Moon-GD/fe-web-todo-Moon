@@ -2,7 +2,6 @@ import {
     FETCH_STATUS_URL, FETCH_CARD_URL, 
     POST_METHOD, POST_HEADER 
 } from "../public/js/common/commonVariable.js";
-import { idGenerator } from "../public/js/common/IDGenerator.js";
 import { updateColumnLength } from "../public/js/component/column.js";
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
 

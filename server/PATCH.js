@@ -1,7 +1,8 @@
+import { pipe } from "../public/js/common/commonFunction.js";
 import { 
     FETCH_STATUS_URL, FETCH_CARD_URL,
     STATUS_ID, STATUS_NAME,
-    PATCH_METHOD, PATCH_HEADER 
+    PATCH_METHOD, PATCH_HEADER, CARD_ORDER 
 } from "../public/js/common/commonVariable.js";
 import { getColumnNodeByStatus, updateColumnLength, getCardOrderByColumn } from "../public/js/component/column.js";
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
@@ -36,8 +37,8 @@ function updateStatusName(prevName, nextName) {
     updateStatusNameOnServer(statusID, nextName)
 }
 
-/** 로컬에서 JSON 데이터를 이동합니다. */
-function moveJSONDataOnLocal(prevStatus, nextStatus, cardID) {
+/** 로컬에서 card JSON 데이터를 이동합니다. */
+function moveCardJSONDataOnLocal(prevStatus, nextStatus, cardID) {
     let prevCardList = cardListOnLocal[prevStatus];
     let nextCardList = cardListOnLocal[nextStatus];
 
@@ -50,13 +51,22 @@ function moveJSONDataOnLocal(prevStatus, nextStatus, cardID) {
     }
 }
 
-/** 서버에서 JSON 데이터를 이동합니다. */
-function moveJSONDataOnServer(cardID, nextStatus) {
+/** 서버에서 card JSON 데이터를 이동합니다. */
+function moveCardJSONDataOnServer(nextStatus, cardID) {
     fetch(FETCH_CARD_URL + "/" + cardID, {
         method: PATCH_METHOD,
         headers: PATCH_HEADER,
         body: JSON.stringify({ status:nextStatus })
     })
+}
+
+function moveCardJsonData(prevStatus, nextStatus, cardID) {
+    moveCardJSONDataOnLocal(prevStatus, nextStatus, cardID);
+    moveCardJSONDataOnServer(nextStatus, cardID)
+}
+
+function changeCardOrderOnLocal(statusID, newCardOrder) {
+    statusListOnLocal[statusID][CARD_ORDER] = newCardOrder;
 }
 
 function changeCardOrderOnServer(statusID, newCardOrder) {
@@ -67,37 +77,33 @@ function changeCardOrderOnServer(statusID, newCardOrder) {
     })
 }
 
-function changeCardOrderOnLocal(statusID, newCardOrder) {
-    statusListOnLocal[statusID]["order"] = newCardOrder;
+function changeCardOrder(statusID, newCardOrder) {
+    changeCardOrderOnServer(statusID, newCardOrder);
+    changeCardOrderOnLocal(statusID, newCardOrder);
+}
+
+function moveJSONDataOnOneColumn(status) {
+    const $cardOrder = pipe(
+        getColumnNodeByStatus,
+        getCardOrderByColumn
+    )(status);
+
+    changeCardOrder(status, $cardOrder);
+    updateColumnLength(status);
+}
+
+function moveJSONDataOnTwoColumn(prevStatus, nextStatus) {
+    moveJSONDataOnOneColumn(prevStatus);
+    moveJSONDataOnOneColumn(nextStatus);
 }
 
 /** 해당하는 JSON 데이터를 이동합니다. */
 function moveJSONData(prevStatus, nextStatus, cardID) {
-    const $prevColumn = getColumnNodeByStatus(prevStatus);
-    const $nextColumn = getColumnNodeByStatus(nextStatus);
+    moveCardJsonData(prevStatus, nextStatus, cardID);
 
-    const $prevCardOrder = getCardOrderByColumn($prevColumn);
-    const $nextCardOrder = getCardOrderByColumn($nextColumn);
-
-    if(prevStatus == nextStatus) {
-        changeCardOrderOnServer(prevStatus, $prevCardOrder);
-        changeCardOrderOnLocal(prevStatus, $prevCardOrder);
-    }
-    else {
-        changeCardOrderOnServer(prevStatus, $prevCardOrder);
-        changeCardOrderOnLocal(prevStatus, $prevCardOrder);
-        changeCardOrderOnServer(nextStatus, $nextCardOrder);
-        changeCardOrderOnLocal(nextStatus, $nextCardOrder);
-    }
-
-    moveJSONDataOnServer(cardID, nextStatus);
-    moveJSONDataOnLocal(prevStatus, nextStatus, cardID);
-
-    // 이동 전 후 column의 길이 갱신
-    updateColumnLength(prevStatus);
-    updateColumnLength(nextStatus);
-
-    console.log(statusListOnLocal)
+    prevStatus == nextStatus ?
+            moveJSONDataOnOneColumn(prevStatus) :
+            moveJSONDataOnTwoColumn(prevStatus, nextStatus);
 }
 
 export { updateStatusName, moveJSONData }

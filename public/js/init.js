@@ -1,7 +1,7 @@
 import { 
     addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton, addEventToFabBtn 
 } from "./component/button.js";
-import { getAllJSONData } from "../../server/GET.js";
+import { getAllJSONData } from "../../server/init.js";
 import { initialDataToTemplate } from "./templates/template.js";
 
 function addEventsToWebsite() {

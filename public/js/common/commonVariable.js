@@ -18,6 +18,7 @@ const STATUS_ID = "id";
 const STATUS_INDEX = "statusIndex";
 const STATUS_NAME = "statusName";
 const CARD_ID = "id";
+const CARD_ORDER = "order";
 
 // HTTP status
 const HTTP_SUCCESS = 200
@@ -98,7 +99,7 @@ export {
     PATCH_HEADER, POST_HEADER,
 
     // fetch json key
-    STATUS, STATUS_ID, STATUS_INDEX, STATUS_NAME, CARD_ID,
+    STATUS, STATUS_ID, STATUS_INDEX, STATUS_NAME, CARD_ID, CARD_ORDER,
 
     // HTTP status
     HTTP_SUCCESS,

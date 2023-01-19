@@ -8,7 +8,7 @@ import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { deleteStatus } from "../../../server/DELETE.js";
 import { updateStatusName } from "../../../server/PATCH.js";
 import { addStatus } from "../../../server/POST.js";
-import { validateNewStatusName } from "../../../server/validateData.js";
+import { validateNewStatusName } from "../../../server/column/validate_column/validateColumn.js";
 import { pipe } from "../common/commonFunction.js";
 import { idGenerator } from "../common/IDGenerator.js";
 

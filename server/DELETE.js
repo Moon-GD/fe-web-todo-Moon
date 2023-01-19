@@ -1,12 +1,12 @@
 import { 
-    FETCH_STATUS_URL, FETCH_CARD_URL,
+    FETCH_STATUS_URL,
     DELETE_METHOD,
-    HTTP_SUCCESS,
     STATUS, STATUS_INDEX, STATUS_NAME,
     CARD_ID,
 } from "../public/js/common/commonVariable.js";
-import { findColumnStatusByCard, updateColumnLength } from "../public/js/component/column.js";
+import { updateColumnLength } from "../public/js/component/column.js";
 import { statusListOnLocal, cardListOnLocal } from "../public/js/store/store.js";
+import { deleteCardDataOnServer } from "./card/delete_card/deleteCard.js";
 
 /** 로컬에서 status 삭제  */
 function deleteStatusOnLocal(statusIndex) {
@@ -40,12 +40,6 @@ function deleteStatus(statusName) {
     deleteStatusOnLocal(statusIndex);
 }
 
-/** 서버에서 카드 JSON 데이터를 삭제합니다. */
-function deleteCardDataOnServer(cardID) {
-    fetch(FETCH_CARD_URL + "/" + cardID, {
-        method: DELETE_METHOD,
-    })
-}
 
 /** 카드 JSON 데이터를 삭제합니다. */
 function deleteCardData(status, cardID) {

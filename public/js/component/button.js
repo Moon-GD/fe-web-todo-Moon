@@ -9,13 +9,14 @@ import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.j
 import { findCardHeaderName, addColumn } from "./column.js";
 import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu/menu.js";
 import { 
-    turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, turnOffModal, turnOffColumnAddModal, turnOffSearchModal
+    turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, 
+    turnOffModal, turnOffColumnAddModal, turnOffSearchModal
 } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { 
     showSuggestedLog, $searchModal , $searchInput, searchCard
 } from "../search/search.js";
-import { validateStatus } from "../../../server/validateData.js";
+import { validateStatus } from "../../../server/column/validate_column/validateColumn.js";
 
 const $Btns = {
     // 검색 관련 버튼
