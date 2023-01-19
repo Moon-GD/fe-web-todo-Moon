@@ -1,16 +1,32 @@
+import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
+import { CARD_ID, STATUS_ID } from "./commonVariable.js";
+
 class IDGenerator {
-    #statusID = 2;
-    #cardID;
+    #cardID = 0;
+    #statusID = 0;
 
-    createStatusID() {
+    async initialize() {
+
+        for(const statusJSON of statusListOnLocal) {
+            if(statusJSON && statusJSON[STATUS_ID] > this.#statusID) {
+                this.#statusID = statusJSON[STATUS_ID];
+            }
+        }
+
+        for(const cardJSON of cardListOnLocal) {
+            if(cardJSON && Number(cardJSON[0][CARD_ID]) < this.#cardID) {
+                this.#cardID = Number(cardJSON[0][CARD_ID]);
+            }
+        }
+    }
+
+    createStatusID = () => {
         this.#statusID += 1;
-
         return this.#statusID;
     }
 
     createCardID() {
-        this.#cardID = new Date().getTime()
-
+        this.#cardID -= 1;
         return this.#cardID;
     }
 }

@@ -10,7 +10,6 @@ function classifyStatusJSONList(statusJSONList) {
         const statusName = statusJSON[STATUS_NAME];
         const statusID = statusJSON[STATUS_ID];
         const cardOrderList = statusJSON[CARD_ORDER];
-
         statusListOnLocal[statusIndex] = {
             id:statusID,
             statusIndex,

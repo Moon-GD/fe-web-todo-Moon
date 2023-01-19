@@ -33,7 +33,7 @@ function initialDataToTemplate() {
 function columnTemplate(columnTitle, columnID, cardCount = 0) {
     let $column = document.createElement("section");
     $column.classList.add("column")
-    $column.setAttribute("id", `column-${columnID}`);
+    $column.setAttribute("id", `${columnID}`);
 
     $column.innerHTML = `
             <h3>
@@ -83,7 +83,7 @@ function cardTemplate(cardTitle, cardContent, cardAuthor, cardId) {
         <h3 class="card-title">${cardTitle}
             <i class="fa-solid fa-xmark"></i>
         </h3>
-        <h4 class="card-content">${cardContent}</h4>
+        <h4 class="card-content" style="word-break: break-word;">${cardContent}</h4>
         <h5 class="card-author">${cardAuthor == "" ? "author by web" : cardAuthor}</h5>
     `;
 

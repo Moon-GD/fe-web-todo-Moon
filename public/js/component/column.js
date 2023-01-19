@@ -109,7 +109,7 @@ function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
 
 function getColumnNodeByStatus(columnStatus) {
     const $columnList = document.querySelectorAll(".column");
-    return $columnList.find(($column) => $column.getAttribute("id") == `column-${columnStatus}`);
+    return $columnList.find(($column) => $column.getAttribute("id") == `${columnStatus}`);
 }
 
 function getCardOrderByColumn($column) {

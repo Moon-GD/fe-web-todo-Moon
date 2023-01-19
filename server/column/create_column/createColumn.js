@@ -29,7 +29,8 @@ function addStatus(statusName, newStatusID) {
     let newStatusJSON = {
         id: newStatusID,
         statusIndex: newStatusID,
-        statusName
+        statusName,
+        order:[]
     };
 
     addStatusOnLocal(newStatusID, newStatusJSON);
