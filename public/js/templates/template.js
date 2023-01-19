@@ -226,7 +226,7 @@ function menuLogDeleteAllTemplate(emotion, author) {
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (move) */
-function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
+function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion, author) {
     let $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -236,8 +236,8 @@ function menuLogMoveTemplate(title, prevStatus, nextStatus, emotion, author) {
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
                 <strong>${title}</strong>을/를
-                <strong>${statusListOnLocal[prevStatus][STATUS_NAME]}</strong>에서
-                <strong>${statusListOnLocal[nextStatus][STATUS_NAME]}</strong>
+                <strong>${prevColumnName}</strong>에서
+                <strong>${nextColumnName}</strong>
                 로 이동하였습니다.
             </h4>
             <h5 class="log-time" data-time></h5>

@@ -41,7 +41,7 @@ function makeUpdateMenuJSONOnServer(menuJSON) {
 function makeUpdateMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
 
 /**
- * card 수정 menu JSON을 server에 생성합니다.
+ * card 수정 menu JSON 데이터를 생성합니다. (server, local)
  * @param {String} columnName 
  * @param {String} cardTitle 
  */
