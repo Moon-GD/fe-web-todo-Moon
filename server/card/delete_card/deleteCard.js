@@ -1,6 +1,7 @@
 import { updateColumnLength } from "../../../public/js/component/column.js";
 import { FETCH_CARD_URL, DELETE_METHOD, CARD_ID } from "../../../public/js/common/commonVariable.js"
 import { cardListOnLocal } from "../../../public/js/store/store.js";
+import { moveJSONDataOnOneColumn } from "../move_card/updateCardOrder.js";
 
 /** 서버에서 카드 JSON 데이터를 삭제합니다. 
  * @param {number} cardID card ID
@@ -26,6 +27,7 @@ function deleteCardData(status, cardID) {
     }
 
     deleteCardDataOnServer(cardID);
+    moveJSONDataOnOneColumn(status);
     updateColumnLength(status);
 }
 

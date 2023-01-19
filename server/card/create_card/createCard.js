@@ -40,7 +40,7 @@ function addCardJSON(status, title, content, cardID) {
     }
 
     moveJSONDataOnOneColumn(status);
-    addCardJSONOnLocal(status, newJSONData);åß
+    addCardJSONOnLocal(status, newJSONData);
     addCardJSONOnServer(newJSONData);
     updateColumnLength(status);
 }

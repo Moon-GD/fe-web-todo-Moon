@@ -12,6 +12,7 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteCardData } from "../../../server/card/delete_card/deleteCard.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/card/create_card/createCard.js";
+import { moveJSONDataOnOneColumn } from "../../../server/card/move_card/updateCardOrder.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -32,12 +33,10 @@ const findCardContent = ($card) => $card.querySelector(".card-content").innerHTM
 
 /** 카드를 삭제합니다. */
 function deleteCard($card) {
+    const cardID = $card.getAttribute(CARD_ID);
     const status = findColumnStatusByCard($card);
-        
-    // 로컬 data 반영
-    deleteCardData(status, $card.getAttribute(CARD_ID));
-
     $card.remove();
+    deleteCardData(status, cardID);
 }
 
 /** 모든 카드를 삭제합니다. */
