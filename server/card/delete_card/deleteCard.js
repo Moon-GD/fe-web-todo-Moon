@@ -6,7 +6,6 @@ import { cardListOnLocal } from "../../../public/js/store/store.js";
  * @param {number} cardID card ID
 */
 function deleteCardDataOnServer(cardID) {
-    console.log(cardID)
     fetch(FETCH_CARD_URL + "/" + cardID, {
         method: DELETE_METHOD,
     })
