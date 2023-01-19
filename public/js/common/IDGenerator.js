@@ -6,7 +6,6 @@ class IDGenerator {
     #statusID = 0;
 
     async initialize() {
-
         for(const statusJSON of statusListOnLocal) {
             if(statusJSON && statusJSON[STATUS_ID] > this.#statusID) {
                 this.#statusID = statusJSON[STATUS_ID];
@@ -14,7 +13,7 @@ class IDGenerator {
         }
 
         for(const cardJSON of cardListOnLocal) {
-            if(cardJSON && Number(cardJSON[0][CARD_ID]) < this.#cardID) {
+            if(cardJSON && cardJSON.length && Number(cardJSON[0][CARD_ID]) < this.#cardID) {
                 this.#cardID = Number(cardJSON[0][CARD_ID]);
             }
         }

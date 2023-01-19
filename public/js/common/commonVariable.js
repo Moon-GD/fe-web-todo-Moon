@@ -1,6 +1,7 @@
 // fetch url
 const FETCH_CARD_URL = "http://localhost:3000/cardList";
 const FETCH_STATUS_URL = "http://localhost:3000/statusList"
+const FETCH_MENU_URL = "http://localhost:3000/menuList"
 
 // fetch method
 const DELETE_METHOD = "DELETE";
@@ -90,7 +91,7 @@ const ONE_SECOND = "1s";
 
 export {
     // fetch url
-    FETCH_CARD_URL, FETCH_STATUS_URL,
+    FETCH_CARD_URL, FETCH_STATUS_URL, FETCH_MENU_URL,
 
     // fetch method
     DELETE_METHOD, GET_METHOD, PATCH_METHOD, POST_METHOD,

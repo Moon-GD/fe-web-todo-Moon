@@ -29,7 +29,7 @@ function deleteStatus(statusName) {
     if(cardListOnLocal[statusIndex].length) {
         cardListOnLocal[statusIndex]
         .filter((cardJSON) => cardJSON[STATUS] == statusIndex)
-        .forEach((cardJSON) => { deleteCardData(cardJSON[STATUS], cardJSON[CARD_ID]); })
+        .forEach((cardJSON) => deleteCardData(cardJSON[STATUS], cardJSON[CARD_ID]))
     }
 
     deleteStatusOnLocal(statusIndex);

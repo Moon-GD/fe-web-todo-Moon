@@ -30,6 +30,11 @@
   <li> custom querySelector & querySelectorAll </li>
 </ul>
 
+### 5️⃣ Mock-server Data
+<ul>
+  <li> 추후 작성 예정 </li>
+</ul>
+
 <br>
 
 ## 2주차 요구사항
@@ -45,11 +50,11 @@
 
 ## 3주차 요구사항
 <ol>
-  <li> Mock 서버 or 실제 서버 활용 </li>
-  <li> fetch api에 then, async/await 활용 </li>
+  <li> Mock 서버 or 실제 서버 활용 ✅ </li>
+  <li> fetch api에 then, async/await 활용 ✅</li>
   <li> Store, View 관계 느슨하게 </li>
   <li> Promise 객체 만들기 </li>
-  <li> 사이드바 시간 반영 </li>
+  <li> 사이드바 시간 반영 ✅</li>
 </ol>
 
 <br>
@@ -76,8 +81,12 @@
 <br>
 
 ## 셀프 피드백 -> 모르는 게 많은 듯. 정확하게 아는 것 같지는 않다는 느낌이 들었다.
-##### 이벤트 버블링, 캡처링
 ##### js remove, map
 ##### bind
-##### for of, for in 차이
 ##### css styling guid - bem
+##### requestAnimationFrame
+##### web working Draft
+##### js animate
+##### Babel
+##### 콜 스택, 콜백 큐
+##### macro/micro queue
