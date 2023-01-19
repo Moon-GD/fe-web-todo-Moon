@@ -1,7 +1,7 @@
-import { statusListOnLocal } from "../../../public/js/store/store.js";
 import { CARD_ORDER, FETCH_STATUS_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
-import { getColumnNodeByStatus, getCardOrderByColumn, updateColumnLength } from "../../../public/js/component/column.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
+import { getColumnNodeByStatus, getCardOrderByColumn, updateColumnLength } from "../../../public/js/component/column.js";
+import { statusListOnLocal } from "../../../public/js/store/store.js";
 
 /**
  * local에서 카드 순서 정보를 갱신합니다.

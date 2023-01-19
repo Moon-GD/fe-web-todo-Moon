@@ -1,5 +1,5 @@
-import { statusListOnLocal } from "../../../public/js/store/store.js";
 import { STATUS_NAME, STATUS_ID, FETCH_STATUS_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
+import { statusListOnLocal } from "../../../public/js/store/store.js";
 
 /** 로컬에서 status의 이름을 바꾸어 줍니다. 
  * @param {string} prevName 이전 column 이름

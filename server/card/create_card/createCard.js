@@ -1,9 +1,6 @@
-import { cardListOnLocal } from "../../../public/js/store/store.js";
 import { FETCH_CARD_URL, POST_METHOD, POST_HEADER } from "../../../public/js/common/commonVariable.js";
-import { 
-    getColumnNodeByStatus, getCardOrderByColumn, 
-    updateColumnLength 
-} from "../../../public/js/component/column.js";
+import { updateColumnLength } from "../../../public/js/component/column.js";
+import { cardListOnLocal } from "../../../public/js/store/store.js";
 import { moveJSONDataOnOneColumn } from "../move_card/updateCardOrder.js";
 
 /** 로컬에 카드 JSON을 추가합니다. 

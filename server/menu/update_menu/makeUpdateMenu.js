@@ -3,6 +3,7 @@ import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../common_menu/common.js";
+
 /**
  * card 수정 menu json을 반환합니다.
  * @param {String} columnName column name

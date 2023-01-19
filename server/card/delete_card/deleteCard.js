@@ -1,5 +1,5 @@
-import { updateColumnLength } from "../../../public/js/component/column.js";
 import { FETCH_CARD_URL, DELETE_METHOD, CARD_ID } from "../../../public/js/common/commonVariable.js"
+import { updateColumnLength } from "../../../public/js/component/column.js";
 import { cardListOnLocal } from "../../../public/js/store/store.js";
 import { moveJSONDataOnOneColumn } from "../move_card/updateCardOrder.js";
 

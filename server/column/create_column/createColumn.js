@@ -1,5 +1,5 @@
-import { cardListOnLocal, statusListOnLocal } from "../../../public/js/store/store.js";
 import { FETCH_STATUS_URL, POST_METHOD, POST_HEADER } from "../../../public/js/common/commonVariable.js";
+import { cardListOnLocal, statusListOnLocal } from "../../../public/js/store/store.js";
 
 /** 로컬에 status를 추가합니다. 
  * @param {string} newColumnID column ID

@@ -1,6 +1,9 @@
-import { statusListOnLocal, cardListOnLocal } from "../../../public/js/store/store.js";
-import { FETCH_STATUS_URL, DELETE_METHOD, STATUS_NAME, STATUS_INDEX, STATUS, CARD_ID } from "../../../public/js/common/commonVariable.js";
+import { 
+    FETCH_STATUS_URL, DELETE_METHOD, 
+    STATUS, STATUS_INDEX, STATUS_NAME, CARD_ID 
+} from "../../../public/js/common/commonVariable.js";
 import { deleteCardData } from "../../card/delete_card/deleteCard.js";
+import { statusListOnLocal, cardListOnLocal } from "../../../public/js/store/store.js";
 
 /** 로컬에서 status 삭제 
  * @param {number} statusIndex column status
