@@ -4,7 +4,6 @@ import { CARD_ID, STATUS_ID } from "./commonVariable.js";
 class IDGenerator {
     #cardID = 0;
     #statusID = 0;
-    #menuID = 0;
 
     async initialize() {
         for(const statusJSON of statusListOnLocal) {
@@ -20,7 +19,7 @@ class IDGenerator {
         }
     }
 
-    createStatusID = () => {
+    createStatusID() {
         this.#statusID += 1;
         return this.#statusID;
     }

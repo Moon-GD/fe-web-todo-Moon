@@ -1,4 +1,4 @@
-import { FETCH_MENU_URL, GET_METHOD } from "../../../public/js/common/commonVariable.js";
+import { FETCH_URL, GET_METHOD } from "../../../public/js/common/commonVariable.js";
 import { menuListOnLocal } from "../../../public/js/store/store.js"
 import { menuJSONFormatter } from "./menuJSONFormatter.js";
 
@@ -14,7 +14,7 @@ async function classifyMenuJSONList(menuJSONList) {
  * 메뉴 JSON 데이터를 서버에서 불러옵니다.
  */
 async function getAllMenuJSON() {
-    await fetch(FETCH_MENU_URL, { method: GET_METHOD })
+    await fetch(FETCH_URL.MENU, { method: GET_METHOD })
     .then((res) => res.json())
     .then((menuList) => classifyMenuJSONList(menuList))
 }

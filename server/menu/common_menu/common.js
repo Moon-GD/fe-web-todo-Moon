@@ -1,4 +1,4 @@
-import { FETCH_MENU_URL, POST_METHOD, POST_HEADER } from "../../../public/js/common/commonVariable.js";
+import { FETCH_URL, POST_METHOD, POST_HEADER } from "../../../public/js/common/commonVariable.js";
 import { menuListOnLocal } from "../../../public/js/store/store.js";
 
 /**
@@ -6,7 +6,7 @@ import { menuListOnLocal } from "../../../public/js/store/store.js";
  * @param {Object} menuJSON menu JSON
  */
 function uploadMenuJSONOnServer(menuJSON) {
-    fetch(FETCH_MENU_URL, {
+    fetch(FETCH_URL.MENU, {
         method: POST_METHOD,
         headers: POST_HEADER,
         body: JSON.stringify(menuJSON)

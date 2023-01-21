@@ -1,4 +1,4 @@
-import { CARD_ORDER, FETCH_STATUS_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
+import { CARD_ORDER, FETCH_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
 import { getColumnNodeByStatus, getCardOrderByColumn, updateColumnLength } from "../../../public/js/component/column.js";
 import { statusListOnLocal } from "../../../public/js/store/store.js";
@@ -16,7 +16,7 @@ function changeCardOrderOnLocal(statusID, newCardOrder) { statusListOnLocal[stat
  * @param {Array} newCardOrder card order Array
  */
 function changeCardOrderOnServer(statusID, newCardOrder) {
-    fetch(FETCH_STATUS_URL + "/" + statusID, {
+    fetch(FETCH_URL.STATUS + "/" + statusID, {
         method: PATCH_METHOD,
         headers: PATCH_HEADER,
         body: JSON.stringify({order: newCardOrder})

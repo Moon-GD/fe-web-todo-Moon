@@ -1,4 +1,4 @@
-import { FETCH_CARD_URL, POST_METHOD, POST_HEADER } from "../../../public/js/common/commonVariable.js";
+import { FETCH_URL, POST_METHOD, POST_HEADER } from "../../../public/js/common/commonVariable.js";
 import { updateColumnLength } from "../../../public/js/component/column.js";
 import { cardListOnLocal } from "../../../public/js/store/store.js";
 import { moveJSONDataOnOneColumn } from "../move_card/updateCardOrder.js";
@@ -13,7 +13,7 @@ const addCardJSONOnLocal = (status, newJSONData) => cardListOnLocal[status].push
  * @param {Object} newJSONData card json
 */
 function addCardJSONOnServer(newJSONData) {
-    fetch(FETCH_CARD_URL, {
+    fetch(FETCH_URL.CARD, {
         method: POST_METHOD,
         headers: POST_HEADER,
         body: JSON.stringify(newJSONData)

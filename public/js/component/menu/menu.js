@@ -11,7 +11,6 @@ import { searchLogManger } from "../../search/searchLogManager.js";
 import { makeDeleteAllMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteAllMenu.js";
 import { makeUpdateMenuJSON } from "../../../../server/menu/update_menu/makeUpdateMenu.js";
 import { makeMoveMenuJSON } from "../../../../server/menu/move_menu/makeMoveMenu.js";
-import { statusListOnLocal } from "../../store/store.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
@@ -36,7 +35,7 @@ function menuLogDeleteAll(emotion="🥳", author="@sam") {
 
 /** 메뉴에 move log를 남깁니다. */
 function menuLogMove(cardTitle, prevColumnName, nextColumnName, emotion="🥳", author="@sam") {
-    if(prevColumnName == nextColumnName) { return; }
+    if(prevColumnName === nextColumnName) { return; }
     makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle);
     $menuContent.prepend(menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName, emotion, author));
 }

@@ -1,4 +1,11 @@
+const BASE_URL = "http://localhost:3000"
+
 // fetch url
+const FETCH_URL = {
+    CARD: BASE_URL + "cardList", 
+    STATUS: BASE_URL + "/statusList",
+    MENU: BASE_URL + "/menuList"
+}
 const FETCH_CARD_URL = "http://localhost:3000/cardList";
 const FETCH_STATUS_URL = "http://localhost:3000/statusList"
 const FETCH_MENU_URL = "http://localhost:3000/menuList"
@@ -32,7 +39,6 @@ const MENU = {
     CARD_TITLE: "cardTitle",
     SEARCH_INPUT: "searchInput",
     SEARCH_FREQUENCY: "searchFrequency"
-
 }
 
 // json menu action
@@ -115,6 +121,7 @@ const ONE_SECOND = "1s";
 
 export {
     // fetch url
+    FETCH_URL,
     FETCH_CARD_URL, FETCH_STATUS_URL, FETCH_MENU_URL,
 
     // fetch method

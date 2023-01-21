@@ -5,10 +5,9 @@ function addChildAfterParent($parent, $child) { $parent.after($child); }
 function changeCSS($target, key, value) { $target.style[key] = value; }
 
 /** pipe 헬퍼 함수 */
-const pipe = (...functionList) => (pipeParam) => {
-    return functionList.reduce((curValue, curFunc) => { 
-        return curFunc(curValue); 
+const pipe = (...functionList) => (pipeParam) => 
+    functionList.reduce((curValue, curFunc) => { 
+        return curFunc(curValue);
     }, pipeParam)
-}
 
 export { changeCSS, addChildAfterParent, pipe }
