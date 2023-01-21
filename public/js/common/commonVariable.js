@@ -2,23 +2,24 @@ const BASE_URL = "http://localhost:3000"
 
 // fetch url
 const FETCH_URL = {
-    CARD: BASE_URL + "cardList", 
+    CARD: BASE_URL + "/cardList", 
     STATUS: BASE_URL + "/statusList",
     MENU: BASE_URL + "/menuList"
 }
-const FETCH_CARD_URL = "http://localhost:3000/cardList";
-const FETCH_STATUS_URL = "http://localhost:3000/statusList"
-const FETCH_MENU_URL = "http://localhost:3000/menuList"
 
 // fetch method
-const DELETE_METHOD = "DELETE";
-const GET_METHOD = "GET";
-const PATCH_METHOD = "PATCH";
-const POST_METHOD = "POST";
+const METHOD = {
+    DELETE: "DELETE",
+    GET: "GET",
+    PATCH: "PATCH",
+    POST: "POST"
+};
 
 // fetch header
-const PATCH_HEADER = { "Content-Type": "application/json", };
-const POST_HEADER = { "Content-Type": "application/json", };
+const HEADER = {
+    PATCH: { "Content-Type": "application/json" },
+    POST: { "Content-Type": "application/json" }
+}
 
 // fetch json key
 const STATUS = "status";
@@ -55,43 +56,57 @@ const MENU_ACTION = {
 const HTTP_SUCCESS = 200
 
 // CSS key
-const POSITION_BOTTOM = "bottom";
-const RIGHT = "right";
+const POSITION = {
+    BOTTOM: "bottom",
+    RIGHT: "right"
+}
 const TRANSFORM = "transform";
 
 // 버튼 색상 스타일링
-const CARD_BTN_HOVER = "#FE5958";
-const CARD_BTN_ORIGINAL = "#000";
+const CARD_BTN = {
+    HOVER: "#FE5958",
+    ORIGINAL: "#000"
+}
 const CARD_DELETE_BTN_ORIGINAL = "#D0D0D0";
 
 // Todo 카드 css 스타일 value
-const CARD_BACKGROUND_ORIGINAL = "#fff";
-const CARD_BACKGROUND_HOVER = "#FFEEEC";
-const CARD_OUTLINE_ORIGINAL = "none";
-const CARD_OUTLINE_HOVER = "0.2vh solid " + CARD_BTN_HOVER;
-const CARD_TEXT_HEIGHT = 2.5;
+const CARD = {
+    BACKGROUND_ORIGINAL: "",
+    BACKGROUND_HOVER: "#FFEEEC",
+    OUTLINE_ORIGINAL: "none",
+    OUTLINE_HOVER: "0.2vh solid " + CARD_BTN.HOVER,
+    TEXT_HEIGTH: 2.5
+}
 
 // 검색된 카드 css 스타일링 value
-const SEARCHED_CARD_ORIGINAL = "0.2vh solid #fff";
-const SEARCHED_CARD_OUTLINE = "0.2vh solid red";
+const SEARCH_CARD = {
+    ORIGINAL: "0.2vh solid #fff",
+    OUTLINE: "0.2vh solid red"
+}
 
-// Fab 버튼 transition degree
-const FAB_BTN_DEGREE_MOVED = "rotate(-45deg)";
-const FAB_BTN_DEGREE_ORIGINAL = "rotate(0deg)";
+// Fab 버튼 관련
+const FAB_BTN = {
+    DEGREE_MOVED: "rotate(-45deg)",
+    DEGREE_ORIGINAL: "rotate(0deg)",
+    BOTTOM_ORIGINAL: "5%"
+}
 
 // 버튼 위치 css value
-const FAB_BTNS_BOTTOM_ORIGINAL = "5%";
-const GO_SEARCH_BTN_MOVED = "13%";
-const GO_COLUMN_ADD_BTN_MOVED = "21%";
-const GO_CLEAR_BTN_MOVED = "29%";
+const BTN_MOVDED = {
+    SEARCH: "13%",
+    COLUMN_ADD: "21%",
+    CARD_CLEAR: "29%"
+}
 
 // 사이드바 transition distance
 const MENU_MOVE_DISTANCE = "-30vw";
 
 // css display value
-const DISPLAY_BLOCK = "block";
-const DISPLAY_FLEX = "flex";
-const DISPLAY_NONE = "none";
+const DISPLAY = {
+    BLOCK: "block",
+    FLEX: "flex",
+    NONE: "none"
+}
 
 // js event option - mouse
 const CLICK = "click";
@@ -122,13 +137,12 @@ const ONE_SECOND = "1s";
 export {
     // fetch url
     FETCH_URL,
-    FETCH_CARD_URL, FETCH_STATUS_URL, FETCH_MENU_URL,
 
     // fetch method
-    DELETE_METHOD, GET_METHOD, PATCH_METHOD, POST_METHOD,
+    METHOD,
 
     // fetch header
-    PATCH_HEADER, POST_HEADER,
+    HEADER,
 
     // fetch json key
     STATUS, STATUS_ID, STATUS_INDEX, STATUS_NAME, CARD_ID, CARD_ORDER,
@@ -143,28 +157,28 @@ export {
     HTTP_SUCCESS,
 
     // CSS key
-    POSITION_BOTTOM, RIGHT, TRANSFORM,
+    POSITION, TRANSFORM,
 
     // 버튼 색상 스타일링
-    CARD_BTN_HOVER, CARD_BTN_ORIGINAL, CARD_DELETE_BTN_ORIGINAL,
+    CARD_BTN, CARD_DELETE_BTN_ORIGINAL,
 
     // Todo 카드 css 스타일 value
-    CARD_BACKGROUND_ORIGINAL, CARD_BACKGROUND_HOVER, CARD_OUTLINE_ORIGINAL, CARD_OUTLINE_HOVER, CARD_TEXT_HEIGHT,
+    CARD,
 
     // 검색된 카드 css 스타일링 value
-    SEARCHED_CARD_OUTLINE, SEARCHED_CARD_ORIGINAL, 
+    SEARCH_CARD,
 
-    // Fab 버튼 transition degree
-    FAB_BTN_DEGREE_MOVED, FAB_BTN_DEGREE_ORIGINAL,
+    // Fab 버튼 관련
+    FAB_BTN,
 
     // 버튼 위치 css value
-    FAB_BTNS_BOTTOM_ORIGINAL, GO_SEARCH_BTN_MOVED, GO_COLUMN_ADD_BTN_MOVED, GO_CLEAR_BTN_MOVED,
+    BTN_MOVDED,
 
     // 사이드바 transition distance
     MENU_MOVE_DISTANCE,
 
     // css display value
-    DISPLAY_BLOCK, DISPLAY_FLEX, DISPLAY_NONE,
+    DISPLAY,
 
     // js event option - mouse
     CLICK, DOUBLE_CLICK, MOUSE_LEAVE, MOUSE_OVER,

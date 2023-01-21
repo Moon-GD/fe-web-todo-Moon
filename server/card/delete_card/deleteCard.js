@@ -1,4 +1,4 @@
-import { FETCH_URL, DELETE_METHOD, CARD_ID } from "../../../public/js/common/commonVariable.js"
+import { FETCH_URL, METHOD, CARD_ID } from "../../../public/js/common/commonVariable.js"
 import { updateColumnLength } from "../../../public/js/component/column.js";
 import { cardListOnLocal } from "../../../public/js/store/store.js";
 import { moveJSONDataOnOneColumn } from "../move_card/updateCardOrder.js";
@@ -8,7 +8,7 @@ import { moveJSONDataOnOneColumn } from "../move_card/updateCardOrder.js";
 */
 function deleteCardDataOnServer(cardID) {
     fetch(FETCH_URL.CARD + "/" + cardID, {
-        method: DELETE_METHOD,
+        method: METHOD.DELETE,
     })
 }
 

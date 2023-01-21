@@ -1,5 +1,5 @@
 import { pipe } from "../common/commonFunction.js";
-import { SEARCHED_CARD_OUTLINE, SEARCHED_CARD_ORIGINAL, ONE_SECOND } from "../common/commonVariable.js";
+import { SEARCH_CARD, ONE_SECOND } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
 import { menuLogSearch } from "../component/menu/menu.js";
 import { querySelector } from "../devUtils/querySelector.js";
@@ -18,11 +18,11 @@ const getCardListByTitle = (title) => {
 
 const changeCardColorTemporary = ($cardList) => {
     $cardList.forEach(($card) => {
-        $card.style.outline = SEARCHED_CARD_OUTLINE;
+        $card.style.outline = SEARCH_CARD.OUTLINE;
         
         setTimeout(() => {
             $card.style.transition = ONE_SECOND;
-            $card.style.outline = SEARCHED_CARD_ORIGINAL;
+            $card.style.outline = SEARCH_CARD.ORIGINAL;
         }, 1000);
     })
 }

@@ -1,4 +1,4 @@
-import { FETCH_URL, POST_METHOD, POST_HEADER } from "../../../public/js/common/commonVariable.js";
+import { FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
 import { cardListOnLocal, statusListOnLocal } from "../../../public/js/store/store.js";
 
 /** 로컬에 status를 추가합니다. 
@@ -15,8 +15,8 @@ function addStatusOnLocal(newStatusID, newStatusJSON) {
 */
 function addStatusOnServer(newStatusJSON) {
     fetch(FETCH_URL.STATUS, {
-        method: POST_METHOD,
-        headers: POST_HEADER,
+        method: METHOD.POST,
+        headers: HEADER.POST,
         body: JSON.stringify(newStatusJSON)
     })
 }

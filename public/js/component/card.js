@@ -1,7 +1,7 @@
 import { 
-    CARD_BTN_ORIGINAL, CARD_OUTLINE_ORIGINAL, CARD_BACKGROUND_ORIGINAL, CARD_BTN_HOVER, 
-    CARD_OUTLINE_HOVER, CARD_BACKGROUND_HOVER, CARD_DELETE_BTN_ORIGINAL, CARD_TEXT_HEIGHT,
-    DISPLAY_BLOCK, DISPLAY_NONE,
+    CARD_BTN, CARD, 
+    CARD_DELETE_BTN_ORIGINAL,
+    DISPLAY,
     CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK, CARD_ID, HALF_SECOND
 } from "../common/commonVariable.js";
 import { idGenerator } from "../common/IDGenerator.js";
@@ -73,17 +73,17 @@ function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
         $deletedCard.style.transition = HALF_SECOND;
         $deletedCard.style.marginTop = "-0.5vh";
         $deletedCard.style.marginBottom = "1.5vh";
-        $deletedCard.style.outline = CARD_OUTLINE_HOVER;
-        $deletedCard.style.backgroundColor = CARD_BACKGROUND_HOVER;
-        $cardDeleteBtn.style.color = CARD_BTN_HOVER;
+        $deletedCard.style.outline = CARD.OUTLINE_HOVER;
+        $deletedCard.style.backgroundColor = CARD.BACKGROUND_HOVER;
+        $cardDeleteBtn.style.color = CARD_BTN.HOVER;
     })
 
     $cardDeleteBtn.addEventListener(MOUSE_LEAVE, () => {
         $deletedCard.style.marginTop = "0vh";
         $deletedCard.style.marginBottom = "1vh";
-        $deletedCard.style.outline = CARD_OUTLINE_ORIGINAL;
-        $deletedCard.style.backgroundColor = CARD_BACKGROUND_ORIGINAL;
-        $cardDeleteBtn.style.color = CARD_BTN_ORIGINAL;
+        $deletedCard.style.outline = CARD.OUTLINE_HOVER;
+        $deletedCard.style.backgroundColor = CARD.BACKGROUND_ORIGINAL;
+        $cardDeleteBtn.style.color = CARD_BTN.ORIGINAL
         $xBtn.style.color = CARD_DELETE_BTN_ORIGINAL;
     })
 }
@@ -92,7 +92,7 @@ function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
 function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $prevCard, isUpdated) {
     $registerCancelBtn.addEventListener(CLICK, () => {
         if(isUpdated) {
-            $prevCard.style.display = DISPLAY_BLOCK;
+            $prevCard.style.display = DISPLAY.BLOCK;
 
             // json 데이터 복구
             addCardJSON(
@@ -125,7 +125,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 
         // 카드 배치 후 카드 등록 폼 제거
         $currentCard.after($newCard);
-        $currentCard.style.display = DISPLAY_NONE;
+        $currentCard.style.display = DISPLAY.NONE;
 
         // 데이터 반영
         let currentStatus = findColumnStatusByCard($newCard);
@@ -165,7 +165,7 @@ function changeCardToRegisterForm($card) {
     deleteCardData(status, $card.getAttribute(CARD_ID));
 
     $card.before(newCardTemplate(title, content, $card, true));
-    $card.style.display = DISPLAY_NONE;
+    $card.style.display = DISPLAY.NONE;
 }
 
 /** 사용자 입력에 따라 카드 등록 폼 형태의 크기를 조절해줍니다. */
@@ -180,7 +180,7 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
 
     $cardRegisterInput.addEventListener(INPUT, () => {
         if($cardRegisterInput.scrollHeight != scrollHeight) {
-            cardHeight += CARD_TEXT_HEIGHT;
+            cardHeight += CARD.TEXT_HEIGTH;
             $cardRegisterForm.style.height = cardHeight + "vh";
             scrollHeight = $cardRegisterInput.scrollHeight;
         }

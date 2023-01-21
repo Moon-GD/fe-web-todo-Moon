@@ -1,4 +1,4 @@
-import { FETCH_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
+import { FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
 import { cardListOnLocal } from "../../../public/js/store/store.js";
 import { moveJSONDataOnOneColumn, moveJSONDataOnTwoColumn } from "./updateCardOrder.js";
 
@@ -26,8 +26,8 @@ function moveCardJSONDataOnLocal(prevStatus, nextStatus, cardID) {
  */
 function moveCardJSONDataOnServer(nextStatus, cardID) {
     fetch(FETCH_URL.CARD + "/" + cardID, {
-        method: PATCH_METHOD,
-        headers: PATCH_HEADER,
+        method: METHOD.PATCH,
+        headers: HEADER.PATCH,
         body: JSON.stringify({ status:nextStatus })
     })
 }

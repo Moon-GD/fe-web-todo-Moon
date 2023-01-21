@@ -1,5 +1,5 @@
 import { 
-    FETCH_URL, GET_METHOD,
+    FETCH_URL, METHOD,
     STATUS_INDEX, STATUS_NAME, STATUS_ID, CARD_ORDER 
 } from "../../../public/js/common/commonVariable.js";
 import { statusListOnLocal, cardListOnLocal } from "../../../public/js/store/store.js";
@@ -29,7 +29,7 @@ function classifyStatusJSONList(statusJSONList) {
  * column JSON 데이터를 서버에서 불러옵니다.
  */
 async function getAllStatusJSONData() {
-    await fetch(FETCH_URL.STATUS, { method: GET_METHOD })
+    await fetch(FETCH_URL.STATUS, { method: METHOD.GET })
     .then((res) => { return res.json(); })
     .then((data) => { classifyStatusJSONList(data); } )
 }

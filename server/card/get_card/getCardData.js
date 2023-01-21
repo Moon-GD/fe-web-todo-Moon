@@ -1,5 +1,5 @@
 import { 
-    FETCH_URL, GET_METHOD, 
+    FETCH_URL, METHOD, 
     STATUS, CARD_ID, CARD_ORDER 
 } from "../../../public/js/common/commonVariable.js";
 import { cardListOnLocal, statusListOnLocal } from "../../../public/js/store/store.js";
@@ -22,7 +22,7 @@ function classifyCardJSONList(cardJSONList) {
  * @returns {none} 
  */
 async function getAllCardJSONData() {
-    await fetch(FETCH_URL.CARD, { method: GET_METHOD })
+    await fetch(FETCH_URL.CARD, { method: METHOD.GET })
     .then((res) => { return res.json(); })
     .then((data) => { classifyCardJSONList(data); })
 }

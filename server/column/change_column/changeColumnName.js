@@ -1,4 +1,4 @@
-import { STATUS_NAME, STATUS_ID, FETCH_URL, PATCH_METHOD, PATCH_HEADER } from "../../../public/js/common/commonVariable.js";
+import { STATUS_NAME, STATUS_ID, FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
 import { statusListOnLocal } from "../../../public/js/store/store.js";
 
 /** 로컬에서 status의 이름을 바꾸어 줍니다. 
@@ -25,8 +25,8 @@ function updateStatusNameOnLocal(prevName, nextName) {
 */
 function updateStatusNameOnServer(statusID, nextName) {
     fetch(FETCH_URL.STATUS + "/" + statusID, {
-        method: PATCH_METHOD,
-        headers: PATCH_HEADER,
+        method: METHOD.PATCH,
+        headers: HEADER.PATCH,
         body: JSON.stringify({statusName: nextName})
     });
 }

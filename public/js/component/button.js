@@ -1,9 +1,9 @@
 import { changeCSS } from "../common/commonFunction.js";
 import {
-    POSITION_BOTTOM, RIGHT, TRANSFORM,
-    FAB_BTN_DEGREE_ORIGINAL, FAB_BTN_DEGREE_MOVED, FAB_BTNS_BOTTOM_ORIGINAL, 
-    GO_SEARCH_BTN_MOVED, GO_COLUMN_ADD_BTN_MOVED, GO_CLEAR_BTN_MOVED,
-    CLICK, MENU_MOVE_DISTANCE, DISPLAY_FLEX 
+    POSITION, TRANSFORM,
+    FAB_BTN, 
+    BTN_MOVDED,
+    CLICK, MENU_MOVE_DISTANCE, DISPLAY 
 } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn } from "./column.js";
@@ -78,16 +78,16 @@ function addEventToSearchAcceptBtn() {
 /** fab 버튼을 toggle 합니다. */
 function toggleFabBtn() {
     if($Btns.$goColumnAddModalBtn.style.bottom == "21%") {
-        changeCSS($Btns.$fabBtn, TRANSFORM, FAB_BTN_DEGREE_ORIGINAL);
-        changeCSS($Btns.$goClearBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
-        changeCSS($Btns.$goColumnAddModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
-        changeCSS($Btns.$goSearchModalBtn, POSITION_BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS($Btns.$fabBtn, TRANSFORM, FAB_BTN.DEGREE_ORIGINAL);
+        changeCSS($Btns.$goClearBtn, POSITION.BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS($Btns.$goColumnAddModalBtn, POSITION.BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS($Btns.$goSearchModalBtn, POSITION.BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
     }
     else {
-        changeCSS($Btns.$fabBtn, TRANSFORM, FAB_BTN_DEGREE_MOVED);
-        changeCSS($Btns.$goSearchModalBtn, POSITION_BOTTOM, GO_SEARCH_BTN_MOVED);
-        changeCSS($Btns.$goColumnAddModalBtn, POSITION_BOTTOM, GO_COLUMN_ADD_BTN_MOVED);
-        changeCSS($Btns.$goClearBtn, POSITION_BOTTOM, GO_CLEAR_BTN_MOVED);
+        changeCSS($Btns.$fabBtn, TRANSFORM, FAB_BTN.DEGREE_MOVED);
+        changeCSS($Btns.$goSearchModalBtn, POSITION.BOTTOM, BTN_MOVDED.SEARCH);
+        changeCSS($Btns.$goColumnAddModalBtn, POSITION.BOTTOM, BTN_MOVDED.COLUMN_ADD);
+        changeCSS($Btns.$goClearBtn, POSITION.BOTTOM, BTN_MOVDED.CARD_CLEAR);
     }
 }
 
@@ -105,7 +105,7 @@ function addEventToFabBtn() {
 /** 검색 모달을 띄워주는 버튼에 클릭 이벤트를 추가합니다. */
 function addEventToSearchBtn() {
     $Btns.$goSearchModalBtn.addEventListener(CLICK, () => {
-        changeCSS($searchModal, "display", DISPLAY_FLEX);
+        changeCSS($searchModal, "display", DISPLAY.FLEX);
         showSuggestedLog();
     })
 }
@@ -113,11 +113,11 @@ function addEventToSearchBtn() {
 /** 사이드바에 toggle 이벤트를 추가합니다. */
 function addEventToMenuBtns() {
     $Btns.$menuOpenBtn.addEventListener(CLICK, () => { 
-        changeCSS($menuBar, RIGHT, 0);
+        changeCSS($menuBar, POSITION.RIGHT, 0);
         menuLogTimeUpdate();
     })
 
-    $Btns.$menuCloseBtn.addEventListener(CLICK, () => changeCSS($menuBar, RIGHT, MENU_MOVE_DISTANCE))
+    $Btns.$menuCloseBtn.addEventListener(CLICK, () => changeCSS($menuBar, POSITION.RIGHT, MENU_MOVE_DISTANCE))
 }
 
 /** 카드 삭제 관련 modal 버튼들에 이벤트를 추가합니다. */

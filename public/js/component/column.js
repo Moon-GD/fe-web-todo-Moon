@@ -1,6 +1,6 @@
 import { 
     CLICK, DOUBLE_CLICK, FOCUS_OUT, 
-    DISPLAY_FLEX, DISPLAY_NONE, STATUS_ID, STATUS_NAME, CARD_ID
+    DISPLAY, STATUS_ID, STATUS_NAME, CARD_ID
 } from "../common/commonVariable.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
@@ -75,7 +75,7 @@ function headerDoubleClickEvent($header) {
         let headerTitle = $header.querySelector("span").innerHTML;
         let $headerInputTemplate = headerTitleTemplate(headerTitle, $header);
         $header.after($headerInputTemplate);
-        $header.style.display = DISPLAY_NONE;
+        $header.style.display = DISPLAY.NONE;
     })
 }
 
@@ -90,7 +90,7 @@ function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
         // 새로 바뀐 이름 중복 검사
         if(validateNewStatusName(originalTitle, newTitle)) {
             changeHeaderName($originalHeader, newTitle);
-            $originalHeader.style.display = DISPLAY_FLEX;
+            $originalHeader.style.display = DISPLAY.FLEX;
 
             updateStatusName(originalTitle, $headerInput.value);
             $headerInput.parentElement.remove();
