@@ -15,8 +15,8 @@ function singleQueryToObject(query) {
         [ID]: [],
     };
 
-    query = query.replace(/\./g, " .")
-    query = query.replace(/#/g, " #")
+    query = query.replace(/\./g, " .");
+    query = query.replace(/#/g, " #");
     query = query.split(" ").sort((a, b) => { return a - b });
 
     for(let i=0;i<query.length;i++) {
@@ -34,7 +34,7 @@ function multipleQueryToList(multipleQuery) {
     return pipe(
             (multipleQuery) => multipleQuery.replace(/>/g, " > "),
             (multipleQuery) => multipleQuery.split(" ").filter((ele) => ele)
-        )(multipleQuery)
+        )(multipleQuery);
 }
 
 /** query에 해당 노드 여부를 boolean으로 반환합니다. */
@@ -65,7 +65,7 @@ function findAllChildren(query, $startNode=$BODY_NODE) {
     return pipe(
         ($targetNode) => $targetNode.children,
         ($childList) => $childList.filter(($child) => valiedateNodeByQuery($child, queryObj))
-    )($startNode)
+    )($startNode);
 }
 
 /** 단일 쿼리에 해당하는 첫 노드를 돔 형태로 반환합니다. */

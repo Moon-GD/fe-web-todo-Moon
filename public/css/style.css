@@ -23,10 +23,6 @@ ol, ul {
   list-style: none;
 }
 
-body {
-  background-color: #F5F5F7;
-}
-
 main {
   display: inline-flex;
   position: relative;
@@ -99,13 +95,8 @@ section > article {
   cursor: pointer;
   font-size: 3rem;
   font-weight: 300;
-  box-shadow: 0 0.5vh 1vh 0 gray;
   color: #fff;
   border-radius: 50%;
-  background-color: #0175DE;
-}
-#fab-btn:hover {
-  box-shadow: 0 0.5vh 1vh 0 #3E95E3;
 }
 
 #go-column-add-modal-btn {
@@ -118,10 +109,8 @@ section > article {
   cursor: pointer;
   font-size: 3rem;
   font-weight: 300;
-  box-shadow: 0 0.5vh 1vh 0 gray;
   color: #fff;
   border-radius: 50%;
-  background-color: #0175DE;
 }
 #go-column-add-modal-btn > span {
   font-size: 2rem;
@@ -137,10 +126,8 @@ section > article {
   cursor: pointer;
   font-size: 3rem;
   font-weight: 300;
-  box-shadow: 0 0.5vh 1vh 0 gray;
   color: #fff;
   border-radius: 50%;
-  background-color: #0175DE;
 }
 #go-search-btn > span {
   font-size: 2rem;
@@ -553,10 +540,8 @@ header > i {
   cursor: pointer;
   font-size: 3rem;
   font-weight: 300;
-  box-shadow: 0 0.5vh 1vh 0 gray;
   color: #fff;
   border-radius: 50%;
-  background-color: #0175DE;
 }
 #go-card-clear-btn > span {
   font-size: 2rem;
@@ -622,4 +607,73 @@ header > i {
   color: #fff;
   background-color: #EE675C;
   outline: 0.2vh solid #EE675C;
+}
+
+.bulb {
+  transition: 0.5s;
+}
+
+#go-light-mode {
+  color: #BFBFBF;
+  display: none;
+}
+
+body {
+  transition: 0.5s;
+  background-color: #F5F5F7;
+}
+
+body.dark-mode {
+  background-color: #3D3D3D;
+  color: #fff;
+}
+
+body.dark-mode header {
+  background-color: #3D3D3D;
+}
+
+body.dark-mode .card-frame {
+  color: #B7B7B7;
+  background-color: #1C1C21;
+  box-shadow: 0.1vh 0.1vh 0.1vh 0 #efefef;
+}
+
+body.dark-mode #menu {
+  background-color: #BDBDBD;
+}
+
+body.dark-mode #menu {
+  background-color: #4D4D4D;
+  color: #BFBFBF;
+}
+
+body.dark-mode .log-frame {
+  color: #BDBDBD;
+  background-color: #3D3D3D;
+}
+
+body.dark-mode section.column h3 {
+  color: #BFBFBF;
+}
+
+body.dark-mode span.column-length {
+  color: #A7A7A7;
+  background-color: #5C5C5C;
+}
+
+.fab-btns {
+  background-color: #0175DE;
+  box-shadow: 0 0.5vh 1vh 0 gray;
+}
+.fab-btns:hover {
+  box-shadow: 0 0.5vh 1vh 0 #3E95E3;
+}
+
+body.dark-mode button.fab-btns {
+  background-color: #5C5C5C;
+  box-shadow: 0 0.5vh 1vh 0 #efefef;
+}
+body.dark-mode button.fab-btns:hover {
+  transition: 0.2s;
+  background-color: #1C1C21;
 }/*# sourceMappingURL=style.css.map */

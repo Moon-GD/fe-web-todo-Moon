@@ -79,9 +79,9 @@ function addEventToSearchAcceptBtn() {
 function toggleFabBtn() {
     if($Btns.$goColumnAddModalBtn.style.bottom == "21%") {
         changeCSS($Btns.$fabBtn, TRANSFORM, FAB_BTN.DEGREE_ORIGINAL);
-        changeCSS($Btns.$goClearBtn, POSITION.BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
-        changeCSS($Btns.$goColumnAddModalBtn, POSITION.BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
-        changeCSS($Btns.$goSearchModalBtn, POSITION.BOTTOM, FAB_BTNS_BOTTOM_ORIGINAL);
+        changeCSS($Btns.$goClearBtn, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL);
+        changeCSS($Btns.$goColumnAddModalBtn, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL);
+        changeCSS($Btns.$goSearchModalBtn, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL );
     }
     else {
         changeCSS($Btns.$fabBtn, TRANSFORM, FAB_BTN.DEGREE_MOVED);

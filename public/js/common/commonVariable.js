@@ -69,17 +69,25 @@ const TRANSFORM = "transform";
 // 버튼 색상 스타일링
 const CARD_BTN = {
     HOVER: "#FE5958",
-    ORIGINAL: "#000"
+    ORIGINAL: "#000",
 }
+
 const CARD_DELETE_BTN_ORIGINAL = "#D0D0D0";
 
 // Todo 카드 css 스타일 value
 const CARD = {
-    BACKGROUND_ORIGINAL: "",
+    BACKGROUND_ORIGINAL: "#fff",
     BACKGROUND_HOVER: "#FFEEEC",
     OUTLINE_ORIGINAL: "none",
     OUTLINE_HOVER: "0.2vh solid " + CARD_BTN.HOVER,
     TEXT_HEIGTH: 2.5
+}
+
+const CARD_DARK_MODE = {
+    BACKGROUND_ORIGINAL: "#1C1C21",
+    BACKGROUND_HOVER: "#1C1C21",
+    OUTLINE_ORIGINAL: "none",
+    OUTLINE_HOVER: "0.2vh solid " + CARD_BTN.HOVER,
 }
 
 // 검색된 카드 css 스타일링 value
@@ -170,7 +178,7 @@ export {
     CARD_BTN, CARD_DELETE_BTN_ORIGINAL,
 
     // Todo 카드 css 스타일 value
-    CARD,
+    CARD, CARD_DARK_MODE,
 
     // 검색된 카드 css 스타일링 value
     SEARCH_CARD,

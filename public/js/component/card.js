@@ -1,6 +1,6 @@
 import { 
     CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
-    DISPLAY, EVENT, CARD_ID, HALF_SECOND
+    DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE
 } from "../common/commonVariable.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
@@ -10,6 +10,7 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteCardData } from "../../../server/card/delete_card/deleteCard.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/card/create_card/createCard.js";
+import { isDarkMode } from "../common/darkMode.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -70,18 +71,32 @@ function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
         $deletedCard.style.transition = HALF_SECOND;
         $deletedCard.style.marginTop = "-0.5vh";
         $deletedCard.style.marginBottom = "1.5vh";
-        $deletedCard.style.outline = CARD.OUTLINE_HOVER;
-        $deletedCard.style.backgroundColor = CARD.BACKGROUND_HOVER;
         $cardDeleteBtn.style.color = CARD_BTN.HOVER;
+        
+        if(isDarkMode()) {
+            $deletedCard.style.outline = CARD_DARK_MODE.OUTLINE_HOVER;
+            $deletedCard.style.backgroundColor = CARD_DARK_MODE.BACKGROUND_HOVER;
+        }
+        else {
+            $deletedCard.style.outline = CARD.OUTLINE_HOVER;
+            $deletedCard.style.backgroundColor = CARD.BACKGROUND_HOVER;
+        }
     })
 
     $cardDeleteBtn.addEventListener(EVENT.MOUSE_LEAVE, () => {
         $deletedCard.style.marginTop = "0vh";
         $deletedCard.style.marginBottom = "1vh";
-        $deletedCard.style.outline = CARD.OUTLINE_HOVER;
-        $deletedCard.style.backgroundColor = CARD.BACKGROUND_ORIGINAL;
-        $cardDeleteBtn.style.color = CARD_BTN.ORIGINAL
+        $cardDeleteBtn.style.color = CARD_BTN.ORIGINAL;
         $xBtn.style.color = CARD_DELETE_BTN_ORIGINAL;
+
+        if(isDarkMode() ) {
+            $deletedCard.style.outline = CARD_DARK_MODE.OUTLINE_ORIGINAL;
+            $deletedCard.style.backgroundColor = CARD_DARK_MODE.BACKGROUND_ORIGINAL;
+        }
+        else {
+            $deletedCard.style.outline = CARD.OUTLINE_ORIGINAL;
+            $deletedCard.style.backgroundColor = CARD.BACKGROUND_ORIGINAL;
+        }
     })
 }
 
