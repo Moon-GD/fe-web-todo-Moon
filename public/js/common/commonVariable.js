@@ -22,12 +22,16 @@ const HEADER = {
 }
 
 // fetch json key
-const STATUS = "status";
-const STATUS_ID = "id";
-const STATUS_INDEX = "statusIndex";
-const STATUS_NAME = "statusName";
+const COLUMN_STATUS = "status";
 const CARD_ID = "id";
 const CARD_ORDER = "order";
+
+// column status
+const STATUS = {
+    ID: "id",
+    INDEX: "statusIndex",
+    NAME: "statusName"
+}
 
 // json menu key
 const MENU = {
@@ -109,26 +113,26 @@ const DISPLAY = {
 }
 
 // js event option - mouse
-const CLICK = "click";
-const DOUBLE_CLICK = "dblclick";
-const MOUSE_LEAVE = "mouseleave";
-const MOUSE_OVER = "mouseover";
-
-// js event option - input box
-const FOCUS_OUT = "focusout";
-const INPUT = "input";
-
-// js event option - drag
-const DRAG_START = "dragstart";
-const DRAG_OVER = "dragover";
-const DRAG_END = "dragend";
-const DROP = "drop";
+const EVENT = {
+    CLICK: "click",
+    DOUBLE_CLICK: "dblclick",
+    MOUSE_LEAVE: "mouseleave",
+    MOUSE_OVER: "mouseover",
+    FOCUS_OUT: "focusout",
+    INPUT: "input",
+    DRAG_START: "dragstart",
+    DRAG_OVER: "dragover",
+    DRAG_END: "dragend",
+    DROP: "drop"
+}
 
 // 사이드바 log 시간 변수
-const MONTH = 0;
-const DATE = 1;
-const HOUR = 2;
-const MINUTE = 3;
+const LOG_TIME = {
+    MONTH: 0,
+    DATE: 1,
+    HOUR: 2,
+    MINUTE: 3
+}
 
 // css transition value
 const HALF_SECOND = "0.5s";
@@ -145,8 +149,11 @@ export {
     HEADER,
 
     // fetch json key
-    STATUS, STATUS_ID, STATUS_INDEX, STATUS_NAME, CARD_ID, CARD_ORDER,
+    STATUS, CARD_ID, CARD_ORDER,
 
+    // column status
+    COLUMN_STATUS,
+    
     // json menu key
     MENU,
 
@@ -181,16 +188,10 @@ export {
     DISPLAY,
 
     // js event option - mouse
-    CLICK, DOUBLE_CLICK, MOUSE_LEAVE, MOUSE_OVER,
-
-    // js event option - input box
-    FOCUS_OUT, INPUT, 
-
-    // js event option - drag
-    DRAG_START, DRAG_OVER, DRAG_END, DROP,    
+    EVENT, 
 
     // 사이드바 log 시간 변수
-    MONTH, DATE, HOUR, MINUTE,
+    LOG_TIME,
 
     // css transition value
     HALF_SECOND, ONE_SECOND,

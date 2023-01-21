@@ -1,5 +1,5 @@
 import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
-import { CARD_ID, STATUS_ID } from "./commonVariable.js";
+import { CARD_ID, STATUS } from "./commonVariable.js";
 
 class IDGenerator {
     #cardID = 0;
@@ -7,8 +7,8 @@ class IDGenerator {
 
     async initialize() {
         for(const statusJSON of statusListOnLocal) {
-            if(statusJSON && statusJSON[STATUS_ID] > this.#statusID) {
-                this.#statusID = statusJSON[STATUS_ID];
+            if(statusJSON && statusJSON[STATUS.ID] > this.#statusID) {
+                this.#statusID = statusJSON[STATUS.ID];
             }
         }
 

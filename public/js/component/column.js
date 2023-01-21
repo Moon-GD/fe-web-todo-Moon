@@ -1,6 +1,6 @@
 import { 
-    CLICK, DOUBLE_CLICK, FOCUS_OUT, 
-    DISPLAY, STATUS_ID, STATUS_NAME, CARD_ID
+    EVENT, 
+    DISPLAY, STATUS, CARD_ID
 } from "../common/commonVariable.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
@@ -16,7 +16,7 @@ const $mainTag = querySelector("main");
 
 /** column 삭제 버튼에 이벤트를 등록합니다. */
 function columnDeleteEvent($columnDeleteBtn, $column) {
-    $columnDeleteBtn.addEventListener(CLICK, () => {
+    $columnDeleteBtn.addEventListener(EVENT.CLICK, () => {
         let statusName = $column.querySelector("span").innerHTML;
         deleteStatus(statusName);
         $column.remove();
@@ -44,7 +44,7 @@ function findCardHeaderName($card) {
 
 /** column 길이를 갱신합니다. */
 function updateColumnLength(status) {
-    let statusName = statusListOnLocal.filter((statusJSON) => { return statusJSON[STATUS_ID] == status; })[0][STATUS_NAME];
+    let statusName = statusListOnLocal.filter((statusJSON) => { return statusJSON[STATUS.ID] == status; })[0][STATUS.NAME];
     let $columnList = document.querySelectorAll(".column");
     let $columnLength = '';
 
@@ -71,7 +71,7 @@ function findColumnStatusByCard($card) {
 
 /** column header에 더블 클릭 이벤트를 등록합니다. */
 function headerDoubleClickEvent($header) {
-    $header.addEventListener(DOUBLE_CLICK, () => {
+    $header.addEventListener(EVENT.DOUBLE_CLICK, () => {
         let headerTitle = $header.querySelector("span").innerHTML;
         let $headerInputTemplate = headerTitleTemplate(headerTitle, $header);
         $header.after($headerInputTemplate);
@@ -84,7 +84,7 @@ const changeHeaderName = ($header, newTitle) => $header.querySelector("span").in
 
 /** column header에 focus out 이벤트를 등록합니다. */
 function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
-    $headerInput.addEventListener(FOCUS_OUT, ()=> {
+    $headerInput.addEventListener(EVENT.FOCUS_OUT, ()=> {
         const newTitle = $headerInput.value;
 
         // 새로 바뀐 이름 중복 검사

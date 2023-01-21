@@ -1,4 +1,4 @@
-import { DRAG_START, DRAG_OVER, DRAG_END, DROP, CARD_ID, STATUS_NAME } from "../common/commonVariable.js";
+import { EVENT, CARD_ID, STATUS } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
 import { findColumnStatusByCard } from "../component/column.js";
 import { menuLogMove } from "../component/menu/menu.js";
@@ -12,23 +12,23 @@ let dragEndStatus = "";
 
 /** $cardNode에 드래그 이벤트를 추가합니다 */
 function makeCardDragEvent($card) {
-    $card.addEventListener(DRAG_START, (event) => {
+    $card.addEventListener(EVENT.DRAG_START, (event) => {
         dragStartStatus = findColumnStatusByCard($card);
         recordDragCard(event);
     })
 
-    $card.addEventListener(DRAG_OVER, (event) => dragOverCard($card, event))
+    $card.addEventListener(EVENT.DRAG_OVER, (event) => dragOverCard($card, event))
 
-    $card.addEventListener(DRAG_END, (event) => {
+    $card.addEventListener(EVENT.DRAG_END, (event) => {
         dragEndStatus = findColumnStatusByCard($card);
-        const prevColumnName = statusListOnLocal[dragStartStatus][STATUS_NAME];
-        const nextColumnName = statusListOnLocal[dragEndStatus][STATUS_NAME];
+        const prevColumnName = statusListOnLocal[dragStartStatus][STATUS.NAME];
+        const nextColumnName = statusListOnLocal[dragEndStatus][STATUS.NAME];
         menuLogMove(findCardTitle($card), prevColumnName, nextColumnName);
         moveJSONData(dragStartStatus, dragEndStatus, $card.getAttribute(CARD_ID));
         makeLightNode();
     })
 
-    $card.addEventListener(DROP, (event) => dropCard($card, event))
+    $card.addEventListener(EVENT.DROP, (event) => dropCard($card, event))
 }
 
 export { 

@@ -1,4 +1,4 @@
-import { DRAG_OVER, STATUS_NAME, CARD_ID } from "../common/commonVariable.js";
+import { EVENT, STATUS, CARD_ID } from "../common/commonVariable.js";
 import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
     resizeCardByInputBox, addDoubleClickEventToCard
@@ -53,12 +53,12 @@ function columnTemplate(columnTitle, columnID, cardCount = 0) {
     let $header = $column.querySelector("h3");
     let $article = $column.querySelector("article");
 
-    $header.addEventListener(DRAG_OVER, (event) => {
+    $header.addEventListener(EVENT.DRAG_OVER, (event) => {
         event.preventDefault();
         $article.prepend(makeShadedNode());
     })
 
-    $article.addEventListener(DRAG_OVER, (event) => {
+    $article.addEventListener(EVENT.DRAG_OVER, (event) => {
         if($article.children.length) { return; }
         
         event.preventDefault();
@@ -271,7 +271,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
         <div class="log-content-area">
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
-                <strong>${ statusListOnLocal[status][STATUS_NAME] }</strong>의
+                <strong>${ statusListOnLocal[status][STATUS.NAME] }</strong>의
                 <strong>${title}</strong>
                 을/를 수정하였습니다.
             </h4>

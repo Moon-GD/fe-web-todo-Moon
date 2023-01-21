@@ -1,8 +1,6 @@
 import { 
-    CARD_BTN, CARD, 
-    CARD_DELETE_BTN_ORIGINAL,
-    DISPLAY,
-    CLICK, MOUSE_OVER, MOUSE_LEAVE, INPUT, DOUBLE_CLICK, CARD_ID, HALF_SECOND
+    CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
+    DISPLAY, EVENT, CARD_ID, HALF_SECOND
 } from "../common/commonVariable.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
@@ -12,7 +10,6 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { deleteCardData } from "../../../server/card/delete_card/deleteCard.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/card/create_card/createCard.js";
-import { moveJSONDataOnOneColumn } from "../../../server/card/move_card/updateCardOrder.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -51,7 +48,7 @@ function deleteAllCards() {
 
 /** 카드 생성 폼을 보여주는 버튼에 이벤트를 등록합니다. */
 function addEventToShowCardRegisterBtn($cardRegisterBtn, $currentColumn) {
-    $cardRegisterBtn.addEventListener(CLICK, () => {
+    $cardRegisterBtn.addEventListener(EVENT.CLICK, () => {
         registering ? 
                 $currentColumn.children[0].remove() :    
                 $currentColumn.prepend(newCardTemplate());
@@ -62,14 +59,14 @@ function addEventToShowCardRegisterBtn($cardRegisterBtn, $currentColumn) {
 
 /** 카드 삭제 버튼에 이벤트를 등록합니다. */
 function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
-    $cardDeleteBtn.addEventListener(CLICK, () => {
+    $cardDeleteBtn.addEventListener(EVENT.CLICK, () => {
         setCard($deletedCard);
         turnOnModal();
     })
 
     let $xBtn = $deletedCard.querySelector("i");
     
-    $cardDeleteBtn.addEventListener(MOUSE_OVER, () => {
+    $cardDeleteBtn.addEventListener(EVENT.MOUSE_OVER, () => {
         $deletedCard.style.transition = HALF_SECOND;
         $deletedCard.style.marginTop = "-0.5vh";
         $deletedCard.style.marginBottom = "1.5vh";
@@ -78,7 +75,7 @@ function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
         $cardDeleteBtn.style.color = CARD_BTN.HOVER;
     })
 
-    $cardDeleteBtn.addEventListener(MOUSE_LEAVE, () => {
+    $cardDeleteBtn.addEventListener(EVENT.MOUSE_LEAVE, () => {
         $deletedCard.style.marginTop = "0vh";
         $deletedCard.style.marginBottom = "1vh";
         $deletedCard.style.outline = CARD.OUTLINE_HOVER;
@@ -90,7 +87,7 @@ function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
 
 /** 카드 생성 취소 버튼에 이벤트를 등록합니다. */
 function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $prevCard, isUpdated) {
-    $registerCancelBtn.addEventListener(CLICK, () => {
+    $registerCancelBtn.addEventListener(EVENT.CLICK, () => {
         if(isUpdated) {
             $prevCard.style.display = DISPLAY.BLOCK;
 
@@ -109,7 +106,7 @@ function addEventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $pre
 
 /** 카드 생성 버튼에 이벤트를 등록합니다. */
 function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated) {
-    $cardMakeBtn.addEventListener(CLICK, () => {
+    $cardMakeBtn.addEventListener(EVENT.CLICK, () => {
         registering = false;
         let title = $currentCard.querySelector("input").value;
         let prevContent = "";
@@ -152,7 +149,7 @@ function addEventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdat
 
 /** 카드에 더블 클릭 이벤트를 등록합니다. */
 function addDoubleClickEventToCard($card) {
-    $card.addEventListener(DOUBLE_CLICK, () => changeCardToRegisterForm($card))
+    $card.addEventListener(EVENT.DOUBLE_CLICK, () => changeCardToRegisterForm($card))
 }
 
 /** 카드를 등록 폼 형태로 바꾸어줍니다. */
@@ -178,7 +175,7 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
             $registerAcceptBtn.disabled = false  :
             $registerAcceptBtn.disabled = true;
 
-    $cardRegisterInput.addEventListener(INPUT, () => {
+    $cardRegisterInput.addEventListener(EVENT.INPUT, () => {
         if($cardRegisterInput.scrollHeight != scrollHeight) {
             cardHeight += CARD.TEXT_HEIGTH;
             $cardRegisterForm.style.height = cardHeight + "vh";

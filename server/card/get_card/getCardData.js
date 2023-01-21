@@ -1,6 +1,6 @@
 import { 
     FETCH_URL, METHOD, 
-    STATUS, CARD_ID, CARD_ORDER 
+    COLUMN_STATUS, CARD_ID, CARD_ORDER 
 } from "../../../public/js/common/commonVariable.js";
 import { cardListOnLocal, statusListOnLocal } from "../../../public/js/store/store.js";
 
@@ -10,7 +10,7 @@ import { cardListOnLocal, statusListOnLocal } from "../../../public/js/store/sto
  */
 function classifyCardJSONList(cardJSONList) {
     cardJSONList.forEach((cardJSON) => {
-        const status = cardJSON[STATUS];
+        const status = cardJSON[COLUMN_STATUS];
         const cardID = cardJSON[CARD_ID]
         const cardOrderList = statusListOnLocal[status][CARD_ORDER];
         const cardIndex = cardOrderList.indexOf(cardID);

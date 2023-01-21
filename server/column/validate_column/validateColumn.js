@@ -1,4 +1,4 @@
-import { STATUS_NAME } from "../../../public/js/common/commonVariable.js";
+import { STATUS } from "../../../public/js/common/commonVariable.js";
 import { statusListOnLocal } from "../../../public/js/store/store.js";
 
 /** 새롭게 생성될 status의 이름 타당성 여부를 반환합니다. 
@@ -6,7 +6,7 @@ import { statusListOnLocal } from "../../../public/js/store/store.js";
 */
 function validateStatus(newName) {
     for(let statusJSON of statusListOnLocal) {
-        if(statusJSON && statusJSON[STATUS_NAME] == newName) { return false; }
+        if(statusJSON && statusJSON[STATUS.NAME] == newName) { return false; }
     }
 
     return true;
@@ -20,7 +20,7 @@ function validateNewStatusName(originalName, newName) {
     for(let i=0;i<statusListOnLocal.length;i++) {
         if(! statusListOnLocal[i]) { continue; }
 
-        let statusName = statusListOnLocal[i][STATUS_NAME];
+        let statusName = statusListOnLocal[i][STATUS.NAME];
 
         if(statusName == newName && statusName != originalName) { return false; }
     }

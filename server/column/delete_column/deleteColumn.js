@@ -1,6 +1,6 @@
 import { 
     FETCH_URL, METHOD, 
-    STATUS, STATUS_INDEX, STATUS_NAME, CARD_ID 
+    COLUMN_STATUS, STATUS, CARD_ID 
 } from "../../../public/js/common/commonVariable.js";
 import { deleteCardData } from "../../card/delete_card/deleteCard.js";
 import { statusListOnLocal, cardListOnLocal } from "../../../public/js/store/store.js";
@@ -23,16 +23,16 @@ const deleteStatusOnServer = (statusIndex) => fetch(FETCH_URL.STATUS + "/" + sta
 */
 function deleteStatus(statusName) {
     let filteredStatus = statusListOnLocal
-    .filter((statusJSON) => statusJSON[STATUS_NAME] == statusName)[0];
+    .filter((statusJSON) => statusJSON[STATUS.NAME] == statusName)[0];
 
-    let statusIndex = filteredStatus[STATUS_INDEX];
+    let statusIndex = filteredStatus[STATUS.INDEX];
 
     deleteStatusOnServer(statusIndex);
 
     if(cardListOnLocal[statusIndex].length) {
         cardListOnLocal[statusIndex]
-        .filter((cardJSON) => cardJSON[STATUS] == statusIndex)
-        .forEach((cardJSON) => deleteCardData(cardJSON[STATUS], cardJSON[CARD_ID]))
+        .filter((cardJSON) => cardJSON[COLUMN_STATUS] == statusIndex)
+        .forEach((cardJSON) => deleteCardData(cardJSON[COLUMN_STATUS], cardJSON[CARD_ID]))
     }
 
     deleteStatusOnLocal(statusIndex);

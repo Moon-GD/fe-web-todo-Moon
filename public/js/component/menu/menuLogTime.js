@@ -1,7 +1,4 @@
-import { 
-    MONTH, DATE, HOUR, MINUTE,
-    MOUSE_OVER, MOUSE_LEAVE
-} from "../../common/commonVariable.js";
+import { LOG_TIME, EVENT } from "../../common/commonVariable.js";
 
 /** 현재 시간을 string으로 파싱하여 반환합니다. */
 function getCurrentTimeInString() {
@@ -41,10 +38,10 @@ function getElapsedTime(timeList) {
     const currentHour = currentTime.getHours();
     const currentMinute = currentTime.getMinutes();
 
-    if(timeList[MONTH] != currentMonth) { return `${currentMonth - timeList[MONTH]}달 전`; }
-    else if(timeList[DATE] != currentDate) { return `${currentDate - timeList[DATE]}일 전`; }
-    else if(timeList[HOUR] != currentHour) { return `${currentHour - timeList[HOUR]}시간 전`; }
-    else if(timeList[MINUTE] != currentMinute) { return `${currentMinute - timeList[MINUTE]}분 전`; }
+    if(timeList[LOG_TIME.MONTH] != currentMonth) { return `${currentMonth - timeList[LOG_TIME.MONTH]}달 전`; }
+    else if(timeList[LOG_TIME.DATE] != currentDate) { return `${currentDate - timeList[LOG_TIME.DATE]}일 전`; }
+    else if(timeList[LOG_TIME.HOUR] != currentHour) { return `${currentHour - timeList[LOG_TIME.HOUR]}시간 전`; }
+    else if(timeList[LOG_TIME.MINUTE] != currentMinute) { return `${currentMinute - timeList[LOG_TIME.MINUTE]}분 전`; }
     else { return '방금'; }
 }
 
@@ -55,8 +52,8 @@ function saveTimeInTimeNode(timeNode, parsedTime) { timeNode.setAttribute("data-
 function addEventToTimeNode(timeNode) {
     const timeNodeContent = timeNode.textContent;
 
-    timeNode.addEventListener(MOUSE_OVER, () => { timeNode.textContent = timeNode.dataset.time; })
-    timeNode.addEventListener(MOUSE_LEAVE, () => { timeNode.textContent = timeNodeContent; })
+    timeNode.addEventListener(EVENT.MOUSE_OVER, () => { timeNode.textContent = timeNode.dataset.time; })
+    timeNode.addEventListener(EVENT.MOUSE_LEAVE, () => { timeNode.textContent = timeNodeContent; })
 }
 
 export { 

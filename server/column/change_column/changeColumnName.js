@@ -1,4 +1,4 @@
-import { STATUS_NAME, STATUS_ID, FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
+import { STATUS, FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
 import { statusListOnLocal } from "../../../public/js/store/store.js";
 
 /** 로컬에서 status의 이름을 바꾸어 줍니다. 
@@ -9,9 +9,9 @@ function updateStatusNameOnLocal(prevName, nextName) {
     let statusID = -1;
 
     for(const statusJSON of statusListOnLocal) {
-        if(statusJSON && statusJSON[STATUS_NAME] == prevName) { 
-            statusID = statusJSON[STATUS_ID]; 
-            statusJSON[STATUS_NAME] = nextName;
+        if(statusJSON && statusJSON[STATUS.NAME] == prevName) { 
+            statusID = statusJSON[STATUS.ID]; 
+            statusJSON[STATUS.NAME] = nextName;
             break;
         }
     }
