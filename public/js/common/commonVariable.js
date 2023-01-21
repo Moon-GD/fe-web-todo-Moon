@@ -93,7 +93,12 @@ const CARD_DARK_MODE = {
 // 검색된 카드 css 스타일링 value
 const SEARCH_CARD = {
     ORIGINAL: "0.2vh solid #fff",
-    OUTLINE: "0.2vh solid red"
+    OUTLINE: "0.4vh solid red"
+}
+
+const SEARCH_CARD_DARK_MODE = {
+    ORIGINAL: "",
+    OUTLINE: "0.4vh solid #fff"
 }
 
 // Fab 버튼 관련
@@ -181,7 +186,7 @@ export {
     CARD, CARD_DARK_MODE,
 
     // 검색된 카드 css 스타일링 value
-    SEARCH_CARD,
+    SEARCH_CARD, SEARCH_CARD_DARK_MODE,
 
     // Fab 버튼 관련
     FAB_BTN,

@@ -1,9 +1,10 @@
 import { pipe } from "../common/commonFunction.js";
-import { SEARCH_CARD, ONE_SECOND } from "../common/commonVariable.js";
+import { SEARCH_CARD, ONE_SECOND, SEARCH_CARD_DARK_MODE } from "../common/commonVariable.js";
 import { findCardTitle } from "../component/card.js";
 import { menuLogSearch } from "../component/menu/menu.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { searchLogManger } from "./searchLogManager.js";
+import { isDarkMode } from "../common/darkMode.js";
 
 const $searchModal = querySelector("#search-modal-section");
 const $searchInput = querySelector("#search-input");
@@ -18,11 +19,15 @@ const getCardListByTitle = (title) => {
 
 const changeCardColorTemporary = ($cardList) => {
     $cardList.forEach(($card) => {
-        $card.style.outline = SEARCH_CARD.OUTLINE;
+        isDarkMode() ?
+                $card.style.outline = SEARCH_CARD_DARK_MODE.OUTLINE:
+                $card.style.outline = SEARCH_CARD.OUTLINE;
         
         setTimeout(() => {
             $card.style.transition = ONE_SECOND;
-            $card.style.outline = SEARCH_CARD.ORIGINAL;
+            isDarkMode() ?
+                    $card.style.outline = SEARCH_CARD_DARK_MODE.ORIGINAL:
+                    $card.style.outline = SEARCH_CARD.ORIGINAL;
         }, 1000);
     })
 }
