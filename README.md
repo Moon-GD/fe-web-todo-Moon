@@ -1,4 +1,5 @@
-# 현대 부트캠프 2주차 - FE web Todo List (mock server 연동으로 배포 링크 닫아둔 상태입니다.)
+# 현대 부트캠프 2주차 - FE web Todo List 
+#### <i>(mock server 연동으로 배포 링크 닫아둔 상태입니다.)</i>
 
 <br>
 
@@ -190,6 +191,8 @@
   <li> Promise 객체 만들기 </li>
   <li> 사이드바 시간 반영 ✅</li>
 </ol>
+
+<br>
 
 ## 리팩토링 가이드
 <ol>
