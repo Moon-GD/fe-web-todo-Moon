@@ -46,50 +46,132 @@
   </li>
 </ul> 
 
-## 도전 중!
+## 도전했던 기능
 
-## server data
-
-## 요구 사항
-
-## 리팩토링 가이드
-
-## 제공 기능
-### 1️⃣ Column
+### 1️⃣ Search
 <ul>
-  <li> 추가 (기존 column과의 중복도 검사 포함) </li>
-  <li> column이 많은 상태에서 추가할 경우 추가된 column으로 scroll 이동 </li>
-  <li> 더블 클릭시 헤더 내용 갱신 </li>
-  <li> 삭제 </li>
-</ul>
-
-### 2️⃣ Card
-<ul>
-  <li> 추가 (등록 과정에서 inputbox는 사용자 입력에 맞추어 유연하게 크기 조정) </li>
-  <li> 더블 클릭 시 내용 수정 </li>
-  <li> 삭제 </li>
-</ul>
-
-### 3️⃣ Menu
-<ul>
-  <li> Card 관련 4가지 액션 (add, delete, update, move) 발생 시 로그로 표시 </li>
-  <li> 메뉴 로그의 시간 표시 (ex: 방금, n분전, n시간 전) </li>
-  <li> 메뉴 로그의 시간 hover시 실제 등록 시간 표시</li>
-</ul>
-
-### 4️⃣ For Dev
-<ul>
-  <li> custom querySelector & querySelectorAll </li>
-</ul>
-
-### 5️⃣ Mock-server Data
-<ul>
-  <li> 추후 작성 예정 </li>
+  <li> Card 제목을 기준으로 검색 <br>
+    <img width="85%" src="https://user-images.githubusercontent.com/74173976/213905239-6995c972-7e6c-4988-8384-d719ca1f0d05.gif"/><br><br>
+  </li>
+  <li> 검색어 추천 <br>
+    운영체제의 페이지 교체 기법 중 LFU를 반대로 활용하여 검색어를 추천하도록 설계 <br>
+    <img width="85%" src="https://user-images.githubusercontent.com/74173976/213905325-83045c3d-6e0f-496a-b613-e235028afcdc.gif"/><br><br>
+  </li>
 </ul>
 
 <br>
 
-## 2주차 요구사항
+### 2️⃣ Dev Utils
+<ul>
+  <li> 
+    Custom querySelector 구현 및 활용 <br>
+    사용자 query를 파싱하여 돔 트리 탐색 (BFS) <a href="https://github.dev/Moon-GD/fe-web-todo-Moon/blob/4ba48e04ba5535f7497359e189ab4b7e36d68826/public/js/devUtils/querySelector.js#L13-L18">구현 부분</a>
+  </li>
+  <li> 
+    pipeline 함수를 통한 가독성 향상 <br>
+    3중 함수 구조 (내부적으로 reduce 함수를 통해 함수 배열 반복 수행) <a href="https://github.dev/Moon-GD/fe-web-todo-Moon/blob/4ba48e04ba5535f7497359e189ab4b7e36d68826/public/js/common/commonFunction.js#L7-L11">구현 부분</a>
+  </li>
+</ul>
+
+<br>
+
+### 3️⃣ Dark Mode
+<ul>
+  <li> 전구 icon을 통한 toggle <br>
+     <img width="85%" src="https://user-images.githubusercontent.com/74173976/213905535-aae8af09-cbfb-459f-b2c7-228445ad2990.gif"/> <br><br>
+  </li>
+</ul>
+
+## server data
+<ul>
+  <li> mock server로 json-server 활용 </li>
+  <li>
+    <details>
+      <summary>
+        예시 데이터
+      </summary>
+
+      ```json
+    {
+      "statusList": [
+        {
+          "id": 1,
+          "statusIndex": 1,
+          "statusName": "해야할 일",
+          "order": [
+            "-1"
+          ]
+        },
+        {
+          "id": 2,
+          "statusIndex": 2,
+          "statusName": "하고 있는 일",
+          "order": [
+            "-2"
+          ]
+        },
+        {
+          "id": 3,
+          "statusIndex": 3,
+          "statusName": "완료한 일",
+          "order": [
+            "-3"
+          ]
+        }
+      ],
+      "cardList": [
+        {
+          "title": "3주차 보충학습",
+          "content": "this를 설명해보자!",
+          "author": "author by web",
+          "status": 1,
+          "date": "2023-01-21T12:51:17.916Z",
+          "id": "-1"
+        },
+        {
+          "title": "Github",
+          "content": "README 정리",
+          "author": "author by web",
+          "status": 2,
+          "date": "2023-01-21T12:51:20.835Z",
+          "id": "-2"
+        },
+        {
+          "title": "설날",
+          "content": "가족들과 시간 보내기",
+          "author": "author by web",
+          "status": 3,
+          "date": "2023-01-21T12:51:23.083Z",
+          "id": "-3"
+        }
+      ],
+      "menuList": [
+        {
+          "action": "CREATE",
+          "actionTime": "1월 22일 16시 39분",
+          "id": 410,
+          "columnName": "하고 있는 일",
+          "cardTitle": "노래 듣기"
+        },
+        {
+          "action": "DELETE",
+          "actionTime": "1월 22일 16시 39분",
+          "id": 918,
+          "columnName": "하고 있는 일",
+          "cardTitle": "노래 듣기"
+        }
+      ]
+    }
+    ```
+
+    </details>
+  </li>    
+</ul>
+  
+<br>
+  
+## 요구 사항
+### 2주차
 <ol>
   <li> Todo 삭제, 편집 ✅ </li>
   <li> Drag & Drop ✅ </li>
@@ -100,7 +182,7 @@
 
 <br>
 
-## 3주차 요구사항
+### 3주차 요구사항
 <ol>
   <li> Mock 서버 or 실제 서버 활용 ✅ </li>
   <li> fetch api에 then, async/await 활용 ✅</li>
@@ -109,10 +191,7 @@
   <li> 사이드바 시간 반영 ✅</li>
 </ol>
 
-<br>
-
-## 기타 사항
-### 리팩토링 가이드
+## 리팩토링 가이드
 <ol>
   <li> html tag 작성 요령
      <ul>
@@ -131,14 +210,3 @@
 </ol>
 
 <br>
-
-## 셀프 피드백 -> 모르는 게 많은 듯. 정확하게 아는 것 같지는 않다는 느낌이 들었다.
-##### js remove, map
-##### bind
-##### css styling guid - bem
-##### requestAnimationFrame
-##### web working Draft
-##### js animate
-##### Babel
-##### 콜 스택, 콜백 큐
-##### macro/micro queue
