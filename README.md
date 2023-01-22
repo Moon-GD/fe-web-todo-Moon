@@ -1,4 +1,4 @@
-# 현대 부트캠프 2주차 - <a href="https://moon-gd-web-todo.netlify.app/">FE web Todo List</a>
+# 현대 부트캠프 2주차 - FE web Todo List (mock server 연동으로 배포 링크 닫아둔 상태입니다.)
 
 <br>
 
