@@ -5,6 +5,58 @@
 ## 제공 기능
 ### 1️⃣ Column
 <ul>
+  <li> column 생성 <br>
+    <img width="85%" src="https://user-images.githubusercontent.com/74173976/213904845-be923916-2bbe-4e04-997b-7d02adf9b92e.gif"/><br><br>
+  </li>
+  <li> column 수정 <br>
+    <img width="85%" src="https://user-images.githubusercontent.com/74173976/213904905-382cdb48-b9ad-4452-bf32-4cfe3ef56975.gif"><br><br>
+  </li>
+  <li> column 자동 스크롤 <br>
+    <img width="85%" src="https://user-images.githubusercontent.com/74173976/213904957-0eafa030-0c59-432d-bce9-0af0745fc06f.gif"><br><br>
+  </li>
+  <li> column 삭제 <br>
+    <img width="85%" src="https://user-images.githubusercontent.com/74173976/213905013-62da0530-11a1-48dd-a6a2-6a9bc9f9d67b.gif"><br><br>
+  </li>
+</ul>
+
+<br>
+
+### 2️⃣ Card
+<ul>
+  <li> card 생성 <br>
+    <img width="45%" src="https://user-images.githubusercontent.com/74173976/213904382-61ef1d16-0a9b-4f2e-9551-6829e18b40ac.gif"/><br><br>
+  </li>
+  <li> card 수정 <br>
+    <img width="45%" src="https://user-images.githubusercontent.com/74173976/213904482-4b186861-68f6-498a-9fbf-3f7a554d8a4b.gif"><br><br>
+  </li>
+  <li> card 이동 <br>
+    <img width="45%" src="https://user-images.githubusercontent.com/74173976/213904612-db24aed3-193d-44bd-bc72-23781e493d10.gif"><br><br>
+  </li>
+  <li> card 삭제 <br>
+    <img width="45%" src="https://user-images.githubusercontent.com/74173976/213904671-ee0ca7cc-d1f9-4d99-ba88-cd276141d227.gif"><br><br>
+  </li>
+</ul>
+
+<br> 
+
+### 3️⃣ Menu
+<ul>
+  <li> 사용자 액션 기록 <br>
+    <img width="85%" src="https://user-images.githubusercontent.com/74173976/213905099-24ddbe48-4fc7-4f6f-8039-94f281ae925b.gif"/><br><br>
+  </li>
+</ul> 
+
+## 도전 중!
+
+## server data
+
+## 요구 사항
+
+## 리팩토링 가이드
+
+## 제공 기능
+### 1️⃣ Column
+<ul>
   <li> 추가 (기존 column과의 중복도 검사 포함) </li>
   <li> column이 많은 상태에서 추가할 경우 추가된 column으로 scroll 이동 </li>
   <li> 더블 클릭시 헤더 내용 갱신 </li>
