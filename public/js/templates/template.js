@@ -9,7 +9,7 @@ import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { searchLogManger } from "../search/searchLogManager.js";
 import { 
     timeToStringFormat, timeStringToArray, 
-    getElapsedTime, saveTimeInTimeNode, addEventToTimeNode
+    getElapsedTime, saveTimeInTimeNode, eventToTimeNode
 } from "../component/menu/menuLogTime.js";
 import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
 
@@ -151,7 +151,7 @@ function menuLogAddTemplate(content, status, emotion, author) {
     saveTimeInTimeNode($timeNode, parsedTime);
 
     // 시간 노드에 event 추가
-    addEventToTimeNode($timeNode);
+    eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
@@ -186,7 +186,7 @@ function menuLogDeleteTemplate(content, status, emotion, author) {
     saveTimeInTimeNode($timeNode, parsedTime);
 
     // 시간 노드에 event 추가
-    addEventToTimeNode($timeNode);
+    eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
@@ -219,7 +219,7 @@ function menuLogDeleteAllTemplate(emotion, author) {
     saveTimeInTimeNode($timeNode, parsedTime);
 
     // 시간 노드에 event 추가
-    addEventToTimeNode($timeNode);
+    eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
@@ -255,7 +255,7 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion, aut
     saveTimeInTimeNode($timeNode, parsedTime)
 
     // 시간 노드에 event 추가
-    addEventToTimeNode($timeNode);
+    eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
@@ -290,7 +290,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
     saveTimeInTimeNode($timeNode, parsedTime);
 
     // 시간 노드에 event 추가
-    addEventToTimeNode($timeNode);
+    eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
@@ -326,7 +326,7 @@ function menuSearchTemplate(searchLog, emotion, author) {
     saveTimeInTimeNode($timeNode, parsedTime);
 
     // 시간 노드에 event 추가
-    addEventToTimeNode($timeNode);
+    eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
