@@ -8,7 +8,7 @@ import { makeShadedNode } from "../drag/dragEffect.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
 import { searchLogManger } from "../search/searchLogManager.js";
 import { 
-    getCurrentTimeInString, timeStringToArray, 
+    timeToStringFormat, timeStringToArray, 
     getElapsedTime, saveTimeInTimeNode, addEventToTimeNode
 } from "../component/menu/menuLogTime.js";
 import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
@@ -140,7 +140,7 @@ function menuLogAddTemplate(content, status, emotion, author) {
     `;
 
     // 시간 계산 및 시간 노드 불러오기
-    const parsedTime = getCurrentTimeInString(new Date());
+    const parsedTime = timeToStringFormat(new Date());
     const timeArray = timeStringToArray(parsedTime);
     const $timeNode = $menuFrame.querySelector(".log-time");
 
@@ -175,7 +175,7 @@ function menuLogDeleteTemplate(content, status, emotion, author) {
     `;
 
     // 시간 계산 및 시간 노드 불러오기
-    const parsedTime = getCurrentTimeInString(new Date());
+    const parsedTime = timeToStringFormat(new Date());
     const timeArray = timeStringToArray(parsedTime);
     const $timeNode = $menuFrame.querySelector(".log-time");
 
@@ -208,7 +208,7 @@ function menuLogDeleteAllTemplate(emotion, author) {
     `;
 
     // 시간 계산 및 시간 노드 불러오기
-    const parsedTime = getCurrentTimeInString(new Date());
+    const parsedTime = timeToStringFormat(new Date());
     const timeArray = timeStringToArray(parsedTime);
     const $timeNode = $menuFrame.querySelector(".log-time");
 
@@ -244,7 +244,7 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion, aut
     `;
 
     // 시간 계산 및 시간 노드 불러오기
-    const parsedTime = getCurrentTimeInString(new Date());
+    const parsedTime = timeToStringFormat(new Date());
     const timeArray = timeStringToArray(parsedTime);
     const $timeNode = $menuFrame.querySelector(".log-time");
 
@@ -279,7 +279,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
     `
 
     // 시간 계산 및 시간 노드 불러오기
-    const parsedTime = getCurrentTimeInString(new Date());
+    const parsedTime = timeToStringFormat(new Date());
     const timeArray = timeStringToArray(parsedTime);
     const $timeNode = $menuFrame.querySelector(".log-time");
 
@@ -315,7 +315,7 @@ function menuSearchTemplate(searchLog, emotion, author) {
     `;
 
     // 시간 계산 및 시간 노드 불러오기
-    const parsedTime = getCurrentTimeInString(new Date());
+    const parsedTime = timeToStringFormat(new Date());
     const timeArray = timeStringToArray(parsedTime);
     const $timeNode = $menuFrame.querySelector(".log-time");
 

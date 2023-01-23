@@ -2,7 +2,7 @@ import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { uploadMenuJSON } from "../post.js";
-import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
+import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 
 /**
  * card 모두 삭제 menu json을 반환합니다.
@@ -11,7 +11,7 @@ import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLo
 function returnDeleteAllMenuJSON() {
     return {
         "action": MENU_ACTION.DELETE_ALL,
-        "actionTime": getCurrentTimeInString(),
+        "actionTime": timeToStringFormat(),
         "id": idGenerator.createMenuID()
     }
 }

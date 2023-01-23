@@ -1,7 +1,7 @@
 import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
-import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
+import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../post.js";
 
 /**
@@ -13,7 +13,7 @@ import { uploadMenuJSON } from "../post.js";
 function returnCreateMenuJSON([columnName, cardTitle]) {
     return {
         "action": MENU_ACTION.CREATE,
-        "actionTime": getCurrentTimeInString(),
+        "actionTime": timeToStringFormat(),
         "id": idGenerator.createMenuID(),
         "columnName": columnName,
         "cardTitle": cardTitle

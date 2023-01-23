@@ -11,6 +11,7 @@ import { searchLogManger } from "../../search/searchLogManager.js";
 import { makeDeleteAllMenuJSON } from "../../../../server/menu/action/cardDeletionAll.js";
 import { makeUpdateMenuJSON } from "../../../../server/menu/action/cardUpdation.js";
 import { makeMoveMenuJSON } from "../../../../server/menu/action/cardMove.js";
+import { pipe } from "../../common/commonFunction.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
@@ -54,15 +55,15 @@ function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
 
 /** 메뉴 log 시간을 업데이트합니다. */
 function menuLogTimeUpdate() {
-    const $logFrameList = document.querySelectorAll(".log-frame");
-
-    for(const $logFrame of $logFrameList) {
-        const $timeNode = $logFrame.querySelector(".log-time");
-        const timeString = $timeNode.dataset.time;
-        const timeArray = timeStringToArray(timeString);
-        const elapsedTimeString = getElapsedTime(timeArray);
-        $timeNode.textContent = elapsedTimeString;
-    }
+    const $timeNodeList = document.querySelectorAll(".log-time");
+    $timeNodeList.forEach(($timeNode) => {
+        pipe(
+            ($timeNode) => $timeNode.dataset.time,
+            (timeString) => timeStringToArray(timeString),
+            (timeArray) => getElapsedTime(timeArray),
+            (timeDiff) => $timeNode.textContent = timeDiff
+        )($timeNode)
+    })
 }
 
 export { 

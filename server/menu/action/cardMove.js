@@ -1,7 +1,7 @@
 import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
-import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
+import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../post.js";
 
 /**
@@ -14,7 +14,7 @@ import { uploadMenuJSON } from "../post.js";
 function retureMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
     return {
         "action": MENU_ACTION.MOVE,
-        "actionTime": getCurrentTimeInString(),
+        "actionTime": timeToStringFormat(),
         "id": idGenerator.createMenuID(),
         "prevColumnName": prevColumnName,
         "nextColumnName": nextColumnName,
