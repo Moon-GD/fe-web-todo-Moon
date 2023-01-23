@@ -51,40 +51,42 @@ function eventToCardClearBtns() {
 
     addEvent($Btns.$cardClearCancel, [
         () => turnOffCardClearModal
-    ])
+    ]);
 
     addEvent($Btns.$cardClearAccept, [
         () => deleteAllCards(),
         () => turnOffCardClearModal()
-    ])
+    ]);
 }
 
 function eventToSearchBtn() {
-    $Btns.$goSearchModal.addEventListener(EVENT.CLICK, () => {
-        changeCSS($searchModal, "display", DISPLAY.FLEX);
-        showSuggestedLog();
-    });
-    $Btns.$searchCancel.addEventListener(EVENT.CLICK, turnOffSearchModal);
-    $Btns.$searchAccept.addEventListener(EVENT.CLICK, () => {
-        turnOffSearchModal();
-        searchCard($searchInput.value);
-        $searchInput.value = "";
-    })
+    addEvent($Btns.$goSearchModal, [
+        () => changeCSS($searchModal, "display", DISPLAY.FLEX),
+        () => showSuggestedLog()
+    ]);
+    
+    addEvent($Btns.$searchCancel, [ turnOffSearchModal]);
+    addEvent($Btns.$searchAccept, [
+        () => turnOffSearchModal(),
+        () => searchCard($searchInput.value),
+        () => $searchInput.value = ""
+    ]);
 }
 
 function eventToColumnAddBtn() {
-    $Btns.$goColumnAddModal.addEventListener(EVENT.CLICK, turnOnColumnAddModal);
-    $Btns.$columnAddCancel.addEventListener(EVENT.CLICK, turnOffColumnAddModal);
-    $Btns.$columnAddAccept.addEventListener(EVENT.CLICK, () => {
-        if(validateStatus($columnAddInput.value)) {
-            addColumn($columnAddInput.value);
-            turnOffColumnAddModal();
+    addEvent($Btns.$goColumnAddModal, [turnOnColumnAddModal])
+    addEvent($Btns.$columnAddCancel, [
+        () => {
+            if(validateStatus($columnAddInput.value)) {
+                addColumn($columnAddInput.value);
+                turnOffColumnAddModal();
+            }
+            else {
+                $columnAddInput.value = "";
+                showWarningModal();
+            }
         }
-        else {
-            $columnAddInput.value = "";
-            showWarningModal();
-        }
-    })
+    ])
 }
 
 function toggleFabBtn() {
@@ -103,7 +105,7 @@ function toggleFabBtn() {
 }
 
 function eventToFabBtn() {
-    $Btns.$fab.addEventListener(EVENT.CLICK, toggleFabBtn);
+    addEvent($Btns.$fab, [toggleFabBtn]);
     eventToCardClearBtns();
     eventToSearchBtn();
     eventToColumnAddBtn();
