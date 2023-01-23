@@ -14,8 +14,8 @@ class SearchLogManager {
         this.#searchLog.push(searchLog);
 
         this.#searchCount[searchLog] ?
-                this.#searchCount[searchLog] += 1:
-                this.#searchCount[searchLog] = 1;
+            this.#searchCount[searchLog] += 1:
+            this.#searchCount[searchLog] = 1;
 
         if(this.#searchCount[searchLog] >= this.#maxCount) {
             this.#maxCount = this.#searchCount[searchLog];
@@ -24,15 +24,14 @@ class SearchLogManager {
     }
 
     /** 검색어를 추천합니다. */
-    suggestLog() {
-        return this.#searchLog.length == 0 ? null : this.#maxLog;
-    }
+    suggestLog = () => 
+        this.#searchLog.length == 0 ? 
+            null : this.#maxLog;
 
     /** 검색어의 빈도를 반환합니다. */
-    getSearchCount(searchLog) {
-        return this.#searchCount[searchLog] ? 
-                this.#searchCount[searchLog] : 0;
-    }
+    getSearchCount = (searchLog) => 
+        this.#searchCount[searchLog] ? 
+            this.#searchCount[searchLog] : 0;
 }
 
 // 싱글톤 패턴 (검색어 기록을 한 군데에서 유지하기 위해)

@@ -10,13 +10,20 @@ const $searchModal = querySelector("#search-modal-section");
 const $searchInput = querySelector("#search-input");
 const $suggestedSearchText = querySelector("#suggested-search-log");
 
-const getCardListByTitle = (title) => {
-    return pipe(
-        () => document.querySelectorAll("div.card-frame"),
-        ($cardList) => $cardList.filter(($card) => findCardTitle($card).indexOf(title) != -1)
-    )()
-}
+/**
+ * 해당하는 제목을 가진 모든 카드 객체를 배열로 반환합니다.
+ * @param {String} title 카드 제목
+ * @returns 카드 객체 배열
+ */
+const getCardArrayByTitle = (title) => pipe(
+    () => document.querySelectorAll("div.card-frame"),
+    ($cardList) => $cardList.filter(($card) => findCardTitle($card).indexOf(title) != -1)
+)();
 
+/**
+ * 카드의 색깔을 1초간 변경합니다.
+ * @param {Array} $cardList 카드 객체 배열
+ */
 const changeCardColorTemporary = ($cardList) => {
     $cardList.forEach(($card) => {
         isDarkMode() ?
@@ -32,19 +39,25 @@ const changeCardColorTemporary = ($cardList) => {
     })
 }
 
-/** 카드를 검색합니다. */
+/**
+ * 카드를 검색합니다.
+ * @param {String} searchInputValue 검색어
+ */
 function searchCard(searchInputValue) {
     searchLogManger.addNewSearchLog(searchInputValue);
     changeCardBackGroundColor(searchInputValue);
     menuLogSearch(searchInputValue);
 }
 
-/** 검색된 카드의 배경색을 일시적으로 바꿉니다. */
-function changeCardBackGroundColor(findTitle) {
+/**
+ * 카드를 검색하고 배경색을 잠시 변경합니다.
+ * @param {String} cardTitle 카드 제목
+ */
+function changeCardBackGroundColor(cardTitle) {
     pipe(
-        getCardListByTitle,
+        getCardArrayByTitle,
         changeCardColorTemporary,
-    )(findTitle)
+    )(cardTitle)
 }
 
 /** 추천 검색어를 보여줍니다. */
