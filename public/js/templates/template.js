@@ -1,7 +1,7 @@
 import { EVENT, STATUS, CARD_ID } from "../common/commonVariable.js";
 import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
-    resizeCardByInputBox, addDoubleClickEventToCard
+    resizeCardByInputBox, addDoubleClickEventToCard, parseCardContentByNewLine
 } from "../component/card.js";
 import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
@@ -78,7 +78,7 @@ function cardTemplate(cardTitle, cardContent, cardAuthor, cardId) {
     $card.classList.add("card-frame");
     $card.setAttribute("draggable", true);
     $card.setAttribute(CARD_ID, cardId);  // drag 이벤트를 위해 카드에 ID 부여
-    
+    cardContent = parseCardContentByNewLine(cardContent)
     $card.innerHTML = `
         <h3 class="card-title">${cardTitle}
             <i class="fa-solid fa-xmark"></i>
@@ -100,7 +100,6 @@ function cardTemplate(cardTitle, cardContent, cardAuthor, cardId) {
 function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false) {
     let $newCard = document.createElement("div");
     $newCard.classList.add("new-card-frame");
-
     $newCard.innerHTML = `
         <input type="text" placeholder="제목을 입력하세요" value='${title}'>
         <textarea cols="30" rows="20" maxlength="500" placeholder="내용을 입력하세요">${content}</textarea>

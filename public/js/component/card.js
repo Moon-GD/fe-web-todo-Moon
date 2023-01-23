@@ -212,5 +212,5 @@ function parseCardContentByNewLine(cardContent) {
 export { 
     addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn, resizeCardByInputBox,
-    addDoubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards, setCard, $chosenCard
+    addDoubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards, setCard, $chosenCard, parseCardContentByNewLine
  }

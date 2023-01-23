@@ -8,6 +8,8 @@ import { getAllMenuJSON } from "../../server/menu/GET.js";
 import { eventToBulbs } from "./common/darkMode.js";
 
 function addEventsToWebsite() {
+    idGenerator.initialize();
+    eventToBulbs();
     initialDataToTemplate();
     addEventToMenuBtns();
     addEventToModalButtons();
@@ -16,10 +18,10 @@ function addEventsToWebsite() {
 }
 
 ( async () => {
-    await getAllJSONData();
-    await idGenerator.initialize();
-    getAllMenuJSON();
-    eventToBulbs();
+    await Promise.all([
+        getAllJSONData(),
+        getAllMenuJSON()
+    ]);
     
     // 사이트에 이벤트를 추가합니다
     addEventsToWebsite();
