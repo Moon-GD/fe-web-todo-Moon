@@ -2,7 +2,7 @@ import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { getCurrentTimeInString } from "../../../public/js/component/menu/menuLogTime.js";
-import { uploadMenuJSON } from "../POST.js";
+import { uploadMenuJSON } from "../post.js";
 
 /**
  * card 생성 menu json을 반환합니다.

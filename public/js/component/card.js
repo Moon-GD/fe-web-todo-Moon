@@ -7,9 +7,9 @@ import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu/menu.js";
 import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { deleteCardData } from "../../../server/card/DELETE.js";
+import { deleteCardData } from "../../../server/card/delete.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
-import { addCardJSON } from "../../../server/card/POST.js";
+import { addCardJSON } from "../../../server/card/post.js";
 import { isDarkMode } from "../common/darkMode.js";
 
 let $chosenCard = "";

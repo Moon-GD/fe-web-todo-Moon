@@ -1,7 +1,7 @@
 import { FETCH_URL, METHOD, CARD_ID } from "../../public/js/common/commonVariable.js"
 import { updateColumnLength } from "../../public/js/component/column.js";
 import { cardListOnLocal } from "../../public/js/store/store.js";
-import { moveJSONDataOnOneColumn } from "./PATCH/cardOrder.js";
+import { moveJSONDataOnOneColumn } from "./patchOrder.js";
 
 /** 서버에서 카드 JSON 데이터를 삭제합니다. 
  * @param {number} cardID card ID
