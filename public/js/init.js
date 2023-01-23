@@ -1,6 +1,4 @@
-import { 
-    eventToMenuBtns, eventToModalButtons, eventToFabBtn 
-} from "./component/button.js";
+import { eventToMenuBtns, eventToModalButtons, eventToFabBtn } from "./component/button.js";
 import { getAllJSONData } from "../../server/serverInit.js";
 import { initialDataToTemplate } from "./templates/template.js";
 import { idGenerator } from "./common/IDGenerator.js";

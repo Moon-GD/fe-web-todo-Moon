@@ -60,7 +60,7 @@ function getElapsedTime(timeList) {
  * @param {Node} timeNode 메뉴 log 노드
  * @param {String} timeString "1월 2일 3시 4분"
  */
-const saveTimeInTimeNode = (timeNode, timeString) => timeNode.setAttribute("data-time", timeString); 
+const saveTimeStringOnTimeNode = (timeNode, timeString) => timeNode.setAttribute("data-time", timeString); 
 
 /**
  * 메뉴 log 노드에 mouse over/out 이벤트를 추가합니다.
@@ -75,5 +75,5 @@ function eventToTimeNode(timeNode) {
 
 export { 
     timeToStringFormat, timeStringToArray,
-    getElapsedTime, saveTimeInTimeNode, eventToTimeNode
+    getElapsedTime, saveTimeStringOnTimeNode, eventToTimeNode
 }
