@@ -1,5 +1,5 @@
 import { 
-    addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton, addEventToFabBtn 
+    eventToMenuBtns, eventToModalButtons, eventToFabBtn 
 } from "./component/button.js";
 import { getAllJSONData } from "../../server/serverInit.js";
 import { initialDataToTemplate } from "./templates/template.js";
@@ -10,10 +10,9 @@ import { eventToBulbs } from "./common/darkMode.js";
 function addEventsToWebsite() {
     idGenerator.initialize();
     eventToBulbs();
-    addEventToMenuBtns();
-    addEventToModalButtons();
-    addEventToColumnAddButton();
-    addEventToFabBtn();
+    eventToMenuBtns();
+    eventToModalButtons();
+    eventToFabBtn();
     initialDataToTemplate();
 }
 

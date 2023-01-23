@@ -116,7 +116,10 @@ const BTN_MOVDED = {
 }
 
 // 사이드바 transition distance
-const MENU_MOVE_DISTANCE = "-30vw";
+const MENU_POSITION = {
+    HIDDEN: "-30vw",
+    VISIBLE: 0
+}
 
 // css display value
 const DISPLAY = {
@@ -195,7 +198,7 @@ export {
     BTN_MOVDED,
 
     // 사이드바 transition distance
-    MENU_MOVE_DISTANCE,
+    MENU_POSITION,
 
     // css display value
     DISPLAY,
