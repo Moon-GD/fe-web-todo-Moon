@@ -5,7 +5,7 @@ import { eventToNewCardBtn, eventToCardDeleteBtn,
 } from "../component/card.js";
 import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
-import { makeCardDragEvent } from "../drag/addDragEvent.js";
+import { eventToCard } from "../drag/addDragEvent.js";
 import { searchLogManger } from "../search/searchLogManager.js";
 import { 
     timeToStringFormat, timeStringToArray, 
@@ -21,7 +21,7 @@ function initialDataToTemplate() {
 
         cardListOnLocal[statusID].forEach((cardData) => {
             let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author, cardData[CARD_ID]);
-            makeCardDragEvent($newCard);
+            eventToCard($newCard);
             $cardArea.appendChild($newCard);
         })    
 

@@ -1,5 +1,5 @@
 import { addChildAfterParent } from "../common/commonFunction.js";
-import { makeShadedNode, makeLightNode } from "./dragEffect.js";
+import { makeShadedNode } from "./dragEffect.js";
 import { dragIDManager } from "./dragIDManager.js";
 
 /** 드래그 중인 카드를 기록합니다. */
@@ -11,7 +11,4 @@ const dragOverCard = ($parent, event) => {
     addChildAfterParent($parent, makeShadedNode());
 }
 
-/** 카드를 놓을 때 실행됩니다. */
-const dropCard = ($parent, event) => addChildAfterParent($parent, makeLightNode());
-
-export { recordDragCard, dragOverCard, dropCard }
+export { recordDragCard, dragOverCard }

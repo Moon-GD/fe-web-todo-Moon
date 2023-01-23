@@ -1,14 +1,9 @@
 class DragIDManager {
-    #ID = 0;
     movedCardID = 0;
 
-    setCurrentCardID(cardID) {
-        this.movedCardID = cardID;
-    }
+    setCurrentCardID = (cardID) => this.movedCardID = cardID;
 
-    getCurrentCardID() {
-        return this.movedCardID;
-    }
+    getCurrentCardID = () => this.movedCardID;
 }
 
 const dragIDManager = new DragIDManager();
