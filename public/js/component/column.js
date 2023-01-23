@@ -12,7 +12,11 @@ import { updateStatusName } from "../../../server/column/patch.js";
 
 const $mainTag = querySelector("main");
 
-/** column 삭제 버튼에 이벤트를 등록합니다. */
+/**
+ * column 삭제 버튼에 이벤트를 등록합니다.
+ * @param {Node} $columnDeleteBtn column 삭제 버튼
+ * @param {Node} $column column 객체
+ */
 function columnDeleteEvent($columnDeleteBtn, $column) {
     addEvent($columnDeleteBtn, [
         () => {
@@ -22,8 +26,11 @@ function columnDeleteEvent($columnDeleteBtn, $column) {
     ])
 }
 
-/** column을 추가합니다. */
-function addColumn(columnName="제목 없음") {
+/**
+ * column을 추가합니다.
+ * @param {String} columnName column 이름
+ */
+function addColumn(columnName) {
     pipe(
         () => idGenerator.createStatusID(),
         (newColumnID) => {
@@ -37,20 +44,24 @@ function addColumn(columnName="제목 없음") {
     )()
 }
 
-/** 카드가 속한 column의 header 이름을 반환합니다. */
-function findCardHeaderName($card) {
-    return pipe(
-        ($card) => $card.closest("section"),
-        ($section) => $section.querySelector("span").innerHTML
-    )($card)
-}
+/**
+ * 카드가 속한 column의 header 이름을 반환합니다.
+ * @param {Node} $card 
+ * @returns {String} column 이름
+ */
+const findCardHeaderName = ($card) => pipe(
+    () => $card.closest("section"),
+    ($section) => $section.querySelector("span").innerHTML
+)()
 
-/** column 길이를 갱신합니다. */
+/**
+ * column 길이를 갱신합니다.
+ * @param {String} status colum status
+ */
 function updateColumnLength(status) {
     let $columnList = document.querySelectorAll(".column");
 
     pipe(
-        () => document.querySelectorAll(".column"),
         () => statusListOnLocal.filter((statusJSON) => statusJSON[STATUS.ID] === status)[0][STATUS.NAME],
         (statusName) => {
             for(const $column of $columnList) {
@@ -63,18 +74,23 @@ function updateColumnLength(status) {
     )()
 }
 
-/** 카드가 속한 column의 status를 반환합니다. */
-function findColumnStatusByCard($card) {
-    return pipe(
-        ($card) => findCardHeaderName($card),
-        (headerName) => statusListOnLocal.filter((ele) => {
-            return ele.statusName == headerName;
-        }),
-        ($column) => $column[0]["statusIndex"]
-    )($card)
-}
+/**
+ * 카드가 속한 column의 status를 반환합니다.
+ * @param {Node} $card 카드 객체
+ * @returns {String} column status
+ */
+const findColumnStatusByCard = ($card) => pipe(
+    () => findCardHeaderName($card),
+    (headerName) => statusListOnLocal.filter((ele) => {
+        return ele.statusName == headerName;
+    }),
+    ($column) => $column[0]["statusIndex"]
+)()
 
-/** column header에 더블 클릭 이벤트를 등록합니다. */
+/**
+ * column header에 더블 클릭 이벤트를 등록합니다.
+ * @param {Node} $header column header
+ */
 function headerDoubleClickEvent($header) {
     addEvent($header, [
         () => pipe(
@@ -88,10 +104,20 @@ function headerDoubleClickEvent($header) {
     ], EVENT.DOUBLE_CLICK);
 }
 
-/** column header 이름을 수정합니다. */
+/**
+ * column header 이름을 수정합니다.
+ * @param {Node} $header header 객체
+ * @param {String} newTitle 새로운 header 이름
+ * @returns 
+ */
 const changeHeaderName = ($header, newTitle) => $header.querySelector("span").innerHTML = newTitle;
 
-/** column header에 focus out 이벤트를 등록합니다. */
+/**
+ * column header에 focus out 이벤트를 등록합니다.
+ * @param {Node} $headerInput header input 객체
+ * @param {String} originalTitle 기존 header 이름
+ * @param {Node} $originalHeader 기존 header 객체
+ */
 function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
     addEvent($headerInput, [
         () => {
@@ -117,11 +143,21 @@ function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
     ], EVENT.FOCUS_OUT);
 }
 
+/**
+ * 해당하는 status의 column 객체를 반환합니다.
+ * @param {String} columnStatus column status
+ * @returns {Node} column 객체
+ */
 const getColumnNodeByStatus = (columnStatus) => pipe(
     () => document.querySelectorAll(".column"),
     ($columnArray) => $columnArray.find(($column) => $column.getAttribute(STATUS.ID) == `${columnStatus}`)
 )();
 
+/**
+ * column의 카드 순서를 반환합니다.
+ * @param {Node} $column column 객체
+ * @returns {Array} 카드 순서 배열
+ */
 const getCardOrderByColumn = ($column) => pipe(
     () => $column.querySelectorAll(".card-frame"),
     ($cardArray) => $cardArray.map(($card) => $card.getAttribute(CARD_ID))
