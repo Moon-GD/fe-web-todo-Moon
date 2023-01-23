@@ -10,11 +10,11 @@ import { eventToBulbs } from "./common/darkMode.js";
 function addEventsToWebsite() {
     idGenerator.initialize();
     eventToBulbs();
-    initialDataToTemplate();
     addEventToMenuBtns();
     addEventToModalButtons();
     addEventToColumnAddButton();
     addEventToFabBtn();
+    initialDataToTemplate();
 }
 
 ( async () => {

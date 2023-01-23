@@ -6,17 +6,14 @@ class IDGenerator {
     #statusID = 0;
 
     async initialize() {
-        for(const statusJSON of statusListOnLocal) {
-            if(statusJSON && statusJSON[STATUS.ID] > this.#statusID) {
-                this.#statusID = statusJSON[STATUS.ID];
-            }
-        }
+        this.#statusID = Math.max(...statusListOnLocal
+            .filter((item) => item)
+            .map(({id}) => id)
+        );
 
-        for(const cardJSON of cardListOnLocal) {
-            if(cardJSON && cardJSON.length && Number(cardJSON[0][CARD_ID]) < this.#cardID) {
-                this.#cardID = Number(cardJSON[0][CARD_ID]);
-            }
-        }
+        cardListOnLocal.forEach((cardList) => 
+            cardList.forEach((card) => this.#cardID = Math.min(this.#cardID, card.id))
+        )
     }
 
     createStatusID() {

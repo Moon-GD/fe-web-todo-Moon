@@ -661,8 +661,18 @@ header {
 }
 
 // bulb
-.bulb {
-    transition: 0.5s
+#bulb-area {
+    width: 2.5vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    .bulb {
+        font-size: 4vh;
+        transition: 0.5s;
+    }
 }
 
 #go-light-mode {

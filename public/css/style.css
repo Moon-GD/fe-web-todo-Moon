@@ -609,7 +609,16 @@ header > i {
   outline: 0.2vh solid #EE675C;
 }
 
-.bulb {
+#bulb-area {
+  width: 2.5vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+#bulb-area .bulb {
+  font-size: 4vh;
   transition: 0.5s;
 }
 
