@@ -38,12 +38,10 @@ function changeCardOrder(statusID, newCardOrder) {
  * @param {number} status column status
  */
 function moveJSONDataOnOneColumn(status) {
-    const $cardOrder = pipe(
-        getColumnNodeByStatus,
-        getCardOrderByColumn
-    )(status);
-
-    changeCardOrder(status, $cardOrder);
+    const $column = getColumnNodeByStatus(status);
+    const cardOrder = getCardOrderByColumn($column);
+    
+    changeCardOrder(status, cardOrder);
     updateColumnLength(status);
 }
 

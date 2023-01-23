@@ -73,7 +73,8 @@ function eventToSearchBtn() {
 /** column 추가 관련 모든 버튼에 이벤트를 등록합니다. */
 function eventToColumnAddBtn() {
     addEvent($Btns.$goColumnAddModal, [turnOnColumnAddModal])
-    addEvent($Btns.$columnAddCancel, [
+    addEvent($Btns.$columnAddCancel, [turnOffColumnAddModal])
+    addEvent($Btns.$columnAddAccept, [
         () => {
             if(validateStatus($columnAddInput.value)) {
                 addColumn($columnAddInput.value);

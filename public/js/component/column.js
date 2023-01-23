@@ -1,38 +1,40 @@
-import { 
-    EVENT, 
-    DISPLAY, STATUS, CARD_ID
-} from "../common/commonVariable.js";
+import { EVENT, DISPLAY, STATUS, CARD_ID, COLUMN_STATUS } from "../common/commonVariable.js";
+import { pipe, addEvent } from "../common/commonFunction.js";
+import { idGenerator } from "../common/IDGenerator.js";
+import { showWarningModal } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { cardListOnLocal, statusListOnLocal } from "../store/store.js";
 import { columnTemplate, headerTitleTemplate } from "../templates/template.js";
 import { addStatus } from "../../../server/column/post.js";
 import { validateNewStatusName } from "../../../server/column/validation.js";
-import { pipe } from "../common/commonFunction.js";
-import { idGenerator } from "../common/IDGenerator.js";
 import { deleteStatus } from "../../../server/column/delete.js";
 import { updateStatusName } from "../../../server/column/patch.js";
-import { showWarningModal } from "./modal.js";
 
 const $mainTag = querySelector("main");
 
 /** column 삭제 버튼에 이벤트를 등록합니다. */
 function columnDeleteEvent($columnDeleteBtn, $column) {
-    $columnDeleteBtn.addEventListener(EVENT.CLICK, () => {
-        let statusName = $column.querySelector("span").innerHTML;
-        deleteStatus(statusName);
-        $column.remove();
-    })
+    addEvent($columnDeleteBtn, [
+        () => {
+            deleteStatus($column.querySelector("span").innerHTML);
+            $column.remove();
+        }
+    ])
 }
 
 /** column을 추가합니다. */
 function addColumn(columnName="제목 없음") {
-    let newColumnID = idGenerator.createStatusID();
-    const $column = columnTemplate(columnName, newColumnID);
-    $mainTag.appendChild($column);
-    $column.scrollIntoView({behavior: "smooth"});
-
-    // data 영역에도 status 추가
-    addStatus(columnName, newColumnID);
+    pipe(
+        () => idGenerator.createStatusID(),
+        (newColumnID) => {
+            addStatus(columnName, newColumnID)
+            return columnTemplate(columnName, newColumnID)
+        },
+        ($newColumn) => {
+            $mainTag.appendChild($newColumn);
+            $newColumn.scrollIntoView({behavior: "smooth"});
+        }
+    )()
 }
 
 /** 카드가 속한 column의 header 이름을 반환합니다. */
@@ -45,18 +47,20 @@ function findCardHeaderName($card) {
 
 /** column 길이를 갱신합니다. */
 function updateColumnLength(status) {
-    let statusName = statusListOnLocal.filter((statusJSON) => { return statusJSON[STATUS.ID] == status; })[0][STATUS.NAME];
     let $columnList = document.querySelectorAll(".column");
-    let $columnLength = '';
 
-    for(const $column of $columnList) {
-        if($column.querySelector("span").innerHTML == statusName) {
-            $columnLength = $column.querySelector(".column-length");
-            break;
-        }
-    }
-
-    $columnLength.innerHTML = cardListOnLocal[status].filter((ele) => ele).length;
+    pipe(
+        () => document.querySelectorAll(".column"),
+        () => statusListOnLocal.filter((statusJSON) => statusJSON[STATUS.ID] === status)[0][STATUS.NAME],
+        (statusName) => {
+            for(const $column of $columnList) {
+                if($column.querySelector("span").innerHTML === statusName) {
+                    return $column.querySelector(".column-length");
+                }
+            }
+        },
+        ($columnLength) => $columnLength.innerHTML = cardListOnLocal[status].filter((ele) => ele).length
+    )()
 }
 
 /** 카드가 속한 column의 status를 반환합니다. */
@@ -72,12 +76,16 @@ function findColumnStatusByCard($card) {
 
 /** column header에 더블 클릭 이벤트를 등록합니다. */
 function headerDoubleClickEvent($header) {
-    $header.addEventListener(EVENT.DOUBLE_CLICK, () => {
-        let headerTitle = $header.querySelector("span").innerHTML;
-        let $headerInputTemplate = headerTitleTemplate(headerTitle, $header);
-        $header.after($headerInputTemplate);
-        $header.style.display = DISPLAY.NONE;
-    })
+    addEvent($header, [
+        () => pipe(
+            () => $header.querySelector("span").innerHTML,
+            (headerTitle) => headerTitleTemplate(headerTitle, $header),
+            ($headerTemplate) => {
+                $header.after($headerTemplate);
+                $header.style.display = DISPLAY.NONE;
+            }
+        )()
+    ], EVENT.DOUBLE_CLICK);
 }
 
 /** column header 이름을 수정합니다. */
@@ -85,38 +93,39 @@ const changeHeaderName = ($header, newTitle) => $header.querySelector("span").in
 
 /** column header에 focus out 이벤트를 등록합니다. */
 function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
-    $headerInput.addEventListener(EVENT.FOCUS_OUT, ()=> {
-        const newTitle = $headerInput.value;
+    addEvent($headerInput, [
+        () => {
+            const newTitle = $headerInput.value;
+        
+            if(validateNewStatusName(originalTitle, newTitle)) {
+                changeHeaderName($originalHeader, newTitle);
+                $originalHeader.style.display = DISPLAY.FLEX;
 
-        // 새로 바뀐 이름 중복 검사
-        if(validateNewStatusName(originalTitle, newTitle)) {
-            changeHeaderName($originalHeader, newTitle);
-            $originalHeader.style.display = DISPLAY.FLEX;
+                updateStatusName(originalTitle, newTitle);
+                $headerInput.parentElement.remove();
+            }
+            else {
+                showWarningModal();
+                $headerInput.value = "";
+                
+                setTimeout(()=>{
+                    $headerInput.focus();
+                })
 
-            updateStatusName(originalTitle, $headerInput.value);
-            $headerInput.parentElement.remove();
+            }
         }
-        else {
-            showWarningModal();
-            $headerInput.value = "";
-            
-            setTimeout(()=>{
-                $headerInput.focus();
-            })
-
-        }
-    })
+    ], EVENT.FOCUS_OUT);
 }
 
-function getColumnNodeByStatus(columnStatus) {
-    const $columnList = document.querySelectorAll(".column");
-    return $columnList.find(($column) => $column.getAttribute("id") == `${columnStatus}`);
-}
+const getColumnNodeByStatus = (columnStatus) => pipe(
+    () => document.querySelectorAll(".column"),
+    ($columnArray) => $columnArray.find(($column) => $column.getAttribute(STATUS.ID) == `${columnStatus}`)
+)();
 
-function getCardOrderByColumn($column) {
-    const $cardList = $column.querySelectorAll(".card-frame");
-    return $cardList.map(($card) => $card.getAttribute(CARD_ID));
-}
+const getCardOrderByColumn = ($column) => pipe(
+    () => $column.querySelectorAll(".card-frame"),
+    ($cardArray) => $cardArray.map(($card) => $card.getAttribute(CARD_ID))
+)()
 
 export { 
     $mainTag,

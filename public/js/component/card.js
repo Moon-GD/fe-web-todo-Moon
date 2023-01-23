@@ -236,16 +236,13 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
     let cardHeight = 18;
 
     pipe(
-        ($cardRegisterForm) => $cardRegisterForm.querySelector("#new-card-register-btn"),
-        ($registerBtn) => $registerBtn.disabled = !Boolean($cardRegisterInput.value)
+        ($cardRegisterForm) => $cardRegisterForm.querySelector("#new-card-register-btn")
     )($cardRegisterForm)
 
     addEvent($cardRegisterInput,[
         () => {
-            if($cardRegisterInput.scrollHeight === scrollHeight) return;
             $cardRegisterForm.style.height = cardHeight + CARD.TEXT_HEIGTH + "vh";
             scrollHeight = $cardRegisterInput.scrollHeight;
-            $registerAcceptBtn.disabled = !Boolean($cardRegisterInput.value);
         }
     ], EVENT.INPUT);
 }
