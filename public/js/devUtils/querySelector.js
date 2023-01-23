@@ -9,20 +9,27 @@ NodeList.prototype.filter = Array.prototype.filter;
 NodeList.prototype.map = Array.prototype.map;
 NodeList.prototype.find = Array.prototype.find
 
-/** 원하는 노드를 찾아 노드 형태로 반환합니다. */
-function querySelector(query) {
-    return pipe(
-        (inputQuery) => multipleQueryToList(inputQuery),
-        (queryList) => queryList.length == 1 ? singleQuerySelector(query) : multipleQuerySelector(query)       
-    )(query)
-}
+/**
+ * 원하는 노드를 찾아 반환합니다.
+ * @param {String} query 찾고자 하는 노드 선택자
+ * @returns {Node} 노드 객체
+ */
+const querySelector = (query) => pipe(
+    () => multipleQueryToList(query),
+    (queryList) => queryList.length == 1 ? 
+        singleQuerySelector(query) : multipleQuerySelector(query)       
+)()
 
 /** 원하는 노드를 찾아 배열 형태로 반환합니다. */
-function querySelectorAll(query) {
-    return pipe(
-        (inputQuery) => multipleQueryToList(inputQuery),
-        (queryList) => queryList.length == 1 ? singleQuerySelectorAll(query) : multipleQuerySelectorAll(query)
-    )(query)
-}
+/**
+ * 원하는 노드를 찾아 반환합니다.
+ * @param {String} query 찾고자 하는 노드 선택자
+ * @returns {Array} 노드 배열
+ */
+const querySelectorAll = (query) => pipe(
+    () => multipleQueryToList(query),
+    (queryList) => queryList.length == 1 ? 
+        singleQuerySelectorAll(query) : multipleQuerySelectorAll(query)
+)()
 
 export { querySelector, querySelectorAll }

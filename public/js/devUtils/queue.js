@@ -1,21 +1,13 @@
 class Queue {
     #_array = [];
 
-    constructor(assignedList=[]) {
-        this.#_array = assignedList;
-    }
+    constructor(assignedList=[]) { this.#_array = assignedList; }
 
-    enque(item) {
-        this.#_array.push(item);
-    }
+    enque(item) { this.#_array.push(item); }
 
-    deque() {
-        return this.#_array.shift();
-    }
+    deque = () => this.#_array.shift();
 
-    getLength() {
-        return this.#_array.length;
-    }
+    getLength = () => this.#_array.length;
 }
 
 export { Queue }
