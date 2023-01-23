@@ -1,8 +1,8 @@
 import { 
     FETCH_URL, METHOD, 
     COLUMN_STATUS, CARD_ID, CARD_ORDER 
-} from "../../../public/js/common/commonVariable.js";
-import { cardListOnLocal, statusListOnLocal } from "../../../public/js/store/store.js";
+} from "../../public/js/common/commonVariable.js";
+import { cardListOnLocal, statusListOnLocal } from "../../public/js/store/store.js";
 
 /**
  * @param {Array} cardJSONList

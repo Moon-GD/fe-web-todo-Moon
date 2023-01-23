@@ -16,7 +16,7 @@ import { querySelector } from "../devUtils/querySelector.js";
 import { 
     showSuggestedLog, $searchModal , $searchInput, searchCard
 } from "../search/search.js";
-import { validateStatus } from "../../../server/column/validate_column/validateColumn.js";
+import { validateStatus } from "../../../server/column/validation.js";
 
 const $Btns = {
     // 검색 관련 버튼

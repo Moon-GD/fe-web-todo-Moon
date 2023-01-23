@@ -1,5 +1,5 @@
-import { FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
-import { menuListOnLocal } from "../../../public/js/store/store.js";
+import { FETCH_URL, METHOD, HEADER } from "../../public/js/common/commonVariable.js";
+import { menuListOnLocal } from "../../public/js/store/store.js";
 
 /**
  * menu JSON을 server에 생성합니다.

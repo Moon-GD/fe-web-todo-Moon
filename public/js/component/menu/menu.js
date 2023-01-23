@@ -4,13 +4,13 @@ import {
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, 
     menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../../templates/template.js";
-import { makeCreateMenuJSON } from "../../../../server/menu/create_menu/makeCreateMenu.js";
-import { makeDeleteMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteMenu.js";
-import { makeSearchMenuJSON } from "../../../../server/menu/search_menu/makeSearchMenu.js";
+import { makeCreateMenuJSON } from "../../../../server/menu/action/cardCreation.js";
+import { makeDeleteMenuJSON } from "../../../../server/menu/action/cardDeletion.js";
+import { makeSearchMenuJSON } from "../../../../server/menu/action/search.js";
 import { searchLogManger } from "../../search/searchLogManager.js";
-import { makeDeleteAllMenuJSON } from "../../../../server/menu/delete_menu/makeDeleteAllMenu.js";
-import { makeUpdateMenuJSON } from "../../../../server/menu/update_menu/makeUpdateMenu.js";
-import { makeMoveMenuJSON } from "../../../../server/menu/move_menu/makeMoveMenu.js";
+import { makeDeleteAllMenuJSON } from "../../../../server/menu/action/cardDeletionAll.js";
+import { makeUpdateMenuJSON } from "../../../../server/menu/action/cardUpdation.js";
+import { makeMoveMenuJSON } from "../../../../server/menu/action/cardMove.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")

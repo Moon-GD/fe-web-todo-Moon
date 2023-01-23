@@ -1,5 +1,5 @@
-import { FETCH_URL, METHOD } from "../../../public/js/common/commonVariable.js";
-import { menuListOnLocal } from "../../../public/js/store/store.js"
+import { FETCH_URL, METHOD } from "../../public/js/common/commonVariable.js";
+import { menuListOnLocal } from "../../public/js/store/store.js"
 import { menuJSONFormatter } from "./menuJSONFormatter.js";
 
 /**

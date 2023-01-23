@@ -1,4 +1,4 @@
-import { MENU } from "../../../public/js/common/commonVariable.js"
+import { MENU } from "../../public/js/common/commonVariable.js"
 
 /**
  * menu JSON 객체를 반환합니다. (create)

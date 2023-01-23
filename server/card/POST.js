@@ -1,7 +1,7 @@
-import { FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
-import { updateColumnLength } from "../../../public/js/component/column.js";
-import { cardListOnLocal } from "../../../public/js/store/store.js";
-import { moveJSONDataOnOneColumn } from "../move_card/updateCardOrder.js";
+import { FETCH_URL, METHOD, HEADER } from "../../public/js/common/commonVariable.js";
+import { updateColumnLength } from "../../public/js/component/column.js";
+import { cardListOnLocal } from "../../public/js/store/store.js";
+import { moveJSONDataOnOneColumn } from "./PATCH/cardOrder.js";
 
 /** 로컬에 카드 JSON을 추가합니다. 
  * @param {number} status column status

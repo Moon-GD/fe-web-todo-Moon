@@ -1,5 +1,5 @@
-import { STATUS } from "../../../public/js/common/commonVariable.js";
-import { statusListOnLocal } from "../../../public/js/store/store.js";
+import { STATUS } from "../../public/js/common/commonVariable.js";
+import { statusListOnLocal } from "../../public/js/store/store.js";
 
 /** 새롭게 생성될 status의 이름 타당성 여부를 반환합니다. 
  * @param {string} newName 새롭게 생성할 column의 이름

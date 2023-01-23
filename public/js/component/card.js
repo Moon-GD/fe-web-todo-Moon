@@ -1,4 +1,4 @@
-import { 
+    import { 
     CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
     DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE
 } from "../common/commonVariable.js";
@@ -7,9 +7,9 @@ import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu/menu.js";
 import { turnOnModal } from "./modal.js";
 import { makeCardDragEvent } from "../drag/addDragEvent.js";
-import { deleteCardData } from "../../../server/card/delete_card/deleteCard.js";
+import { deleteCardData } from "../../../server/card/DELETE.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
-import { addCardJSON } from "../../../server/card/create_card/createCard.js";
+import { addCardJSON } from "../../../server/card/POST.js";
 import { isDarkMode } from "../common/darkMode.js";
 
 let $chosenCard = "";

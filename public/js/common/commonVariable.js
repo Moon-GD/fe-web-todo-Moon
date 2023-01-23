@@ -79,7 +79,7 @@ const CARD = {
     BACKGROUND_ORIGINAL: "#fff",
     BACKGROUND_HOVER: "#FFEEEC",
     OUTLINE_ORIGINAL: "none",
-    OUTLINE_HOVER: "0.2vh solid " + CARD_BTN.HOVER,
+    OUTLINE_HOVER: "0.4vh solid " + CARD_BTN.HOVER,
     TEXT_HEIGTH: 2.5
 }
 
@@ -87,7 +87,7 @@ const CARD_DARK_MODE = {
     BACKGROUND_ORIGINAL: "#1C1C21",
     BACKGROUND_HOVER: "#1C1C21",
     OUTLINE_ORIGINAL: "none",
-    OUTLINE_HOVER: "0.2vh solid " + CARD_BTN.HOVER,
+    OUTLINE_HOVER: "0.4vh solid " + CARD_BTN.HOVER,
 }
 
 // 검색된 카드 css 스타일링 value

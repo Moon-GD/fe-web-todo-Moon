@@ -4,7 +4,7 @@ import { findColumnStatusByCard } from "../component/column.js";
 import { menuLogMove } from "../component/menu/menu.js";
 import { recordDragCard, dragOverCard, dropCard } from "./dragCard.js"
 import { makeLightNode } from "./dragEffect.js"
-import { moveJSONData } from "../../../server/card/move_card/moveCard.js";
+import { moveJSONData } from "../../../server/card/PATCH/move.js";
 import { statusListOnLocal } from "../store/store.js";
 
 let dragStartStatus = "";

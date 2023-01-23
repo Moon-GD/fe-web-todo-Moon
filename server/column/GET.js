@@ -1,8 +1,8 @@
 import { 
     FETCH_URL, METHOD,
     STATUS, CARD_ORDER 
-} from "../../../public/js/common/commonVariable.js";
-import { statusListOnLocal, cardListOnLocal } from "../../../public/js/store/store.js";
+} from "../../public/js/common/commonVariable.js";
+import { statusListOnLocal, cardListOnLocal } from "../../public/js/store/store.js";
 
 /**
  * 서버의 menu JSON을 분류하여 local에 저장합니다.

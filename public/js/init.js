@@ -4,7 +4,7 @@ import {
 import { getAllJSONData } from "../../server/serverInit.js";
 import { initialDataToTemplate } from "./templates/template.js";
 import { idGenerator } from "./common/IDGenerator.js";
-import { getAllMenuJSON } from "../../server/menu/get_menu/getMenu.js";
+import { getAllMenuJSON } from "../../server/menu/GET.js";
 import { eventToBulbs } from "./common/darkMode.js";
 
 function addEventsToWebsite() {

@@ -1,6 +1,6 @@
 import { FETCH_URL, METHOD, HEADER } from "../../../public/js/common/commonVariable.js";
 import { cardListOnLocal } from "../../../public/js/store/store.js";
-import { moveJSONDataOnOneColumn, moveJSONDataOnTwoColumn } from "./updateCardOrder.js";
+import { moveJSONDataOnOneColumn, moveJSONDataOnTwoColumn } from "./cardOrder.js";
 
 /** 로컬에서 card JSON 데이터를 이동합니다.
  * @param {number} prevStatus 이전 column status
