@@ -1,7 +1,7 @@
 import { EVENT, STATUS, CARD_ID } from "../common/commonVariable.js";
-import { addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
-    addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn,
-    resizeCardByInputBox, addDoubleClickEventToCard, parseCardContentByNewLine
+import { eventToNewCardBtn, eventToCardDeleteBtn, 
+    eventToMakeCardCancelBtn, eventToMakeNewCardBtn,
+    resizeCardByInputBox, doubleClickEventToCard, parseCardContentByNewLine
 } from "../component/card.js";
 import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
@@ -66,7 +66,7 @@ function columnTemplate(columnTitle, columnID, cardCount = 0) {
     })
 
     columnDeleteEvent($columnDeleteBtn, $column); // column 제거 이벤트
-    addEventToShowCardRegisterBtn($cardAddBtn, $column.children[1]); // card 추가 이벤트
+    eventToNewCardBtn($cardAddBtn, $column.children[1]); // card 추가 이벤트
     headerDoubleClickEvent($header);  // 헤더 더블 클릭 이벤트
 
     return $column;
@@ -88,10 +88,10 @@ function cardTemplate(cardTitle, cardContent, cardAuthor, cardId) {
     `;
 
     // 더블 클릭 이벤트 추가
-    addDoubleClickEventToCard($card);
+    doubleClickEventToCard($card);
 
     let $cardDeleteBtn = $card.querySelector("i");
-    addEventToCardDeleteBtn($cardDeleteBtn, $card);
+    eventToCardDeleteBtn($cardDeleteBtn, $card);
 
     return $card;
 }
@@ -114,8 +114,8 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
     const $textArea = $newCard.querySelector("textarea");
 
     // 등록 카드 폼의 버튼에 이벤트 추가
-    addEventToMakeCardCancelBtn($newCancelBtn, $newCard, prevCard, isUpdated);
-    addEventToMakeNewCardBtn($newRegisterBtn, $newCard, prevCard, isUpdated);
+    eventToMakeCardCancelBtn($newCancelBtn, $newCard, prevCard, isUpdated);
+    eventToMakeNewCardBtn($newRegisterBtn, $newCard, prevCard, isUpdated);
     resizeCardByInputBox($textArea, $newCard);
 
     return $newCard;
