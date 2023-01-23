@@ -11,6 +11,7 @@ import { pipe } from "../common/commonFunction.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { deleteStatus } from "../../../server/column/delete.js";
 import { updateStatusName } from "../../../server/column/patch.js";
+import { showWarningModal } from "./modal.js";
 
 const $mainTag = querySelector("main");
 
@@ -96,7 +97,7 @@ function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
             $headerInput.parentElement.remove();
         }
         else {
-            alert("이미 존재하는 이름입니다.");
+            showWarningModal();
             $headerInput.value = "";
             
             setTimeout(()=>{

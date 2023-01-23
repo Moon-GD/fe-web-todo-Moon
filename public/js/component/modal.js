@@ -6,6 +6,7 @@ import { $searchModal } from "../search/search.js";
 const $modalSection = querySelector("#modal-section");
 const $columnAddModal = querySelector("#column-add-modal-section");
 const $cardClearModal = querySelector("#clear-modal-section");
+const $warningModal = querySelector("#warning-modal");
 
 /** 카드 삭제 관련 모달을 띄워줍니다. */
 const turnOnModal = () => $modalSection.style.display = DISPLAY.FLEX;
@@ -28,8 +29,14 @@ const turnOffCardClearModal = () => changeCSS($cardClearModal, "display", DISPLA
 /** card clear modal을 보여줍니다. */
 const turnOnCardClearModal = () => changeCSS($cardClearModal, "display", DISPLAY.FLEX);
 
+function showWarningModal() {
+    $warningModal.style.display = DISPLAY.FLEX;
+    setTimeout(() => $warningModal.style.display = DISPLAY.NONE, 1000)
+}
+
 export { 
     $modalSection, turnOnModal, turnOnColumnAddModal,
     turnOffSearchModal,
-    turnOnCardClearModal, turnOffCardClearModal, turnOffModal, turnOffColumnAddModal
+    turnOnCardClearModal, turnOffCardClearModal, turnOffModal, turnOffColumnAddModal,
+    showWarningModal
  }

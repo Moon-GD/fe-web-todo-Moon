@@ -10,7 +10,7 @@ import { findCardHeaderName, addColumn } from "./column.js";
 import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu/menu.js";
 import { 
     turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, 
-    turnOffModal, turnOffColumnAddModal, turnOffSearchModal
+    turnOffModal, turnOffColumnAddModal, turnOffSearchModal, showWarningModal
 } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { 
@@ -148,13 +148,12 @@ function addEventToColumnAddButton() {
         }
         else {
             $columnAddInput.value = "";
-            alert("이미 존재하는 column 입니다.");
+            showWarningModal();
         }
     })
 }
 
 export {
     $Btns,
-    addEventToSearchBtn,
-    addEventToFabBtn, addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton
+    addEventToSearchBtn, addEventToFabBtn, addEventToMenuBtns, addEventToModalButtons, addEventToColumnAddButton
 }

@@ -680,4 +680,24 @@ body.dark-mode button.fab-btns:hover {
 
 body.dark-mode .modal {
   color: #000;
+}
+
+#warning-modal {
+  position: fixed;
+  background-color: #F7E406;
+  color: black;
+  left: calc(50% - 11vw);
+  top: 5%;
+  width: 22vw;
+  height: 12vh;
+  z-index: 100;
+  display: none;
+  transition: 1s;
+  justify-content: center;
+  align-items: center;
+}
+
+#warning-modal h1 {
+  font-weight: 700;
+  font-size: 2vh;
 }/*# sourceMappingURL=style.css.map */
