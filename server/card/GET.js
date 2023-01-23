@@ -23,7 +23,7 @@ function classifyCardJSONList(cardJSONList) {
  */
 async function getAllCardJSONData() {
     await fetch(FETCH_URL.CARD, { method: METHOD.GET })
-    .then((res) => { return res.json(); })
+    .then((res) => res.json())
     .then((data) => classifyCardJSONList(data))
 }
 

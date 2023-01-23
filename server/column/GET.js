@@ -1,7 +1,4 @@
-import { 
-    FETCH_URL, METHOD,
-    STATUS, CARD_ORDER 
-} from "../../public/js/common/commonVariable.js";
+import { FETCH_URL, METHOD, STATUS, CARD_ORDER } from "../../public/js/common/commonVariable.js";
 import { statusListOnLocal, cardListOnLocal } from "../../public/js/store/store.js";
 
 /**
@@ -30,7 +27,7 @@ function classifyStatusJSONList(statusJSONList) {
  */
 async function getAllStatusJSONData() {
     await fetch(FETCH_URL.STATUS, { method: METHOD.GET })
-    .then((res) => { return res.json(); })
+    .then((res) => res.json())
     .then((data) => { classifyStatusJSONList(data); } )
 }
 

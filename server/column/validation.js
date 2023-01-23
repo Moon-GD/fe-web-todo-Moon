@@ -6,7 +6,7 @@ import { statusListOnLocal } from "../../public/js/store/store.js";
 */
 function validateStatus(newName) {
     for(let statusJSON of statusListOnLocal) {
-        if(statusJSON && statusJSON[STATUS.NAME] == newName) { return false; }
+        if(statusJSON && statusJSON[STATUS.NAME] == newName) return false;
     }
 
     return true;
@@ -18,11 +18,13 @@ function validateStatus(newName) {
  */
 function validateNewStatusName(originalName, newName) {
     for(let i=0;i<statusListOnLocal.length;i++) {
-        if(! statusListOnLocal[i]) { continue; }
+        if(! statusListOnLocal[i]) 
+            continue;
 
         let statusName = statusListOnLocal[i][STATUS.NAME];
 
-        if(statusName == newName && statusName != originalName) { return false; }
+        if(statusName == newName && statusName != originalName) 
+            return false;
     }
 
     return true;

@@ -17,7 +17,9 @@ function uploadMenuJSONOnServer(menuJSON) {
  * menu JSON을 local에 생성합니다.
  * @param {Object} menuJSON menu JSON
  */
-function uploadMenuJSONOnLocal(menuJSON) { menuListOnLocal.push(menuJSON); }
+function uploadMenuJSONOnLocal(menuJSON) { 
+    menuListOnLocal.push(menuJSON); 
+}
 
 /**
  * menu JSON을 server와 local에 업로드합니다.

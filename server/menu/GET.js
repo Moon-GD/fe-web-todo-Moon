@@ -7,7 +7,9 @@ import { menuJSONFormatter } from "./menuJSONFormatter.js";
  * @param {Array} menuJSONList menu JSON Array
  */
 async function classifyMenuJSONList(menuJSONList) {
-    menuJSONList.forEach((menuJSON) => menuListOnLocal.push( menuJSONFormatter[menuJSON["action"]](menuJSON)))
+    menuJSONList.forEach((menuJSON) => 
+        menuListOnLocal.push( menuJSONFormatter[menuJSON["action"]](menuJSON))
+    )
 }
 
 /**
