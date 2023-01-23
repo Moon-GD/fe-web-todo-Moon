@@ -260,5 +260,5 @@ const parseCardContentByNewLine = (cardContent) => pipe(
 export { 
     eventToNewCardBtn, eventToCardDeleteBtn, 
     eventToMakeCardCancelBtn, eventToMakeNewCardBtn, resizeCardByInputBox,
-    doubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards, $chosenCard, parseCardContentByNewLine
+    doubleClickEventToCard, deleteCard, findCardTitle, deleteAllCards, $chosenCard, parseCardContentByNewLine
  }

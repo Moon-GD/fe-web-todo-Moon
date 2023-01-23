@@ -29,14 +29,13 @@ const turnOffCardClearModal = () => changeCSS($cardClearModal, "display", DISPLA
 /** card clear modal을 보여줍니다. */
 const turnOnCardClearModal = () => changeCSS($cardClearModal, "display", DISPLAY.FLEX);
 
+/** 경고 modal을 1초간 보여줍니다. */
 function showWarningModal() {
     $warningModal.style.display = DISPLAY.FLEX;
     setTimeout(() => $warningModal.style.display = DISPLAY.NONE, 1000)
 }
 
 export { 
-    $modalSection, turnOnModal, turnOnColumnAddModal,
-    turnOffSearchModal,
-    turnOnCardClearModal, turnOffCardClearModal, turnOffModal, turnOffColumnAddModal,
-    showWarningModal
+    turnOnModal, turnOnColumnAddModal, turnOffSearchModal,
+    turnOnCardClearModal, turnOffCardClearModal, turnOffModal, turnOffColumnAddModal, showWarningModal
  }

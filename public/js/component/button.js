@@ -135,6 +135,5 @@ function eventToModalButtons() {
 }
 
 export {
-    $Btns,
-    eventToSearchBtn, eventToFabBtn, eventToMenuBtns, eventToModalButtons
+    $Btns, eventToFabBtn, eventToMenuBtns, eventToModalButtons
 }
