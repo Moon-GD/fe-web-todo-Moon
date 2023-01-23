@@ -1,7 +1,7 @@
 import { addEvent, changeCSS } from "../common/commonFunction.js";
 import {
     POSITION, TRANSFORM, FAB_BTN, BTN_MOVDED,
-    EVENT, MENU_POSITION, DISPLAY 
+    MENU_POSITION, DISPLAY 
 } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn } from "./column.js";
@@ -29,7 +29,6 @@ const $Btns = {
     $modalCancel: querySelector("#card-cancel-btn"),
 
     // 모든 카드 삭제 관련 버튼
-    $goCardClearModal: querySelector("#go-card-clear-btn"),
     $cardClearCancel: querySelector("#clear-cancel-btn"),
     $cardClearAccept: querySelector("#clear-accept-btn"),
 
@@ -40,18 +39,15 @@ const $Btns = {
     $goClear: querySelector("#go-card-clear-btn"),
 
     // 메뉴 버튼
-    $goClear: querySelector("#menu-open-btn"),
+    $menuOpen: querySelector("#menu-open-btn"),
     $menuClose: querySelector("#menu-close-btn")
 };
 
+/** 카드 모두 지우기 관련 모든 버튼에 이벤트를 등록합니다. */
 function eventToCardClearBtns() {
-    addEvent($Btns.$goCardClearModal, [
-        () => turnOnCardClearModal
-    ]);
+    addEvent($Btns.$goClear, [turnOnCardClearModal]);
 
-    addEvent($Btns.$cardClearCancel, [
-        () => turnOffCardClearModal
-    ]);
+    addEvent($Btns.$cardClearCancel, [turnOffCardClearModal]);
 
     addEvent($Btns.$cardClearAccept, [
         () => deleteAllCards(),
@@ -59,13 +55,14 @@ function eventToCardClearBtns() {
     ]);
 }
 
+/** 카드 검색 관련 모든 버튼에 이벤트를 등록합니다. */
 function eventToSearchBtn() {
     addEvent($Btns.$goSearchModal, [
         () => changeCSS($searchModal, "display", DISPLAY.FLEX),
         () => showSuggestedLog()
     ]);
     
-    addEvent($Btns.$searchCancel, [ turnOffSearchModal]);
+    addEvent($Btns.$searchCancel, [turnOffSearchModal]);
     addEvent($Btns.$searchAccept, [
         () => turnOffSearchModal(),
         () => searchCard($searchInput.value),
@@ -73,6 +70,7 @@ function eventToSearchBtn() {
     ]);
 }
 
+/** column 추가 관련 모든 버튼에 이벤트를 등록합니다. */
 function eventToColumnAddBtn() {
     addEvent($Btns.$goColumnAddModal, [turnOnColumnAddModal])
     addEvent($Btns.$columnAddCancel, [
@@ -98,12 +96,13 @@ function toggleFabBtn() {
     }
     else {
         changeCSS($Btns.$fab, TRANSFORM, FAB_BTN.DEGREE_MOVED);
+        changeCSS($Btns.$goClear, POSITION.BOTTOM, BTN_MOVDED.CARD_CLEAR);
         changeCSS($Btns.$goSearchModal, POSITION.BOTTOM, BTN_MOVDED.SEARCH);
         changeCSS($Btns.$goColumnAddModal, POSITION.BOTTOM, BTN_MOVDED.COLUMN_ADD);
-        changeCSS($Btns.$goClear, POSITION.BOTTOM, BTN_MOVDED.CARD_CLEAR);
     }
 }
 
+/** fab 버튼 및 속해 있는 버튼들에 이벤트를 등록합니다. */
 function eventToFabBtn() {
     addEvent($Btns.$fab, [toggleFabBtn]);
     eventToCardClearBtns();
@@ -111,10 +110,11 @@ function eventToFabBtn() {
     eventToColumnAddBtn();
 }
 
+/** 메뉴 관련 모든 버튼에 이벤트를 등록합니다. */
 function eventToMenuBtns() {
-    addEvent($Btns.$goClear, [
-        () => changeCSS($menuBar, POSITION.RIGHT, MENU_POSITION.VISIBLE),
-        () => menuLogTimeUpdate()
+    addEvent($Btns.$menuOpen, [
+        () => menuLogTimeUpdate(),
+        () => changeCSS($menuBar, POSITION.RIGHT, MENU_POSITION.VISIBLE)
     ])
 
     addEvent($Btns.$menuClose, [
@@ -122,17 +122,15 @@ function eventToMenuBtns() {
     ])
 }
 
-/** 카드 삭제 관련 modal 버튼들에 이벤트를 추가합니다. */
+/** 카드 삭제 관련 모든 버튼에 이벤트를 등록합니다. */
 function eventToModalButtons() {
     addEvent($Btns.$modalDelete, [
+        () => turnOffModal(),
         () => menuLogDelete(findCardTitle($chosenCard), findCardHeaderName($chosenCard)),
-        () => deleteCard($chosenCard),
-        () => turnOffModal
+        () => deleteCard($chosenCard)
     ])
 
-    addEvent($Btns.$modalCancel, [
-        () => turnOffModal
-    ]);
+    addEvent($Btns.$modalCancel, [turnOffModal]);
 }
 
 export {

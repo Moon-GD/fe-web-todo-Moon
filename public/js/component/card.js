@@ -11,25 +11,38 @@ import { deleteCardData } from "../../../server/card/delete.js";
 import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/card/post.js";
 import { isDarkMode } from "../common/darkMode.js";
+import { pipe } from "../common/commonFunction.js";
 
 let $chosenCard = "";
 let registering = false;
 
-/** 현재 drag 중인 카드 정보를 저장합니다. */
-function setCard($card) { $chosenCard = $card; }
+/**
+ * 삭제될 카드를 지정합니다.
+ * @param {Node} $card 카드 객체
+ */
+const setCardToBeDeleted = ($card) => $chosenCard = $card;
 
-/** 카드 제목을 찾아줍니다. */
-function findCardTitle($card) {
-    const cardTitleText = $card.querySelector("h3").innerHTML;
-    const cardTitle = cardTitleText.split('\n')[0];
+/**
+ * 카드 객체의 제목을 반환합니다.
+ * @param {Node} $card 카드 객체
+ * @returns {String} 카드 제목
+ */
+const findCardTitle = ($card) => pipe(
+    ($card) => $card.querySelector("h3").innerHTML,
+    (cardHTML) => cardHTML.split('\n')[0]
+)($card)
 
-    return cardTitle;
-}
-
-/** 카드 내용을 찾아줍니다. */
+/**
+ * 카드 내용을 반환합니다.
+ * @param {Node} $card 카드 객체
+ * @returns {String} 카드 내용
+ */
 const findCardContent = ($card) => $card.querySelector(".card-content").innerHTML;
 
-/** 카드를 삭제합니다. */
+/**
+ * 카드를 삭제합니다.
+ * @param {Node} $card 카드 객체
+ */
 function deleteCard($card) {
     const cardID = $card.getAttribute(CARD_ID);
     const status = findColumnStatusByCard($card);
@@ -39,12 +52,13 @@ function deleteCard($card) {
 
 /** 모든 카드를 삭제합니다. */
 function deleteAllCards() {
-    const $cards = document.querySelectorAll(".card-frame");
-
-    $cards.forEach(($card) => { deleteCard($card); })
-
-    // 메뉴에 로그를 남깁니다.
-    menuLogDeleteAll();
+    pipe(
+        () => document.querySelectorAll(".card-frame"),
+        ($cardList) => {
+            $cardList.forEach(($card) => deleteCard($card));
+        },
+        () => menuLogDeleteAll()
+    )()
 }
 
 /** 카드 생성 폼을 보여주는 버튼에 이벤트를 등록합니다. */
@@ -61,7 +75,7 @@ function addEventToShowCardRegisterBtn($cardRegisterBtn, $currentColumn) {
 /** 카드 삭제 버튼에 이벤트를 등록합니다. */
 function addEventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
     $cardDeleteBtn.addEventListener(EVENT.CLICK, () => {
-        setCard($deletedCard);
+        setCardToBeDeleted($deletedCard);
         turnOnModal();
     })
 
@@ -212,5 +226,5 @@ function parseCardContentByNewLine(cardContent) {
 export { 
     addEventToShowCardRegisterBtn, addEventToCardDeleteBtn, 
     addEventToMakeCardCancelBtn, addEventToMakeNewCardBtn, resizeCardByInputBox,
-    addDoubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards, setCard, $chosenCard, parseCardContentByNewLine
+    addDoubleClickEventToCard, deleteCard, findCardTitle, findCardContent, deleteAllCards, $chosenCard, parseCardContentByNewLine
  }
