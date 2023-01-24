@@ -1,5 +1,4 @@
 import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
-import { CARD_ID, STATUS } from "./commonVariable.js";
 
 class IDGenerator {
     #cardID = 0;
@@ -11,9 +10,9 @@ class IDGenerator {
             .map(({id}) => id)
         );
 
-        cardListOnLocal.forEach((cardList) => 
-            cardList.forEach((card) => this.#cardID = Math.min(this.#cardID, card.id))
-        )
+        cardListOnLocal.forEach((cardArray) => 
+            cardArray.forEach((card) => this.#cardID = Math.min(this.#cardID, card.id))
+        );
     }
 
     createStatusID() {
@@ -26,9 +25,7 @@ class IDGenerator {
         return this.#cardID;
     }
 
-    createMenuID() {
-        return new Date().getMilliseconds();
-    }
+    createMenuID = () => new Date().getMilliseconds();
 }
 
 const idGenerator = new IDGenerator();

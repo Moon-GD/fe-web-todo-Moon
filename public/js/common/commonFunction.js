@@ -10,7 +10,7 @@ const changeCSS = ($target, key, value) => $target.style[key] = value;
 const pipe = (...functionList) => (firstParam) => 
     functionList.reduce((curValue, curFunc) => { 
         return curFunc(curValue);
-    }, firstParam)
+    }, firstParam);
 /**
  * targetNode에 이벤트를 추가합니다.
  * @param {Node} targetNode 이벤트 대상 객체
