@@ -1,4 +1,4 @@
-import { addChildAfterParent, addEvent, changeCSS } from "../common/commonFunction.js";
+import { childAfterParent, addEvent, changeCSS } from "../common/commonFunction.js";
 import {
     POSITION, TRANSFORM, FAB_BTN, BTN_MOVDED,
     MENU_POSITION, DISPLAY, STATUS, MENU, MENU_ACTION 
