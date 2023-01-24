@@ -50,7 +50,7 @@ function menuLogUpdate(title, status, emotion="🥳", author="@sam") {
 /** 메뉴에 search log를 남깁니다. */
 function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
     makeSearchMenuJSON(searchLog, searchLogManger.getSearchCount(searchLog))
-    $menuContent.prepend(menuSearchTemplate(searchLog, emotion, author));
+    $menuContent.prepend(menuSearchTemplate(searchLog));
 }
 
 /** 메뉴 log 시간을 업데이트합니다. */

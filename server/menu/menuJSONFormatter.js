@@ -1,4 +1,5 @@
 import { MENU } from "../../public/js/common/commonVariable.js"
+import { menuLogAddTemplate, menuLogDeleteAllTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate } from "../../public/js/templates/template.js"
 
 /**
  * menu JSON 객체를 반환합니다. (create)
@@ -89,9 +90,7 @@ function getSearchMenuJSON(menuJSON) {
     }
 }
 
-/**
- * action에 따른 menu JSON 함수를 연결해줍니다.
- */
+/** action에 따른 menu JSON 함수를 연결해줍니다. */
 const menuJSONFormatter = {
     "CREATE": getCreateMenuJSON,
     "UPDATE": getUpdateMenuJSON,
@@ -101,4 +100,21 @@ const menuJSONFormatter = {
     "SEARCH": getSearchMenuJSON
 }
 
-export { menuJSONFormatter }
+const menuJSONTemplateForMatter = (menuJSON) => {
+    const action = menuJSON[MENU.ACTION];
+    const columnName = menuJSON[MENU.COLUMN_NAME];
+    const prevColumnName = menuJSON[MENU.PREV_COLUMN_NAME];
+    const nextColumnName = menuJSON[MENU.NEXT_COLUMN_NAME];
+    const cardTitle = menuJSON[MENU.CARD_TITLE];
+    const searchInPut = menuJSON[MENU.SEARCH_INPUT];
+    const searchFrequency = menuJSON[MENU.ACTION.SEARCH_FREQUENCY];
+
+    if(action == "CREATE") return menuLogAddTemplate(cardTitle, columnName);
+    else if(action == "UPDATE") return menuLogUpdateTemplate(cardTitle, columnName);
+    else if(action == "MOVE") return menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName);
+    else if(action == "DELETE_ALL") return menuLogDeleteAllTemplate();
+    else if(action == "DELETE") return menuLogDeleteTemplate(cardTitle, "", columnName);
+    else if(action == "SEARCH") return menuSearchTemplate(searchInPut, searchFrequency);
+}
+
+export { menuJSONFormatter, menuJSONTemplateForMatter }

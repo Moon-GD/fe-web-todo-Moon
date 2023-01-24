@@ -11,10 +11,11 @@ import {
     timeToStringFormat, timeStringToArray, 
     getElapsedTime, saveTimeStringOnTimeNode, eventToTimeNode
 } from "../component/menu/menuLogTime.js";
-import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
+import { statusListOnLocal, cardListOnLocal, menuListOnLocal } from "../store/store.js";
 import { addEvent, pipe } from "../common/commonFunction.js";
-import { idGenerator } from "../common/IDGenerator.js";
 import { eventToUndoBtn } from "../component/button.js";
+import { querySelector } from "../devUtils/querySelector.js";
+import { menuJSONTemplateForMatter } from "../../../server/menu/menuJSONFormatter.js";
 
 /** 초기 데이터를 템플릿으로 구성합니다. */
 function initialDataToTemplate() {
@@ -30,6 +31,9 @@ function initialDataToTemplate() {
 
         $mainTag.appendChild($newColumn);
     })
+
+    const $menuContent = querySelector("#menu-content");
+    menuListOnLocal.forEach((menuJSON) => { $menuContent.prepend(menuJSONTemplateForMatter(menuJSON)); })
 }
 
 /** column 템플릿을 반환합니다. */
@@ -126,7 +130,7 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (add) */
-function menuLogAddTemplate(content, status, emotion, author) {
+function menuLogAddTemplate(cardTitle, columnName, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -135,8 +139,8 @@ function menuLogAddTemplate(content, status, emotion, author) {
         <div class="log-content-area">
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
-                <strong>${status}</strong>에 
-                <strong>${content}</strong>
+                <strong>${columnName}</strong>에 
+                <strong>${cardTitle}</strong>
                 을/를 등록하였습니다.
             </h4>
             <h5 class="log-time" data-time></h5>
@@ -162,7 +166,7 @@ function menuLogAddTemplate(content, status, emotion, author) {
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete) */
-function menuLogDeleteTemplate(cardTitle, cardContent, columnName, emotion, author) {
+function menuLogDeleteTemplate(cardTitle, cardContent, columnName, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
     $menuFrame.innerHTML = `
@@ -196,14 +200,15 @@ function menuLogDeleteTemplate(cardTitle, cardContent, columnName, emotion, auth
 
     const $undoBtn = $menuFrame.querySelector(".undo-btn");
     
-    eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author);
+    if(cardContent !== "") eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author);
+    else $undoBtn.remove();
     eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete all) */
-function menuLogDeleteAllTemplate(emotion, author) {
+function menuLogDeleteAllTemplate(emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -236,7 +241,7 @@ function menuLogDeleteAllTemplate(emotion, author) {
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (move) */
-function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion, author) {
+function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -272,7 +277,7 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion, aut
 }
  
 /** 메뉴 log 템플릿을 반환합니다. (update) */
-function menuLogUpdateTemplate(title, status, emotion, author) {
+function menuLogUpdateTemplate(cardTitle, status, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -282,7 +287,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
                 <strong>${ statusListOnLocal[status][STATUS.NAME] }</strong>의
-                <strong>${title}</strong>
+                <strong>${cardTitle}</strong>
                 을/를 수정하였습니다.
             </h4>
             <h5 class="log-time" data-time></h5>
@@ -307,7 +312,7 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (search) */
-function menuSearchTemplate(searchLog, emotion, author) {
+function menuSearchTemplate(searchLog, searchCount, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -319,7 +324,7 @@ function menuSearchTemplate(searchLog, emotion, author) {
                 최근 검색어 : <strong>${searchLog}</strong>
             </h4>
             <h4 class="log-content">검색 횟수 : 
-                <strong>${searchLogManger.getSearchCount(searchLog)} </strong>
+                <strong>${searchCount ? searchCount : searchLogManger.getSearchCount(searchLog)} </strong>
             </h4>
             <h5 class="log-time" data-time></h5>
         </div>
