@@ -5,7 +5,7 @@ import { statusListOnLocal } from "../../public/js/store/store.js";
  * @param {string} newName 새롭게 생성할 column의 이름
 */
 function validateStatus(newName) {
-    for(let statusJSON of statusListOnLocal) {
+    for(const statusJSON of statusListOnLocal) {
         if(statusJSON && statusJSON[STATUS.NAME] == newName) return false;
     }
 

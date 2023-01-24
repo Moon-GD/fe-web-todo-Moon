@@ -1,5 +1,5 @@
-import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
+import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../post.js";
@@ -17,7 +17,7 @@ function returnSearchMenuJSON([searchInput, searchFrequency]) {
         "id": idGenerator.createMenuID(),
         "searchInput": searchInput,
         "searchFrequency": searchFrequency
-    }
+    };
 }
 
 /**
@@ -25,11 +25,9 @@ function returnSearchMenuJSON([searchInput, searchFrequency]) {
  * @param {String} searchInput 검색어
  * @param {Number} searchFrequency 검색 빈도
  */
-function makeSearchMenuJSON(searchInput, searchFrequency) {
-    pipe(
-        returnSearchMenuJSON,
-        uploadMenuJSON
-    )([searchInput, searchFrequency])
-}
+const makeSearchMenuJSON = (searchInput, searchFrequency) => pipe(
+    returnSearchMenuJSON,
+    uploadMenuJSON
+)([searchInput, searchFrequency]);
 
 export { makeSearchMenuJSON }

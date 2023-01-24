@@ -34,9 +34,9 @@ function updateStatusNameOnServer(statusID, nextName) {
  * @param {string} prevName 이전 column 이름
  * @param {string} nextName 다음 column 이름
 */
-function updateStatusName(prevName, nextName) {
-    let statusID = updateStatusNameOnLocal(prevName, nextName);
-    updateStatusNameOnServer(statusID, nextName)
-}
+const updateStatusName = (prevName, nextName) => pipe(
+    () => updateStatusNameOnLocal(prevName, nextName),
+    (statusID) => updateStatusNameOnServer(statusID, nextName)
+)();
 
 export { updateStatusName }

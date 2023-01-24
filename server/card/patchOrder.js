@@ -1,5 +1,5 @@
-import { CARD_ORDER, FETCH_URL, METHOD, HEADER } from "../../public/js/common/commonVariable.js";
 import { pipe } from "../../public/js/common/commonFunction.js";
+import { CARD_ORDER, FETCH_URL, METHOD, HEADER } from "../../public/js/common/commonVariable.js";
 import { getColumnNodeByStatus, getCardOrderByColumn, updateColumnLength } from "../../public/js/component/column.js";
 import { statusListOnLocal } from "../../public/js/store/store.js";
 
@@ -8,9 +8,8 @@ import { statusListOnLocal } from "../../public/js/store/store.js";
  * @param {number} statusID column ID
  * @param {Array} newCardOrder card order Array
  */
-function changeCardOrderOnLocal(statusID, newCardOrder) { 
-    statusListOnLocal[statusID][CARD_ORDER] = newCardOrder; 
-}
+const changeCardOrderOnLocal = (statusID, newCardOrder) => 
+    statusListOnLocal[statusID][CARD_ORDER] = newCardOrder;
 
 /**
  * server에서 카드 순서 정보를 갱신합니다.

@@ -1,7 +1,8 @@
 import { MENU } from "../../public/js/common/commonVariable.js"
-import { findCardByTitle } from "../../public/js/component/card.js"
-import { findCardHeaderName } from "../../public/js/component/column.js"
-import { menuLogAddTemplate, menuLogDeleteAllTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate } from "../../public/js/templates/template.js"
+import { 
+    menuLogAddTemplate, menuLogDeleteAllTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, 
+    menuLogUpdateTemplate, menuSearchTemplate 
+} from "../../public/js/templates/template.js"
 
 /**
  * menu JSON 객체를 반환합니다. (create)
@@ -15,7 +16,7 @@ function getCreateMenuJSON(menuJSON) {
         "id":menuJSON[MENU.ID],
         "columnName":menuJSON[MENU.COLUMN_NAME],
         "cardTitle":menuJSON[MENU.CARD_TITLE]
-    }
+    };
 }
 
 /**
@@ -30,7 +31,7 @@ function getUpdateMenuJSON(menuJSON) {
         "id":menuJSON[MENU.ID],
         "columnName":menuJSON[MENU.COLUMN_NAME],
         "cardTitle":menuJSON[MENU.CARD_TITLE]
-    }
+    };
 }
 
 /**
@@ -46,8 +47,8 @@ function getDeleteMenuJSON(menuJSON) {
         "columnName":menuJSON[MENU.COLUMN_NAME],
         "cardTitle":menuJSON[MENU.CARD_TITLE],
         "cardContent": menuJSON[MENU.CARD_CONTENT],
-        "isRecovered":menuJSON["isRecovered"]
-    }
+        "isRecovered":menuJSON[MENU.IS_RECOVERED]
+    };
 }
 
 /**
@@ -60,7 +61,7 @@ function getDeleteAllMenuJSON(menuJSON) {
         "action": menuJSON[MENU.ACTION],
         "actionTime":menuJSON[MENU.ACTION_TIME],
         "id":menuJSON[MENU.ID]
-    }
+    };
 }
 
 /**
@@ -76,7 +77,7 @@ function getMoveMenuJSON(menuJSON) {
         "prevColumnName": menuJSON[MENU.PREV_COLUMN_NAME],
         "nextColumnName": menuJSON[MENU.NEXT_COLUMN_NAME],
         "cardTitle": menuJSON[MENU.CARD_TITLE]
-    }
+    };
 }
 
 /**
@@ -102,7 +103,7 @@ const menuJSONFormatter = {
     "DELETE_ALL": getDeleteAllMenuJSON,
     "MOVE": getMoveMenuJSON,
     "SEARCH": getSearchMenuJSON
-}
+};
 
 const menuJSONTemplateForMatter = (menuJSON) => {
     const action = menuJSON[MENU.ACTION];
@@ -114,7 +115,7 @@ const menuJSONTemplateForMatter = (menuJSON) => {
     const cardContent = menuJSON[MENU.CARD_CONTENT];
     const searchInPut = menuJSON[MENU.SEARCH_INPUT];
     const searchFrequency = menuJSON[MENU.ACTION.SEARCH_FREQUENCY];
-    const isRecovered = menuJSON[MENU.isRecovered];
+    const isRecovered = menuJSON[MENU.IS_RECOVERED];
 
     if(action == "CREATE") return menuLogAddTemplate(columnName, cardTitle, actionTime);
     else if(action == "UPDATE") return menuLogUpdateTemplate(columnName, cardTitle, actionTime);

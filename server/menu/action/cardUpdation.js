@@ -1,5 +1,5 @@
-import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
+import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../post.js";
@@ -17,7 +17,7 @@ function returnUpdateMenuJSON([columnName, cardTitle]) {
         "id": idGenerator.createMenuID(),
         "columnName": columnName,
         "cardTitle": cardTitle
-    }
+    };
 }
 
 /**
@@ -25,11 +25,9 @@ function returnUpdateMenuJSON([columnName, cardTitle]) {
  * @param {String} columnName 
  * @param {String} cardTitle 
  */
-function makeUpdateMenuJSON(columnName, cardTitle) {
-    pipe(
-        returnUpdateMenuJSON,
-        uploadMenuJSON
-    )([columnName, cardTitle])
-}
+const makeUpdateMenuJSON = (columnName, cardTitle) => pipe(
+    returnUpdateMenuJSON,
+    uploadMenuJSON
+)([columnName, cardTitle]);
 
 export { makeUpdateMenuJSON }

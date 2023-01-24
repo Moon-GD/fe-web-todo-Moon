@@ -1,5 +1,5 @@
-import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
+import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../post.js";
@@ -19,7 +19,7 @@ function retureMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
         "prevColumnName": prevColumnName,
         "nextColumnName": nextColumnName,
         "cardTitle": cardTitle
-    }
+    };
 }
 
 /**
@@ -28,11 +28,9 @@ function retureMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
  * @param {String} nextColumnName 다음 column name
  * @param {String} cardTitle card title
  */
-function makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle) {
-    pipe(
-        retureMoveMenuJSON,
-        uploadMenuJSON
-    )([prevColumnName, nextColumnName, cardTitle])
-}
+const makeMoveMenuJSON = (prevColumnName, nextColumnName, cardTitle) => pipe(
+    retureMoveMenuJSON,
+    uploadMenuJSON
+)([prevColumnName, nextColumnName, cardTitle]);
 
 export { makeMoveMenuJSON }

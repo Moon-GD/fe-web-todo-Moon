@@ -1,5 +1,5 @@
-import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
 import { pipe } from "../../../public/js/common/commonFunction.js";
+import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../post.js";
@@ -19,7 +19,7 @@ function returnDeleteMenuJSON([columnName, cardTitle, cardContent]) {
         "cardTitle": cardTitle,
         "cardContent": cardContent,
         "isRecovered": false
-    }
+    };
 }
 
 /**
@@ -27,11 +27,9 @@ function returnDeleteMenuJSON([columnName, cardTitle, cardContent]) {
  * @param {String} columnName column name
  * @param {String} cardTitle card title
  */
-function makeDeleteMenuJSON(columnName, cardTitle, cardContent) {
-    pipe(
-        returnDeleteMenuJSON,
-        uploadMenuJSON
-    )([columnName, cardTitle, cardContent])
-}
+const makeDeleteMenuJSON = (columnName, cardTitle, cardContent) => pipe(
+    returnDeleteMenuJSON,
+    uploadMenuJSON
+)([columnName, cardTitle, cardContent]);
 
 export { makeDeleteMenuJSON }

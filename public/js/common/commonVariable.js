@@ -45,7 +45,7 @@ const MENU = {
     CARD_CONTENT: "cardContent",
     SEARCH_INPUT: "searchInput",
     SEARCH_FREQUENCY: "searchFrequency",
-    isRecovered: "isRecovered"
+    IS_RECOVERED: "isRecovered"
 }
 
 // json menu action

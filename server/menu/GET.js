@@ -1,4 +1,4 @@
-import { FETCH_URL, METHOD } from "../../public/js/common/commonVariable.js";
+import { FETCH_URL, METHOD, MENU } from "../../public/js/common/commonVariable.js";
 import { menuListOnLocal } from "../../public/js/store/store.js"
 import { menuJSONFormatter } from "./menuJSONFormatter.js";
 
@@ -8,7 +8,7 @@ import { menuJSONFormatter } from "./menuJSONFormatter.js";
  */
 async function classifyMenuJSONList(menuJSONList) {
     menuJSONList.forEach((menuJSON) => 
-        menuListOnLocal.push( menuJSONFormatter[menuJSON["action"]](menuJSON))
+        menuListOnLocal.push( menuJSONFormatter[menuJSON[MENU.ACTION]](menuJSON))
     )
 }
 
