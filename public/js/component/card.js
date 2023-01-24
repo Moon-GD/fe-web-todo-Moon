@@ -1,21 +1,20 @@
-    import { 
+import { 
     CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
     DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE, STATUS
 } from "../common/commonVariable.js";
+import { addEvent, pipe } from "../common/commonFunction.js";
+import { isDarkMode } from "../common/darkMode.js";
 import { idGenerator } from "../common/IDGenerator.js";
-import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu/menu.js";
+import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
 import { turnOnModal } from "./modal.js";
 import { eventToCard } from "../drag/addDragEvent.js";
-import { deleteCardData } from "../../../server/card/delete.js";
-import { cardTemplate, newCardTemplate } from "../templates/template.js";
-import { addCardJSON } from "../../../server/card/post.js";
-import { isDarkMode } from "../common/darkMode.js";
-import { addEvent, pipe } from "../common/commonFunction.js";
 import { statusListOnLocal } from "../store/store.js";
+import { cardTemplate, newCardTemplate } from "../templates/template.js";
+import { deleteCardData } from "../../../server/card/delete.js";
+import { addCardJSON } from "../../../server/card/post.js";
 
-let $chosenCard = "";
-let registering = false;
+let [$chosenCard, registering] = ["", false];
 
 /**
  * 삭제될 카드를 지정합니다.
@@ -47,9 +46,9 @@ const findCardContent = ($card) => $card.querySelector(".card-content").innerHTM
  */
 function findCardByTitle(title) {
     const cardArray = document.querySelectorAll(".card-frame");
+
     for(let $card of cardArray) {
-        const cardTitle = findCardTitle($card);
-        if(cardTitle == title) return $card;
+        if(findCardTitle($card) == title) return $card;
     }
     
     return null;
@@ -225,24 +224,19 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
 }
 
 /** 카드에 더블 클릭 이벤트를 등록합니다. */
-function doubleClickEventToCard($card) {
-    addEvent($card, [
-        () => changeCardToRegisterForm($card)
-    ], EVENT.DOUBLE_CLICK)
-}
+const doubleClickEventToCard = ($card) => 
+    addEvent($card, [() => changeCardToRegisterForm($card)], EVENT.DOUBLE_CLICK)
 
 /**
  * 카드를 등록 폼 형태로 바꾸어줍니다.
  * @param {Node} $card 카드 객체
  */
 function changeCardToRegisterForm($card) {
-    let title = findCardTitle($card);
-    let content = findCardContent($card);
-    let status = findColumnStatusByCard($card);
+    const title = findCardTitle($card);
+    const content = findCardContent($card);
+    const status = findColumnStatusByCard($card);
 
-    // JSON 반영
     deleteCardData(status, $card.getAttribute(CARD_ID));
-
     $card.before(newCardTemplate(title, content, $card, true));
     $card.style.display = DISPLAY.NONE;
 }
@@ -250,18 +244,18 @@ function changeCardToRegisterForm($card) {
 /** 사용자 입력에 따라 카드 등록 폼 형태의 크기를 조절해줍니다. */
 function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
     let scrollHeight = 0;
-    let cardHeight = 18;
 
-    pipe(
-        ($cardRegisterForm) => $cardRegisterForm.querySelector("#new-card-register-btn")
-    )($cardRegisterForm)
-
-    addEvent($cardRegisterInput,[
+    addEvent($cardRegisterInput, [
         () => {
-            $cardRegisterForm.style.height = cardHeight + CARD.TEXT_HEIGTH + "vh";
+            if(scrollHeight < $cardRegisterInput.scrollHeight) {
+                $cardRegisterForm.style.height ?
+                    $cardRegisterForm.style.height = parseInt($cardRegisterForm.style.height) + CARD.TEXT_HEIGTH + "vh":
+                    $cardRegisterForm.style.height = CARD.HEIGHT + CARD.TEXT_HEIGTH + "vh";
+             }
+            
             scrollHeight = $cardRegisterInput.scrollHeight;
         }
-    ], EVENT.INPUT);
+    ], EVENT.INPUT)
 }
 
 /**

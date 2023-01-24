@@ -1,22 +1,22 @@
-import { childAfterParent, addEvent, changeCSS } from "../common/commonFunction.js";
+import { addEvent, changeCSS } from "../common/commonFunction.js";
 import {
     POSITION, TRANSFORM, FAB_BTN, BTN_MOVDED,
-    MENU_POSITION, DISPLAY, STATUS, MENU, MENU_ACTION 
+    MENU_POSITION, DISPLAY, STATUS, MENU_ACTION 
 } from "../common/commonVariable.js";
+import { idGenerator } from "../common/IDGenerator.js";
+import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu/menu.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn, findColumnStatusByCard } from "./column.js";
-import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu/menu.js";
 import { 
     turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, 
     turnOffModal, turnOffColumnAddModal, turnOffSearchModal, showWarningModal
 } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { showSuggestedLog, $searchModal , $searchInput, searchCard } from "../search/search.js";
-import { validateStatus } from "../../../server/column/validation.js";
 import { menuListOnLocal, statusListOnLocal } from "../store/store.js";
 import { cardTemplate } from "../templates/template.js";
-import { idGenerator } from "../common/IDGenerator.js";
 import { addCardJSON } from "../../../server/card/post.js";
+import { validateStatus } from "../../../server/column/validation.js";
 import { uploadRecoverInfoOnServer } from "../../../server/menu/patch.js";
 
 const $columnAddInput = querySelector("#column-add-input");
@@ -51,9 +51,7 @@ const $Btns = {
 /** 카드 모두 지우기 관련 모든 버튼에 이벤트를 등록합니다. */
 function eventToCardClearBtns() {
     addEvent($Btns.$goClear, [turnOnCardClearModal]);
-
     addEvent($Btns.$cardClearCancel, [turnOffCardClearModal]);
-
     addEvent($Btns.$cardClearAccept, [
         () => deleteAllCards(),
         () => turnOffCardClearModal()
@@ -94,7 +92,7 @@ function eventToColumnAddBtn() {
 }
 
 function toggleFabBtn() {
-    if($Btns.$goColumnAddModal.style.bottom == "21%") {
+    if($Btns.$goColumnAddModal.style.bottom == BTN_MOVDED.COLUMN_ADD) {
         changeCSS($Btns.$fab, TRANSFORM, FAB_BTN.DEGREE_ORIGINAL);
         changeCSS($Btns.$goClear, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL);
         changeCSS($Btns.$goColumnAddModal, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL);
@@ -122,7 +120,6 @@ function eventToMenuBtns() {
         () => menuLogTimeUpdate(),
         () => changeCSS($menuBar, POSITION.RIGHT, MENU_POSITION.VISIBLE)
     ])
-
     addEvent($Btns.$menuClose, [
         () => changeCSS($menuBar, POSITION.RIGHT, MENU_POSITION.HIDDEN),
     ])
@@ -137,7 +134,6 @@ function eventToModalButtons() {
             ),
         () => deleteCard($chosenCard)
     ])
-
     addEvent($Btns.$modalCancel, [turnOffModal]);
 }
 

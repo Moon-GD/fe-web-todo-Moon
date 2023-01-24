@@ -82,7 +82,8 @@ const CARD = {
     BACKGROUND_HOVER: "#FFEEEC",
     OUTLINE_ORIGINAL: "none",
     OUTLINE_HOVER: "0.4vh solid " + CARD_BTN.HOVER,
-    TEXT_HEIGTH: 2.5
+    TEXT_HEIGTH: 3.5,
+    HEIGHT: 18
 }
 
 const CARD_DARK_MODE = {
