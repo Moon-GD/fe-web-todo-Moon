@@ -7,7 +7,7 @@ import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent
 import { makeShadedNode } from "../drag/dragEffect.js";
 import { eventToCard } from "../drag/addDragEvent.js";
 import { searchLogManger } from "../search/searchLogManager.js";
-import { getElapsedTime, eventToTimeNode, getElapsedTimeByTimeArray, timeStringToArray, saveTimeStringOnTimeNode } from "../component/menu/menuLogTime.js";
+import { recordElapsedTimeOnTarget, eventToTimeNode, getElapsedTimeByTimeArray, timeStringToArray, saveTimeStringOnTimeNode } from "../component/menu/menuLogTime.js";
 import { statusListOnLocal, cardListOnLocal, menuListOnLocal } from "../store/store.js";
 import { addEvent } from "../common/commonFunction.js";
 import { eventToUndoBtn } from "../component/button.js";
@@ -151,7 +151,7 @@ function menuLogAddTemplate(columnName, cardTitle, actionTimeString, emotion="ðŸ
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
     }
-    else getElapsedTime($timeNode);
+    else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -185,7 +185,7 @@ function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeStr
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
     }
-    else getElapsedTime($timeNode);
+    else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -220,7 +220,7 @@ function menuLogDeleteAllTemplate(actionTimeString, emotion="ðŸ¥³", author="@sam
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
     }
-    else getElapsedTime($timeNode);
+    else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -254,7 +254,7 @@ function menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTi
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
     }
-    else getElapsedTime($timeNode);
+    else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -286,7 +286,7 @@ function menuLogUpdateTemplate(columnName, cardTitle, actionTimeString, emotion=
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
     }
-    else getElapsedTime($timeNode);
+    else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -319,7 +319,7 @@ function menuSearchTemplate(searchLog, searchCount, actionTimeString, emotion="ð
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
     }
-    else getElapsedTime($timeNode);
+    else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
