@@ -46,7 +46,7 @@ function getDeleteMenuJSON(menuJSON) {
         "columnName":menuJSON[MENU.COLUMN_NAME],
         "cardTitle":menuJSON[MENU.CARD_TITLE],
         "cardContent": menuJSON[MENU.CARD_CONTENT],
-        "isRecovered":menuJSON["isReCovered"]
+        "isRecovered":menuJSON["isRecovered"]
     }
 }
 
@@ -114,12 +114,13 @@ const menuJSONTemplateForMatter = (menuJSON) => {
     const cardContent = menuJSON[MENU.CARD_CONTENT];
     const searchInPut = menuJSON[MENU.SEARCH_INPUT];
     const searchFrequency = menuJSON[MENU.ACTION.SEARCH_FREQUENCY];
+    const isRecovered = menuJSON[MENU.isRecovered];
 
     if(action == "CREATE") return menuLogAddTemplate(columnName, cardTitle, actionTime);
     else if(action == "UPDATE") return menuLogUpdateTemplate(columnName, cardTitle, actionTime);
     else if(action == "MOVE") return menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTime);
     else if(action == "DELETE_ALL") return menuLogDeleteAllTemplate(actionTime);
-    else if(action == "DELETE") return menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTime);
+    else if(action == "DELETE") return menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTime, isRecovered);
     else if(action == "SEARCH") return menuSearchTemplate(searchInPut, searchFrequency, actionTime);
 }
 

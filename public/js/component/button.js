@@ -1,7 +1,7 @@
 import { addChildAfterParent, addEvent, changeCSS } from "../common/commonFunction.js";
 import {
     POSITION, TRANSFORM, FAB_BTN, BTN_MOVDED,
-    MENU_POSITION, DISPLAY, STATUS 
+    MENU_POSITION, DISPLAY, STATUS, MENU, MENU_ACTION 
 } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn, findColumnStatusByCard } from "./column.js";
@@ -17,6 +17,7 @@ import { menuListOnLocal, statusListOnLocal } from "../store/store.js";
 import { cardTemplate } from "../templates/template.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { addCardJSON } from "../../../server/card/post.js";
+import { uploadRecoverInfoOnServer } from "../../../server/menu/patch.js";
 
 const $columnAddInput = querySelector("#column-add-input");
 const $Btns = {
@@ -151,9 +152,14 @@ function eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author) {
             () => $article.prepend($undoCard),
             () => $undoBtn.remove(),
             () => addCardJSON(findColumnStatusByCard($undoCard), cardTitle, cardContent, $undoCard.id),
-            () => {
-                menuListOnLocal.forEach((menu) => {
-                })
+            () => { 
+                for(let menuJSON of menuListOnLocal) {
+                    if(menuJSON["action"] !== MENU_ACTION.DELETE) continue;
+                    if(menuJSON["cardTitle"] === cardTitle && menuJSON["cardContent"] === cardContent) {
+                        const menuID = menuJSON["id"];
+                        uploadRecoverInfoOnServer(menuID);
+                    }
+                }
             }
         ]);
     }

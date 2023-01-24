@@ -159,7 +159,7 @@ function menuLogAddTemplate(columnName, cardTitle, actionTimeString, emotion="�
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete) */
-function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeString, isRecovered = false, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
     $menuFrame.innerHTML = `
@@ -179,7 +179,6 @@ function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeStr
     `;
 
     const $timeNode = $menuFrame.querySelector(".log-time");
-    eventToTimeNode($timeNode);
 
     if(actionTimeString) {
         saveTimeStringOnTimeNode($timeNode, actionTimeString);
@@ -192,8 +191,8 @@ function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeStr
 
     const $undoBtn = $menuFrame.querySelector(".undo-btn");
     
-    if(cardContent !== "") eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author);
-    else $undoBtn.remove();
+    if(isRecovered) $undoBtn.remove();
+    else eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author);
 
     return $menuFrame;
 }

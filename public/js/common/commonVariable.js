@@ -44,7 +44,8 @@ const MENU = {
     CARD_TITLE: "cardTitle",
     CARD_CONTENT: "cardContent",
     SEARCH_INPUT: "searchInput",
-    SEARCH_FREQUENCY: "searchFrequency"
+    SEARCH_FREQUENCY: "searchFrequency",
+    isRecovered: "isRecovered"
 }
 
 // json menu action
