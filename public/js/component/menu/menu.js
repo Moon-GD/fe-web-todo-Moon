@@ -12,20 +12,21 @@ import { makeDeleteAllMenuJSON } from "../../../../server/menu/action/cardDeleti
 import { makeUpdateMenuJSON } from "../../../../server/menu/action/cardUpdation.js";
 import { makeMoveMenuJSON } from "../../../../server/menu/action/cardMove.js";
 import { pipe } from "../../common/commonFunction.js";
+import { STATUS } from "../../common/commonVariable.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
 
 /** 메뉴에 add log를 남깁니다. */
-function menuLogAdd(title, status) {
-    makeCreateMenuJSON(status, title);
-    $menuContent.prepend(menuLogAddTemplate(title, status));
+function menuLogAdd(cardTitle, columnName) {
+    makeCreateMenuJSON(columnName, cardTitle);
+    $menuContent.prepend(menuLogAddTemplate(columnName, cardTitle));
 }
 
 /** 메뉴에 delete log를 남깁니다. */
 function menuLogDelete(title, status, cardContent) {
     makeDeleteMenuJSON(status, title, cardContent)
-    $menuContent.prepend(menuLogDeleteTemplate(title, cardContent, status));
+    $menuContent.prepend(menuLogDeleteTemplate(status, title, cardContent));
 }
 
 /** 메뉴에 delete all log를 남깁니다. */
@@ -38,13 +39,14 @@ function menuLogDeleteAll() {
 function menuLogMove(cardTitle, prevColumnName, nextColumnName) {
     if(prevColumnName === nextColumnName) { return; }
     makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle);
-    $menuContent.prepend(menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName));
+    $menuContent.prepend(menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle));
 }
 
 /** 메뉴에 update log를 남깁니다. */
 function menuLogUpdate(title, status) {
     makeUpdateMenuJSON(status, title);
-    $menuContent.prepend(menuLogUpdateTemplate(title, status));
+    const columnName = statusListOnLocal[status][STATUS.NAME];
+    $menuContent.prepend(menuLogUpdateTemplate(columnName, title));
 }
 
 /** 메뉴에 search log를 남깁니다. */

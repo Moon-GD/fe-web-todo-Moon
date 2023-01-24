@@ -127,7 +127,7 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (add) */
-function menuLogAddTemplate(cardTitle, columnName, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogAddTemplate(columnName, cardTitle, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -159,7 +159,7 @@ function menuLogAddTemplate(cardTitle, columnName, actionTimeString, emotion="�
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete) */
-function menuLogDeleteTemplate(cardTitle, cardContent, columnName, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
     $menuFrame.innerHTML = `
@@ -229,7 +229,7 @@ function menuLogDeleteAllTemplate(actionTimeString, emotion="🥳", author="@sam
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (move) */
-function menuLogMoveTemplate(title, prevColumnName, nextColumnName, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -238,7 +238,7 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, actionTimeSt
         <div class="log-content-area">
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
-                <strong>${title}</strong>을/를
+                <strong>${cardTitle}</strong>을/를
                 <strong>${prevColumnName}</strong>에서
                 <strong>${nextColumnName}</strong>
                 로 이동하였습니다.
@@ -263,7 +263,7 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, actionTimeSt
 }
  
 /** 메뉴 log 템플릿을 반환합니다. (update) */
-function menuLogUpdateTemplate(cardTitle, status, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogUpdateTemplate(columnName, cardTitle, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -272,7 +272,7 @@ function menuLogUpdateTemplate(cardTitle, status, actionTimeString, emotion="�
         <div class="log-content-area">
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
-                <strong>${ statusListOnLocal[status][STATUS.NAME] }</strong>의
+                <strong>${ columnName }</strong>의
                 <strong>${cardTitle}</strong>
                 을/를 수정하였습니다.
             </h4>
