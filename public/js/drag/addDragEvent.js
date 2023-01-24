@@ -1,15 +1,14 @@
 import { EVENT, CARD_ID, STATUS } from "../common/commonVariable.js";
+import { addEvent, pipe } from "../common/commonFunction.js";
 import { findCardTitle } from "../component/card.js";
 import { findColumnStatusByCard } from "../component/column.js";
 import { menuLogMove } from "../component/menu/menu.js";
 import { recordDragCard, dragOverCard } from "./dragCard.js"
 import { makeLightNode } from "./dragEffect.js"
-import { moveJSONData } from "../../../server/card/patchMove.js";
 import { statusListOnLocal } from "../store/store.js";
-import { addEvent, pipe } from "../common/commonFunction.js";
+import { moveJSONData } from "../../../server/card/patchMove.js";
 
-let dragStartStatus = "";
-let dragEndStatus = "";
+let [dragStartStatus, dragEndStatus] = ["", ""];
 
 /**
  * 카드에 드래그 이벤트를 추가합니다.
@@ -21,9 +20,7 @@ function eventToCard($card) {
         (event) => recordDragCard(event)
     ], EVENT.DRAG_START);
 
-    addEvent($card, [
-        (event) => dragOverCard($card, event)
-    ], EVENT.DRAG_OVER);
+    addEvent($card, [(event) => dragOverCard($card, event)], EVENT.DRAG_OVER);
 
     addEvent($card, [
         () => pipe(
@@ -37,12 +34,7 @@ function eventToCard($card) {
         )()
     ], EVENT.DRAG_END);
 
-    addEvent($card, [
-        () => dragOverCard($card, event)
-    ], EVENT.DROP);
+    addEvent($card, [() => dragOverCard($card, event)], EVENT.DROP);
 }
 
-export { 
-    dragStartStatus, dragEndStatus,
-    eventToCard
-}
+export { dragStartStatus, dragEndStatus, eventToCard }

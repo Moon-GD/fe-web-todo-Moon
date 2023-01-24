@@ -157,6 +157,9 @@ const LOG_TIME = {
 const HALF_SECOND = "0.5s";
 const ONE_SECOND = "1s";
 
+// js find 배열 못 찾았을 때
+const NOT_FOUND = -1
+
 export {
     // fetch url
     FETCH_URL,
@@ -214,4 +217,7 @@ export {
 
     // css transition value
     HALF_SECOND, ONE_SECOND,
+
+    // js find 배열 못 찾았을 때
+    NOT_FOUND,
 }

@@ -13,7 +13,7 @@ function deleteStatusOnLocal(statusIndex) {
 /** 서버에서 status 삭제
  * @param {number} statusIndex column status
  */
-function deleteStatusOnServer(statusIndex) {
+async function deleteStatusOnServer(statusIndex) {
     fetch(FETCH_URL.STATUS + "/" + statusIndex, { 
         method: METHOD.DELETE 
     });
@@ -22,13 +22,13 @@ function deleteStatusOnServer(statusIndex) {
 /** status를 삭제합니다. 
  * @param {string} statusName column 이름
 */
-function deleteStatus(statusName) {
+async function deleteStatus(statusName) {
     let filteredStatus = statusListOnLocal
     .filter((statusJSON) => statusJSON[STATUS.NAME] == statusName)[0];
 
     const statusIndex = filteredStatus[STATUS.INDEX];
 
-    deleteStatusOnServer(statusIndex);
+    await deleteStatusOnServer(statusIndex);
 
     if(cardListOnLocal[statusIndex].length) {
         cardListOnLocal[statusIndex]

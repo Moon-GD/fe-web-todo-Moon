@@ -61,15 +61,15 @@ function valiedateNodeByQuery(node, queryObj) {
     const ids = queryObj[ID];
     
     for(let i=0;i<tags.length;i++) {
-        if(node.tagName != tags[i]) { return false; }
+        if(node.tagName != tags[i]) return false;
     }
     
     for(let i=0;i<classes.length;i++) {
-        if(classes[i] in node.classList) { return false; }
+        if(classes[i] in node.classList) return false;
     }
 
     for(let i=0;i<ids.length;i++) {
-        if(node.id != ids[i]) { return false; }
+        if(node.id != ids[i]) return false;
     }
 
     return true;

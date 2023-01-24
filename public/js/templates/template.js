@@ -1,24 +1,27 @@
+import { addEvent } from "../common/commonFunction.js";
 import { EVENT, STATUS, CARD_ID } from "../common/commonVariable.js";
+import { eventToUndoBtn } from "../component/button.js";
 import { eventToNewCardBtn, eventToCardDeleteBtn, 
     eventToMakeCardCancelBtn, eventToMakeNewCardBtn,
     resizeCardByInputBox, doubleClickEventToCard, parseCardContentByNewLine
 } from "../component/card.js";
 import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
-import { makeShadedNode } from "../drag/dragEffect.js";
+import { 
+    recordElapsedTimeOnTarget, eventToTimeNode, getElapsedTimeByTimeArray, 
+    timeStringToArray, saveTimeStringOnTimeNode 
+} from "../component/menu/menuLogTime.js";
 import { eventToCard } from "../drag/addDragEvent.js";
-import { searchLogManger } from "../search/searchLogManager.js";
-import { recordElapsedTimeOnTarget, eventToTimeNode, getElapsedTimeByTimeArray, timeStringToArray, saveTimeStringOnTimeNode } from "../component/menu/menuLogTime.js";
-import { statusListOnLocal, cardListOnLocal, menuListOnLocal } from "../store/store.js";
-import { addEvent } from "../common/commonFunction.js";
-import { eventToUndoBtn } from "../component/button.js";
+import { makeShadedNode } from "../drag/dragEffect.js";
 import { querySelector } from "../devUtils/querySelector.js";
+import { searchLogManger } from "../search/searchLogManager.js";
+import { statusListOnLocal, cardListOnLocal, menuListOnLocal } from "../store/store.js";
 import { menuJSONTemplateForMatter } from "../../../server/menu/menuJSONFormatter.js";
 
 /** 초기 데이터를 템플릿으로 구성합니다. */
 function initialDataToTemplate() {
     statusListOnLocal.forEach(({id: statusID, statusName}) => {
-        let $newColumn = columnTemplate(statusName, statusID, cardListOnLocal[statusID].length);
-        let $cardArea = $newColumn.querySelector("article");
+        const $newColumn = columnTemplate(statusName, statusID, cardListOnLocal[statusID].length);
+        const $cardArea = $newColumn.querySelector("article");
 
         cardListOnLocal[statusID].forEach((cardData) => {
             let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author, cardData[CARD_ID]);
@@ -30,7 +33,7 @@ function initialDataToTemplate() {
     })
 
     const $menuContent = querySelector("#menu-content");
-    menuListOnLocal.forEach((menuJSON) => { $menuContent.prepend(menuJSONTemplateForMatter(menuJSON)); })
+    menuListOnLocal.forEach((menuJSON) => $menuContent.prepend(menuJSONTemplateForMatter(menuJSON)))
 }
 
 /** column 템플릿을 반환합니다. */

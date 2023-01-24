@@ -1,12 +1,10 @@
-import { DISPLAY } from "../common/commonVariable.js";
+import { DISPLAY, ONE_SECOND } from "../common/commonVariable.js";
 import { changeCSS } from "../common/commonFunction.js";
-import { querySelector } from "../devUtils/querySelector.js";
+import { multiQuerySelector } from "../devUtils/querySelector.js";
 import { $searchModal } from "../search/search.js";
 
-const $modalSection = querySelector("#modal-section");
-const $columnAddModal = querySelector("#column-add-modal-section");
-const $cardClearModal = querySelector("#clear-modal-section");
-const $warningModal = querySelector("#warning-modal");
+const [$modalSection, $columnAddModal, $cardClearModal, $warningModal]
+    = multiQuerySelector(["#modal-section, #column-add-modal-section, #clear-modal-section, #warning-modal"]);
 
 /** 카드 삭제 관련 모달을 띄워줍니다. */
 const turnOnModal = () => $modalSection.style.display = DISPLAY.FLEX;
@@ -32,7 +30,7 @@ const turnOnCardClearModal = () => changeCSS($cardClearModal, "display", DISPLAY
 /** 경고 modal을 1초간 보여줍니다. */
 function showWarningModal() {
     $warningModal.style.display = DISPLAY.FLEX;
-    setTimeout(() => $warningModal.style.display = DISPLAY.NONE, 1000)
+    setTimeout(() => $warningModal.style.display = DISPLAY.NONE, ONE_SECOND)
 }
 
 export { 

@@ -20,7 +20,7 @@ const $mainTag = querySelector("main");
 function columnDeleteEvent($columnDeleteBtn, $column) {
     addEvent($columnDeleteBtn, [
         () => {
-            deleteStatus($column.querySelector("span").innerHTML);
+            deleteStatus($column.querySelector("span").innerHTML)
             $column.remove();
         }
     ])

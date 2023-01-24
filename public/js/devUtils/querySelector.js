@@ -20,10 +20,7 @@ const querySelector = (query) => pipe(
         singleQuerySelector(query) : multipleQuerySelector(query)       
 )()
 
-const multiQuerySelector = (queryArray) => {
-    const map2 = queryArray.map((query) => querySelector(query));
-    return map2;
-}
+const multiQuerySelector = (queryArray) => queryArray.map((query) => querySelector(query));
 
 /** 원하는 노드를 찾아 배열 형태로 반환합니다. */
 /**
