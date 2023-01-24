@@ -13,7 +13,7 @@ import {
 import { querySelector } from "../devUtils/querySelector.js";
 import { showSuggestedLog, $searchModal , $searchInput, searchCard } from "../search/search.js";
 import { validateStatus } from "../../../server/column/validation.js";
-import { statusListOnLocal } from "../store/store.js";
+import { menuListOnLocal, statusListOnLocal } from "../store/store.js";
 import { cardTemplate } from "../templates/template.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { addCardJSON } from "../../../server/card/post.js";
@@ -150,7 +150,11 @@ function eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author) {
         addEvent($undoBtn, [
             () => $article.prepend($undoCard),
             () => $undoBtn.remove(),
-            () => addCardJSON(findColumnStatusByCard($undoCard), cardTitle, cardContent, $undoCard.id)
+            () => addCardJSON(findColumnStatusByCard($undoCard), cardTitle, cardContent, $undoCard.id),
+            () => {
+                menuListOnLocal.forEach((menu) => {
+                })
+            }
         ]);
     }
 }

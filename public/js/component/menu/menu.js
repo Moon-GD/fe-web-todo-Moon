@@ -1,5 +1,5 @@
 import { querySelector } from "../../devUtils/querySelector.js";
-import { timeStringToArray, getElapsedTime } from "./menuLogTime.js";
+import { timeStringToArray, getElapsedTime, getElapsedTimeByTimeArray } from "./menuLogTime.js";
 import { 
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, 
     menuSearchTemplate, menuLogDeleteAllTemplate
@@ -17,38 +17,38 @@ const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
 
 /** 메뉴에 add log를 남깁니다. */
-function menuLogAdd(title, status, emotion="🥳", author="@sam") {
+function menuLogAdd(title, status) {
     makeCreateMenuJSON(status, title);
-    $menuContent.prepend(menuLogAddTemplate(title, status, emotion, author));
+    $menuContent.prepend(menuLogAddTemplate(title, status));
 }
 
 /** 메뉴에 delete log를 남깁니다. */
-function menuLogDelete(title, status, cardContent, emotion="🥳", author="@sam") {
-    makeDeleteMenuJSON(status, title)
-    $menuContent.prepend(menuLogDeleteTemplate(title, cardContent, status, emotion, author));
+function menuLogDelete(title, status, cardContent) {
+    makeDeleteMenuJSON(status, title, cardContent)
+    $menuContent.prepend(menuLogDeleteTemplate(title, cardContent, status));
 }
 
 /** 메뉴에 delete all log를 남깁니다. */
-function menuLogDeleteAll(emotion="🥳", author="@sam") {
+function menuLogDeleteAll() {
     makeDeleteAllMenuJSON()
-    $menuContent.prepend(menuLogDeleteAllTemplate(emotion, author));
+    $menuContent.prepend(menuLogDeleteAllTemplate());
 }
 
 /** 메뉴에 move log를 남깁니다. */
-function menuLogMove(cardTitle, prevColumnName, nextColumnName, emotion="🥳", author="@sam") {
+function menuLogMove(cardTitle, prevColumnName, nextColumnName) {
     if(prevColumnName === nextColumnName) { return; }
     makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle);
-    $menuContent.prepend(menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName, emotion, author));
+    $menuContent.prepend(menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName));
 }
 
 /** 메뉴에 update log를 남깁니다. */
-function menuLogUpdate(title, status, emotion="🥳", author="@sam") {
+function menuLogUpdate(title, status) {
     makeUpdateMenuJSON(status, title);
-    $menuContent.prepend(menuLogUpdateTemplate(title, status, emotion, author));
+    $menuContent.prepend(menuLogUpdateTemplate(title, status));
 }
 
 /** 메뉴에 search log를 남깁니다. */
-function menuLogSearch(searchLog, emotion="🥳", author="@sam") {
+function menuLogSearch(searchLog) {
     makeSearchMenuJSON(searchLog, searchLogManger.getSearchCount(searchLog))
     $menuContent.prepend(menuSearchTemplate(searchLog));
 }
@@ -60,7 +60,7 @@ function menuLogTimeUpdate() {
         pipe(
             ($timeNode) => $timeNode.dataset.time,
             (timeString) => timeStringToArray(timeString),
-            (timeArray) => getElapsedTime(timeArray),
+            (timeArray) => getElapsedTimeByTimeArray(timeArray),
             (timeDiff) => $timeNode.textContent = timeDiff
         )($timeNode)
     })

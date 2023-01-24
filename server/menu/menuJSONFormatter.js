@@ -1,4 +1,6 @@
 import { MENU } from "../../public/js/common/commonVariable.js"
+import { findCardByTitle } from "../../public/js/component/card.js"
+import { findCardHeaderName } from "../../public/js/component/column.js"
 import { menuLogAddTemplate, menuLogDeleteAllTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate } from "../../public/js/templates/template.js"
 
 /**
@@ -42,7 +44,9 @@ function getDeleteMenuJSON(menuJSON) {
         "actionTime":menuJSON[MENU.ACTION_TIME],
         "id":menuJSON[MENU.ID],
         "columnName":menuJSON[MENU.COLUMN_NAME],
-        "cardTitle":menuJSON[MENU.CARD_TITLE]
+        "cardTitle":menuJSON[MENU.CARD_TITLE],
+        "cardContent": menuJSON[MENU.CARD_CONTENT],
+        "isRecovered":menuJSON["isReCovered"]
     }
 }
 
@@ -102,19 +106,21 @@ const menuJSONFormatter = {
 
 const menuJSONTemplateForMatter = (menuJSON) => {
     const action = menuJSON[MENU.ACTION];
+    const actionTime = menuJSON[MENU.ACTION_TIME];
     const columnName = menuJSON[MENU.COLUMN_NAME];
     const prevColumnName = menuJSON[MENU.PREV_COLUMN_NAME];
     const nextColumnName = menuJSON[MENU.NEXT_COLUMN_NAME];
     const cardTitle = menuJSON[MENU.CARD_TITLE];
+    const cardContent = menuJSON[MENU.CARD_CONTENT];
     const searchInPut = menuJSON[MENU.SEARCH_INPUT];
     const searchFrequency = menuJSON[MENU.ACTION.SEARCH_FREQUENCY];
 
-    if(action == "CREATE") return menuLogAddTemplate(cardTitle, columnName);
-    else if(action == "UPDATE") return menuLogUpdateTemplate(cardTitle, columnName);
-    else if(action == "MOVE") return menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName);
-    else if(action == "DELETE_ALL") return menuLogDeleteAllTemplate();
-    else if(action == "DELETE") return menuLogDeleteTemplate(cardTitle, "", columnName);
-    else if(action == "SEARCH") return menuSearchTemplate(searchInPut, searchFrequency);
+    if(action == "CREATE") return menuLogAddTemplate(cardTitle, columnName, actionTime);
+    else if(action == "UPDATE") return menuLogUpdateTemplate(cardTitle, columnName, actionTime);
+    else if(action == "MOVE") return menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName, actionTime);
+    else if(action == "DELETE_ALL") return menuLogDeleteAllTemplate(actionTime);
+    else if(action == "DELETE") return menuLogDeleteTemplate(cardTitle, cardContent, columnName, actionTime);
+    else if(action == "SEARCH") return menuSearchTemplate(searchInPut, searchFrequency, actionTime);
 }
 
 export { menuJSONFormatter, menuJSONTemplateForMatter }

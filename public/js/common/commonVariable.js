@@ -42,6 +42,7 @@ const MENU = {
     NEXT_COLUMN_NAME: "nextColumnName",
     COLUMN_NAME: "columnName",
     CARD_TITLE: "cardTitle",
+    CARD_CONTENT: "cardContent",
     SEARCH_INPUT: "searchInput",
     SEARCH_FREQUENCY: "searchFrequency"
 }

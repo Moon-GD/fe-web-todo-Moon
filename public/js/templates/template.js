@@ -7,12 +7,9 @@ import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent
 import { makeShadedNode } from "../drag/dragEffect.js";
 import { eventToCard } from "../drag/addDragEvent.js";
 import { searchLogManger } from "../search/searchLogManager.js";
-import { 
-    timeToStringFormat, timeStringToArray, 
-    getElapsedTime, saveTimeStringOnTimeNode, eventToTimeNode
-} from "../component/menu/menuLogTime.js";
+import { getElapsedTime, eventToTimeNode, getElapsedTimeByTimeArray, timeStringToArray, saveTimeStringOnTimeNode } from "../component/menu/menuLogTime.js";
 import { statusListOnLocal, cardListOnLocal, menuListOnLocal } from "../store/store.js";
-import { addEvent, pipe } from "../common/commonFunction.js";
+import { addEvent } from "../common/commonFunction.js";
 import { eventToUndoBtn } from "../component/button.js";
 import { querySelector } from "../devUtils/querySelector.js";
 import { menuJSONTemplateForMatter } from "../../../server/menu/menuJSONFormatter.js";
@@ -130,7 +127,7 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (add) */
-function menuLogAddTemplate(cardTitle, columnName, emotion="🥳", author="@sam") {
+function menuLogAddTemplate(cardTitle, columnName, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -149,24 +146,20 @@ function menuLogAddTemplate(cardTitle, columnName, emotion="🥳", author="@sam"
 
     const $timeNode = $menuFrame.querySelector(".log-time");
 
-    pipe(
-        (currnetTime) => timeToStringFormat(currnetTime),
-        (timeString) => {
-            saveTimeStringOnTimeNode($timeNode, timeString);
-            return timeStringToArray(timeString);
-        },
-        (timeArray) => getElapsedTime(timeArray),
-        (timeDiff) => $timeNode.textContent = timeDiff
-    )(new Date())
+    if(actionTimeString) {
+        saveTimeStringOnTimeNode($timeNode, actionTimeString);
+        const timeArray = timeStringToArray(actionTimeString);
+        $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
+    }
+    else getElapsedTime($timeNode);
 
-    // 시간 노드에 event 추가
     eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete) */
-function menuLogDeleteTemplate(cardTitle, cardContent, columnName, emotion="🥳", author="@sam") {
+function menuLogDeleteTemplate(cardTitle, cardContent, columnName, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
     $menuFrame.innerHTML = `
@@ -186,29 +179,27 @@ function menuLogDeleteTemplate(cardTitle, cardContent, columnName, emotion="🥳
     `;
 
     const $timeNode = $menuFrame.querySelector(".log-time");
+    eventToTimeNode($timeNode);
 
-    pipe(
-        (currnetTime) => timeToStringFormat(currnetTime),
-        (timeString) => {
-            saveTimeStringOnTimeNode($timeNode, timeString);
-            return timeStringToArray(timeString);
-        },
-        (timeArray) => getElapsedTime(timeArray),
-        (timeDiff) => $timeNode.textContent = timeDiff
-    )(new Date())
+    if(actionTimeString) {
+        saveTimeStringOnTimeNode($timeNode, actionTimeString);
+        const timeArray = timeStringToArray(actionTimeString);
+        $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
+    }
+    else getElapsedTime($timeNode);
 
+    eventToTimeNode($timeNode);
 
     const $undoBtn = $menuFrame.querySelector(".undo-btn");
     
     if(cardContent !== "") eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author);
     else $undoBtn.remove();
-    eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete all) */
-function menuLogDeleteAllTemplate(emotion="🥳", author="@sam") {
+function menuLogDeleteAllTemplate(actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -224,16 +215,13 @@ function menuLogDeleteAllTemplate(emotion="🥳", author="@sam") {
     `;
 
     const $timeNode = $menuFrame.querySelector(".log-time");
-
-    pipe(
-        (currnetTime) => timeToStringFormat(currnetTime),
-        (timeString) => {
-            saveTimeStringOnTimeNode($timeNode, timeString);
-            return timeStringToArray(timeString);
-        },
-        (timeArray) => getElapsedTime(timeArray),
-        (timeDiff) => $timeNode.textContent = timeDiff
-    )(new Date())
+    
+    if(actionTimeString) {
+        saveTimeStringOnTimeNode($timeNode, actionTimeString);
+        const timeArray = timeStringToArray(actionTimeString);
+        $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
+    }
+    else getElapsedTime($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -241,7 +229,7 @@ function menuLogDeleteAllTemplate(emotion="🥳", author="@sam") {
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (move) */
-function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion="🥳", author="@sam") {
+function menuLogMoveTemplate(title, prevColumnName, nextColumnName, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -260,16 +248,14 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion="�
     `;
 
     const $timeNode = $menuFrame.querySelector(".log-time");
+    eventToTimeNode($timeNode);
 
-    pipe(
-        (currnetTime) => timeToStringFormat(currnetTime),
-        (timeString) => {
-            saveTimeStringOnTimeNode($timeNode, timeString);
-            return timeStringToArray(timeString);
-        },
-        (timeArray) => getElapsedTime(timeArray),
-        (timeDiff) => $timeNode.textContent = timeDiff
-    )(new Date())
+    if(actionTimeString) {
+        saveTimeStringOnTimeNode($timeNode, actionTimeString);
+        const timeArray = timeStringToArray(actionTimeString);
+        $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
+    }
+    else getElapsedTime($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -277,7 +263,7 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion="�
 }
  
 /** 메뉴 log 템플릿을 반환합니다. (update) */
-function menuLogUpdateTemplate(cardTitle, status, emotion="🥳", author="@sam") {
+function menuLogUpdateTemplate(cardTitle, status, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -296,15 +282,12 @@ function menuLogUpdateTemplate(cardTitle, status, emotion="🥳", author="@sam")
 
     const $timeNode = $menuFrame.querySelector(".log-time");
 
-    pipe(
-        (currnetTime) => timeToStringFormat(currnetTime),
-        (timeString) => {
-            saveTimeStringOnTimeNode($timeNode, timeString);
-            return timeStringToArray(timeString);
-        },
-        (timeArray) => getElapsedTime(timeArray),
-        (timeDiff) => $timeNode.textContent = timeDiff
-    )(new Date())
+    if(actionTimeString) {
+        saveTimeStringOnTimeNode($timeNode, actionTimeString);
+        const timeArray = timeStringToArray(actionTimeString);
+        $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
+    }
+    else getElapsedTime($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -312,7 +295,7 @@ function menuLogUpdateTemplate(cardTitle, status, emotion="🥳", author="@sam")
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (search) */
-function menuSearchTemplate(searchLog, searchCount, emotion="🥳", author="@sam") {
+function menuSearchTemplate(searchLog, searchCount, actionTimeString, emotion="🥳", author="@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -332,15 +315,12 @@ function menuSearchTemplate(searchLog, searchCount, emotion="🥳", author="@sam
 
     const $timeNode = $menuFrame.querySelector(".log-time");
 
-    pipe(
-        (currnetTime) => timeToStringFormat(currnetTime),
-        (timeString) => {
-            saveTimeStringOnTimeNode($timeNode, timeString);
-            return timeStringToArray(timeString);
-        },
-        (timeArray) => getElapsedTime(timeArray),
-        (timeDiff) => $timeNode.textContent = timeDiff
-    )(new Date())
+    if(actionTimeString) {
+        saveTimeStringOnTimeNode($timeNode, actionTimeString);
+        const timeArray = timeStringToArray(actionTimeString);
+        $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
+    }
+    else getElapsedTime($timeNode);
 
     eventToTimeNode($timeNode);
 

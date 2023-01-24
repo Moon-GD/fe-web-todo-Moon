@@ -40,6 +40,21 @@ const findCardTitle = ($card) => pipe(
 const findCardContent = ($card) => $card.querySelector(".card-content").innerHTML;
 
 /**
+ * 카드 제목을 기반으로 카드 객체를 반환합니다.
+ * @param {String} title 카드 제목
+ * @returns 카드 객체 / null
+ */
+function findCardByTitle(title) {
+    const cardArray = document.querySelectorAll(".card-frame");
+    for(let $card of cardArray) {
+        const cardTitle = findCardTitle($card);
+        if(cardTitle == title) return $card;
+    }
+    
+    return null;
+}
+
+/**
  * 카드를 삭제합니다.
  * @param {Node} $card 카드 객체
  */
@@ -259,6 +274,6 @@ const parseCardContentByNewLine = (cardContent) => pipe(
 
 export { 
     eventToNewCardBtn, eventToCardDeleteBtn, 
-    eventToMakeCardCancelBtn, eventToMakeNewCardBtn, resizeCardByInputBox,
+    eventToMakeCardCancelBtn, eventToMakeNewCardBtn, resizeCardByInputBox, findCardByTitle,
     doubleClickEventToCard, deleteCard, findCardTitle, deleteAllCards, $chosenCard, parseCardContentByNewLine
  }

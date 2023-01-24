@@ -1,3 +1,4 @@
+import { pipe } from "../../common/commonFunction.js";
 import { LOG_TIME, EVENT } from "../../common/commonVariable.js";
 
 /** 현재 시간을 배열로 반환합니다.
@@ -45,14 +46,30 @@ function timeStringToArray(timeString) {
  * @param {Array} timeList 월, 일, 시, 분 정보가 담긴 정수 배열
  * @returns "1달 전" || "2일 전" || "3시간 전" || "4분 전" || 방금
  */
-function getElapsedTime(timeList) {
+function getElapsedTime($timeNode) {
+    const timeArray = pipe(
+        () => timeToStringFormat(),
+        (timeString) => {
+            saveTimeStringOnTimeNode($timeNode, timeString);
+            return timeStringToArray(timeString);
+        },
+    )()
+
+    $timeNode.textContent = getElapsedTimeByTimeArray(timeArray);
+}
+
+function getElapsedTimeByTimeArray(timeArray) {
     const [month, day, hour, minute] = getCurrentTime();
 
-    if(timeList[LOG_TIME.MONTH] != month) { return `${month - timeList[LOG_TIME.MONTH]}달 전`; }
-    else if(timeList[LOG_TIME.DATE] != day) { return `${day - timeList[LOG_TIME.DATE]}일 전`; }
-    else if(timeList[LOG_TIME.HOUR] != hour) { return `${hour - timeList[LOG_TIME.HOUR]}시간 전`; }
-    else if(timeList[LOG_TIME.MINUTE] != minute) { return `${minute - timeList[LOG_TIME.MINUTE]}분 전`; }
-    else { return '방금'; }
+    let timeDiff = "";
+
+    if(timeArray[LOG_TIME.MONTH] != month) timeDiff = `${month - timeArray[LOG_TIME.MONTH]}달 전`;
+    else if(timeArray[LOG_TIME.DATE] != day) timeDiff = `${day - timeArray[LOG_TIME.DATE]}일 전`;
+    else if(timeArray[LOG_TIME.HOUR] != hour) timeDiff = `${hour - timeArray[LOG_TIME.HOUR]}시간 전`; 
+    else if(timeArray[LOG_TIME.MINUTE] != minute) timeDiff = `${minute - timeArray[LOG_TIME.MINUTE]}분 전`;
+    else timeDiff = '방금';
+
+    return timeDiff;
 }
 
 /**
@@ -74,6 +91,6 @@ function eventToTimeNode(timeNode) {
 }
 
 export { 
-    timeToStringFormat, timeStringToArray,
+    timeToStringFormat, timeStringToArray, getElapsedTimeByTimeArray,
     getElapsedTime, saveTimeStringOnTimeNode, eventToTimeNode
 }

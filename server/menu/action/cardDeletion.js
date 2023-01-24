@@ -10,13 +10,15 @@ import { uploadMenuJSON } from "../post.js";
  * @param {String} cardTitle 
  * @returns 
  */
-function returnDeleteMenuJSON([columnName, cardTitle]) {
+function returnDeleteMenuJSON([columnName, cardTitle, cardContent]) {
     return {
         "action": MENU_ACTION.DELETE,
         "actionTime": timeToStringFormat(),
         "id": idGenerator.createMenuID(),
         "columnName": columnName,
-        "cardTitle": cardTitle
+        "cardTitle": cardTitle,
+        "cardContent": cardContent,
+        "isRecovered": false
     }
 }
 
@@ -25,11 +27,11 @@ function returnDeleteMenuJSON([columnName, cardTitle]) {
  * @param {String} columnName column name
  * @param {String} cardTitle card title
  */
-function makeDeleteMenuJSON(columnName, cardTitle) {
+function makeDeleteMenuJSON(columnName, cardTitle, cardContent) {
     pipe(
         returnDeleteMenuJSON,
         uploadMenuJSON
-    )([columnName, cardTitle])
+    )([columnName, cardTitle, cardContent])
 }
 
 export { makeDeleteMenuJSON }
