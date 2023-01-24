@@ -631,11 +631,6 @@ header > i {
   transition: 0.45s;
 }
 
-#go-light-mode {
-  color: #BFBFBF;
-  display: none;
-}
-
 body {
   transition: 0.3s;
   background-color: #F5F5F7;
@@ -644,6 +639,19 @@ body {
 body.dark-mode {
   background-color: #3D3D3D;
   color: #fff;
+}
+
+body #go-light-mode {
+  color: #BFBFBF;
+  display: none;
+}
+
+body.dark-mode #go-light-mode {
+  display: block;
+}
+
+body.dark-mode #go-dark-mode {
+  display: none;
 }
 
 body.dark-mode header {
