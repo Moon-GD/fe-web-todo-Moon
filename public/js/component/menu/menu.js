@@ -23,9 +23,9 @@ function menuLogAdd(title, status, emotion="🥳", author="@sam") {
 }
 
 /** 메뉴에 delete log를 남깁니다. */
-function menuLogDelete(title, status, emotion="🥳", author="@sam") {
+function menuLogDelete(title, status, cardContent, emotion="🥳", author="@sam") {
     makeDeleteMenuJSON(status, title)
-    $menuContent.prepend(menuLogDeleteTemplate(title, status, emotion, author));
+    $menuContent.prepend(menuLogDeleteTemplate(title, cardContent, status, emotion, author));
 }
 
 /** 메뉴에 delete all log를 남깁니다. */

@@ -13,6 +13,8 @@ import {
 } from "../component/menu/menuLogTime.js";
 import { statusListOnLocal, cardListOnLocal } from "../store/store.js";
 import { addEvent, pipe } from "../common/commonFunction.js";
+import { idGenerator } from "../common/IDGenerator.js";
+import { eventToUndoBtn } from "../component/button.js";
 
 /** 초기 데이터를 템플릿으로 구성합니다. */
 function initialDataToTemplate() {
@@ -160,17 +162,19 @@ function menuLogAddTemplate(content, status, emotion, author) {
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete) */
-function menuLogDeleteTemplate(content, status, emotion, author) {
+function menuLogDeleteTemplate(cardTitle, cardContent, columnName, emotion, author) {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
-
     $menuFrame.innerHTML = `
         <div class="log-emotion-area">${emotion}</div>
-        <div class="log-content-area">
-            <h4 class="log-author">${author}</h4>
+            <div class="log-content-area">
+            <h4 class="log-author">
+                <span>${author}</span>
+                <i class="fa-solid fa-arrow-rotate-left undo-btn"></i>
+            </h4>
             <h4 class="log-content">
-                <strong>${status}</strong>에서
-                <strong>${content}</strong>
+                <strong>${columnName}</strong>에서
+                <strong>${cardTitle}</strong>
                 을/를 삭제하였습니다.
             </h4>
             <h5 class="log-time" data-time></h5>
@@ -189,7 +193,10 @@ function menuLogDeleteTemplate(content, status, emotion, author) {
         (timeDiff) => $timeNode.textContent = timeDiff
     )(new Date())
 
-    // 시간 노드에 event 추가
+
+    const $undoBtn = $menuFrame.querySelector(".undo-btn");
+    
+    eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author);
     eventToTimeNode($timeNode);
 
     return $menuFrame;
@@ -223,7 +230,6 @@ function menuLogDeleteAllTemplate(emotion, author) {
         (timeDiff) => $timeNode.textContent = timeDiff
     )(new Date())
 
-    // 시간 노드에 event 추가
     eventToTimeNode($timeNode);
 
     return $menuFrame;
@@ -260,7 +266,6 @@ function menuLogMoveTemplate(title, prevColumnName, nextColumnName, emotion, aut
         (timeDiff) => $timeNode.textContent = timeDiff
     )(new Date())
 
-    // 시간 노드에 event 추가
     eventToTimeNode($timeNode);
 
     return $menuFrame;
@@ -296,7 +301,6 @@ function menuLogUpdateTemplate(title, status, emotion, author) {
         (timeDiff) => $timeNode.textContent = timeDiff
     )(new Date())
 
-    // 시간 노드에 event 추가
     eventToTimeNode($timeNode);
 
     return $menuFrame;
@@ -333,7 +337,6 @@ function menuSearchTemplate(searchLog, emotion, author) {
         (timeDiff) => $timeNode.textContent = timeDiff
     )(new Date())
 
-    // 시간 노드에 event 추가
     eventToTimeNode($timeNode);
 
     return $menuFrame;

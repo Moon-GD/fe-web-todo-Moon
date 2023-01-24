@@ -1,10 +1,10 @@
-import { addEvent, changeCSS } from "../common/commonFunction.js";
+import { addChildAfterParent, addEvent, changeCSS } from "../common/commonFunction.js";
 import {
     POSITION, TRANSFORM, FAB_BTN, BTN_MOVDED,
-    MENU_POSITION, DISPLAY 
+    MENU_POSITION, DISPLAY, STATUS 
 } from "../common/commonVariable.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
-import { findCardHeaderName, addColumn } from "./column.js";
+import { findCardHeaderName, addColumn, findColumnStatusByCard } from "./column.js";
 import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu/menu.js";
 import { 
     turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, 
@@ -13,6 +13,10 @@ import {
 import { querySelector } from "../devUtils/querySelector.js";
 import { showSuggestedLog, $searchModal , $searchInput, searchCard } from "../search/search.js";
 import { validateStatus } from "../../../server/column/validation.js";
+import { statusListOnLocal } from "../store/store.js";
+import { cardTemplate } from "../templates/template.js";
+import { idGenerator } from "../common/IDGenerator.js";
+import { addCardJSON } from "../../../server/card/post.js";
 
 const $columnAddInput = querySelector("#column-add-input");
 const $Btns = {
@@ -127,13 +131,28 @@ function eventToMenuBtns() {
 function eventToModalButtons() {
     addEvent($Btns.$modalDelete, [
         () => turnOffModal(),
-        () => menuLogDelete(findCardTitle($chosenCard), findCardHeaderName($chosenCard)),
+        () => menuLogDelete(
+                findCardTitle($chosenCard), findCardHeaderName($chosenCard), $chosenCard.querySelector(".card-content").innerHTML
+            ),
         () => deleteCard($chosenCard)
     ])
 
     addEvent($Btns.$modalCancel, [turnOffModal]);
 }
 
-export {
-    $Btns, eventToFabBtn, eventToMenuBtns, eventToModalButtons
+function eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author) {
+    const columnID = statusListOnLocal.filter((column) => column && column.statusName == columnName)[0][STATUS.ID];
+    
+    if(columnID) {
+        const $undoCard = cardTemplate(cardTitle, cardContent, author, idGenerator.createCardID());
+        const $undoColumn = querySelector(`.column#${columnID}`);
+        const $article = $undoColumn.querySelector("article");
+        addEvent($undoBtn, [
+            () => $article.prepend($undoCard),
+            () => $undoBtn.remove(),
+            () => addCardJSON(findColumnStatusByCard($undoCard), cardTitle, cardContent, $undoCard.id)
+        ]);
+    }
 }
+
+export { $Btns, eventToFabBtn, eventToMenuBtns, eventToModalButtons, eventToUndoBtn }

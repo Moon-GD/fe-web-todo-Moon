@@ -149,7 +149,7 @@ function eventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $prevCa
         () => {
             if(!isUpdated) return;
             $prevCard.style.display = DISPLAY.BLOCK;
-            // json 데이터 복구
+            
             addCardJSON(
                 findColumnStatusByCard($prevCard),
                 findCardTitle($prevCard),

@@ -6,9 +6,9 @@ import { getAllMenuJSON } from "./menu/GET.js";
 async function getAllJSONData() {
     await Promise.all([
         getAllStatusJSONData(),
-        getAllCardJSONData(),
         getAllMenuJSON()
     ])
+    await getAllCardJSONData()
 }
 
 export { getAllJSONData }
