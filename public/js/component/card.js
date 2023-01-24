@@ -1,6 +1,6 @@
     import { 
     CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
-    DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE
+    DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE, STATUS
 } from "../common/commonVariable.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
@@ -12,6 +12,7 @@ import { cardTemplate, newCardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/card/post.js";
 import { isDarkMode } from "../common/darkMode.js";
 import { addEvent, pipe } from "../common/commonFunction.js";
+import { statusListOnLocal } from "../store/store.js";
 
 let $chosenCard = "";
 let registering = false;
@@ -182,11 +183,11 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
     addEvent($cardMakeBtn, [
         () => {
             registering = false;
-            let title = $currentCard.querySelector("input").value;
+            let cardTitle = $currentCard.querySelector("input").value;
             let prevContent = "";
             let updatedContent = $currentCard.querySelector("textarea").value ;
             let $newCard = cardTemplate(
-                title, parseCardContentByNewLine(updatedContent), "", 
+                cardTitle, parseCardContentByNewLine(updatedContent), "", 
                 isUpdated ? $prevCard.getAttribute(CARD_ID) : idGenerator.createCardID()
             );
             let updatedStatus = "";
@@ -200,7 +201,7 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
     
             // 데이터 반영
             let currentStatus = findColumnStatusByCard($newCard);
-            addCardJSON(currentStatus, title, updatedContent, $newCard.getAttribute(CARD_ID));
+            addCardJSON(currentStatus, cardTitle, updatedContent, $newCard.getAttribute(CARD_ID));
     
             // 메뉴 update
             if(isUpdated) {
@@ -211,12 +212,13 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
             }
             // 메뉴 add
             else {
-                menuLogAdd(findCardHeaderName($currentCard), title);
+                menuLogAdd(findCardHeaderName($currentCard), cardTitle);
             }
     
             // 메뉴 update (update 사항이 있는 경우 메뉴 바에 반영)
             if(isUpdated && prevContent != updatedContent) {
-                menuLogUpdate(updatedStatus, title);
+                const columnName = statusListOnLocal[updatedStatus][STATUS.NAME];
+                menuLogUpdate(columnName, cardTitle);
             }
         }
     ])

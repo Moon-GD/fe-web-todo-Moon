@@ -13,6 +13,7 @@ import { makeUpdateMenuJSON } from "../../../../server/menu/action/cardUpdation.
 import { makeMoveMenuJSON } from "../../../../server/menu/action/cardMove.js";
 import { pipe } from "../../common/commonFunction.js";
 import { STATUS } from "../../common/commonVariable.js";
+import { statusListOnLocal } from "../../store/store.js";
 
 const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
@@ -43,9 +44,8 @@ function menuLogMove(prevColumnName, nextColumnName, cardTitle) {
 }
 
 /** 메뉴에 update log를 남깁니다. */
-function menuLogUpdate(status, cardTitle) {
-    makeUpdateMenuJSON(status, cardTitle);
-    const columnName = statusListOnLocal[status][STATUS.NAME];
+function menuLogUpdate(columnName, cardTitle) {
+    makeUpdateMenuJSON(columnName, cardTitle);
     $menuContent.prepend(menuLogUpdateTemplate(columnName, cardTitle));
 }
 

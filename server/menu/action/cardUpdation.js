@@ -10,7 +10,7 @@ import { uploadMenuJSON } from "../post.js";
  * @param {String} cardTitle card title
  * @returns 
  */
-function returnUpdateMenuJSON(columnName, cardTitle) {
+function returnUpdateMenuJSON([columnName, cardTitle]) {
     return {
         "action": MENU_ACTION.UPDATE,
         "actionTime": timeToStringFormat(),
