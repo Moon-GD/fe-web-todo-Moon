@@ -132,7 +132,7 @@ function eventToModalButtons() {
     addEvent($Btns.$modalDelete, [
         () => turnOffModal(),
         () => menuLogDelete(
-                findCardTitle($chosenCard), findCardHeaderName($chosenCard), $chosenCard.querySelector(".card-content").innerHTML
+                findCardHeaderName($chosenCard), findCardTitle($chosenCard), $chosenCard.querySelector(".card-content").innerHTML
             ),
         () => deleteCard($chosenCard)
     ])

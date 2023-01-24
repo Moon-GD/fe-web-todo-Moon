@@ -211,12 +211,12 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
             }
             // 메뉴 add
             else {
-                menuLogAdd(title, findCardHeaderName($currentCard));
+                menuLogAdd(findCardHeaderName($currentCard), title);
             }
     
             // 메뉴 update (update 사항이 있는 경우 메뉴 바에 반영)
             if(isUpdated && prevContent != updatedContent) {
-                menuLogUpdate(title, updatedStatus);   
+                menuLogUpdate(updatedStatus, title);
             }
         }
     ])

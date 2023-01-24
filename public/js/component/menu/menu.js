@@ -1,5 +1,5 @@
 import { querySelector } from "../../devUtils/querySelector.js";
-import { timeStringToArray, getElapsedTime, getElapsedTimeByTimeArray } from "./menuLogTime.js";
+import { timeStringToArray, getElapsedTimeByTimeArray } from "./menuLogTime.js";
 import { 
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, 
     menuSearchTemplate, menuLogDeleteAllTemplate
@@ -18,15 +18,15 @@ const $menuBar = querySelector("#menu");
 const $menuContent = querySelector("#menu-content")
 
 /** 메뉴에 add log를 남깁니다. */
-function menuLogAdd(cardTitle, columnName) {
+function menuLogAdd(columnName, cardTitle) {
     makeCreateMenuJSON(columnName, cardTitle);
     $menuContent.prepend(menuLogAddTemplate(columnName, cardTitle));
 }
 
 /** 메뉴에 delete log를 남깁니다. */
-function menuLogDelete(title, status, cardContent) {
-    makeDeleteMenuJSON(status, title, cardContent)
-    $menuContent.prepend(menuLogDeleteTemplate(status, title, cardContent));
+function menuLogDelete(columnName, cardTitle, cardContent) {
+    makeDeleteMenuJSON(columnName, cardTitle, cardContent)
+    $menuContent.prepend(menuLogDeleteTemplate(columnName, cardTitle, cardContent));
 }
 
 /** 메뉴에 delete all log를 남깁니다. */
@@ -36,17 +36,17 @@ function menuLogDeleteAll() {
 }
 
 /** 메뉴에 move log를 남깁니다. */
-function menuLogMove(cardTitle, prevColumnName, nextColumnName) {
+function menuLogMove(prevColumnName, nextColumnName, cardTitle) {
     if(prevColumnName === nextColumnName) { return; }
     makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle);
     $menuContent.prepend(menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle));
 }
 
 /** 메뉴에 update log를 남깁니다. */
-function menuLogUpdate(title, status) {
-    makeUpdateMenuJSON(status, title);
+function menuLogUpdate(status, cardTitle) {
+    makeUpdateMenuJSON(status, cardTitle);
     const columnName = statusListOnLocal[status][STATUS.NAME];
-    $menuContent.prepend(menuLogUpdateTemplate(columnName, title));
+    $menuContent.prepend(menuLogUpdateTemplate(columnName, cardTitle));
 }
 
 /** 메뉴에 search log를 남깁니다. */

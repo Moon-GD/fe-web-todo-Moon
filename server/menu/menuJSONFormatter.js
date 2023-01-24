@@ -115,11 +115,11 @@ const menuJSONTemplateForMatter = (menuJSON) => {
     const searchInPut = menuJSON[MENU.SEARCH_INPUT];
     const searchFrequency = menuJSON[MENU.ACTION.SEARCH_FREQUENCY];
 
-    if(action == "CREATE") return menuLogAddTemplate(cardTitle, columnName, actionTime);
-    else if(action == "UPDATE") return menuLogUpdateTemplate(cardTitle, columnName, actionTime);
-    else if(action == "MOVE") return menuLogMoveTemplate(cardTitle, prevColumnName, nextColumnName, actionTime);
+    if(action == "CREATE") return menuLogAddTemplate(columnName, cardTitle, actionTime);
+    else if(action == "UPDATE") return menuLogUpdateTemplate(columnName, cardTitle, actionTime);
+    else if(action == "MOVE") return menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTime);
     else if(action == "DELETE_ALL") return menuLogDeleteAllTemplate(actionTime);
-    else if(action == "DELETE") return menuLogDeleteTemplate(cardTitle, cardContent, columnName, actionTime);
+    else if(action == "DELETE") return menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTime);
     else if(action == "SEARCH") return menuSearchTemplate(searchInPut, searchFrequency, actionTime);
 }
 

@@ -30,7 +30,7 @@ function eventToCard($card) {
             () => dragEndStatus = findColumnStatusByCard($card),
             () => [statusListOnLocal[dragStartStatus][STATUS.NAME], statusListOnLocal[dragEndStatus][STATUS.NAME]],
             ([prevColumnName, nextColumnName]) => {
-                menuLogMove(findCardTitle($card), prevColumnName, nextColumnName);
+                menuLogMove(prevColumnName, nextColumnName, findCardTitle($card));
                 moveJSONData(dragStartStatus, dragEndStatus, $card.getAttribute(CARD_ID));
                 makeLightNode();
             }
