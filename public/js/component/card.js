@@ -1,6 +1,6 @@
 import { 
     CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
-    DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE, STATUS
+    DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE, STATUS, FETCH_URL, METHOD, HEADER
 } from "../common/commonVariable.js";
 import { addEvent, pipe } from "../common/commonFunction.js";
 import { isDarkMode } from "../common/darkMode.js";
@@ -58,7 +58,7 @@ function findCardByTitle(title) {
  * 카드를 삭제합니다.
  * @param {Node} $card 카드 객체
  */
-function deleteCard($card) {
+async function deleteCard($card) {
     const cardID = $card.getAttribute(CARD_ID);
     const status = findColumnStatusByCard($card);
     $card.remove();

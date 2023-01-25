@@ -1,5 +1,5 @@
 import { pipe } from "../common/commonFunction.js";
-import { SEARCH_CARD, ONE_SECOND, SEARCH_CARD_DARK_MODE, NOT_FOUND } from "../common/commonVariable.js";
+import { SEARCH_CARD, SEARCH_CARD_DARK_MODE, NOT_FOUND } from "../common/commonVariable.js";
 import { isDarkMode } from "../common/darkMode.js";
 import { findCardTitle } from "../component/card.js";
 import { menuLogSearch } from "../component/menu/menu.js";
@@ -25,17 +25,15 @@ const getCardArrayByTitle = (title) => pipe(
  */
 const changeCardColorTemporary = ($cardList) => {
     $cardList.forEach(($card) => {
-        console.log($card);
         isDarkMode() ?
                 $card.style.outline = SEARCH_CARD_DARK_MODE.OUTLINE:
                 $card.style.outline = SEARCH_CARD.OUTLINE;
-        
+              
         setTimeout(() => {
-            $card.style.transition = ONE_SECOND;
             isDarkMode() ?
                     $card.style.outline = SEARCH_CARD_DARK_MODE.ORIGINAL:
                     $card.style.outline = SEARCH_CARD.ORIGINAL;
-        }, ONE_SECOND);
+        }, 1000);
     })
 }
 
