@@ -6,7 +6,7 @@ import { uploadMenuJSON } from "../post.js";
 
 /**
  * card 생성 menu json을 반환합니다.
- * @param {string} columnName 
+ * @param {string} columnName
  * @param {string} cardTitle
  * @returns {Object} menu JSON (create)
  */

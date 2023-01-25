@@ -1,7 +1,7 @@
 import { MENU } from "../../public/js/common/commonVariable.js"
-import { 
-    menuLogAddTemplate, menuLogDeleteAllTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, 
-    menuLogUpdateTemplate, menuSearchTemplate 
+import {
+    menuLogAddTemplate, menuLogDeleteAllTemplate, menuLogDeleteTemplate, menuLogMoveTemplate,
+    menuLogUpdateTemplate, menuSearchTemplate
 } from "../../public/js/templates/template.js"
 
 /**
@@ -11,11 +11,11 @@ import {
  */
 function getCreateMenuJSON(menuJSON) {
     return {
-        "action":menuJSON[MENU.ACTION],
-        "actionTime":menuJSON[MENU.ACTION_TIME],
-        "id":menuJSON[MENU.ID],
-        "columnName":menuJSON[MENU.COLUMN_NAME],
-        "cardTitle":menuJSON[MENU.CARD_TITLE]
+        "action": menuJSON[MENU.ACTION],
+        "actionTime": menuJSON[MENU.ACTION_TIME],
+        "id": menuJSON[MENU.ID],
+        "columnName": menuJSON[MENU.COLUMN_NAME],
+        "cardTitle": menuJSON[MENU.CARD_TITLE]
     };
 }
 
@@ -26,28 +26,28 @@ function getCreateMenuJSON(menuJSON) {
  */
 function getUpdateMenuJSON(menuJSON) {
     return {
-        "action":menuJSON[MENU.ACTION],
-        "actionTime":menuJSON[MENU.ACTION_TIME],
-        "id":menuJSON[MENU.ID],
-        "columnName":menuJSON[MENU.COLUMN_NAME],
-        "cardTitle":menuJSON[MENU.CARD_TITLE]
+        "action": menuJSON[MENU.ACTION],
+        "actionTime": menuJSON[MENU.ACTION_TIME],
+        "id": menuJSON[MENU.ID],
+        "columnName": menuJSON[MENU.COLUMN_NAME],
+        "cardTitle": menuJSON[MENU.CARD_TITLE]
     };
 }
 
 /**
  * menu JSON 객체를 반환합니다. (delete)
- * @param {*} menuJSON 
- * @returns 
+ * @param {*} menuJSON
+ * @returns
  */
 function getDeleteMenuJSON(menuJSON) {
     return {
-        "action":menuJSON[MENU.ACTION],
-        "actionTime":menuJSON[MENU.ACTION_TIME],
-        "id":menuJSON[MENU.ID],
-        "columnName":menuJSON[MENU.COLUMN_NAME],
-        "cardTitle":menuJSON[MENU.CARD_TITLE],
+        "action": menuJSON[MENU.ACTION],
+        "actionTime": menuJSON[MENU.ACTION_TIME],
+        "id": menuJSON[MENU.ID],
+        "columnName": menuJSON[MENU.COLUMN_NAME],
+        "cardTitle": menuJSON[MENU.CARD_TITLE],
         "cardContent": menuJSON[MENU.CARD_CONTENT],
-        "isRecovered":menuJSON[MENU.IS_RECOVERED]
+        "isRecovered": menuJSON[MENU.IS_RECOVERED]
     };
 }
 
@@ -59,8 +59,8 @@ function getDeleteMenuJSON(menuJSON) {
 function getDeleteAllMenuJSON(menuJSON) {
     return {
         "action": menuJSON[MENU.ACTION],
-        "actionTime":menuJSON[MENU.ACTION_TIME],
-        "id":menuJSON[MENU.ID]
+        "actionTime": menuJSON[MENU.ACTION_TIME],
+        "id": menuJSON[MENU.ID]
     };
 }
 
@@ -117,12 +117,12 @@ const menuJSONTemplateForMatter = (menuJSON) => {
     const searchFrequency = menuJSON[MENU.ACTION.SEARCH_FREQUENCY];
     const isRecovered = menuJSON[MENU.IS_RECOVERED];
 
-    if(action == "CREATE") return menuLogAddTemplate(columnName, cardTitle, actionTime);
-    else if(action == "UPDATE") return menuLogUpdateTemplate(columnName, cardTitle, actionTime);
-    else if(action == "MOVE") return menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTime);
-    else if(action == "DELETE_ALL") return menuLogDeleteAllTemplate(actionTime);
-    else if(action == "DELETE") return menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTime, isRecovered);
-    else if(action == "SEARCH") return menuSearchTemplate(searchInPut, searchFrequency, actionTime);
+    if (action == "CREATE") return menuLogAddTemplate(columnName, cardTitle, actionTime);
+    else if (action == "UPDATE") return menuLogUpdateTemplate(columnName, cardTitle, actionTime);
+    else if (action == "MOVE") return menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTime);
+    else if (action == "DELETE_ALL") return menuLogDeleteAllTemplate(actionTime);
+    else if (action == "DELETE") return menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTime, isRecovered);
+    else if (action == "SEARCH") return menuSearchTemplate(searchInPut, searchFrequency, actionTime);
 }
 
 export { menuJSONFormatter, menuJSONTemplateForMatter }

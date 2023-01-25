@@ -1,4 +1,4 @@
-import { 
+import {
     CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
     DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE, STATUS, FETCH_URL, METHOD, HEADER
 } from "../common/commonVariable.js";
@@ -47,10 +47,10 @@ const findCardContent = ($card) => $card.querySelector(".card-content").innerHTM
 function findCardByTitle(title) {
     const cardArray = document.querySelectorAll(".card-frame");
 
-    for(let $card of cardArray) {
-        if(findCardTitle($card) == title) return $card;
+    for (let $card of cardArray) {
+        if (findCardTitle($card) == title) return $card;
     }
-    
+
     return null;
 }
 
@@ -82,10 +82,10 @@ function deleteAllCards() {
 function eventToNewCardBtn($cardRegisterBtn, $currentColumn) {
     addEvent($cardRegisterBtn, [
         () => {
-            registering ? 
-                    $currentColumn.children[0].remove() :    
-                    $currentColumn.prepend(newCardTemplate());
-    
+            registering ?
+                $currentColumn.children[0].remove() :
+                $currentColumn.prepend(newCardTemplate());
+
             registering != registering;
         }
     ])
@@ -99,12 +99,11 @@ function pullUpCard($card) {
     $card.style.transition = HALF_SECOND;
     $card.style.marginTop = "-0.5vh";
     $card.style.marginBottom = "1.5vh";
-    
-    if(isDarkMode()) {
+
+    if (isDarkMode()) {
         $card.style.outline = CARD_DARK_MODE.OUTLINE_HOVER;
         $card.style.backgroundColor = CARD_DARK_MODE.BACKGROUND_HOVER;
-    }
-    else {
+    } else {
         $card.style.outline = CARD.OUTLINE_HOVER;
         $card.style.backgroundColor = CARD.BACKGROUND_HOVER;
     }
@@ -121,11 +120,10 @@ function pullDownCard($card, $cardDeleteBtn) {
     $cardDeleteBtn.style.color = CARD_BTN.ORIGINAL;
     $cardDeleteBtn.style.color = CARD_DELETE_BTN_ORIGINAL;
 
-    if(isDarkMode() ) {
+    if (isDarkMode()) {
         $card.style.outline = CARD_DARK_MODE.OUTLINE_ORIGINAL;
         $card.style.backgroundColor = CARD_DARK_MODE.BACKGROUND_ORIGINAL;
-    }
-    else {
+    } else {
         $card.style.outline = CARD.OUTLINE_ORIGINAL;
         $card.style.backgroundColor = CARD.BACKGROUND_ORIGINAL;
     }
@@ -137,7 +135,7 @@ function pullDownCard($card, $cardDeleteBtn) {
  * @param {Node} $deletedCard 삭제할 카드 객체
  */
 function eventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
-    addEvent($cardDeleteBtn,[
+    addEvent($cardDeleteBtn, [
         () => setCardToBeDeleted($deletedCard),
         () => turnOnModal()
     ]);
@@ -153,7 +151,7 @@ function eventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
 
 /** 카드 생성 취소 버튼에 이벤트를 등록합니다. */
 /**
- * 
+ *
  * @param {Node} $registerCancelBtn 카드 등록 취소 버튼 객체
  * @param {Node} $cardRegisterForm 카드 등록 폼 객체
  * @param {Node} $prevCard update 이전의 원본 카드 객체
@@ -162,9 +160,9 @@ function eventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
 function eventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $prevCard, isUpdated) {
     addEvent($registerCancelBtn, [
         () => {
-            if(!isUpdated) return;
+            if (!isUpdated) return;
             $prevCard.style.display = DISPLAY.BLOCK;
-            
+
             addCardJSON(
                 findColumnStatusByCard($prevCard),
                 findCardTitle($prevCard),
@@ -184,26 +182,26 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
             registering = false;
             let cardTitle = $currentCard.querySelector("input").value;
             let prevContent = "";
-            let updatedContent = $currentCard.querySelector("textarea").value ;
+            let updatedContent = $currentCard.querySelector("textarea").value;
             let $newCard = cardTemplate(
-                cardTitle, parseCardContentByNewLine(updatedContent), "", 
+                cardTitle, parseCardContentByNewLine(updatedContent), "",
                 isUpdated ? $prevCard.getAttribute(CARD_ID) : idGenerator.createCardID()
             );
             let updatedStatus = "";
-    
+
             // drag 이벤트 추가
             eventToCard($newCard);
-    
+
             // 카드 배치 후 카드 등록 폼 제거
             $currentCard.after($newCard);
             $currentCard.style.display = DISPLAY.NONE;
-    
+
             // 데이터 반영
             let currentStatus = findColumnStatusByCard($newCard);
             addCardJSON(currentStatus, cardTitle, updatedContent, $newCard.getAttribute(CARD_ID));
-    
+
             // 메뉴 update
-            if(isUpdated) {
+            if (isUpdated) {
                 updatedStatus = findColumnStatusByCard($prevCard);
                 $prevCard.remove();
                 $currentCard.remove();
@@ -213,9 +211,9 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
             else {
                 menuLogAdd(findCardHeaderName($currentCard), cardTitle);
             }
-    
+
             // 메뉴 update (update 사항이 있는 경우 메뉴 바에 반영)
-            if(isUpdated && prevContent != updatedContent) {
+            if (isUpdated && prevContent != updatedContent) {
                 const columnName = statusListOnLocal[updatedStatus][STATUS.NAME];
                 menuLogUpdate(columnName, cardTitle);
             }
@@ -224,7 +222,7 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
 }
 
 /** 카드에 더블 클릭 이벤트를 등록합니다. */
-const doubleClickEventToCard = ($card) => 
+const doubleClickEventToCard = ($card) =>
     addEvent($card, [() => changeCardToRegisterForm($card)], EVENT.DOUBLE_CLICK)
 
 /**
@@ -247,12 +245,12 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
 
     addEvent($cardRegisterInput, [
         () => {
-            if(scrollHeight < $cardRegisterInput.scrollHeight) {
+            if (scrollHeight < $cardRegisterInput.scrollHeight) {
                 $cardRegisterForm.style.height ?
-                    $cardRegisterForm.style.height = parseInt($cardRegisterForm.style.height) + CARD.TEXT_HEIGTH + "vh":
+                    $cardRegisterForm.style.height = parseInt($cardRegisterForm.style.height) + CARD.TEXT_HEIGTH + "vh" :
                     $cardRegisterForm.style.height = CARD.HEIGHT + CARD.TEXT_HEIGTH + "vh";
-             }
-            
+            }
+
             scrollHeight = $cardRegisterInput.scrollHeight;
         }
     ], EVENT.INPUT)
@@ -268,8 +266,8 @@ const parseCardContentByNewLine = (cardContent) => pipe(
     (cardContentArray) => cardContentArray.join("<br>")
 )(cardContent);
 
-export { 
-    eventToNewCardBtn, eventToCardDeleteBtn, 
+export {
+    eventToNewCardBtn, eventToCardDeleteBtn,
     eventToMakeCardCancelBtn, eventToMakeNewCardBtn, resizeCardByInputBox, findCardByTitle,
     doubleClickEventToCard, deleteCard, findCardTitle, deleteAllCards, $chosenCard, parseCardContentByNewLine
- }
+}

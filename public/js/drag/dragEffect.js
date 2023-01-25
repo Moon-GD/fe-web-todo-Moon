@@ -10,7 +10,7 @@ const getDragCardNode = () => querySelector("#" + dragIDManager.getCurrentCardID
  * @param {Node} $card 카드 객체
  * @returns {Node} 카드 객체
  */
-const makeCardLight = ($card) => { 
+const makeCardLight = ($card) => {
     $card.style.opacity = 1;
     return $card;
 }
@@ -21,7 +21,7 @@ const makeCardLight = ($card) => {
  * @returns {Node} 카드 객체
  */
 const makeCardDark = ($card) => {
-    $card.style.opacity = 0.5;  
+    $card.style.opacity = 0.5;
     return $card;
 }
 

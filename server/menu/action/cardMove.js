@@ -9,7 +9,7 @@ import { uploadMenuJSON } from "../post.js";
  * @param {String} prevColumnName 이전 column name
  * @param {String} nextColumnName 다음 column name
  * @param {String} cardTitle card title
- * @returns 
+ * @returns
  */
 function retureMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
     return {

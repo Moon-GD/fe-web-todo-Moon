@@ -1,18 +1,18 @@
 import { addEvent, changeCSS } from "../common/commonFunction.js";
 import {
     POSITION, TRANSFORM, FAB_BTN, BTN_MOVDED,
-    MENU_POSITION, DISPLAY, STATUS, MENU_ACTION 
+    MENU_POSITION, DISPLAY, STATUS, MENU_ACTION
 } from "../common/commonVariable.js";
 import { idGenerator } from "../common/IDGenerator.js";
 import { $menuBar, menuLogDelete, menuLogTimeUpdate } from "./menu/menu.js";
 import { deleteAllCards, findCardTitle, deleteCard, $chosenCard } from "./card.js";
 import { findCardHeaderName, addColumn, findColumnStatusByCard } from "./column.js";
-import { 
-    turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal, 
+import {
+    turnOnCardClearModal, turnOffCardClearModal, turnOnColumnAddModal,
     turnOffModal, turnOffColumnAddModal, turnOffSearchModal, showWarningModal
 } from "./modal.js";
 import { querySelector } from "../devUtils/querySelector.js";
-import { showSuggestedLog, $searchModal , $searchInput, searchCard } from "../search/search.js";
+import { showSuggestedLog, $searchModal, $searchInput, searchCard } from "../search/search.js";
 import { menuListOnLocal, statusListOnLocal } from "../store/store.js";
 import { cardTemplate } from "../templates/template.js";
 import { addCardJSON } from "../../../server/card/post.js";
@@ -22,7 +22,7 @@ import { uploadRecoverInfoOnServer } from "../../../server/menu/patch.js";
 const $columnAddInput = querySelector("#column-add-input");
 const $Btns = {
     // 검색 관련 버튼
-    $searchCancel: querySelector("#search-cancel-btn"), 
+    $searchCancel: querySelector("#search-cancel-btn"),
     $searchAccept: querySelector("#search-accept-btn"),
 
     // column 생성 관련 버튼
@@ -64,7 +64,7 @@ function eventToSearchBtn() {
         () => changeCSS($searchModal, "display", DISPLAY.FLEX),
         () => showSuggestedLog()
     ]);
-    
+
     addEvent($Btns.$searchCancel, [turnOffSearchModal]);
     addEvent($Btns.$searchAccept, [
         () => turnOffSearchModal(),
@@ -79,11 +79,10 @@ function eventToColumnAddBtn() {
     addEvent($Btns.$columnAddCancel, [turnOffColumnAddModal])
     addEvent($Btns.$columnAddAccept, [
         () => {
-            if(validateStatus($columnAddInput.value)) {
+            if (validateStatus($columnAddInput.value)) {
                 addColumn($columnAddInput.value);
                 turnOffColumnAddModal();
-            }
-            else {
+            } else {
                 $columnAddInput.value = "";
                 showWarningModal();
             }
@@ -92,13 +91,12 @@ function eventToColumnAddBtn() {
 }
 
 function toggleFabBtn() {
-    if($Btns.$goColumnAddModal.style.bottom == BTN_MOVDED.COLUMN_ADD) {
+    if ($Btns.$goColumnAddModal.style.bottom == BTN_MOVDED.COLUMN_ADD) {
         changeCSS($Btns.$fab, TRANSFORM, FAB_BTN.DEGREE_ORIGINAL);
         changeCSS($Btns.$goClear, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL);
         changeCSS($Btns.$goColumnAddModal, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL);
-        changeCSS($Btns.$goSearchModal, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL );
-    }
-    else {
+        changeCSS($Btns.$goSearchModal, POSITION.BOTTOM, FAB_BTN.BOTTOM_ORIGINAL);
+    } else {
         changeCSS($Btns.$fab, TRANSFORM, FAB_BTN.DEGREE_MOVED);
         changeCSS($Btns.$goClear, POSITION.BOTTOM, BTN_MOVDED.CARD_CLEAR);
         changeCSS($Btns.$goSearchModal, POSITION.BOTTOM, BTN_MOVDED.SEARCH);
@@ -130,8 +128,8 @@ function eventToModalButtons() {
     addEvent($Btns.$modalDelete, [
         () => turnOffModal(),
         () => menuLogDelete(
-                findCardHeaderName($chosenCard), findCardTitle($chosenCard), $chosenCard.querySelector(".card-content").innerHTML
-            ),
+            findCardHeaderName($chosenCard), findCardTitle($chosenCard), $chosenCard.querySelector(".card-content").innerHTML
+        ),
         () => deleteCard($chosenCard)
     ])
     addEvent($Btns.$modalCancel, [turnOffModal]);
@@ -139,8 +137,8 @@ function eventToModalButtons() {
 
 function eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author) {
     const columnID = statusListOnLocal.filter((column) => column && column.statusName == columnName)[0][STATUS.ID];
-    
-    if(columnID) {
+
+    if (columnID) {
         const $undoCard = cardTemplate(cardTitle, cardContent, author, idGenerator.createCardID());
         const $undoColumn = querySelector(`.column#${columnID}`);
         const $article = $undoColumn.querySelector("article");
@@ -148,10 +146,10 @@ function eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author) {
             () => $article.prepend($undoCard),
             () => $undoBtn.remove(),
             () => addCardJSON(findColumnStatusByCard($undoCard), cardTitle, cardContent, $undoCard.id),
-            () => { 
-                for(let menuJSON of menuListOnLocal) {
-                    if(menuJSON["action"] !== MENU_ACTION.DELETE) continue;
-                    if(menuJSON["cardTitle"] === cardTitle && menuJSON["cardContent"] === cardContent) {
+            () => {
+                for (let menuJSON of menuListOnLocal) {
+                    if (menuJSON["action"] !== MENU_ACTION.DELETE) continue;
+                    if (menuJSON["cardTitle"] === cardTitle && menuJSON["cardContent"] === cardContent) {
                         const menuID = menuJSON["id"];
                         uploadRecoverInfoOnServer(menuID);
                     }

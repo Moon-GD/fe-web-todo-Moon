@@ -46,7 +46,7 @@ function addColumn(columnName) {
 
 /**
  * 카드가 속한 column의 header 이름을 반환합니다.
- * @param {Node} $card 
+ * @param {Node} $card
  * @returns {String} column 이름
  */
 const findCardHeaderName = ($card) => pipe(
@@ -64,8 +64,8 @@ function updateColumnLength(status) {
     pipe(
         () => statusListOnLocal.filter((statusJSON) => statusJSON[STATUS.ID] === status)[0][STATUS.NAME],
         (statusName) => {
-            for(const $column of $columnList) {
-                if($column.querySelector("span").innerHTML === statusName) {
+            for (const $column of $columnList) {
+                if ($column.querySelector("span").innerHTML === statusName) {
                     return $column.querySelector(".column-length");
                 }
             }
@@ -108,7 +108,7 @@ function headerDoubleClickEvent($header) {
  * column header 이름을 수정합니다.
  * @param {Node} $header header 객체
  * @param {String} newTitle 새로운 header 이름
- * @returns 
+ * @returns
  */
 const changeHeaderName = ($header, newTitle) => $header.querySelector("span").innerHTML = newTitle;
 
@@ -122,19 +122,18 @@ function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
     addEvent($headerInput, [
         () => {
             const newTitle = $headerInput.value;
-        
-            if(validateNewStatusName(originalTitle, newTitle)) {
+
+            if (validateNewStatusName(originalTitle, newTitle)) {
                 changeHeaderName($originalHeader, newTitle);
                 $originalHeader.style.display = DISPLAY.FLEX;
 
                 updateStatusName(originalTitle, newTitle);
                 $headerInput.parentElement.remove();
-            }
-            else {
+            } else {
                 showWarningModal();
                 $headerInput.value = "";
-                
-                setTimeout(()=>{
+
+                setTimeout(() => {
                     $headerInput.focus();
                 })
 
@@ -163,9 +162,9 @@ const getCardOrderByColumn = ($column) => pipe(
     ($cardArray) => $cardArray.map(($card) => $card.getAttribute(CARD_ID))
 )()
 
-export { 
+export {
     $mainTag,
-    columnDeleteEvent, findColumnStatusByCard, addColumn, 
+    columnDeleteEvent, findColumnStatusByCard, addColumn,
     findCardHeaderName, updateColumnLength,
     headerDoubleClickEvent, inputFocusOutEvent,
     getColumnNodeByStatus, getCardOrderByColumn

@@ -5,7 +5,7 @@ import { menuListOnLocal } from "../../public/js/store/store.js";
  * menu JSON을 server에 생성합니다.
  * @param {Object} menuJSON menu JSON
  */
-function uploadMenuJSONOnServer(menuJSON, method=METHOD.POST, headers=HEADER.POST) {
+function uploadMenuJSONOnServer(menuJSON, method = METHOD.POST, headers = HEADER.POST) {
     fetch(FETCH_URL.MENU, {
         method,
         headers,

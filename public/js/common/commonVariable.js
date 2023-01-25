@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:3000"
 
 // fetch url
 const FETCH_URL = {
-    CARD: BASE_URL + "/cardList", 
+    CARD: BASE_URL + "/cardList",
     STATUS: BASE_URL + "/statusList",
     MENU: BASE_URL + "/menuList"
 }
@@ -17,8 +17,8 @@ const METHOD = {
 
 // fetch header
 const HEADER = {
-    PATCH: { "Content-Type": "application/json" },
-    POST: { "Content-Type": "application/json" }
+    PATCH: {"Content-Type": "application/json"},
+    POST: {"Content-Type": "application/json"}
 }
 
 // fetch json key
@@ -175,7 +175,7 @@ export {
 
     // column status
     COLUMN_STATUS,
-    
+
     // json menu key
     MENU,
 
@@ -210,7 +210,7 @@ export {
     DISPLAY,
 
     // js event option - mouse
-    EVENT, 
+    EVENT,
 
     // 사이드바 log 시간 변수
     LOG_TIME,

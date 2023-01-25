@@ -10,7 +10,7 @@ const [$modalSection, $columnAddModal, $cardClearModal, $warningModal]
 const turnOnModal = () => $modalSection.style.display = DISPLAY.FLEX;
 
 /** 카드 삭제 관련 모달을 숨겨줍니다. */
-const turnOffModal = () => $modalSection.style.display = DISPLAY.NONE; 
+const turnOffModal = () => $modalSection.style.display = DISPLAY.NONE;
 
 /** column 추가 관련 모달을 띄워줍니다. */
 const turnOnColumnAddModal = () => $columnAddModal.style.display = DISPLAY.FLEX;
@@ -33,7 +33,7 @@ function showWarningModal() {
     setTimeout(() => $warningModal.style.display = DISPLAY.NONE, ONE_SECOND)
 }
 
-export { 
+export {
     turnOnModal, turnOnColumnAddModal, turnOffSearchModal,
     turnOnCardClearModal, turnOffCardClearModal, turnOffModal, turnOffColumnAddModal, showWarningModal
- }
+}

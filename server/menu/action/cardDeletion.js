@@ -1,14 +1,14 @@
 import { pipe } from "../../../public/js/common/commonFunction.js";
-import { MENU_ACTION} from "../../../public/js/common/commonVariable.js";
+import { MENU_ACTION } from "../../../public/js/common/commonVariable.js";
 import { idGenerator } from "../../../public/js/common/IDGenerator.js";
 import { timeToStringFormat } from "../../../public/js/component/menu/menuLogTime.js";
 import { uploadMenuJSON } from "../post.js";
 
 /**
  * card 삭제 menu json을 반환합니다.
- * @param {String} columnName 
- * @param {String} cardTitle 
- * @returns 
+ * @param {String} columnName
+ * @param {String} cardTitle
+ * @returns
  */
 function returnDeleteMenuJSON([columnName, cardTitle, cardContent]) {
     return {

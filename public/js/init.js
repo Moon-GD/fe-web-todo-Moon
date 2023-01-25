@@ -13,9 +13,9 @@ function addEventsToWebsite() {
     initialDataToTemplate();
 }
 
-( async () => {
+(async () => {
     await getAllJSONData();
-    
+
     // 사이트에 이벤트를 추가합니다
     addEventsToWebsite();
 })();

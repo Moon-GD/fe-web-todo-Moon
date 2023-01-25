@@ -3,7 +3,7 @@ import { statusListOnLocal, cardListOnLocal } from "../../public/js/store/store.
 
 /**
  * 서버의 menu JSON을 분류하여 local에 저장합니다.
- * @param {Array} statusJSONList 
+ * @param {Array} statusJSONList
  */
 function classifyStatusJSONList(statusJSONList) {
     statusJSONList.forEach((statusJSON) => {
@@ -12,12 +12,12 @@ function classifyStatusJSONList(statusJSONList) {
         const statusID = statusJSON[STATUS.ID];
         const cardOrderList = statusJSON[CARD_ORDER];
         statusListOnLocal[statusIndex] = {
-            id:statusID,
+            id: statusID,
             statusIndex,
             statusName,
             order: cardOrderList
         }
-        
+
         cardListOnLocal[statusIndex] = [];
     })
 }
@@ -26,9 +26,11 @@ function classifyStatusJSONList(statusJSONList) {
  * column JSON 데이터를 서버에서 불러옵니다.
  */
 async function getAllStatusJSONData() {
-    await fetch(FETCH_URL.STATUS, { method: METHOD.GET })
-    .then((res) => res.json())
-    .then((data) => { classifyStatusJSONList(data); } )
+    await fetch(FETCH_URL.STATUS, {method: METHOD.GET})
+        .then((res) => res.json())
+        .then((data) => {
+            classifyStatusJSONList(data);
+        })
 }
 
 export { classifyStatusJSONList, getAllStatusJSONData }

@@ -1,18 +1,18 @@
 import { FETCH_URL, METHOD, HEADER } from "../../public/js/common/commonVariable.js";
 import { cardListOnLocal, statusListOnLocal } from "../../public/js/store/store.js";
 
-/** 로컬에 status를 추가합니다. 
+/** 로컬에 status를 추가합니다.
  * @param {string} newColumnID column ID
  * @param {Object} newStatusJSON column json
-*/
+ */
 function addStatusOnLocal(newStatusID, newStatusJSON) {
     cardListOnLocal[newStatusID] = [];
     statusListOnLocal[newStatusID] = newStatusJSON;
 }
 
-/** 서버에 status를 추가합니다. 
+/** 서버에 status를 추가합니다.
  * @param {Object} newStatusJSON column json
-*/
+ */
 function addStatusOnServer(newStatusJSON) {
     fetch(FETCH_URL.STATUS, {
         method: METHOD.POST,
@@ -30,7 +30,7 @@ function addStatus(statusName, newStatusID) {
         id: newStatusID,
         statusIndex: newStatusID,
         statusName,
-        order:[]
+        order: []
     };
 
     addStatusOnLocal(newStatusID, newStatusJSON);

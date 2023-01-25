@@ -35,18 +35,18 @@ const timeStringToArray = (timeString) => pipe(
 
 /**
  * 시간 배열을 기준으로 현재 시간과의 차이를 반환합니다.
- * @param {Array} timeArray 
+ * @param {Array} timeArray
  * @returns {String} "방금" || "1분 전" || "2시간 전" || "3일 전" || "4달 전"
  */
 const getElapsedTimeByTimeArray = (timeArray) => pipe(
     ([month, day, hour, minute]) => {
-        if(timeArray[LOG_TIME.MONTH] != month) 
+        if (timeArray[LOG_TIME.MONTH] != month)
             return `${month - timeArray[LOG_TIME.MONTH]}달 전`;
-        else if(timeArray[LOG_TIME.DATE] != day) 
+        else if (timeArray[LOG_TIME.DATE] != day)
             return `${day - timeArray[LOG_TIME.DATE]}일 전`;
-        else if(timeArray[LOG_TIME.HOUR] != hour) 
-            return `${hour - timeArray[LOG_TIME.HOUR]}시간 전`; 
-        else if(timeArray[LOG_TIME.MINUTE] != minute) 
+        else if (timeArray[LOG_TIME.HOUR] != hour)
+            return `${hour - timeArray[LOG_TIME.HOUR]}시간 전`;
+        else if (timeArray[LOG_TIME.MINUTE] != minute)
             return `${minute - timeArray[LOG_TIME.MINUTE]}분 전`;
         else return '방금';
     }
@@ -57,7 +57,7 @@ const getElapsedTimeByTimeArray = (timeArray) => pipe(
  * @param {Node} $target 타겟 객체
  * @param {String} timeString "1월 2일 3시 4분"
  */
-const saveTimeStringOnTimeNode = ($target, timeString) => $target.setAttribute("data-time", timeString); 
+const saveTimeStringOnTimeNode = ($target, timeString) => $target.setAttribute("data-time", timeString);
 
 /**
  * 타깃 객체에 현재 시간과의 차이를 기록합니다.
@@ -78,12 +78,12 @@ const recordElapsedTimeOnTarget = ($target) => pipe(
  */
 function eventToTimeNode($target) {
     const timeNodeContent = $target.textContent;
-    
+
     addEvent($target, [() => $target.textContent = $target.dataset.time], EVENT.MOUSE_OVER);
     addEvent($target, [() => $target.textContent = timeNodeContent], EVENT.MOUSE_LEAVE);
 }
 
-export { 
+export {
     timeToStringFormat, timeStringToArray, getElapsedTimeByTimeArray,
     recordElapsedTimeOnTarget, saveTimeStringOnTimeNode, eventToTimeNode
 }
