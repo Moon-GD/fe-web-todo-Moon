@@ -4,7 +4,7 @@ import { multiQuerySelector } from "../devUtils/querySelector.js";
 import { $searchModal } from "../search/search.js";
 
 const [$modalSection, $columnAddModal, $cardClearModal, $warningModal]
-    = multiQuerySelector(["#modal-section, #column-add-modal-section, #clear-modal-section, #warning-modal"]);
+    = multiQuerySelector(["#modal-section", "#column-add-modal-section", "#clear-modal-section", "#warning-modal"]);
 
 /** 카드 삭제 관련 모달을 띄워줍니다. */
 const turnOnModal = () => $modalSection.style.display = DISPLAY.FLEX;

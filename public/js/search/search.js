@@ -25,6 +25,7 @@ const getCardArrayByTitle = (title) => pipe(
  */
 const changeCardColorTemporary = ($cardList) => {
     $cardList.forEach(($card) => {
+        console.log($card);
         isDarkMode() ?
                 $card.style.outline = SEARCH_CARD_DARK_MODE.OUTLINE:
                 $card.style.outline = SEARCH_CARD.OUTLINE;
