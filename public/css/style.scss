@@ -68,7 +68,7 @@ section {
       padding: 0.3vw 0.7vw;
     }
 
-    > .column-btn-area {
+    > .column-button-area {
       position: absolute;
       right: 1vw;
 
@@ -89,11 +89,11 @@ section {
   }
 }
 
-.column-delete-btn:hover {
+.column-delete-button:hover {
   color: #FF4D4D;
 }
 
-#fab-btn, #go-column-add-modal-btn, #go-search-btn, #go-card-clear-btn {
+#fab-button, #go-column-add-modal-button, #go-search-button, #go-card-clear-button {
   border: none;
   border-radius: 50%;
   bottom: 5%;
@@ -199,7 +199,7 @@ section {
     }
   }
 
-  > button#new-card-cancel-btn {
+  > button#new-card-cancel-button {
     background-color: #e0e0e0;
     color: #828282;
 
@@ -214,7 +214,7 @@ section {
     }
   }
 
-  > button#new-card-register-btn {
+  > button#new-card-register-button {
     background-color: #0075de;
     color: #fff;
 
@@ -391,7 +391,7 @@ header {
   opacity: 1;
 }
 
-#modal-btn-area {
+#modal-button-area {
   margin-left: 6vw;
 
   > button {
@@ -401,7 +401,7 @@ header {
     height: 3vh;
     width: 6vw;
 
-    &#card-cancel-btn {
+    &#card-cancel-button {
       background-color: #E0E0E0;
       color: #B1B1B1;
 
@@ -412,7 +412,7 @@ header {
       }
     }
 
-    &#card-delete-btn {
+    &#card-delete-button {
       background-color: #0175DE;
       color: #fff;
 
@@ -443,7 +443,7 @@ header {
   }
 }
 
-#column-add-modal-btn-area {
+#column-add-modal-button-area {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
@@ -457,7 +457,7 @@ header {
   }
 }
 
-#column-add-cancel-btn {
+#column-add-cancel-button {
   background-color: #E0E0E0;
   color: #B1B1B1;
 
@@ -468,7 +468,7 @@ header {
   }
 }
 
-#column-add-accept-btn {
+#column-add-accept-button {
   background-color: #0175DE;
   color: #fff;
 
@@ -479,7 +479,7 @@ header {
   }
 }
 
-#search-modal-btn-area {
+#search-modal-button-area {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
@@ -493,7 +493,7 @@ header {
   }
 }
 
-#search-cancel-btn {
+#search-cancel-button {
   background-color: #E0E0E0;
   color: #B1B1B1;
 
@@ -504,7 +504,7 @@ header {
   }
 }
 
-#search-accept-btn {
+#search-accept-button {
   background-color: #0175DE;
   color: #fff;
 
@@ -515,7 +515,7 @@ header {
   }
 }
 
-#clear-modal-btn-area {
+#clear-modal-button-area {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
@@ -529,7 +529,7 @@ header {
   }
 }
 
-#clear-cancel-btn {
+#clear-cancel-button {
   background-color: #E0E0E0;
   color: #B1B1B1;
 
@@ -540,7 +540,7 @@ header {
   }
 }
 
-#clear-accept-btn {
+#clear-accept-button {
   background-color: #EE675C;
   color: #fff;
 

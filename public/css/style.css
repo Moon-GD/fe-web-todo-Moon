@@ -63,11 +63,11 @@ section > h3 > span.column-length {
   margin-left: 1vw;
   padding: 0.3vw 0.7vw;
 }
-section > h3 > .column-btn-area {
+section > h3 > .column-button-area {
   position: absolute;
   right: 1vw;
 }
-section > h3 > .column-btn-area > i {
+section > h3 > .column-button-area > i {
   cursor: pointer;
   margin: 0 0.5vw;
 }
@@ -80,11 +80,11 @@ section > article {
   width: 100%;
 }
 
-.column-delete-btn:hover {
+.column-delete-button:hover {
   color: #FF4D4D;
 }
 
-#fab-btn, #go-column-add-modal-btn, #go-search-btn, #go-card-clear-btn {
+#fab-button, #go-column-add-modal-button, #go-search-button, #go-card-clear-button {
   border: none;
   border-radius: 50%;
   bottom: 5%;
@@ -97,7 +97,7 @@ section > article {
   right: 5%;
   transition: 1s;
 }
-#fab-btn > span, #go-column-add-modal-btn > span, #go-search-btn > span, #go-card-clear-btn > span {
+#fab-button > span, #go-column-add-modal-button > span, #go-search-button > span, #go-card-clear-button > span {
   font-size: 2rem;
 }
 
@@ -178,27 +178,27 @@ section > article {
 .new-card-button-area > button :focus {
   outline: none;
 }
-.new-card-button-area > button#new-card-cancel-btn {
+.new-card-button-area > button#new-card-cancel-button {
   background-color: #e0e0e0;
   color: #828282;
 }
-.new-card-button-area > button#new-card-cancel-btn:hover {
+.new-card-button-area > button#new-card-cancel-button:hover {
   background-color: #828282;
   color: #fff;
 }
-.new-card-button-area > button#new-card-cancel-btn:disabled {
+.new-card-button-area > button#new-card-cancel-button:disabled {
   background-color: #e0e0e0;
   color: #828282;
 }
-.new-card-button-area > button#new-card-register-btn {
+.new-card-button-area > button#new-card-register-button {
   background-color: #0075de;
   color: #fff;
 }
-.new-card-button-area > button#new-card-register-btn:hover {
+.new-card-button-area > button#new-card-register-button:hover {
   background-color: #0075de;
   color: #fff;
 }
-.new-card-button-area > button#new-card-register-btn:disabled {
+.new-card-button-area > button#new-card-register-button:disabled {
   background-color: #86c6ff;
   color: rgba(255, 255, 255, 0.4);
 }
@@ -353,30 +353,30 @@ header > i {
   opacity: 1;
 }
 
-#modal-btn-area {
+#modal-button-area {
   margin-left: 6vw;
 }
-#modal-btn-area > button {
+#modal-button-area > button {
   border: none;
   border-radius: 0.5vh;
   cursor: pointer;
   height: 3vh;
   width: 6vw;
 }
-#modal-btn-area > button#card-cancel-btn {
+#modal-button-area > button#card-cancel-button {
   background-color: #E0E0E0;
   color: #B1B1B1;
 }
-#modal-btn-area > button#card-cancel-btn:hover {
+#modal-button-area > button#card-cancel-button:hover {
   background-color: #B1B1B1;
   color: #E0E0E0;
   outline: 0.2vh solid #B1B1B1;
 }
-#modal-btn-area > button#card-delete-btn {
+#modal-button-area > button#card-delete-button {
   background-color: #0175DE;
   color: #fff;
 }
-#modal-btn-area > button#card-delete-btn:hover {
+#modal-button-area > button#card-delete-button:hover {
   background-color: #0175FF;
   color: #fff;
   outline: 0.2vh solid #0175FF;
@@ -398,12 +398,12 @@ header > i {
   outline: none;
 }
 
-#column-add-modal-btn-area {
+#column-add-modal-button-area {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
 }
-#column-add-modal-btn-area > button {
+#column-add-modal-button-area > button {
   border: none;
   border-radius: 0.5vh;
   cursor: pointer;
@@ -411,32 +411,32 @@ header > i {
   width: 40%;
 }
 
-#column-add-cancel-btn {
+#column-add-cancel-button {
   background-color: #E0E0E0;
   color: #B1B1B1;
 }
-#column-add-cancel-btn:hover {
+#column-add-cancel-button:hover {
   background-color: #B1B1B1;
   color: #E0E0E0;
   outline: 0.2vh solid #B1B1B1;
 }
 
-#column-add-accept-btn {
+#column-add-accept-button {
   background-color: #0175DE;
   color: #fff;
 }
-#column-add-accept-btn:hover {
+#column-add-accept-button:hover {
   background-color: #0175FF;
   color: #fff;
   outline: 0.2vh solid #0175FF;
 }
 
-#search-modal-btn-area {
+#search-modal-button-area {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
 }
-#search-modal-btn-area > button {
+#search-modal-button-area > button {
   border: none;
   border-radius: 0.5vh;
   cursor: pointer;
@@ -444,32 +444,32 @@ header > i {
   width: 40%;
 }
 
-#search-cancel-btn {
+#search-cancel-button {
   background-color: #E0E0E0;
   color: #B1B1B1;
 }
-#search-cancel-btn:hover {
+#search-cancel-button:hover {
   background-color: #B1B1B1;
   color: #E0E0E0;
   outline: 0.2vh solid #B1B1B1;
 }
 
-#search-accept-btn {
+#search-accept-button {
   background-color: #0175DE;
   color: #fff;
 }
-#search-accept-btn:hover {
+#search-accept-button:hover {
   background-color: #0175FF;
   color: #fff;
   outline: 0.2vh solid #0175FF;
 }
 
-#clear-modal-btn-area {
+#clear-modal-button-area {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
 }
-#clear-modal-btn-area > button {
+#clear-modal-button-area > button {
   border: none;
   border-radius: 0.5vh;
   cursor: pointer;
@@ -477,21 +477,21 @@ header > i {
   width: 40%;
 }
 
-#clear-cancel-btn {
+#clear-cancel-button {
   background-color: #E0E0E0;
   color: #B1B1B1;
 }
-#clear-cancel-btn:hover {
+#clear-cancel-button:hover {
   background-color: #B1B1B1;
   color: #E0E0E0;
   outline: 0.2vh solid #B1B1B1;
 }
 
-#clear-accept-btn {
+#clear-accept-button {
   background-color: #EE675C;
   color: #fff;
 }
-#clear-accept-btn:hover {
+#clear-accept-button:hover {
   background-color: #EE675C;
   color: #fff;
   outline: 0.2vh solid #EE675C;

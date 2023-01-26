@@ -38,6 +38,7 @@ const timeStringToArray = (timeString) => pipe(
  * @param {Array} timeArray
  * @returns {String} "방금" || "1분 전" || "2시간 전" || "3일 전" || "4달 전"
  */
+// FIXME: these if-else cases might be turned into switch
 const getElapsedTimeByTimeArray = (timeArray) => pipe(
     ([month, day, hour, minute]) => {
         if (timeArray[LOG_TIME.MONTH] != month)

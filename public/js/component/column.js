@@ -14,11 +14,11 @@ const $mainTag = querySelector("main");
 
 /**
  * column 삭제 버튼에 이벤트를 등록합니다.
- * @param {Node} $columnDeleteBtn column 삭제 버튼
+ * @param {Node} $columnDeleteButton column 삭제 버튼
  * @param {Node} $column column 객체
  */
-function columnDeleteEvent($columnDeleteBtn, $column) {
-    addEvent($columnDeleteBtn, [
+function columnDeleteEvent($columnDeleteButton, $column) {
+    addEvent($columnDeleteButton, [
         () => {
             deleteStatus($column.querySelector("span").innerHTML)
             $column.remove();
@@ -82,7 +82,7 @@ function updateColumnLength(status) {
 const findColumnStatusByCard = ($card) => pipe(
     () => findCardHeaderName($card),
     (headerName) => statusListOnLocal.filter((ele) => {
-        return ele.statusName == headerName;
+        return ele.statusName === headerName;
     }),
     ($column) => $column[0]["statusIndex"]
 )()
@@ -149,7 +149,7 @@ function inputFocusOutEvent($headerInput, originalTitle, $originalHeader) {
  */
 const getColumnNodeByStatus = (columnStatus) => pipe(
     () => document.querySelectorAll(".column"),
-    ($columnArray) => $columnArray.find(($column) => $column.getAttribute(STATUS.ID) == `${columnStatus}`)
+    ($columnArray) => $columnArray.find(($column) => $column.getAttribute(STATUS.ID) === `${columnStatus}`)
 )();
 
 /**

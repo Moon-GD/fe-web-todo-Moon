@@ -1,5 +1,5 @@
 import {
-    CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
+    CARD_BUTTON, CARD, CARD_DELETE_BUTTON_ORIGINAL,
     DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE, STATUS, FETCH_URL, METHOD, HEADER
 } from "../common/commonVariable.js";
 import {addEvent, pipe} from "../common/commonFunction.js";
@@ -76,17 +76,17 @@ function deleteAllCards() {
 
 /**
  * 카드 생성 폼을 보여주는 버튼에 이벤트를 등록합니다.
- * @param {Node} $cardRegisterBtn 카드 생성 버튼
+ * @param {Node} $cardRegisterButton 카드 생성 버튼
  * @param {Node} $currentColumn 카드 생성 버튼의 column
  */
-function eventToNewCardBtn($cardRegisterBtn, $currentColumn) {
-    addEvent($cardRegisterBtn, [
+function eventToNewCardButton($cardRegisterButton, $currentColumn) {
+    addEvent($cardRegisterButton, [
         () => {
             registering ?
                 $currentColumn.children[0].remove() :
                 $currentColumn.prepend(newCardTemplate());
 
-            registering != registering;
+            registering = !registering;
         }
     ])
 }
@@ -112,13 +112,13 @@ function pullUpCard($card) {
 /**
  * 카드를 끌어내리는 css 효과를 줍니다.
  * @param {Node} $card 카드 객체
- * @param {Node} $cardDeleteBtn 카드 삭제 버튼 객체
+ * @param {Node} $cardDeleteButton 카드 삭제 버튼 객체
  */
-function pullDownCard($card, $cardDeleteBtn) {
+function pullDownCard($card, $cardDeleteButton) {
     $card.style.marginTop = "0vh";
     $card.style.marginBottom = "1vh";
-    $cardDeleteBtn.style.color = CARD_BTN.ORIGINAL;
-    $cardDeleteBtn.style.color = CARD_DELETE_BTN_ORIGINAL;
+    $cardDeleteButton.style.color = CARD_BUTTON.ORIGINAL;
+    $cardDeleteButton.style.color = CARD_DELETE_BUTTON_ORIGINAL;
 
     if (isDarkMode()) {
         $card.style.outline = CARD_DARK_MODE.OUTLINE_ORIGINAL;
@@ -131,34 +131,34 @@ function pullDownCard($card, $cardDeleteBtn) {
 
 /**
  * 카드 삭제 버튼에 이벤트를 등록합니다.
- * @param {Node} $cardDeleteBtn 카드 삭제 버튼
+ * @param {Node} $cardDeleteButton 카드 삭제 버튼
  * @param {Node} $deletedCard 삭제할 카드 객체
  */
-function eventToCardDeleteBtn($cardDeleteBtn, $deletedCard) {
-    addEvent($cardDeleteBtn, [
+function eventToCardDeleteButton($cardDeleteButton, $deletedCard) {
+    addEvent($cardDeleteButton, [
         () => setCardToBeDeleted($deletedCard),
         () => turnOnModal()
     ]);
 
-    addEvent($cardDeleteBtn, [
+    addEvent($cardDeleteButton, [
         () => pullUpCard($deletedCard)
     ], EVENT.MOUSE_OVER);
 
-    addEvent($cardDeleteBtn, [
-        () => pullDownCard($deletedCard, $cardDeleteBtn)
+    addEvent($cardDeleteButton, [
+        () => pullDownCard($deletedCard, $cardDeleteButton)
     ], EVENT.MOUSE_LEAVE);
 }
 
 /** 카드 생성 취소 버튼에 이벤트를 등록합니다. */
 /**
  *
- * @param {Node} $registerCancelBtn 카드 등록 취소 버튼 객체
+ * @param {Node} $registerCancelButton 카드 등록 취소 버튼 객체
  * @param {Node} $cardRegisterForm 카드 등록 폼 객체
  * @param {Node} $prevCard update 이전의 원본 카드 객체
  * @param {Boolean} isUpdated 카드 등록 폼이 나온 이유 -> update(true) / create card (false)
  */
-function eventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $prevCard, isUpdated) {
-    addEvent($registerCancelBtn, [
+function eventToMakeCardCancelButton($registerCancelButton, $cardRegisterForm, $prevCard, isUpdated) {
+    addEvent($registerCancelButton, [
         () => {
             if (!isUpdated) return;
             $prevCard.style.display = DISPLAY.BLOCK;
@@ -176,8 +176,8 @@ function eventToMakeCardCancelBtn($registerCancelBtn, $cardRegisterForm, $prevCa
 
 /** 카드 생성 버튼에 이벤트를 등록합니다. */
 // 으어... 넘나 지저분
-function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated) {
-    addEvent($cardMakeBtn, [
+function eventToMakeNewCardButton($cardMakeButton, $currentCard, $prevCard, isUpdated) {
+    addEvent($cardMakeButton, [
         () => {
             registering = false;
             let cardTitle = $currentCard.querySelector("input").value;
@@ -213,7 +213,7 @@ function eventToMakeNewCardBtn($cardMakeBtn, $currentCard, $prevCard, isUpdated)
             }
 
             // 메뉴 update (update 사항이 있는 경우 메뉴 바에 반영)
-            if (isUpdated && prevContent != updatedContent) {
+            if (isUpdated && prevContent !== updatedContent) {
                 const columnName = statusListOnLocal[updatedStatus][STATUS.NAME];
                 menuLogUpdate(columnName, cardTitle);
             }
@@ -247,8 +247,8 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
         () => {
             if (scrollHeight < $cardRegisterInput.scrollHeight) {
                 $cardRegisterForm.style.height ?
-                    $cardRegisterForm.style.height = parseInt($cardRegisterForm.style.height) + CARD.TEXT_HEIGTH + "vh" :
-                    $cardRegisterForm.style.height = CARD.HEIGHT + CARD.TEXT_HEIGTH + "vh";
+                    $cardRegisterForm.style.height = parseInt($cardRegisterForm.style.height) + CARD.TEXT_HEIGHT + "vh" :
+                    $cardRegisterForm.style.height = CARD.HEIGHT + CARD.TEXT_HEIGHT + "vh";
             }
 
             scrollHeight = $cardRegisterInput.scrollHeight;
@@ -267,7 +267,7 @@ const parseCardContentByNewLine = (cardContent) => pipe(
 )(cardContent);
 
 export {
-    eventToNewCardBtn, eventToCardDeleteBtn,
-    eventToMakeCardCancelBtn, eventToMakeNewCardBtn, resizeCardByInputBox, findCardByTitle,
+    eventToNewCardButton, eventToCardDeleteButton,
+    eventToMakeCardCancelButton, eventToMakeNewCardButton, resizeCardByInputBox, findCardByTitle,
     doubleClickEventToCard, deleteCard, findCardTitle, deleteAllCards, $chosenCard, parseCardContentByNewLine
 }
