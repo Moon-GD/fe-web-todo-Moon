@@ -25,7 +25,7 @@ class SearchLogManager {
 
     /** 검색어를 추천합니다. */
     suggestLog = () =>
-        this.#searchLog.length == 0 ?
+        this.#searchLog.length === 0 ?
             null : this.#maxLog;
 
     /** 검색어의 빈도를 반환합니다. */

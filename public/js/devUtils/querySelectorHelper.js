@@ -7,8 +7,8 @@ const CLASS = "className";
 const ID = "id";
 
 const queryClassifyMap = (query) => {
-    if (query[0] == ".") return [CLASS, query.slice(1,)];
-    else if (query[0] == "#") return [ID, query.slice(1,)];
+    if (query[0] === ".") return [CLASS, query.slice(1,)];
+    else if (query[0] === "#") return [ID, query.slice(1,)];
     else return [TAG, query.toUpperCase()];
 }
 
@@ -61,7 +61,7 @@ function valiedateNodeByQuery(node, queryObj) {
     const ids = queryObj[ID];
 
     for (let i = 0; i < tags.length; i++) {
-        if (node.tagName != tags[i]) return false;
+        if (node.tagName !== tags[i]) return false;
     }
 
     for (let i = 0; i < classes.length; i++) {
@@ -69,7 +69,7 @@ function valiedateNodeByQuery(node, queryObj) {
     }
 
     for (let i = 0; i < ids.length; i++) {
-        if (node.id != ids[i]) return false;
+        if (node.id !== ids[i]) return false;
     }
 
     return true;
@@ -157,7 +157,7 @@ function multipleQuerySelector(multipleQuery, $startNode = $BODY_NODE) {
         $startNodeList = $endNodeList;
         $endNodeList = [];
 
-        if (multipleQueryList[queryListIndex] == ">") {
+        if (multipleQueryList[queryListIndex] === ">") {
             queryListIndex += 1;
 
             $startNodeList.forEach(($node) => {
@@ -167,7 +167,7 @@ function multipleQuerySelector(multipleQuery, $startNode = $BODY_NODE) {
         } else {
             $startNodeList.forEach(($node) => {
                 let $validateNodeList = singleQuerySelectorAll(multipleQueryList[queryListIndex], $node);
-                $endNodeList = $endNodeList.concat($validateNodeList).filter((ele) => ele != $node);
+                $endNodeList = $endNodeList.concat($validateNodeList).filter((ele) => ele !== $node);
             })
         }
 
@@ -196,7 +196,7 @@ function multipleQuerySelectorAll(multipleQuery, $startNode = $BODY_NODE) {
         $startNodeList = $endNodeList;
         $endNodeList = [];
 
-        if (multipleQueryList[queryListIndex] == ">") {
+        if (multipleQueryList[queryListIndex] === ">") {
             queryListIndex += 1;
 
             $startNodeList.forEach(($node) => {
@@ -206,7 +206,7 @@ function multipleQuerySelectorAll(multipleQuery, $startNode = $BODY_NODE) {
         } else {
             $startNodeList.forEach(($node) => {
                 let validateNodeList = singleQuerySelectorAll(multipleQueryList[queryListIndex], $node);
-                $endNodeList = $endNodeList.concat(validateNodeList).filter((ele) => ele != $node);
+                $endNodeList = $endNodeList.concat(validateNodeList).filter((ele) => ele !== $node);
             })
         }
 

@@ -16,7 +16,7 @@ NodeList.prototype.find = Array.prototype.find
  */
 const querySelector = (query) => pipe(
     () => multipleQueryToList(query),
-    (queryList) => queryList.length == 1 ?
+    (queryList) => queryList.length === 1 ?
         singleQuerySelector(query) : multipleQuerySelector(query)
 )()
 
@@ -30,7 +30,7 @@ const multiQuerySelector = (queryArray) => queryArray.map((query) => querySelect
  */
 const querySelectorAll = (query) => pipe(
     () => multipleQueryToList(query),
-    (queryList) => queryList.length == 1 ?
+    (queryList) => queryList.length === 1 ?
         singleQuerySelectorAll(query) : multipleQuerySelectorAll(query)
 )()
 
