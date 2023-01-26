@@ -8,7 +8,7 @@ import { statusListOnLocal } from "../../public/js/store/store.js";
  * @param {number} statusID column ID
  * @param {Array} newCardOrder card order Array
  */
-const changeCardOrderOnLocal = (statusID, newCardOrder) => 
+const changeCardOrderOnLocal = (statusID, newCardOrder) =>
     statusListOnLocal[statusID][CARD_ORDER] = newCardOrder;
 
 /**
@@ -26,8 +26,8 @@ function changeCardOrderOnServer(statusID, newCardOrder) {
 
 /**
  * 카드 순서 정보를 갱신합니다.
- * @param {number} statusID 
- * @param {Array} newCardOrder 
+ * @param {number} statusID
+ * @param {Array} newCardOrder
  */
 function changeCardOrder(statusID, newCardOrder) {
     changeCardOrderOnServer(statusID, newCardOrder);
@@ -44,7 +44,7 @@ function moveJSONDataOnOneColumn(status) {
         ($column) => getCardOrderByColumn($column),
         ($cardOrder) => changeCardOrder(status, $cardOrder)
     )();
-    
+
     updateColumnLength(status);
 }
 

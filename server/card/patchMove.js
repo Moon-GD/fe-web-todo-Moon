@@ -11,8 +11,8 @@ function moveCardJSONDataOnLocal(prevStatus, nextStatus, cardID) {
     let prevCardList = cardListOnLocal[prevStatus];
     let nextCardList = cardListOnLocal[nextStatus];
 
-    for(let i=0;i<prevCardList.length;i++) {
-        if(prevCardList[i] && prevCardList[i].id == cardID) {
+    for (let i = 0; i < prevCardList.length; i++) {
+        if (prevCardList[i] && prevCardList[i].id === cardID) {
             nextCardList.push(prevCardList[i]);
             prevCardList.splice(i, 1);
             break;
@@ -28,7 +28,7 @@ function moveCardJSONDataOnServer(nextStatus, cardID) {
     fetch(FETCH_URL.CARD + "/" + cardID, {
         method: METHOD.PATCH,
         headers: HEADER.PATCH,
-        body: JSON.stringify({ status:nextStatus })
+        body: JSON.stringify({status: nextStatus})
     })
 }
 
@@ -46,13 +46,13 @@ function moveCardJsonData(prevStatus, nextStatus, cardID) {
  * @param {number} prevStatus 이전 column status
  * @param {number} nextStatus 다음 column status
  * @param {string} cardID card ID
-*/
+ */
 function moveJSONData(prevStatus, nextStatus, cardID) {
     moveCardJsonData(prevStatus, nextStatus, cardID);
 
     prevStatus == nextStatus ?
-            moveJSONDataOnOneColumn(prevStatus) :
-            moveJSONDataOnTwoColumn(prevStatus, nextStatus);
+        moveJSONDataOnOneColumn(prevStatus) :
+        moveJSONDataOnTwoColumn(prevStatus, nextStatus);
 }
 
 export { moveJSONData }

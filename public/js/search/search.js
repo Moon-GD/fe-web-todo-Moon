@@ -6,7 +6,7 @@ import { menuLogSearch } from "../component/menu/menu.js";
 import { multiQuerySelector } from "../devUtils/querySelector.js";
 import { searchLogManger } from "./searchLogManager.js";
 
-const [$searchModal, $searchInput, $suggestedSearchText] = 
+const [$searchModal, $searchInput, $suggestedSearchText] =
     multiQuerySelector(["#search-modal-section", "#search-input", "#suggested-search-log"]);
 
 /**
@@ -26,13 +26,13 @@ const getCardArrayByTitle = (title) => pipe(
 const changeCardColorTemporary = ($cardList) => {
     $cardList.forEach(($card) => {
         isDarkMode() ?
-                $card.style.outline = SEARCH_CARD_DARK_MODE.OUTLINE:
-                $card.style.outline = SEARCH_CARD.OUTLINE;
-              
+            $card.style.outline = SEARCH_CARD_DARK_MODE.OUTLINE :
+            $card.style.outline = SEARCH_CARD.OUTLINE;
+
         setTimeout(() => {
             isDarkMode() ?
-                    $card.style.outline = SEARCH_CARD_DARK_MODE.ORIGINAL:
-                    $card.style.outline = SEARCH_CARD.ORIGINAL;
+                $card.style.outline = SEARCH_CARD_DARK_MODE.ORIGINAL :
+                $card.style.outline = SEARCH_CARD.ORIGINAL;
         }, 1000);
     })
 }
@@ -59,8 +59,8 @@ const changeCardBackGroundColor = (cardTitle) => pipe(
 /** 추천 검색어를 보여줍니다. */
 function showSuggestedLog() {
     searchLogManger.suggestLog() ?
-            $suggestedSearchText.innerHTML = "#" + searchLogManger.suggestLog():
-            $suggestedSearchText.innerHTML = "아직 없습니다.";
+        $suggestedSearchText.innerHTML = "#" + searchLogManger.suggestLog() :
+        $suggestedSearchText.innerHTML = "아직 없습니다.";
 }
 
 export { $searchModal, $searchInput, searchCard, showSuggestedLog }

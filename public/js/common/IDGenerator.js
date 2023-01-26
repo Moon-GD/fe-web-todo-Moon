@@ -10,7 +10,7 @@ class IDGenerator {
             .map(({id}) => id)
         );
 
-        cardListOnLocal.forEach((cardArray) => 
+        cardListOnLocal.forEach((cardArray) =>
             cardArray.forEach((card) => this.#cardID = Math.min(this.#cardID, card.id))
         );
     }

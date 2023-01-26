@@ -4,8 +4,10 @@ import { menuListOnLocal } from "../../public/js/store/store.js";
 /**
  * menu JSON을 server에 생성합니다.
  * @param {Object} menuJSON menu JSON
+ * @param method 전송 방식
+ * @param headers 전송시 헤더
  */
-function uploadMenuJSONOnServer(menuJSON, method=METHOD.POST, headers=HEADER.POST) {
+function uploadMenuJSONOnServer(menuJSON, method = METHOD.POST, headers = HEADER.POST) {
     fetch(FETCH_URL.MENU, {
         method,
         headers,
@@ -22,6 +24,8 @@ const uploadMenuJSONOnLocal = (menuJSON) => menuListOnLocal.push(menuJSON);
 /**
  * menu JSON을 server와 local에 업로드합니다.
  * @param {Object} menuJSON menu JSON
+ * @param method 전송 방식
+ * @param headers 전송시 헤더
  */
 function uploadMenuJSON(menuJSON, method, headers) {
     uploadMenuJSONOnServer(menuJSON, method, headers);

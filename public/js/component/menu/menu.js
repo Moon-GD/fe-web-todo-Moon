@@ -2,8 +2,8 @@ import { pipe } from "../../common/commonFunction.js";
 import { multiQuerySelector } from "../../devUtils/querySelector.js";
 import { searchLogManger } from "../../search/searchLogManager.js";
 import { timeStringToArray, getElapsedTimeByTimeArray } from "./menuLogTime.js";
-import { 
-    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, 
+import {
+    menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate,
     menuSearchTemplate, menuLogDeleteAllTemplate
 } from "../../templates/template.js";
 import { makeCreateMenuJSON } from "../../../../server/menu/action/cardCreation.js";
@@ -35,7 +35,9 @@ function menuLogDeleteAll() {
 
 /** 메뉴에 move log를 남깁니다. */
 function menuLogMove(prevColumnName, nextColumnName, cardTitle) {
-    if(prevColumnName === nextColumnName) { return; }
+    if (prevColumnName === nextColumnName) {
+        return;
+    }
     makeMoveMenuJSON(prevColumnName, nextColumnName, cardTitle);
     $menuContent.prepend(menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle));
 }
@@ -68,8 +70,8 @@ function menuLogTimeUpdate() {
     )()
 }
 
-export { 
-    $menuBar, 
-    menuLogAdd, menuLogDelete, menuLogDeleteAll, menuLogMove, menuLogUpdate, 
-    menuLogSearch, menuLogTimeUpdate 
+export {
+    $menuBar,
+    menuLogAdd, menuLogDelete, menuLogDeleteAll, menuLogMove, menuLogUpdate,
+    menuLogSearch, menuLogTimeUpdate
 }

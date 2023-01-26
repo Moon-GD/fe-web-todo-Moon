@@ -7,8 +7,8 @@ const CLASS = "className";
 const ID = "id";
 
 const queryClassifyMap = (query) => {
-    if(query[0] == ".") return [CLASS, query.slice(1, )];
-    else if(query[0] == "#") return [ID, query.slice(1, )];
+    if (query[0] === ".") return [CLASS, query.slice(1,)];
+    else if (query[0] === "#") return [ID, query.slice(1,)];
     else return [TAG, query.toUpperCase()];
 }
 
@@ -30,8 +30,8 @@ function singleQueryToObject(query) {
         (query) => query.split(" ").sort((a, b) => a - b)
     )()
 
-    for(let i=0;i<query.length;i++) {
-        if(query[i] === "") continue; // split 하면서 생긴 빈 문자열은 무시합니다.
+    for (let i = 0; i < query.length; i++) {
+        if (query[i] === "") continue; // split 하면서 생긴 빈 문자열은 무시합니다.
         const [index, parsedQuery] = queryClassifyMap(query[i]);
         queryObj[index].push(parsedQuery);
     }
@@ -59,17 +59,17 @@ function valiedateNodeByQuery(node, queryObj) {
     const tags = queryObj[TAG];
     const classes = queryObj[CLASS];
     const ids = queryObj[ID];
-    
-    for(let i=0;i<tags.length;i++) {
-        if(node.tagName != tags[i]) return false;
-    }
-    
-    for(let i=0;i<classes.length;i++) {
-        if(classes[i] in node.classList) return false;
+
+    for (let i = 0; i < tags.length; i++) {
+        if (node.tagName !== tags[i]) return false;
     }
 
-    for(let i=0;i<ids.length;i++) {
-        if(node.id != ids[i]) return false;
+    for (let i = 0; i < classes.length; i++) {
+        if (classes[i] in node.classList) return false;
+    }
+
+    for (let i = 0; i < ids.length; i++) {
+        if (node.id !== ids[i]) return false;
     }
 
     return true;
@@ -81,7 +81,7 @@ function valiedateNodeByQuery(node, queryObj) {
  * @param {Node} $startNode 탐색 시작 노드
  * @returns {Array} 노드 객체 배열
  */
-const findAllChildren = (query, $startNode=$BODY_NODE) => pipe(
+const findAllChildren = (query, $startNode = $BODY_NODE) => pipe(
     () => [singleQueryToObject(query), $startNode.children],
     ([queryObj, $childArray]) => $childArray.filter(($child) => valiedateNodeByQuery($child, queryObj))
 )()
@@ -92,18 +92,22 @@ const findAllChildren = (query, $startNode=$BODY_NODE) => pipe(
  * @param {Node} $startNode 탐색 시작 노드
  * @returns {Node} 노드 객체
  */
-function singleQuerySelector(query, $startNode=$BODY_NODE) {
+function singleQuerySelector(query, $startNode = $BODY_NODE) {
     const queryObj = singleQueryToObject(query);
     const queue = new Queue();
     queue.enque($startNode);
 
     // BFS 순회
-    while(queue.getLength()) {
+    while (queue.getLength()) {
         const $currentDom = queue.deque();
-        
+
         // return : 원하는 ID를 찾은 경우
-        if(valiedateNodeByQuery($currentDom, queryObj)) { return $currentDom; }
-        $currentDom.children.forEach(($childNode) => { queue.enque($childNode); })
+        if (valiedateNodeByQuery($currentDom, queryObj)) {
+            return $currentDom;
+        }
+        $currentDom.children.forEach(($childNode) => {
+            queue.enque($childNode);
+        })
     }
 
     return null;
@@ -113,21 +117,25 @@ function singleQuerySelector(query, $startNode=$BODY_NODE) {
  * 단일 쿼리에 해당하는 모든 노드를 배열 형태로 반환합니다.
  * @param {String} query 노드 탐색 query
  * @param {Node} $startNode 탐색 시작 노드
- * @returns 
+ * @returns
  */
-function singleQuerySelectorAll(query, $startNode=$BODY_NODE) {
+function singleQuerySelectorAll(query, $startNode = $BODY_NODE) {
     let listToBeReturned = [];
     const queryObj = singleQueryToObject(query);
     const queue = new Queue();
     queue.enque($startNode);
 
     // BFS 순회
-    while(queue.getLength()) {
+    while (queue.getLength()) {
         const $currentDom = queue.deque();
 
         // return : 원하는 ID를 찾은 경우
-        if(valiedateNodeByQuery($currentDom, queryObj)) { listToBeReturned.push($currentDom); }
-        $currentDom.children.forEach(($childNode) => { queue.enque($childNode); })
+        if (valiedateNodeByQuery($currentDom, queryObj)) {
+            listToBeReturned.push($currentDom);
+        }
+        $currentDom.children.forEach(($childNode) => {
+            queue.enque($childNode);
+        })
     }
 
     return listToBeReturned;
@@ -137,30 +145,29 @@ function singleQuerySelectorAll(query, $startNode=$BODY_NODE) {
  * 복합 쿼리에 해당하는 첫 노드를 반환합니다
  * @param {Object} multipleQuery 복합 명령어 객체
  * @param {Node} $startNode 탐색 시작 노드
- * @returns 
+ * @returns
  */
-function multipleQuerySelector(multipleQuery, $startNode=$BODY_NODE) {
+function multipleQuerySelector(multipleQuery, $startNode = $BODY_NODE) {
     const multipleQueryList = multipleQueryToList(multipleQuery);
     let queryListIndex = 0;
     let $startNodeList = [];
     let $endNodeList = [$startNode];
 
-    while(queryListIndex < multipleQueryList.length) {
+    while (queryListIndex < multipleQueryList.length) {
         $startNodeList = $endNodeList;
         $endNodeList = [];
 
-        if(multipleQueryList[queryListIndex] == ">") {
+        if (multipleQueryList[queryListIndex] === ">") {
             queryListIndex += 1;
 
             $startNodeList.forEach(($node) => {
                 let $childNodeList = findAllChildren(multipleQueryList[queryListIndex], $node);
                 $endNodeList = $endNodeList.concat($childNodeList);
             })
-        }
-        else {
+        } else {
             $startNodeList.forEach(($node) => {
                 let $validateNodeList = singleQuerySelectorAll(multipleQueryList[queryListIndex], $node);
-                $endNodeList = $endNodeList.concat($validateNodeList).filter((ele) => ele != $node);
+                $endNodeList = $endNodeList.concat($validateNodeList).filter((ele) => ele !== $node);
             })
         }
 
@@ -177,30 +184,29 @@ function multipleQuerySelector(multipleQuery, $startNode=$BODY_NODE) {
  * 복합 쿼리에 해당하는 모든 노드를 배열 형태로 반환합니다.
  * @param {Object} multipleQuery 복합 명령어 객체
  * @param {Node} $startNode 탐색 시작 노드
- * @returns 
+ * @returns
  */
-function multipleQuerySelectorAll(multipleQuery, $startNode=$BODY_NODE) {
+function multipleQuerySelectorAll(multipleQuery, $startNode = $BODY_NODE) {
     const multipleQueryList = multipleQueryToList(multipleQuery);
     let queryListIndex = 0;
     let $startNodeList = [];
     let $endNodeList = [$startNode];
 
-    while(queryListIndex < multipleQueryList.length) {
+    while (queryListIndex < multipleQueryList.length) {
         $startNodeList = $endNodeList;
         $endNodeList = [];
 
-        if(multipleQueryList[queryListIndex] == ">") {
+        if (multipleQueryList[queryListIndex] === ">") {
             queryListIndex += 1;
 
             $startNodeList.forEach(($node) => {
                 let $childList = findAllChildren(multipleQueryList[queryListIndex], $node);
                 $endNodeList = $endNodeList.concat($childList);
             })
-        }
-        else {
+        } else {
             $startNodeList.forEach(($node) => {
                 let validateNodeList = singleQuerySelectorAll(multipleQueryList[queryListIndex], $node);
-                $endNodeList = $endNodeList.concat(validateNodeList).filter((ele) => ele != $node);
+                $endNodeList = $endNodeList.concat(validateNodeList).filter((ele) => ele !== $node);
             })
         }
 
@@ -213,6 +219,6 @@ function multipleQuerySelectorAll(multipleQuery, $startNode=$BODY_NODE) {
 }
 
 export {
-    singleQuerySelector, singleQuerySelectorAll, 
+    singleQuerySelector, singleQuerySelectorAll,
     multipleQueryToList, multipleQuerySelector, multipleQuerySelectorAll
 }

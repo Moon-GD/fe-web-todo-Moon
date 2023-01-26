@@ -7,8 +7,8 @@ const childAfterParent = ($parent, $child) => $parent.after($child);
 const changeCSS = ($target, key, value) => $target.style[key] = value;
 
 /** pipe 헬퍼 함수 */
-const pipe = (...functionList) => (firstParam) => 
-    functionList.reduce((curValue, curFunc) => { 
+const pipe = (...functionList) => (firstParam) =>
+    functionList.reduce((curValue, curFunc) => {
         return curFunc(curValue);
     }, firstParam);
 /**
@@ -17,7 +17,7 @@ const pipe = (...functionList) => (firstParam) =>
  * @param {Array} callBackArray 콜백 함수 배열
  * @param {String} eventType 이벤트 종류
  */
-const addEvent = (targetNode, callBackArray, eventType=EVENT.CLICK) => {
+const addEvent = (targetNode, callBackArray, eventType = EVENT.CLICK) => {
     callBackArray.forEach((callBack) => targetNode.addEventListener(eventType, callBack));
 }
 

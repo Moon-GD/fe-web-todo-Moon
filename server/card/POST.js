@@ -3,15 +3,15 @@ import { updateColumnLength } from "../../public/js/component/column.js";
 import { cardListOnLocal } from "../../public/js/store/store.js";
 import { moveJSONDataOnOneColumn } from "./patchOrder.js";
 
-/** 로컬에 카드 JSON을 추가합니다. 
+/** 로컬에 카드 JSON을 추가합니다.
  * @param {number} status column status
  * @param {Object} newJSONData card json
-*/
+ */
 const addCardJSONOnLocal = (status, newJSONData) => cardListOnLocal[status].push(newJSONData);
 
-/** 서버에 카드 JSON을 추가합니다. 
+/** 서버에 카드 JSON을 추가합니다.
  * @param {Object} newJSONData card json
-*/
+ */
 function addCardJSONOnServer(newJSONData) {
     fetch(FETCH_URL.CARD, {
         method: METHOD.POST,

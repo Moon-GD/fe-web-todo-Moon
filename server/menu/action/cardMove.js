@@ -9,9 +9,9 @@ import { uploadMenuJSON } from "../post.js";
  * @param {String} prevColumnName 이전 column name
  * @param {String} nextColumnName 다음 column name
  * @param {String} cardTitle card title
- * @returns 
+ * @returns
  */
-function retureMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
+function returnMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
     return {
         "action": MENU_ACTION.MOVE,
         "actionTime": timeToStringFormat(),
@@ -29,7 +29,7 @@ function retureMoveMenuJSON([prevColumnName, nextColumnName, cardTitle]) {
  * @param {String} cardTitle card title
  */
 const makeMoveMenuJSON = (prevColumnName, nextColumnName, cardTitle) => pipe(
-    retureMoveMenuJSON,
+    returnMoveMenuJSON,
     uploadMenuJSON
 )([prevColumnName, nextColumnName, cardTitle]);
 

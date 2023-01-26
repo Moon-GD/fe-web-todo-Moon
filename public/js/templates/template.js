@@ -1,14 +1,15 @@
 import { addEvent } from "../common/commonFunction.js";
 import { EVENT, STATUS, CARD_ID } from "../common/commonVariable.js";
-import { eventToUndoBtn } from "../component/button.js";
-import { eventToNewCardBtn, eventToCardDeleteBtn, 
-    eventToMakeCardCancelBtn, eventToMakeNewCardBtn,
+import { eventToUndoButton } from "../component/button.js";
+import {
+    eventToNewCardButton, eventToCardDeleteButton,
+    eventToMakeCardCancelButton, eventToMakeNewCardButton,
     resizeCardByInputBox, doubleClickEventToCard, parseCardContentByNewLine
 } from "../component/card.js";
 import { $mainTag, columnDeleteEvent, headerDoubleClickEvent, inputFocusOutEvent } from "../component/column.js";
-import { 
-    recordElapsedTimeOnTarget, eventToTimeNode, getElapsedTimeByTimeArray, 
-    timeStringToArray, saveTimeStringOnTimeNode 
+import {
+    recordElapsedTimeOnTarget, eventToTimeNode, getElapsedTimeByTimeArray,
+    timeStringToArray, saveTimeStringOnTimeNode
 } from "../component/menu/menuLogTime.js";
 import { eventToCard } from "../drag/addDragEvent.js";
 import { makeShadedNode } from "../drag/dragEffect.js";
@@ -27,7 +28,7 @@ function initialDataToTemplate() {
             let $newCard = cardTemplate(cardData.title, cardData.content, cardData.author, cardData[CARD_ID]);
             eventToCard($newCard);
             $cardArea.appendChild($newCard);
-        })    
+        })
 
         $mainTag.appendChild($newColumn);
     })
@@ -46,17 +47,17 @@ function columnTemplate(columnTitle, columnID, cardCount = 0) {
             <h3>
                 <span>${columnTitle}</span>
                 <span class="column-length">${cardCount}</span>
-                <div class="column-btn-area">
-                    <i class="card-add-btn fa-solid fa-plus"></i>
-                    <i class="column-delete-btn fa-solid fa-xmark"></i>
+                <div class="column-button-area">
+                    <i class="card-add-button fa-solid fa-plus"></i>
+                    <i class="column-delete-button fa-solid fa-xmark"></i>
                 </div>
             </h3>
             <article>
             </article>
         `;
 
-    const $cardAddBtn = $column.querySelector(".card-add-btn");
-    const $columnDeleteBtn = $column.querySelector(".column-delete-btn");
+    const $cardAddButton = $column.querySelector(".card-add-button");
+    const $columnDeleteButton = $column.querySelector(".column-delete-button");
     const $header = $column.querySelector("h3");
     const $article = $column.querySelector("article");
 
@@ -67,15 +68,15 @@ function columnTemplate(columnTitle, columnID, cardCount = 0) {
 
     addEvent($article, [
         (event) => {
-            if($article.children.length) return;
-        
+            if ($article.children.length) return;
+
             event.preventDefault();
             $article.appendChild(makeShadedNode());
         }
     ], EVENT.DRAG_OVER);
 
-    columnDeleteEvent($columnDeleteBtn, $column);
-    eventToNewCardBtn($cardAddBtn, $column.children[1]);
+    columnDeleteEvent($columnDeleteButton, $column);
+    eventToNewCardButton($cardAddButton, $column.children[1]);
     headerDoubleClickEvent($header);
 
     return $column;
@@ -85,27 +86,27 @@ function columnTemplate(columnTitle, columnID, cardCount = 0) {
 function cardTemplate(cardTitle, cardContent, cardAuthor, cardId) {
     const $card = document.createElement("div");
     $card.classList.add("card-frame");
-    $card.setAttribute("draggable", true);
+    $card.setAttribute("draggable", "true");
     $card.setAttribute(CARD_ID, cardId);
-    cardContent = parseCardContentByNewLine(cardContent); 
+    cardContent = parseCardContentByNewLine(cardContent);
     $card.innerHTML = `
         <h3 class="card-title">${cardTitle}
             <i class="fa-solid fa-xmark"></i>
         </h3>
         <h4 class="card-content" style="word-break: break-word;">${cardContent}</h4>
-        <h5 class="card-author">${cardAuthor == "" ? "author by web" : cardAuthor}</h5>
+        <h5 class="card-author">${cardAuthor === "" ? "author by web" : cardAuthor}</h5>
     `;
 
     doubleClickEventToCard($card);
 
-    const $cardDeleteBtn = $card.querySelector("i");
-    eventToCardDeleteBtn($cardDeleteBtn, $card);
+    const $cardDeleteButton = $card.querySelector("i");
+    eventToCardDeleteButton($cardDeleteButton, $card);
 
     return $card;
 }
 
 /** 카드 등록 템플릿을 반환합니다. */
-function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false) {
+function newCardTemplate(title = "", content = "", prevCard = "", isUpdated = false) {
     const $newCard = document.createElement("div");
     $newCard.classList.add("new-card-frame");
 
@@ -113,24 +114,24 @@ function newCardTemplate(title = "", content = "", prevCard="", isUpdated=false)
         <input type="text" placeholder="제목을 입력하세요" value='${title}'>
         <textarea cols="30" rows="20" maxlength="500" placeholder="내용을 입력하세요">${content}</textarea>
         <div class="new-card-button-area">
-            <button id="new-card-cancel-btn">취소</button>
-            <button id="new-card-register-btn">등록</button>
+            <button id="new-card-cancel-button">취소</button>
+            <button id="new-card-register-button">등록</button>
         </div>
     `;
 
-    const $newCancelBtn = $newCard.querySelector("#new-card-cancel-btn");
-    const $newRegisterBtn = $newCard.querySelector("#new-card-register-btn");
+    const $newCancelButton = $newCard.querySelector("#new-card-cancel-button");
+    const $newRegisterButton = $newCard.querySelector("#new-card-register-button");
     const $textArea = $newCard.querySelector("textarea");
 
-    eventToMakeCardCancelBtn($newCancelBtn, $newCard, prevCard, isUpdated);
-    eventToMakeNewCardBtn($newRegisterBtn, $newCard, prevCard, isUpdated);
+    eventToMakeCardCancelButton($newCancelButton, $newCard, prevCard, isUpdated);
+    eventToMakeNewCardButton($newRegisterButton, $newCard, prevCard, isUpdated);
     resizeCardByInputBox($textArea, $newCard);
 
     return $newCard;
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (add) */
-function menuLogAddTemplate(columnName, cardTitle, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogAddTemplate(columnName, cardTitle, actionTimeString = "", emotion = "🥳", author = "@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -149,12 +150,11 @@ function menuLogAddTemplate(columnName, cardTitle, actionTimeString, emotion="�
 
     const $timeNode = $menuFrame.querySelector(".log-time");
 
-    if(actionTimeString) {
+    if (actionTimeString) {
         saveTimeStringOnTimeNode($timeNode, actionTimeString);
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
-    }
-    else recordElapsedTimeOnTarget($timeNode);
+    } else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -162,7 +162,7 @@ function menuLogAddTemplate(columnName, cardTitle, actionTimeString, emotion="�
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete) */
-function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeString, isRecovered = false, emotion="🥳", author="@sam") {
+function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeString = "", isRecovered = false, emotion = "🥳", author = "@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
     $menuFrame.innerHTML = `
@@ -170,7 +170,7 @@ function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeStr
             <div class="log-content-area">
             <h4 class="log-author">
                 <span>${author}</span>
-                <i class="fa-solid fa-arrow-rotate-left undo-btn"></i>
+                <i class="fa-solid fa-arrow-rotate-left undo-button"></i>
             </h4>
             <h4 class="log-content">
                 <strong>${columnName}</strong>에서
@@ -183,25 +183,24 @@ function menuLogDeleteTemplate(columnName, cardTitle, cardContent, actionTimeStr
 
     const $timeNode = $menuFrame.querySelector(".log-time");
 
-    if(actionTimeString) {
+    if (actionTimeString) {
         saveTimeStringOnTimeNode($timeNode, actionTimeString);
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
-    }
-    else recordElapsedTimeOnTarget($timeNode);
+    } else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
-    const $undoBtn = $menuFrame.querySelector(".undo-btn");
-    
-    if(isRecovered) $undoBtn.remove();
-    else eventToUndoBtn($undoBtn, columnName, cardTitle, cardContent, author);
+    const $undoButton = $menuFrame.querySelector(".undo-button");
+
+    if (isRecovered) $undoButton.remove();
+    else eventToUndoButton($undoButton, columnName, cardTitle, cardContent, author);
 
     return $menuFrame;
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (delete all) */
-function menuLogDeleteAllTemplate(actionTimeString, emotion="🥳", author="@sam") {
+function menuLogDeleteAllTemplate(actionTimeString = "", emotion = "🥳", author = "@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -217,13 +216,12 @@ function menuLogDeleteAllTemplate(actionTimeString, emotion="🥳", author="@sam
     `;
 
     const $timeNode = $menuFrame.querySelector(".log-time");
-    
-    if(actionTimeString) {
+
+    if (actionTimeString) {
         saveTimeStringOnTimeNode($timeNode, actionTimeString);
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
-    }
-    else recordElapsedTimeOnTarget($timeNode);
+    } else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -231,7 +229,7 @@ function menuLogDeleteAllTemplate(actionTimeString, emotion="🥳", author="@sam
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (move) */
-function menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTimeString = "", emotion = "🥳", author = "@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -252,20 +250,19 @@ function menuLogMoveTemplate(prevColumnName, nextColumnName, cardTitle, actionTi
     const $timeNode = $menuFrame.querySelector(".log-time");
     eventToTimeNode($timeNode);
 
-    if(actionTimeString) {
+    if (actionTimeString) {
         saveTimeStringOnTimeNode($timeNode, actionTimeString);
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
-    }
-    else recordElapsedTimeOnTarget($timeNode);
+    } else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
     return $menuFrame;
 }
- 
+
 /** 메뉴 log 템플릿을 반환합니다. (update) */
-function menuLogUpdateTemplate(columnName, cardTitle, actionTimeString, emotion="🥳", author="@sam") {
+function menuLogUpdateTemplate(columnName, cardTitle, actionTimeString = "", emotion = "🥳", author = "@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -274,7 +271,7 @@ function menuLogUpdateTemplate(columnName, cardTitle, actionTimeString, emotion=
         <div class="log-content-area">
             <h4 class="log-author">${author}</h4>
             <h4 class="log-content">
-                <strong>${ columnName }</strong>의
+                <strong>${columnName}</strong>의
                 <strong>${cardTitle}</strong>
                 을/를 수정하였습니다.
             </h4>
@@ -284,12 +281,11 @@ function menuLogUpdateTemplate(columnName, cardTitle, actionTimeString, emotion=
 
     const $timeNode = $menuFrame.querySelector(".log-time");
 
-    if(actionTimeString) {
+    if (actionTimeString) {
         saveTimeStringOnTimeNode($timeNode, actionTimeString);
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
-    }
-    else recordElapsedTimeOnTarget($timeNode);
+    } else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -297,7 +293,7 @@ function menuLogUpdateTemplate(columnName, cardTitle, actionTimeString, emotion=
 }
 
 /** 메뉴 log 템플릿을 반환합니다. (search) */
-function menuSearchTemplate(searchLog, searchCount, actionTimeString, emotion="🥳", author="@sam") {
+function menuSearchTemplate(searchLog, searchCount = 0, actionTimeString = "", emotion = "🥳", author = "@sam") {
     const $menuFrame = document.createElement("div");
     $menuFrame.classList.add("log-frame");
 
@@ -317,12 +313,11 @@ function menuSearchTemplate(searchLog, searchCount, actionTimeString, emotion="�
 
     const $timeNode = $menuFrame.querySelector(".log-time");
 
-    if(actionTimeString) {
+    if (actionTimeString) {
         saveTimeStringOnTimeNode($timeNode, actionTimeString);
         const timeArray = timeStringToArray(actionTimeString);
         $timeNode.innerHTML = getElapsedTimeByTimeArray(timeArray);
-    }
-    else recordElapsedTimeOnTarget($timeNode);
+    } else recordElapsedTimeOnTarget($timeNode);
 
     eventToTimeNode($timeNode);
 
@@ -333,12 +328,12 @@ function menuSearchTemplate(searchLog, searchCount, actionTimeString, emotion="�
 function headerTitleTemplate(title, $originalHeader) {
     const $header = document.createElement("h3");
     const $input = document.createElement("input");
-    
+
     $input.setAttribute("type", "text");
     $input.setAttribute("placeholder", "제목을 입력해주세요.");
     $input.setAttribute("maxlength", "10");
     $input.value = title;
-    
+
     setTimeout(() => {
         $input.focus();
     }, 0)
@@ -352,7 +347,7 @@ function headerTitleTemplate(title, $originalHeader) {
 
 export {
     initialDataToTemplate,
-    columnTemplate, cardTemplate, newCardTemplate, 
+    columnTemplate, cardTemplate, newCardTemplate,
     menuLogAddTemplate, menuLogDeleteTemplate, menuLogMoveTemplate, menuLogUpdateTemplate, menuSearchTemplate,
     headerTitleTemplate, menuLogDeleteAllTemplate
 }

@@ -14,23 +14,23 @@ class SearchLogManager {
         this.#searchLog.push(searchLog);
 
         this.#searchCount[searchLog] ?
-            this.#searchCount[searchLog] += 1:
+            this.#searchCount[searchLog] += 1 :
             this.#searchCount[searchLog] = 1;
 
-        if(this.#searchCount[searchLog] >= this.#maxCount) {
+        if (this.#searchCount[searchLog] >= this.#maxCount) {
             this.#maxCount = this.#searchCount[searchLog];
             this.#maxLog = searchLog;
         }
     }
 
     /** 검색어를 추천합니다. */
-    suggestLog = () => 
-        this.#searchLog.length == 0 ? 
+    suggestLog = () =>
+        this.#searchLog.length === 0 ?
             null : this.#maxLog;
 
     /** 검색어의 빈도를 반환합니다. */
-    getSearchCount = (searchLog) => 
-        this.#searchCount[searchLog] ? 
+    getSearchCount = (searchLog) =>
+        this.#searchCount[searchLog] ?
             this.#searchCount[searchLog] : 0;
 }
 

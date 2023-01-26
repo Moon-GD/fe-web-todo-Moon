@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:3000"
 
 // fetch url
 const FETCH_URL = {
-    CARD: BASE_URL + "/cardList", 
+    CARD: BASE_URL + "/cardList",
     STATUS: BASE_URL + "/statusList",
     MENU: BASE_URL + "/menuList"
 }
@@ -17,8 +17,8 @@ const METHOD = {
 
 // fetch header
 const HEADER = {
-    PATCH: { "Content-Type": "application/json" },
-    POST: { "Content-Type": "application/json" }
+    PATCH: {"Content-Type": "application/json"},
+    POST: {"Content-Type": "application/json"}
 }
 
 // fetch json key
@@ -69,20 +69,20 @@ const POSITION = {
 const TRANSFORM = "transform";
 
 // 버튼 색상 스타일링
-const CARD_BTN = {
+const CARD_BUTTON = {
     HOVER: "#FE5958",
     ORIGINAL: "#000",
 }
 
-const CARD_DELETE_BTN_ORIGINAL = "#D0D0D0";
+const CARD_DELETE_BUTTON_ORIGINAL = "#D0D0D0";
 
 // Todo 카드 css 스타일 value
 const CARD = {
     BACKGROUND_ORIGINAL: "#fff",
     BACKGROUND_HOVER: "#FFEEEC",
     OUTLINE_ORIGINAL: "none",
-    OUTLINE_HOVER: "0.4vh solid " + CARD_BTN.HOVER,
-    TEXT_HEIGTH: 3.5,
+    OUTLINE_HOVER: "0.4vh solid " + CARD_BUTTON.HOVER,
+    TEXT_HEIGHT: 3.5,
     HEIGHT: 18
 }
 
@@ -90,7 +90,7 @@ const CARD_DARK_MODE = {
     BACKGROUND_ORIGINAL: "#1C1C21",
     BACKGROUND_HOVER: "#1C1C21",
     OUTLINE_ORIGINAL: "none",
-    OUTLINE_HOVER: "0.4vh solid " + CARD_BTN.HOVER,
+    OUTLINE_HOVER: "0.4vh solid " + CARD_BUTTON.HOVER,
 }
 
 // 검색된 카드 css 스타일링 value
@@ -105,14 +105,14 @@ const SEARCH_CARD_DARK_MODE = {
 }
 
 // Fab 버튼 관련
-const FAB_BTN = {
+const FAB_BUTTON = {
     DEGREE_MOVED: "rotate(-45deg)",
     DEGREE_ORIGINAL: "rotate(0deg)",
     BOTTOM_ORIGINAL: "5%"
 }
 
 // 버튼 위치 css value
-const BTN_MOVDED = {
+const BUTTON_MOVED_POSITION = {
     SEARCH: "13%",
     COLUMN_ADD: "21%",
     CARD_CLEAR: "29%"
@@ -155,7 +155,7 @@ const LOG_TIME = {
 
 // css transition value
 const HALF_SECOND = "0.5s";
-const ONE_SECOND = "1s";
+const ONE_SECOND = 1000;
 
 // js find 배열 못 찾았을 때
 const NOT_FOUND = -1
@@ -175,7 +175,7 @@ export {
 
     // column status
     COLUMN_STATUS,
-    
+
     // json menu key
     MENU,
 
@@ -189,19 +189,19 @@ export {
     POSITION, TRANSFORM,
 
     // 버튼 색상 스타일링
-    CARD_BTN, CARD_DELETE_BTN_ORIGINAL,
+    CARD_BUTTON, CARD_DELETE_BUTTON_ORIGINAL,
 
-    // Todo 카드 css 스타일 value
+    // TODO: 카드 css 스타일 value
     CARD, CARD_DARK_MODE,
 
     // 검색된 카드 css 스타일링 value
     SEARCH_CARD, SEARCH_CARD_DARK_MODE,
 
     // Fab 버튼 관련
-    FAB_BTN,
+    FAB_BUTTON,
 
     // 버튼 위치 css value
-    BTN_MOVDED,
+    BUTTON_MOVED_POSITION,
 
     // 사이드바 transition distance
     MENU_POSITION,
@@ -210,7 +210,7 @@ export {
     DISPLAY,
 
     // js event option - mouse
-    EVENT, 
+    EVENT,
 
     // 사이드바 log 시간 변수
     LOG_TIME,

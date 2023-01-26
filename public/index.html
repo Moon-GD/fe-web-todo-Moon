@@ -13,98 +13,100 @@
     <link rel="stylesheet" href="./css/style.css">
 
     <!-- google icon -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 
     <!-- fontAwesome -->
     <script src="https://kit.fontawesome.com/53b577849a.js" crossorigin="anonymous"></script>
 
-    <!-- js --> 
+    <!-- js -->
     <script defer type="module" src="./js/init.js"></script>
 </head>
 <body>
-    <!-- header -->
-    <header>
-        <div id="bulb-area">
-            <i class="bulb fa-sharp fa-solid fa-lightbulb" id="go-dark-mode"></i>
-            <i class="hidden bulb fa-regular fa-lightbulb" id="go-light-mode"></i>
+<!-- header -->
+<header>
+    <div id="bulb-area">
+        <i class="bulb fa-sharp fa-solid fa-lightbulb" id="go-dark-mode"></i>
+        <i class="hidden bulb fa-regular fa-lightbulb" id="go-light-mode"></i>
+    </div>
+    <h1>To-Do List</h1>
+    <i class="fa-solid fa-bars" id="menu-open-button"></i>
+</header>
+<!-- main -->
+<main>
+    <button class="fab-buttons" id="go-card-clear-button"><span class="material-symbols-outlined">delete</span></button>
+    <button class="fab-buttons" id="go-column-add-modal-button"><span class="material-symbols-outlined">add_circle</span>
+    </button>
+    <button class="fab-buttons" id="go-search-button"><span class="material-symbols-outlined">search</span></button>
+    <button class="fab-buttons" id="fab-button">+</button>
+    <!-- menu -->
+    <aside id="menu">
+        <section id="menu-header">
+            <i class="fa-solid fa-xmark" id="menu-close-button"></i>
+        </section>
+        <section id="menu-frame">
+            <div id="menu-content">
+            </div>
+        </section>
+    </aside>
+    <!-- modal -->
+    <section class="modal" id="modal-section">
+        <div id="modal-frame">
+            <div id="modal-header">
+                선택한 카드를 삭제할까요?
+            </div>
+            <div id="modal-button-area">
+                <button id="card-cancel-button">취소</button>
+                <button id="card-delete-button">삭제</button>
+            </div>
         </div>
-        <h1>To-Do List</h1>
-        <i class="fa-solid fa-bars" id="menu-open-btn"></i>
-    </header>
-    <!-- main -->
-    <main>
-        <button class="fab-btns" id="go-card-clear-btn"><span class="material-symbols-outlined">delete</span></button>
-        <button class="fab-btns" id="go-column-add-modal-btn"><span class="material-symbols-outlined">add_circle</span></button>
-        <button class="fab-btns" id="go-search-btn"><span class="material-symbols-outlined">search</span></button>
-        <button class="fab-btns" id="fab-btn">+</button>
-        <!-- menu -->
-        <aside id="menu">
-            <section id="menu-header">
-                <i class="fa-solid fa-xmark" id="menu-close-btn"></i>
-            </section>
-            <section id="menu-frame">
-                <div id="menu-content">
-                </div>
-            </section>          
-        </aside>
-        <!-- modal -->
-        <section class="modal" id="modal-section">
-            <div id="modal-frame">
-                <div id="modal-header">
-                    선택한 카드를 삭제할까요?
-                </div>
-                <div id="modal-btn-area">
-                    <button id="card-cancel-btn">취소</button>
-                    <button id="card-delete-btn">삭제</button>
-                </div>
+    </section>
+    <!-- column add modal -->
+    <section class="modal" id="column-add-modal-section">
+        <div id="column-add-modal-frame">
+            <div id="column-add-modal-header">
+                새로운 column의 제목을 입력해주세요
             </div>
-        </section>
-        <!-- column add modal -->
-        <section class="modal" id="column-add-modal-section">
-            <div id="column-add-modal-frame">
-                <div id="column-add-modal-header">
-                    새로운 column의 제목을 입력해주세요
-                </div>
-                <input type="text" placeholder="제목을 입력해주세요 (최대 20자)" maxlength="20" id="column-add-input">
-                <div id="column-add-modal-btn-area">
-                    <button id="column-add-cancel-btn">취소</button>
-                    <button id="column-add-accept-btn">수락</button>
-                </div>
+            <input type="text" placeholder="제목을 입력해주세요 (최대 20자)" maxlength="20" id="column-add-input">
+            <div id="column-add-modal-button-area">
+                <button id="column-add-cancel-button">취소</button>
+                <button id="column-add-accept-button">수락</button>
             </div>
-        </section>
-        <!-- search modal -->
-        <section class="modal" id="search-modal-section">
-            <div id="search-modal-frame">
-                <div id="search-modal-header">
-                    검색할 카드의 제목을 입력해주세요
-                </div>
-                <input type="text" placeholder="카드 제목을 입력해주세요 (최대 20자)" maxlength="20" id="search-input">
-                <h3>
-                    <span>추천 검색어 : </span>
-                    <span id="suggested-search-log">아직 없습니다.</span>
-                </h3>
-                <div id="search-modal-btn-area">
-                    <button id="search-cancel-btn">취소</button>
-                    <button id="search-accept-btn">검색</button>
-                </div>
+        </div>
+    </section>
+    <!-- search modal -->
+    <section class="modal" id="search-modal-section">
+        <div id="search-modal-frame">
+            <div id="search-modal-header">
+                검색할 카드의 제목을 입력해주세요
             </div>
-        </section>
-        <!-- 휴지통 modal -->
-        <section class="modal" id="clear-modal-section">
-            <div id="clear-modal-frame">
-                <div id="clear-modal-header">
-                    모든 카드를 지우시겠습니까?
-                </div>
-                <div id="clear-modal-btn-area">
-                    <button id="clear-cancel-btn">취소</button>
-                    <button id="clear-accept-btn">삭제</button>
-                </div>
+            <input type="text" placeholder="카드 제목을 입력해주세요 (최대 20자)" maxlength="20" id="search-input">
+            <h3>
+                <span>추천 검색어 : </span>
+                <span id="suggested-search-log">아직 없습니다.</span>
+            </h3>
+            <div id="search-modal-button-area">
+                <button id="search-cancel-button">취소</button>
+                <button id="search-accept-button">검색</button>
             </div>
-        </section>
-        <!-- column 중복 경고 창 -->
-        <section id="warning-modal">
-            <h1>중복된 column 이름입니다.</h1>
-        </section>
-    </main>
+        </div>
+    </section>
+    <!-- 휴지통 modal -->
+    <section class="modal" id="clear-modal-section">
+        <div id="clear-modal-frame">
+            <div id="clear-modal-header">
+                모든 카드를 지우시겠습니까?
+            </div>
+            <div id="clear-modal-button-area">
+                <button id="clear-cancel-button">취소</button>
+                <button id="clear-accept-button">삭제</button>
+            </div>
+        </div>
+    </section>
+    <!-- column 중복 경고 창 -->
+    <section id="warning-modal">
+        <h1>중복된 column 이름입니다.</h1>
+    </section>
+</main>
 </body>
 </html>

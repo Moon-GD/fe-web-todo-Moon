@@ -1,12 +1,12 @@
 import { STATUS } from "../../public/js/common/commonVariable.js";
 import { statusListOnLocal } from "../../public/js/store/store.js";
 
-/** 새롭게 생성될 status의 이름 타당성 여부를 반환합니다. 
+/** 새롭게 생성될 status의 이름 타당성 여부를 반환합니다.
  * @param {string} newName 새롭게 생성할 column의 이름
-*/
+ */
 function validateStatus(newName) {
-    for(const statusJSON of statusListOnLocal) {
-        if(statusJSON && statusJSON[STATUS.NAME] == newName) return false;
+    for (const statusJSON of statusListOnLocal) {
+        if (statusJSON && statusJSON[STATUS.NAME] === newName) return false;
     }
 
     return true;
@@ -17,13 +17,13 @@ function validateStatus(newName) {
  * @param {string} newName column 변경 할 이름
  */
 function validateNewStatusName(originalName, newName) {
-    for(let i=0;i<statusListOnLocal.length;i++) {
-        if(! statusListOnLocal[i]) 
+    for (let i = 0; i < statusListOnLocal.length; i++) {
+        if (!statusListOnLocal[i])
             continue;
 
         let statusName = statusListOnLocal[i][STATUS.NAME];
 
-        if(statusName == newName && statusName != originalName) 
+        if (statusName === newName && statusName !== originalName)
             return false;
     }
 
