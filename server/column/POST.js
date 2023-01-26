@@ -2,7 +2,7 @@ import { FETCH_URL, METHOD, HEADER } from "../../public/js/common/commonVariable
 import { cardListOnLocal, statusListOnLocal } from "../../public/js/store/store.js";
 
 /** 로컬에 status를 추가합니다.
- * @param {string} newColumnID column ID
+ * @param {string} newStatusID column ID
  * @param {Object} newStatusJSON column json
  */
 function addStatusOnLocal(newStatusID, newStatusJSON) {
@@ -23,7 +23,7 @@ function addStatusOnServer(newStatusJSON) {
 
 /** status를 추가합니다.
  * @param {string} statusName column name
- * @param {string} newStatusID colum ID
+ * @param {string} newStatusID column ID
  */
 function addStatus(statusName, newStatusID) {
     let newStatusJSON = {

@@ -20,7 +20,7 @@ function deleteCardData(status, cardID) {
     let dataList = cardListOnLocal[status];
 
     for (let i = 0; i < dataList.length; i++) {
-        if (dataList[i] && dataList[i][CARD_ID] == cardID) {
+        if (dataList[i] && dataList[i][CARD_ID] === cardID) {
             delete dataList[i];
             break;
         }

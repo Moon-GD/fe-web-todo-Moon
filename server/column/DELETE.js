@@ -24,7 +24,7 @@ async function deleteStatusOnServer(statusIndex) {
  */
 async function deleteStatus(statusName) {
     let filteredStatus = statusListOnLocal
-        .filter((statusJSON) => statusJSON[STATUS.NAME] == statusName)[0];
+        .filter((statusJSON) => statusJSON[STATUS.NAME] === statusName)[0];
 
     const statusIndex = filteredStatus[STATUS.INDEX];
 
@@ -32,7 +32,7 @@ async function deleteStatus(statusName) {
 
     if (cardListOnLocal[statusIndex].length) {
         cardListOnLocal[statusIndex]
-            .filter((cardJSON) => cardJSON[COLUMN_STATUS] == statusIndex)
+            .filter((cardJSON) => cardJSON[COLUMN_STATUS] === statusIndex)
             .forEach((cardJSON) => deleteCardData(cardJSON[COLUMN_STATUS], cardJSON[CARD_ID]))
     }
 

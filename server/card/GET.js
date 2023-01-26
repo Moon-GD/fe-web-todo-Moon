@@ -6,7 +6,7 @@ import { cardListOnLocal, statusListOnLocal } from "../../public/js/store/store.
 
 /**
  * @param {Array} cardJSONList
- * @returns {none}
+ * @returns
  */
 function classifyCardJSONList(cardJSONList) {
     cardJSONList.forEach((cardJSON) => {
@@ -19,7 +19,7 @@ function classifyCardJSONList(cardJSONList) {
 }
 
 /** 카드 JSON 데이터를 서버에서 불러옵니다.
- * @returns {none}
+ * @returns
  */
 async function getAllCardJSONData() {
     await fetch(FETCH_URL.CARD, {method: METHOD.GET})
