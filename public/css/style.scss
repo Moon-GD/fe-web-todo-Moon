@@ -3,7 +3,7 @@ html, body, div, span,
 h1, h2, h3, h4, h5, h6, p,
 a, i, ol, ul, li, form, label
 article, aside, footer, header,
-menu, nav, section {
+menu, nav, section, textarea {
   margin: 0;
   padding: 0;
   border: 0;
@@ -65,7 +65,7 @@ section {
     > span.column-length {
       margin-left: 1vw;
       background-color: #BDBDBD;
-      padding: 0.25vw 0.5vw;
+      padding: 0.3vw 0.7vw;
       border-radius: 50%;
     }
 
@@ -150,14 +150,15 @@ section {
   justify-content: space-evenly;
   width: 85%;
   margin-bottom: 1vh;
-  padding: 1.5vh 1vw;
+  padding: 2vh 1vw;
   border-radius: 1vh;
   background-color: white;
 
   > h3 {
     position: relative;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
+    margin-bottom: 1vh;
 
     > i {
       position: absolute;
@@ -173,12 +174,13 @@ section {
   }
 
   > h4 {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     font-weight: 500;
+    margin-bottom: 1vh;
   }
 
   > h5 {
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     color: #CDCDCD;
   }
 }
@@ -186,11 +188,11 @@ section {
 .new-card-frame {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  //justify-content: space-evenly;
   width: 85%;
   height: 18vh;
   margin-bottom: 1vh;
-  padding: 1.5vh 1vw;
+  padding: 2vh 1vw;
   border-radius: 1vh;
   background-color: white;
 
@@ -200,13 +202,13 @@ section {
   }
 
   > input {
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 700;
     margin-bottom: 1vh;
   }
 
   > textarea {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     resize: none;
   }
 }

@@ -2,17 +2,17 @@ import {
     CARD_BTN, CARD, CARD_DELETE_BTN_ORIGINAL,
     DISPLAY, EVENT, CARD_ID, HALF_SECOND, CARD_DARK_MODE, STATUS, FETCH_URL, METHOD, HEADER
 } from "../common/commonVariable.js";
-import { addEvent, pipe } from "../common/commonFunction.js";
-import { isDarkMode } from "../common/darkMode.js";
-import { idGenerator } from "../common/IDGenerator.js";
-import { menuLogAdd, menuLogUpdate, menuLogDeleteAll } from "./menu/menu.js";
-import { findColumnStatusByCard, findCardHeaderName } from "./column.js";
-import { turnOnModal } from "./modal.js";
-import { eventToCard } from "../drag/addDragEvent.js";
-import { statusListOnLocal } from "../store/store.js";
-import { cardTemplate, newCardTemplate } from "../templates/template.js";
-import { deleteCardData } from "../../../server/card/delete.js";
-import { addCardJSON } from "../../../server/card/post.js";
+import {addEvent, pipe} from "../common/commonFunction.js";
+import {isDarkMode} from "../common/darkMode.js";
+import {idGenerator} from "../common/IDGenerator.js";
+import {menuLogAdd, menuLogUpdate, menuLogDeleteAll} from "./menu/menu.js";
+import {findColumnStatusByCard, findCardHeaderName} from "./column.js";
+import {turnOnModal} from "./modal.js";
+import {eventToCard} from "../drag/addDragEvent.js";
+import {statusListOnLocal} from "../store/store.js";
+import {cardTemplate, newCardTemplate} from "../templates/template.js";
+import {deleteCardData} from "../../../server/card/delete.js";
+import {addCardJSON} from "../../../server/card/post.js";
 
 let [$chosenCard, registering] = ["", false];
 
@@ -253,7 +253,7 @@ function resizeCardByInputBox($cardRegisterInput, $cardRegisterForm) {
 
             scrollHeight = $cardRegisterInput.scrollHeight;
         }
-    ], EVENT.INPUT)
+    ], EVENT.INPUT);
 }
 
 /**
